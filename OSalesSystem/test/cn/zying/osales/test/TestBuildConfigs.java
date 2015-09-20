@@ -1,7 +1,8 @@
 package cn.zying.osales.test ;
-import cn.zy.apps.tools.dev.builds.BuildJSModule ;
-import cn.zy.apps.tools.dev.builds.IBuildJSModule ;
-import cn.zying.osales.pojos.SystemUser ;
+import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
+import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
+import cn.zying.osales.pojos.StaffInfo ;
+
 
 
 
@@ -19,7 +20,7 @@ public class TestBuildConfigs {
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/builds/js";
         String out ="./release/build";
         IBuildJSModule buildJSModule=new BuildJSModule(jsSrcPath ,out );
-        buildJSModule.build("system_user_manage",SystemUser.class);
+        buildJSModule.build("staffInfo_manage",StaffInfo.class);
 
     }
 
