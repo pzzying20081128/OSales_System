@@ -3,11 +3,8 @@
  
  
  import cn.zy.apps.tools.web.SelectPage ;
-
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.SystemUser ; 
-
-
+import cn.zying.osales.pojos.SystemUser ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.sysmanage.units.SystemUserSearchBean ;
 

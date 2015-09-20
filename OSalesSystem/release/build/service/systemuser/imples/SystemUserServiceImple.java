@@ -1,18 +1,14 @@
  package  cn.zying.osales.service.sysmanage.imples;
  
 
-  import javax.annotation.Resource ;
-
-import org.springframework.stereotype.Component ;
-
-import cn.zy.apps.tools.web.SelectPage ;
-import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.SystemUser ;
-import cn.zying.osales.service.ABCommonsService ;
-import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.service.sysmanage.ISystemUserService ;
-import cn.zying.osales.service.sysmanage.units.SystemUserSaveUpdateUnits ;
+  import org.springframework.stereotype.Component ;
+ import cn.zy.apps.tools.web.SelectPage ;
+import cn.zying.osales.pojos.SystemUser ; 
+import  cn.zying.osales.service.sysmanage.ISystemUserService ;
 import cn.zying.osales.service.sysmanage.units.SystemUserSearchBean ;
+
+import cn.zying.osales.service.sysmanage.units.SystemUserSaveUpdateUnits ;
+
 import cn.zying.osales.service.sysmanage.units.SystemUserSearchUnits ;
  
 
@@ -24,21 +20,21 @@ public class SystemUserServiceImple extends  ABCommonsService  implements ISyste
            
            @Resource(name=" SystemUserSaveUpdateUnits")
            private SystemUserSaveUpdateUnits  iSystemUserSaveUpdateUnits;
-            
-            @Override
+			
+			@Override
             public void saveUpdate(OptType  optType ,   SystemUser   optSystemUser )throws SystemOptServiceException{
-                 iSystemUserSaveUpdateUnits.saveUpdate(optType, optSystemUser);
-                }
+        		 iSystemUserSaveUpdateUnits.saveUpdate(optType, optSystemUser);
+        		}
             
-           @Override
+       	   @Override
             public SelectPage<SystemUser > search(OptType  optType ,    SystemUserSearchBean  searchBean )throws SystemOptServiceException{
-                    return  iSystemUserSearchUnits.search(optType, searchBean);
+				    return  iSystemUserSearchUnits.search(optType, searchBean);
             }
             
-            @Override
+			@Override
             public  void   remove(OptType  optType ,   SystemUser   optSystemUser)throws SystemOptServiceException{
-              
-              }
+			  
+			  }
             
             
 }

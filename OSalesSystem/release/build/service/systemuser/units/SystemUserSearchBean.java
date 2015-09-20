@@ -1,4 +1,4 @@
-package  cn.zying.osales.service.basemanage.units ;
+package  cn.zying.osales.service.sysmanage.units ;
 
 import cn.zying.osales.pojos.SystemUser ;
 

@@ -3,7 +3,7 @@ package cn.zying.osales;
 public interface OSalesConfigProperties {
     
     public enum OptType  {
-        add,update,check,delete
+        save,update,check,delete
     }
     
     public enum   Status{

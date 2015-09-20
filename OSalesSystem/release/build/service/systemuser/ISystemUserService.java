@@ -1,13 +1,10 @@
- package  cn.zying.osales.service.basemanage;
+ package  cn.zying.osales.service.sysmanage;
 
  
  
  import cn.zy.apps.tools.web.SelectPage ;
-
 import cn.zying.osales.pojos.SystemUser ; 
-
-
-import cn.zying.osales.service.basemanage.units.SystemUserSearchBean ;
+import cn.zying.osales.service.sysmanage.units.SystemUserSearchBean ;
 
 public interface ISystemUserService {
     
