@@ -17,7 +17,8 @@ public interface ISystemUserService {
             public void saveUpdate(OptType  optType ,   SystemUser   optSystemUser )throws SystemOptServiceException;
             
        	  
-            public SelectPage<SystemUser > search(OptType  optType ,    SystemUserSearchBean  searchBean )throws SystemOptServiceException;
+            public SelectPage<SystemUser > search(OptType  optType ,    
+				           SystemUserSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
             
             
             public  void   remove(OptType  optType ,  SystemUser   optSystemUser)throws SystemOptServiceException;

@@ -1,4 +1,4 @@
-package  cn.zying.osales.service.sysmanage.units ;
+package  cn.zying.osales.service.basemanage.units ;
 
 import java.util.List ;
 import java.util.Map ;
@@ -10,22 +10,22 @@ import cn.zy.apps.tools.web.SelectPage ;
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 
-import cn.zying.osales.pojos.SystemUser ; 
+import cn.zying.osales.pojos.StaffInfo ; 
 import cn.zying.osales.service.ABCommonsService ;
 
 
-@Component("SystemUserSearchUnits")
-public class SystemUserSearchUnits extends ABCommonsService {
+@Component("StaffInfoSearchUnits")
+public class StaffInfoSearchUnits extends ABCommonsService {
 
-    public SelectPage<SystemUser> search(OptType optType,
-		                            SystemUserSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
-        SelectPage<SystemUser> selectPage = new SelectPage<SystemUser>() ;
+    public SelectPage<StaffInfo> search(OptType optType,
+		                            StaffInfoSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+        SelectPage<StaffInfo> selectPage = new SelectPage<StaffInfo>() ;
 
 		Map<String, Object> value=ToolsUnits.createSearchMap();
 			
 		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
 				
-        List<SystemUser> result = list(sqlWhere,value,startLimit) ;
+        List<StaffInfo> result = list(sqlWhere,value,startLimit) ;
 
         Long sum = sum(sqlWhere,value) ;
 
@@ -38,9 +38,9 @@ public class SystemUserSearchUnits extends ABCommonsService {
     }
 
 	 private  String sql ="";   
-    private List<SystemUser> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
+    private List<StaffInfo> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
    String sql_ =sql+ sqlWhere ;
-        List<SystemUser>  result = baseService.findByHSQL(sql_, value, startLimit);
+        List<StaffInfo>  result = baseService.findByHSQL(sql_, value, startLimit);
         return result;
     }
  private  String sqlsum ="";   
@@ -50,7 +50,7 @@ public class SystemUserSearchUnits extends ABCommonsService {
         return sum;
     }
 	
-	 private String createWhere(Map<String, Object> value,SystemUserSearchBean searchBean ,CommSearchBean commSearchBean){
+	 private String createWhere(Map<String, Object> value,StaffInfoSearchBean searchBean ,CommSearchBean commSearchBean){
         String sqlWhere="";
         return sqlWhere;
     }

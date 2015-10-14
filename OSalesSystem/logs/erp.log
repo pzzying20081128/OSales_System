@@ -1,0 +1,54 @@
+2015-10-14 14:29:07,573 INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2deb9dd5, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@47c72280, org.springframework.test.context.support.DirtiesContextTestExecutionListener@62aa2650]
+2015-10-14 14:29:07,699 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [configs/spring/transaction_config.xml]
+2015-10-14 14:29:07,969 INFO  [org.springframework.context.support.GenericApplicationContext] Refreshing org.springframework.context.support.GenericApplicationContext@4128c728: startup date [Wed Oct 14 14:29:07 CST 2015]; root of context hierarchy
+2015-10-14 14:29:08,480 INFO  [org.springframework.orm.jpa.persistenceunit.PersistenceUnitReader] persistence.xml should be located inside META-INF directory; cannot determine persistence unit root URL for class path resource [configs/persistence.xml]
+2015-10-14 14:29:08,579 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] Building JPA container EntityManagerFactory for persistence unit 'db'
+2015-10-14 14:29:08,579 WARN  [org.hibernate.ejb.HibernatePersistence] HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-10-14 14:29:08,685 INFO  [org.hibernate.Version] HHH000412: Hibernate Core {4.3.8.Final}
+2015-10-14 14:29:08,687 INFO  [org.hibernate.cfg.Environment] HHH000206: hibernate.properties not found
+2015-10-14 14:29:08,689 INFO  [org.hibernate.cfg.Environment] HHH000021: Bytecode provider name : javassist
+2015-10-14 14:29:11,087 INFO  [org.hibernate.annotations.common.Version] HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2015-10-14 14:29:11,320 INFO  [org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator] HHH000130: Instantiating explicit connection provider: cn.zy.apps.tools.jpa.privates.MyH4ProxoolConnectionProvider
+2015-10-14 14:29:11,343 INFO  [org.hibernate.proxool.internal.ProxoolConnectionProvider] HHH030004: Configuring Proxool Provider using JAXPConfigurator: configs/proxool.xml
+2015-10-14 14:29:11,361 INFO  [org.logicalcobwebs.proxool.ProxoolFacade] Proxool 0.9.1 (23-Aug-2008 11:10)
+2015-10-14 14:29:11,423 INFO  [org.hibernate.proxool.internal.ProxoolConnectionProvider] HHH030002: Configuring Proxool Provider to use pool alias: proxool.db
+2015-10-14 14:29:11,423 INFO  [org.hibernate.proxool.internal.ProxoolConnectionProvider] HHH030001: Autocommit mode: false
+2015-10-14 14:29:11,423 INFO  [org.logicalcobwebs.proxool.db] Proxool statistics legend: "s - r  (a/t/o)" > s=served, r=refused (only shown if non-zero), a=active, t=total, o=offline (being tested)
+2015-10-14 14:29:11,778 INFO  [org.hibernate.dialect.Dialect] HHH000400: Using dialect: cn.zy.apps.tools.jpa.privates.MYMYSQL5InnoDBDialect
+2015-10-14 14:29:12,028 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] HHH000397: Using ASTQueryTranslatorFactory
+2015-10-14 14:29:12,067 WARN  [net.sf.ehcache.config.ConfigurationFactory] No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/media/you/MY_WORKSHOPS/workshops/H4libs/ehcache-core-2.4.3.jar!/ehcache-failsafe.xml
+2015-10-14 14:29:12,209 INFO  [org.hibernate.cache.spi.UpdateTimestampsCache] HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+2015-10-14 14:29:12,214 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
+2015-10-14 14:29:12,243 INFO  [org.hibernate.cache.internal.StandardQueryCache] HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+2015-10-14 14:29:12,244 WARN  [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory] HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
+2015-10-14 14:29:12,561 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000228: Running hbm2ddl schema update
+2015-10-14 14:29:12,561 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000102: Fetching database metadata
+2015-10-14 14:29:12,604 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000396: Updating schema
+2015-10-14 14:29:12,616 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: open_sales.sys_system_config
+2015-10-14 14:29:12,617 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [id, title, config_value, config_key, config_desc]
+2015-10-14 14:29:12,617 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+2015-10-14 14:29:12,617 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [uk_ab7e1g2qdmt3uk49as42yho53, primary]
+2015-10-14 14:29:12,627 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: open_sales.sys_system_log
+2015-10-14 14:29:12,628 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [id, what, module_name, date, system_user_id]
+2015-10-14 14:29:12,628 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: [fk_q8dyx0yp2p9f1uq456n6ruyfw]
+2015-10-14 14:29:12,628 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk_q8dyx0yp2p9f1uq456n6ruyfw, primary]
+2015-10-14 14:29:12,640 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: open_sales.sys_system_staff
+2015-10-14 14:29:12,640 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [is_goods_man, text, sex, phone, status, cell, is_transport_man, id, pwd, is_admin, address, name, account, is_biz_man, is_stock_man]
+2015-10-14 14:29:12,640 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: []
+2015-10-14 14:29:12,640 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [primary]
+2015-10-14 14:29:12,650 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: open_sales.sys_user_opt_power
+2015-10-14 14:29:12,650 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [user_power_id, power_code, ids, power_name, is_use]
+2015-10-14 14:29:12,650 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: [fk_ak8u7d8ca280oo5hm3l1x57qy]
+2015-10-14 14:29:12,650 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [primary, fk_ak8u7d8ca280oo5hm3l1x57qy]
+2015-10-14 14:29:12,658 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000261: Table found: open_sales.sys_user_power
+2015-10-14 14:29:12,659 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000037: Columns: [sys_system_user_id, module_id, ids, module_name]
+2015-10-14 14:29:12,659 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000108: Foreign keys: [fk_l9modev6r4wfvjipknsla6u0u]
+2015-10-14 14:29:12,659 INFO  [org.hibernate.tool.hbm2ddl.TableMetadata] HHH000126: Indexes: [fk_l9modev6r4wfvjipknsla6u0u, primary]
+2015-10-14 14:29:12,661 INFO  [org.hibernate.tool.hbm2ddl.SchemaUpdate] HHH000232: Schema update complete
+2015-10-14 14:29:13,369 INFO  [cn.zy.apps.tools.jpa.privates.HibernateJpaIsolationSupportDialect] The isolation level set on the transaction is 4
+2015-10-14 14:29:13,524 INFO  [org.springframework.context.support.GenericApplicationContext] Closing org.springframework.context.support.GenericApplicationContext@4128c728: startup date [Wed Oct 14 14:29:07 CST 2015]; root of context hierarchy
+2015-10-14 14:29:13,527 INFO  [org.logicalcobwebs.proxool.db] Shutting down 'db' pool immediately [Shutdown Hook]
+2015-10-14 14:29:13,534 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean] Closing JPA EntityManagerFactory for persistence unit 'db'
+2015-10-14 14:29:13,538 INFO  [org.logicalcobwebs.proxool.db] 'db' pool has been closed down by Shutdown Hook in 11 milliseconds.
+2015-10-14 14:29:13,538 INFO  [org.logicalcobwebs.proxool.PrototyperController] Stopping Prototyper thread
+2015-10-14 14:29:13,539 INFO  [org.logicalcobwebs.proxool.HouseKeeperController] Stopping HouseKeeper thread

@@ -20,7 +20,7 @@ public class SystemUserSaveUpdateUnits extends ABCommonsService {
             break ;
 
         default:
-            throw new SystemOptServiceException("[opt type error ]") ;
+            throw new SystemOptServiceException("[操作类型错误]") ;
         }
     }
 
