@@ -4,37 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>教育</title>
 
-<link rel="stylesheet" type="text/css" href="./ext3/fileupload/css/fileuploadfield.css" />
-
-
 <link rel="stylesheet" type="text/css" href="./ext3/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="./ext3/privates/privates.js" />
-
 <script type="text/javascript" src="./ext3/adapter/ext/ext-base.min.js"></script>
 <script type="text/javascript" src="./ext3/my-ext-all-debug.min.js"></script>
 <script type="text/javascript" src="./ext3/ext-basex-debug.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="./ext3/boxselect/superboxselect.css" />
-<script type="text/javascript" src="./ext3/boxselect/SuperBoxSelect.js"></script>
-
-<!-- 
-<link rel="stylesheet" type="text/css" href="./ext3/tables/tab-scroller-menu.css" />
-<script type="text/javascript" src="./ext3/tables/TabScrollerMenu.js"></script>
- -->
-
-
-
-<script type="text/javascript" src="./ext3/toolbarkeymap.js"></script>
-<script type="text/javascript" src="./ext3/privates/base.js"></script>
-<script type="text/javascript" src="./ext3/privates/privates.js"></script>
-<script type="text/javascript" src="./ext3/privates/vtype.js"></script>
-
-
+<script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
 <script type="text/javascript" src="./module/module.js"></script>
 
 
-<script type="text/javascript" src="./ext3/kindeditor/kindeditor.js"></script>
-<script type="text/javascript" src="./ext3/kindeditor/lang/zh_CN.js"></script>
 
 
 
@@ -49,7 +27,7 @@
 <script type="text/javascript">
 
 function unlogin(){
-	window.location.href="./exit.jhtml"
+	window.location.href="./exit.do"
 }
 
 	function init(userId,userName, loginUser, regGUest) {
@@ -303,7 +281,7 @@ function unlogin(){
 
 
 </head>
-<body onload=" init('userId','userName', 'loginUser', 'regGUest')">
+<body onload=" init('${systemUser.id}','${systemUser.name}', '${systemUser.account}', '')">
 
 </body>
 </html>

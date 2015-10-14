@@ -10,10 +10,7 @@
 <script type="text/javascript" src="./ext3/my-ext-all-debug.min.js"></script>
 <script type="text/javascript" src="./ext3/ext-basex-debug.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="./ext3/boxselect/superboxselect.css" />
-<script type="text/javascript" src="./ext3/boxselect/SuperBoxSelect.js"></script>
-<script type="text/javascript" src="./ext3/privates/base.js"></script>
-<script type="text/javascript" src="./ext3/privates/privates.js"></script>
+<script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
 <script type="text/javascript">
 	Ext.onReady(function() {
 
@@ -40,8 +37,6 @@
 			autoHeight : false,
 
 			autoWidth : false,
-
-
 
 			defaults : {
 
@@ -95,12 +90,12 @@
 						// 提交到服务器操作
 
 						login.submit({
-							url : 'login.jhtml',
+							url : 'login.do',
 							// 提交成功的回调函数
 							success : function(json) {
 								if (json.success == true) {
 									win.close();
-									window.location = './intoMain.jhtml';
+									window.location = './intoMain.do';
 								} else {
 									Ext.Msg.alert('登陆失败', action.result.msg);
 								}
@@ -126,16 +121,16 @@
 		});
 
 		// 定义窗体
-		
+
 		//var tab1GroupMgr = new Ext.WindowGroup();
-//前置窗口
-       //tab1GroupMgr.zseed=99999; 
+		//前置窗口
+		//tab1GroupMgr.zseed=99999; 
 
 		var win = new Ext.Window({
 
 			id : 'loginWin',
 
-			title : '用户登陆',
+			title : '销售系统登陆',
 
 			layout : 'fit', // 布局方式fit，自适应布局
 
@@ -169,39 +164,33 @@
 
 			draggable : false,
 
-			pageX:100,
-			 pageY:100,
-			
+			pageX : 100,
+			pageY : 100,
+
 			//pageY:100, 
-			
-			modal : false, 
-			
-			maskDisabled : true, 
-			
-			//manager: tab1GroupMgr,
+
+			modal : false,
+
+			maskDisabled : true,
+
+		//manager: tab1GroupMgr,
 
 		// 将表单作为窗体元素嵌套布局
 
 		});
-		
-		
+
 		win.show();// 显示窗体
 		//网页可见区域宽：document.body.clientWidth 
-	       
+
 		//网页可见区域高：document.body.clientHeight 
-		
-		 var clientWidth = window.screen.width  * 0.6 ;
-		
-		 var clientHeight = window.screen.height * 0.4 ;
-		
-		
+
+		var clientWidth = window.screen.width * 0.6;
+
+		var clientHeight = window.screen.height * 0.4;
+
 		//alert(clientWidth +"   "+clientHeight);
-		
+
 		win.setPosition(clientWidth, clientHeight);
-		
-		
-	
-		
 
 	});
 </script>
@@ -214,12 +203,13 @@
 	left: 0;
 	-moz-opacity: 0.5;
 	opacity: .00;
-	filter: alpha(opacity =   50);
+	filter: alpha(opacity =     50);
 	background-color: #fffffff;
 	width: 100%;
 	height: 100%;
 	zoom: 1;
 }
+
 .bd {
 	background-image: url(backImage.jpg);
 	background-repeat: no-repeat;
