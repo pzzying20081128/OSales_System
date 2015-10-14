@@ -1,4 +1,4 @@
-function staffInfo_manage_search_windows(moduleId, moduleName, params) {
+function base_info_staff_search_windows(moduleId, moduleName, params) {
 
 	
 	var grid = params.grid.getGrid();

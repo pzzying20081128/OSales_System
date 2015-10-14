@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<package name="sys_base_staff" namespace="/" extends="struts-ajax">
+	<action name="listSysStaffinfos" class="SysStaffUserManagerAction" method="list">
+		<result type="json">
+			<param name="ignoreHierarchy">false</param>
+			<param name="excludeNullProperties">false</param>
+			<param name="includeProperties">
+				success,msg,
+				selectPage,
+				selectPage.\w+,
+				selectPage.result\[\d+\]\.\w+,
+			</param>
+		</result>
+	</action>
+	
+</package>
+</struts>

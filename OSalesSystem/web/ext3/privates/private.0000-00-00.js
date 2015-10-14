@@ -33,6 +33,58 @@ Ext.ERPDefaultsWindow = Ext.extend(Ext.Window, {
 		windows.show()
 	}
 });
+Ext.ERPWindow = Ext.extend(Ext.Window, {
+	closable : true,
+	plain : true,
+	resizable : true,
+	layout : "fit",
+	maximizable : true,
+	modal : true,
+	maximized : true,
+	closeAction : "close",
+	maximizable : true,
+	draggable : true,
+	minimizable : true,
+	closable : true,
+	constrain : true,
+	width : 700,
+	height : 400,
+	listeners : {
+		"minimize" : function(e) {
+			this.hide()
+		},
+		"bodyresize" : function(el, w, h) {
+		},
+		"beforeclose" : function() {
+			if (typeof this.grids == "undefined")
+				return;
+			var grids = this.grids;
+			for (var i = 0; i < grids.length; i++)
+				grids[i].saveColModule()
+		}
+	},
+	showWin : function(params) {
+		var grids = this.grids;
+		if (typeof this.moduleId == "undefined")
+			showErrorMsg("系统错误", "windows not find moduleId ! moduleId:TREEID");
+		var TREEID = null;
+		var windows = this;
+		var grids = this.grids;
+		if (typeof grids != "undefined")
+			for (var i = 0; i < grids.length; i++)
+				if (typeof params == "undefined")
+					grids[i].setPower();
+				else if (typeof params.modulePower != "undefined")
+					grids[i].setPower(params.modulePower);
+		Ext.getCmp("center_panel").removeAll();
+		Ext.getCmp("center_panel").add(windows);
+		Ext.getCmp("center_panel").doLayout();
+		windows.show();
+		if (typeof grids != "undefined")
+			for (var i = 0; i < grids.length; i++)
+				grids[i].removeOptBt()
+	}
+});
 Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 	layout : "form",
 	border : false,
@@ -253,6 +305,16 @@ function IndexPanel(userId, userName, loginUser, regGUest, properties) {
 	createWin();
 	win.show()
 };
+Ext.data.ERPStore = Ext.extend(Ext.data.Store, {
+	remoteSort : true,
+	listeners : {
+		"beforeload" : function(store, options) {
+			var o = store.baseParams;
+			Ext.apply(o, options.params);
+			this.baseParams = o
+		}
+	}
+});
 Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	region : "north",
 	split : true,
@@ -363,19 +425,6 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		Ext.grid.ERPGridPanel.superclass.initComponent.call(this);
 		this.on("rowdblclick", this.onRowDblClick, this);
-		this.store.on("beforeload", function(store, options) {
-			if (typeof store.lastOptions != "undefined")
-				if (typeof store.lastOptions.params != "undefined") {
-					var o = store.lastOptions.params;
-					Ext.apply(o, options.params);
-					this.lastOptions.params = o
-				} else
-					this.lastOptions.params = options.params;
-			else
-				this.lastOptions = {
-					params : options.params
-				}
-		});
 		var cmConfigs = this.colModel.config;
 		for (var j = 0; j < cmConfigs.length; j++) {
 			var cmConfig_ = cmConfigs[j];
@@ -608,6 +657,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	load : function(loadParams) {
 		var store_ = this.store;
 		store_.removeAll();
+		store_.baseParams = {};
 		if (typeof loadParams === "undefined")
 			loadParams = {
 				params : {
@@ -641,11 +691,11 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		store_.load({
 			params : loadParams.params,
 			callback : function(r, options, success, action) {
-				if (!success)
+				if (success == false)
 					if (loadParams != null) {
 						var jsonData = store_.reader.jsonData;
 						if (typeof loadParams.errors == "function")
-							if (typeof jsonData.msg === "undefined")
+							if (typeof jsonData === "undefined" || typeof jsonData.msg === "undefined")
 								showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
 							else if (jsonData.msg == 1001 || jsonData.msg == "1001")
 								Ext.MessageBox.alert("标题", "用户没有登录/用户超时，请重新登录系统！ ", function() {
@@ -657,6 +707,8 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 								showErrorMsg("失败", "数据请求失败【未知错误 -2 】！");
 							else
 								loadParams.errors(r, options, jsonData.msg);
+						else if (typeof jsonData === "undefined" || typeof jsonData.msg === "undefined")
+							showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
 						else if (jsonData.msg == 1001 || jsonData.msg == "1001")
 							Ext.MessageBox.alert("标题", "用户没有登录/用户超时，请重新登录系统！ ", function() {
 								window.location.href = "./"
@@ -681,7 +733,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if (loadParams != null) {
 						if (typeof loadParams.errors == "function") {
 							var jsonData = store_.reader.jsonData;
-							if (typeof jsonData.msg === "undefined")
+							if (typeof jsonData === "undefined" || typeof jsonData.msg === "undefined")
 								showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
 							else if (jsonData.msg == 1001 || jsonData.msg == "1001")
 								Ext.MessageBox.alert("标题", "用户没有登录/用户超时，请重新登录系统！ ", function() {
@@ -705,6 +757,28 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		})
 	}
 });
+Ext.grid.ERPRowNumberer = Ext.extend(Ext.grid.RowNumberer, {
+	width : 40,
+	sortable : false,
+	resizable : true,
+	draggable : false,
+	hideable : false,
+	menuDisabled : true,
+	renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+		var gridTotalType = record.get("gridTotalType");
+		if (gridTotalType == "PageTotal") {
+			cellmeta.attr = 'style\x3d"background-color: #C9D8FC"';
+			return "合计"
+		} else if (gridTotalType == "AllTotal") {
+			cellmeta.attr = 'style\x3d"background-color: #C9D8FC"';
+			return "总计"
+		} else if (store.lastOptions != null && store.lastOptions.params != null) {
+			var pageindex = store.lastOptions.params.start;
+			return pageindex + rowIndex + 1
+		} else
+			return rowIndex + 1
+	}
+});
 var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
 function updateUserPasswdWindows() {
@@ -722,7 +796,7 @@ function updateUserPasswdWindows() {
 				baseCls : "x-plain",
 				defaultType : "textfield",
 				defaults : {
-					width : 250
+					width : 300
 				},
 				items : [{
 					id : "systemUserInfo.accessPassword1",
@@ -748,7 +822,7 @@ function updateUserPasswdWindows() {
 				baseCls : "x-plain",
 				defaultType : "textfield",
 				defaults : {
-					width : 250
+					width : 300
 				},
 				items : [{
 					id : "systemUserInfo.accessPassword2",
@@ -798,7 +872,7 @@ function updateUserPasswdWindows() {
 	var window = new Ext.ERPDefaultsWindow({
 		title : "修改密码",
 		closable : true,
-		width : 360,
+		width : 300,
 		height : 200,
 		autoHeight : false,
 		items : [form_panel]
@@ -1531,4 +1605,56 @@ function showErrorMsg(title, message) {
 		modal : true,
 		icon : Ext.Msg.ERROR
 	})
+}
+function mainGridWindow(properties) {
+	var isBbar = typeof properties.isBbar == "undefined" ? true : properties.isBbar;
+	var moduleId = properties.moduleId;
+	var store = new Ext.data.ERPStore({
+		proxy : new Ext.data.HttpProxy({
+			url : properties.url
+		}),
+		reader : new Ext.data.JsonReader({
+			totalProperty : "selectPage.count",
+			root : "selectPage.result"
+		}, new Ext.data.Record.create(properties.record))
+	});
+	var grid = new Ext.grid.ERPGridPanel({
+		id : moduleId + "_GRID",
+		width : "100%",
+		height : typeof properties.height != "undefined" ? properties.height : "100%",
+		region : "center",
+		cm : new Ext.grid.ColumnModel(properties.column),
+		store : store,
+		moduleId : moduleId,
+		bbar : isBbar == true ? new Ext.PagingToolbar({
+			store : store,
+			pageSize : erp_grid_panel_limit,
+			displayInfo : true,
+			displayMsg : "本页显示第{0}条到第{1}条的记录，一共{2}条。",
+			emptyMsg : "没有记录",
+			doRefresh : function() {
+				this.store.reload({
+					callback : function(r, options, success) {
+						if (!success)
+							Ext.MessageBox.alert("提示", "加载相关数据失败【系统错误】！");
+						else
+							;
+					},
+					failure : function(form, action) {
+						Ext.MessageBox.alert("提示", "加载相关数据失败(failure)！")
+					}
+				})
+			}
+		}) : null,
+		rowdblclickKey : this.moduleId + "_edit",
+		tbar : properties.tbar
+	});
+	grid.initPanel(properties.init);
+	this.getGrid = getGrid_;
+	function getGrid_() {
+		return grid
+	}
+	this.load = function(params) {
+		grid.load(params)
+	}
 };

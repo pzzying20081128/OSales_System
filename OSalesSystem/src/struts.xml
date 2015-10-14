@@ -15,6 +15,8 @@
 	<!-- <include file="struts_luwq_system_power.xml"></include> -->
 
 	<include file="configs/struts/struts_power.xml"></include>
+	<include file="configs/struts/struts_sys_staff.xml"></include>
+	
 
 	<package name="init" namespace="/" extends="struts-appframe">
 		<action name="exit" class="UserLoginAction" method="exit">

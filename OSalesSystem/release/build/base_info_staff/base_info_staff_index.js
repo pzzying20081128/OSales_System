@@ -1,22 +1,22 @@
-function create_staffInfo_manage_window(moduleId, moduleName) {
+function create_base_info_staff_window(moduleId, moduleName) {
  
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
 		url : "ssssssssss",
 		// grid_column.record
-		record : staffInfo_manage_grid_column.record,
+		record : base_info_staff_grid_column.record,
 		// grid_column.column
-		column : staffInfo_manage_grid_column.column,
+		column : base_info_staff_grid_column.column,
 		tbar : {
-			plugins : new Ext.ux.ToolbarKeyMap(),
+			//plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
 				id : moduleId + '_add',
 				xtype : "tbbutton",
 				text : "增加",
 				//keyBinding : createCreateKey(),
 				handler : function(bt) {
-					staffInfo_manage_create_windows(moduleId, moduleName, {
+					base_info_staff_create_windows(moduleId, moduleName, {
 					grid : mainGridModule,
 				
 				 });
@@ -27,7 +27,7 @@ function create_staffInfo_manage_window(moduleId, moduleName) {
 				text : "编辑",
 				//keyBinding : createEditKey(),
 				handler : function(bt) {
-					 staffInfo_manage_update_windows(moduleId, moduleName, {
+					 base_info_staff_update_windows(moduleId, moduleName, {
 					 grid : mainGridModule,
 					 searchParams:test_search_params
 					 });
@@ -38,7 +38,7 @@ function create_staffInfo_manage_window(moduleId, moduleName) {
 				text : "删除",
 				//keyBinding : createDeleteKey(),
 				handler : function(bt) {
-					  staffInfo_manage_delete_windows(moduleId, moduleName, {
+					  base_info_staff_delete_windows(moduleId, moduleName, {
 					 grid : mainGridModule,
 					 });
 				}
@@ -48,9 +48,9 @@ function create_staffInfo_manage_window(moduleId, moduleName) {
 				text : "查询",
 				//keyBinding : createSearchKey(),
 				handler : function() {
-					var searchWindex = staffInfo_manage_search_windows(moduleId, moduleName, {
+					var searchWindex = base_info_staff_search_windows(moduleId, moduleName, {
 					grid : mainGridModule,
-					searchParams: staffInfo_manage_search_params
+					searchParams: base_info_staff_search_params
 					});
 				}
 			}]
@@ -81,7 +81,7 @@ function create_staffInfo_manage_window(moduleId, moduleName) {
 	window.showWin();
 	
 	
-		function   staffInfo_manage_delete_windows(moduleId, moduleName, params) {
+		function   base_info_staff_delete_windows(moduleId, moduleName, params) {
 	var mainGridModule = params.grid;
 	var mainGrid = mainGridModule.getGrid();
 	var selection_rows = mainGrid.getSelectionModel().getSelections();

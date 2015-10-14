@@ -1,18 +1,40 @@
-function staffInfo_manage_create_windows(moduleId, moduleName, params) {
+function base_info_staff_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
+	
+	var selection_rows = grid.getSelectionModel().getSelections();
 
-	var staffInfo_manage_params = {
-		title : "新增" + moduleName,
-		action : "save",
+	if (selection_rows == null) {
+		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
+		return false;
+	}
+
+	if (selection_rows.length != 1) {
+		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
+		return false;
+	}
+	var selectId = selection_rows[0].id;
+	
+
+	var base_info_staff_params = {
+		title : "编辑" + moduleName,
+		action : "update",
 		grid : grid,
 		// 结果路径
 		pojo : "sss",
 		//url
 		url : './saveUpdateMaterialManage.action',
 		params : {
-			optType : "save"
+			optType : "update"
 		},
+	   reader : new Ext.data.JsonReader({
+			successProperty : 'success',
+			root : 'dept',
+			totalProperty : 'totalProperty'
+		}, [{
+			name : 'dept.name',
+			mapping : 'name'
+		}]),
 		//字段
 		field : [
 		{// 第一排
@@ -89,6 +111,13 @@ function staffInfo_manage_create_windows(moduleId, moduleName, params) {
 		
 	}
 
-	var staffInfo_manage_create_window = new staffInfo_manage_save_update_form_panel_windows(staffInfo_manage_params);
+	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(base_info_staff_params);
+	
+		base_info_staff_create_window.load({
+		url : './getStaff.action?uuid=' + goodsId,
+		success : function(form, action) {
+		
+		}
+	});
 
 }

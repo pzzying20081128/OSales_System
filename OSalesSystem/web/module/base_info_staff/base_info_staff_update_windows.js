@@ -1,4 +1,4 @@
-function ${javaScript.packages}_update_windows(moduleId, moduleName, params) {
+function base_info_staff_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 	
@@ -16,7 +16,7 @@ function ${javaScript.packages}_update_windows(moduleId, moduleName, params) {
 	var selectId = selection_rows[0].id;
 	
 
-	var staffInfo_manage_params = {
+	var base_info_staff_params = {
 		title : "编辑" + moduleName,
 		action : "update",
 		grid : grid,
@@ -111,9 +111,9 @@ function ${javaScript.packages}_update_windows(moduleId, moduleName, params) {
 		
 	}
 
-	var ${javaScript.packages}_create_window = new ${javaScript.packages}_save_update_form_panel_windows(${javaScript.packages}_params);
+	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(base_info_staff_params);
 	
-		${javaScript.packages}_create_window.load({
+		base_info_staff_create_window.load({
 		url : './getStaff.action?uuid=' + goodsId,
 		success : function(form, action) {
 		

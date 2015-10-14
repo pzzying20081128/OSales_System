@@ -28,10 +28,6 @@ public class SysStaffUser extends CommBean {
     @FieldDesc(name = "ID", isShow = false)
     private Integer id ;
 
-    @Column(name = "account", length = 1)
-    @FieldDesc(name = "是否管理员", desc = "0:否;1:是")
-    private String account ;
-
     @Column(name = "pwd", length = 10)
     @FieldDesc(name = "密码", isShow = false)
     private String pwd ;
@@ -39,6 +35,10 @@ public class SysStaffUser extends CommBean {
     @Column(name = "name", length = 10)
     @FieldDesc(name = "姓名")
     private String name ;
+    
+    @Column(name = "account", length = 1)
+    @FieldDesc(name = "系统用户")
+    private String account ;
 
     @Column(name = "sex", length = 1)
     @FieldDesc(name = "性别", desc = "0:女;1:男")

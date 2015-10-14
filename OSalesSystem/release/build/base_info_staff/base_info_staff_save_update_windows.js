@@ -1,4 +1,4 @@
-function staffInfo_manage_save_update_form_panel_windows(params) {
+function base_info_staff_save_update_form_panel_windows(params) {
 
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,

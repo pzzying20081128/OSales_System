@@ -1,7 +1,7 @@
 /**
  * 主要用户设置查询的一些参数
  */
-var  staffInfo_manage_search_params = {
+var  base_info_staff_search_params = {
 	formField : [
 		
 	{ // 第一排

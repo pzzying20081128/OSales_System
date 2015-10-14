@@ -1,27 +1,20 @@
-var staffInfo_manage_grid_column = {
-//	record : [{
-//		name : 'id'
-//	}, {
-//		name : 'name'
-//	}, {
-//		name : 'job'
-//	}, {
-//		name : 'sex'
-//	}, {
-//		name : 'access'
-//	}, {
-//		name : 'departmentParents.name',
-//		mapping : "departmentParents"
-//	}],
-	
+var base_info_staff_grid_column = {
    record : [
          			  {
                     name : 'id',
 					mapping : 'id'
                 },
 		 			  {
+                    name : 'pwd',
+					mapping : 'pwd'
+                },
+		 			  {
                     name : 'name',
 					mapping : 'name'
+                },
+		 			  {
+                    name : 'account',
+					mapping : 'account'
                 },
 		 			  {
                     name : 'sex',
@@ -40,24 +33,28 @@ var staffInfo_manage_grid_column = {
 					mapping : 'address'
                 },
 		 			  {
-                    name : 'isStock',
-					mapping : 'isStock'
+                    name : 'isAdmin',
+					mapping : 'isAdmin'
                 },
 		 			  {
-                    name : 'isBiz',
-					mapping : 'isBiz'
-                },
-		 			  {
-                    name : 'isTransportContactMan',
-					mapping : 'isTransportContactMan'
+                    name : 'isBizMan',
+					mapping : 'isBizMan'
                 },
 		 			  {
                     name : 'isGoodsMan',
 					mapping : 'isGoodsMan'
                 },
 		 			  {
-                    name : 'isDistributionMan',
-					mapping : 'isDistributionMan'
+                    name : 'isStockMan',
+					mapping : 'isStockMan'
+                },
+		 			  {
+                    name : 'isTransportMan',
+					mapping : 'isTransportMan'
+                },
+		 			  {
+                    name : 'text',
+					mapping : 'text'
                 },
 		    ],
 	
@@ -65,7 +62,7 @@ var staffInfo_manage_grid_column = {
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	column : [
 	 new Ext.grid.ERPRowNumberer(),
-	   	      		 	      			  {
+	   	      		 	      		 	      			  {
                     header : '姓名',
 		            width :   200,
 		            dataIndex :'name',
@@ -76,7 +73,22 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
+		            	 }
+		          }
+                },
+            		 	      			  {
+                    header : '系统用户',
+		            width :   200,
+		            dataIndex :'account',
+		            sortable :  true,
+		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+		            	if(value==null ){
+		            		return value ;
+		            	}
+		            	 else
+		            	 {
+		            	   return   value;
 		            	 }
 		          }
                 },
@@ -91,7 +103,7 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
@@ -106,7 +118,7 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
@@ -121,7 +133,7 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
@@ -136,14 +148,14 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
             		 	      			  {
-                    header : '是否采购员',
+                    header : '是否管理员',
 		            width :   200,
-		            dataIndex :'isStock',
+		            dataIndex :'isAdmin',
 		            sortable :  true,
 		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 		            	if(value==null ){
@@ -151,14 +163,14 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
             		 	      			  {
                     header : '是否业务员',
 		            width :   200,
-		            dataIndex :'isBiz',
+		            dataIndex :'isBizMan',
 		            sortable :  true,
 		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 		            	if(value==null ){
@@ -166,22 +178,7 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
-		            	 }
-		          }
-                },
-            		 	      			  {
-                    header : '是否运输员',
-		            width :   200,
-		            dataIndex :'isTransportContactMan',
-		            sortable :  true,
-		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-		            	if(value==null ){
-		            		return value ;
-		            	}
-		            	 else
-		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
@@ -196,14 +193,14 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
 		            	 }
 		          }
                 },
             		 	      			  {
-                    header : '是否配货员',
+                    header : '是否采购员',
 		            width :   200,
-		            dataIndex :'isDistributionMan',
+		            dataIndex :'isStockMan',
 		            sortable :  true,
 		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 		            	if(value==null ){
@@ -211,7 +208,37 @@ var staffInfo_manage_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     value;
+		            	   return   value;
+		            	 }
+		          }
+                },
+            		 	      			  {
+                    header : ' 是否运输人',
+		            width :   200,
+		            dataIndex :'isTransportMan',
+		            sortable :  true,
+		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+		            	if(value==null ){
+		            		return value ;
+		            	}
+		            	 else
+		            	 {
+		            	   return   value;
+		            	 }
+		          }
+                },
+            		 	      			  {
+                    header : '备注',
+		            width :   200,
+		            dataIndex :'text',
+		            sortable :  true,
+		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+		            	if(value==null ){
+		            		return value ;
+		            	}
+		            	 else
+		            	 {
+		            	   return   value;
 		            	 }
 		          }
                 },
