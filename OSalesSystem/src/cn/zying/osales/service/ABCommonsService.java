@@ -1,14 +1,15 @@
 package cn.zying.osales.service ;
 
-import javax.annotation.Resource ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.beans.factory.annotation.Qualifier ;
 
-public abstract class ABCommonsService implements ICommonsService {
 
-    @Resource(name = IERPBaseService.name)
-    protected IERPBaseService baseService ;
+public abstract class ABCommonsService {
+    
+    @Autowired
+    @Qualifier(IABService.name)
+    protected IABService baseService;
 
-    public void setBaseService(IERPBaseService baseService) {
-        this.baseService = baseService ;
-    }
+    
 
 }

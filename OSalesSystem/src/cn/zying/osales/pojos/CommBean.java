@@ -13,7 +13,7 @@ public abstract class CommBean implements java.io.Serializable {
 
     private static final long serialVersionUID = 15993127981203978L ;
 
-    @Column(name = "status")
+    @Column(name = "status" ,length=5)
     @Enumerated(EnumType.STRING)
     private Status status ;
 

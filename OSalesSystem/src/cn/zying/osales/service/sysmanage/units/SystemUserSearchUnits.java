@@ -1,25 +1,33 @@
-package cn.zying.osales.service.sysmanage.units ;
+package  cn.zying.osales.service.sysmanage.units ;
 
 import java.util.List ;
+import java.util.Map ;
 
 import org.springframework.stereotype.Component ;
 
+import cn.zy.apps.tools.units.CommSearchBean ;
+import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.StaffInfo ;
-import cn.zying.osales.pojos.SystemUser ;
+import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 
-@Component("SystemUserUnits")
+
+@Component("SystemUserSearchUnits")
 public class SystemUserSearchUnits extends ABCommonsService {
 
-    public SelectPage<SystemUser> search(OptType optType, SystemUserSearchBean searchBean) throws SystemOptServiceException {
-        SelectPage<SystemUser> selectPage = new SelectPage<SystemUser>() ;
+    public SelectPage<SysStaffUser> search(OptType optType,
+		                            SystemUserSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+        SelectPage<SysStaffUser> selectPage = new SelectPage<SysStaffUser>() ;
 
-        List<SystemUser> result = list(searchBean) ;
+		Map<String, Object> value=ToolsUnits.createSearchMap();
+			
+		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
+				
+        List<SysStaffUser> result = list(sqlWhere,value,startLimit) ;
 
-        Long sum = sum(searchBean) ;
+        Long sum = sum(sqlWhere,value) ;
 
         selectPage.setCount(sum) ;
 
@@ -29,12 +37,22 @@ public class SystemUserSearchUnits extends ABCommonsService {
 
     }
 
-    private List<SystemUser> list(SystemUserSearchBean searchBean) throws SystemOptServiceException {
-
+	 private  String sql ="";   
+    private List<SysStaffUser> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
+   String sql_ =sql+ sqlWhere ;
+        List<SysStaffUser>  result = baseService.findByHSQL(sql_, value, startLimit);
+        return result;
     }
-
-    private Long sum(SystemUserSearchBean searchBean) throws SystemOptServiceException {
-
+ private  String sqlsum ="";   
+    private Long sum(String sqlWhere ,Map<String, Object> value) throws SystemOptServiceException {
+ String sql_ =sqlsum+ sqlWhere ;
+        Long  sum = baseService.findSinglenessByHSQL(sql_, value);
+        return sum;
+    }
+	
+	 private String createWhere(Map<String, Object> value,SystemUserSearchBean searchBean ,CommSearchBean commSearchBean){
+        String sqlWhere="";
+        return sqlWhere;
     }
 
 }
