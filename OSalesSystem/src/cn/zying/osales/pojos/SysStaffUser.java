@@ -1,5 +1,9 @@
 package cn.zying.osales.pojos ;
 
+import java.util.List ;
+
+
+import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
@@ -7,7 +11,7 @@ import javax.persistence.GeneratedValue ;
 import javax.persistence.GenerationType ;
 import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
-import javax.persistence.OneToOne ;
+import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Transient ;
 
@@ -23,7 +27,7 @@ public class SysStaffUser extends CommBean {
     private static final long serialVersionUID = 8238708907376609336L ;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     @FieldDesc(name = "ID", isShow = false)
     private Integer id ;
@@ -88,7 +92,10 @@ public class SysStaffUser extends CommBean {
     
     @Transient
     private String accessPassword;
-
+    
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="sysStaffUser")
+    private List<SystemUserPower> systemUserPowers;
+    
     public Integer getId() {
         return id ;
     }
@@ -207,6 +214,14 @@ public class SysStaffUser extends CommBean {
 
     public void setAccessPassword(String accessPassword) {
         this.accessPassword = accessPassword ;
+    }
+
+    public List<SystemUserPower> getSystemUserPowers() {
+        return systemUserPowers ;
+    }
+
+    public void setSystemUserPowers(List<SystemUserPower> systemUserPowers) {
+        this.systemUserPowers = systemUserPowers ;
     }
 
 }

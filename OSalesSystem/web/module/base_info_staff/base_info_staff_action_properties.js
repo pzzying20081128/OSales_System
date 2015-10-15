@@ -65,7 +65,7 @@ var base_info_staff_grid_column = {
 		dataIndex : 'name',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-		
+
 			if (value == null) {
 				return value;
 			} else {

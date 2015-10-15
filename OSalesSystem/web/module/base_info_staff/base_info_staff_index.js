@@ -80,15 +80,14 @@ function create_base_info_staff_window(moduleId, moduleName) {
 		moduleId : moduleId,
 		listeners : {}
 	});
-	
+
 	mainGrid.load({
-	params:{
-		opttype:"list"
-	}
+		params : {
+			opttype : "list"
+		}
 	});
-	
+
 	window.showWin();
-	
 
 	function base_info_staff_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;

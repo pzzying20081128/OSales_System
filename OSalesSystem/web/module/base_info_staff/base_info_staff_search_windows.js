@@ -1,21 +1,20 @@
 function base_info_staff_search_windows(moduleId, moduleName, params) {
 
-	
 	var grid = params.grid.getGrid();
 	var search_params = params.searchParams;
 	var form_panel = new Ext.form.ERPFormPanel({
-        height : 400,
-//		autoHeight : false,
+		height : 400,
+		// autoHeight : false,
 		labelWidth : 60,
 		items : search_params.formField,
 		buttons : [{
 			text : '提交',
 			listeners : {
 				'click' : function() {
-					
+
 					if (!search_params.verification())
 						return;
-						grid.removeAll();
+					grid.removeAll();
 					grid.load({
 						params : search_params.params(),
 						success : function() {
@@ -43,14 +42,11 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 		title : "查询工单",
 		closable : true,
 		width : 500,
-//		height : 400,
-//		autoHeight : false,
-		
+		// height : 400,
+		// autoHeight : false,
+
 		items : [form_panel]
 	});
 	window.showWin();
 
-
-	
-	
 }

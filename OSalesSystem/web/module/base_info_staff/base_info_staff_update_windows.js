@@ -1,7 +1,7 @@
 function base_info_staff_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
+
 	var selection_rows = grid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
@@ -14,7 +14,6 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 		return false;
 	}
 	var selectId = selection_rows[0].id;
-	
 
 	var base_info_staff_params = {
 		title : "编辑" + moduleName,
@@ -22,12 +21,12 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 		grid : grid,
 		// 结果路径
 		pojo : "sss",
-		//url
+		// url
 		url : './saveUpdateMaterialManage.action',
 		params : {
 			optType : "update"
 		},
-	   reader : new Ext.data.JsonReader({
+		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
 			root : 'dept',
 			totalProperty : 'totalProperty'
@@ -35,9 +34,8 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 			name : 'dept.name',
 			mapping : 'name'
 		}]),
-		//字段
-		field : [
-		{// 第一排
+		// 字段
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{// 1-1
@@ -106,17 +104,16 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 			}// 1-3 end
 			]
 
-		}
-		]
-		
+		}]
+
 	}
 
 	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(base_info_staff_params);
-	
-		base_info_staff_create_window.load({
+
+	base_info_staff_create_window.load({
 		url : './getStaff.action?uuid=' + goodsId,
 		success : function(form, action) {
-		
+
 		}
 	});
 
