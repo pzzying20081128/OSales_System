@@ -7,9 +7,9 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 		action : "save",
 		grid : grid,
 		// 结果路径
-		pojo : "sss",
+		pojo : "systemUserInfo",
 		// url
-		url : './saveUpdateMaterialManage.action',
+		url : './saveSysStaffinfo.do',
 		params : {
 			optType : "save"
 		},
@@ -17,9 +17,7 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [
-
-			{
+			items : [{
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -40,9 +38,7 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			},
-
-			{
+			}, {
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -63,9 +59,7 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			},
-
-			{
+			}, {
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -74,7 +68,6 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-
 					id : 'systemUserInfo.pwd',
 					name : 'systemUserInfo.pwd',
 					fieldLabel : '登录密码',
@@ -86,11 +79,8 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						'specialkey' : function(field, e) {
 						}
 					}
-
 				}]
-			},
-
-			{
+			}, {
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -111,13 +101,10 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						'specialkey' : function(field, e) {
 						}
 					}
-
 				}]
 			}]
-
 		}// end
 		, {
-
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{
@@ -128,22 +115,15 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'systemUserInfo.isStockMan',
 					name : 'systemUserInfo.isStockMan',
 					fieldLabel : ' 采购员',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			},
-
-			{
+					storeData : [[1, "是"], [0, "否"]],
+					defaultValue : 1,
+					allowBlank : false
+				})]
+			}, {
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -151,22 +131,15 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'systemUserInfo.isTransportMan',
 					name : 'systemUserInfo.isTransportMan',
 					fieldLabel : '  运输员',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			},
-
-			{
+					storeData : [[1, "是"], [0, "否"]],
+					defaultValue : 1,
+					allowBlank : false
+				})]
+			}, {
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -174,19 +147,14 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'systemUserInfo.isBizMan',
 					name : 'systemUserInfo.isBizMan',
 					fieldLabel : ' 业务员',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+					storeData : [[1, "是"], [0, "否"]],
+					defaultValue : 1,
+					allowBlank : false
+				})]
 			}, {
 
 				columnWidth : .25,
@@ -196,29 +164,27 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'systemUserInfo.isGoodsMan',
 					name : 'systemUserInfo.isGoodsMan',
 					fieldLabel : ' 理货员',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
+					storeData : [[1, "是"], [0, "否"]],
+					defaultValue : 1,
 					allowBlank : false,
 					listeners : {
-						'specialkey' : function(field, e) {
+						'load' : function(field, e) {
+
+							// this.setValue(1);
 						}
 					}
-				}]
-			}
-			]
+				})]
+			}]
 		}
 
 		, {// start 2
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [
-
-			{
+			items : [{
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -239,9 +205,7 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			},
-
-			{
+			}, {
 				columnWidth : .75,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -262,17 +226,13 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}
-
-			]
+			}]
 		}// end
 		, {
 			// start 2
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [
-
-			{
+			items : [{
 				columnWidth : .25,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -280,23 +240,17 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
+				items : [
+
+				createLocalCombo({
 					id : 'systemUserInfo.sex',
 					name : 'systemUserInfo.sex',
 					fieldLabel : ' 性别',
-					xtype : 'textfield',
-					//style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-
-				}]
-			},
-
-			{
+					storeData : [[1, "男"], [0, "女"]],
+					defaultValue : null,
+					allowBlank : true
+				})]
+			}, {
 				columnWidth : .75,
 				layout : 'form',
 				defaultType : 'textfield',
@@ -317,14 +271,8 @@ function base_info_staff_create_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}
-
-			]
-
-		}
-
-		]
-
+			}]
+		}]
 	}
 
 	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(base_info_staff_params);

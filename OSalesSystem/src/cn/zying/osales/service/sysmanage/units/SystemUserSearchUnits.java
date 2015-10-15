@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
+import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
@@ -15,6 +16,23 @@ import cn.zying.osales.service.SystemOptServiceException ;
 
 @Component("SystemUserSearchUnits")
 public class SystemUserSearchUnits extends ABCommonsService {
+
+    public SysStaffUser searchByAccessName(String accessName) throws SystemOptServiceException {
+        //                String sql ="select  systemUser from  SystemUser as  systemUser  where  systemUser.account =:account  ";
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+        value.put("account", accessName.trim()) ;
+        value.put("status", OSalesConfigProperties.Status.正常) ;
+        return baseService.findSinglenessByQName(OSalesConfigProperties.query_sysStaffUser_searchByAccessName, value) ;
+    }
+
+    private static String searchByName = "select  sysStaffUser  from  SysStaffUser as  sysStaffUser  where sysStaffUser.name =:name" ;
+
+    public SysStaffUser searchByName(String name) throws SystemOptServiceException {
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+        value.put("name", name) ;
+        return baseService.findSinglenessByHSQL(searchByName, value) ;
+
+    }
 
     private String sql = "select  sysStaffUser  from  SysStaffUser as  sysStaffUser  " ;
 

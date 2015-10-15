@@ -143,6 +143,10 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 				var errormsg = action.response.responseJSON.msg;
 				if (errormsg == null || errormsg == "")
 					showErrorMsg("错误提示", "提交请求操作失败【系统错误[" + failureType + "]】");
+				else if (jsonData.msg == 1001 || jsonData.msg == "1001")
+					Ext.MessageBox.alert("标题", "用户没有登录/用户超时，请重新登录系统！ ", function() {
+						window.location.href = "./"
+					});
 				else if (typeof properties.errors == "function")
 					properties.errors(form, action, errormsg);
 				else
@@ -781,6 +785,8 @@ Ext.grid.ERPRowNumberer = Ext.extend(Ext.grid.RowNumberer, {
 });
 var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
+var NoAllowBlankStyle = "background:#fff1a4;";
+var AllowBlankStyle = "background:#ffffff;";
 function updateUserPasswdWindows() {
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
@@ -1605,6 +1611,36 @@ function showErrorMsg(title, message) {
 		modal : true,
 		icon : Ext.Msg.ERROR
 	})
+}
+function createLocalCombo(params) {
+	var xx = {
+		itemid : "combobox_type",
+		name : params.name,
+		hiddenName : params.name,
+		fieldLabel : params.fieldLabel,
+		xtype : "combo",
+		mode : "local",
+		valueField : "id",
+		displayField : "value",
+		triggerAction : "all",
+		editable : false,
+		defaultValue : typeof params.defaultValue == "undefined" ? null : params.defaultValue,
+		reset : function() {
+			if (this.clearFilterOnReset && this.mode == "local")
+				this.store.clearFilter();
+			Ext.form.ComboBox.superclass.reset.call(this);
+			this.setValue(this.defaultValue)
+		},
+		allowBlank : typeof params.allowBlank == "undefined" ? false : params.allowBlank,
+		style : typeof params.allowBlank == "undefined" ? NoAllowBlankStyle : params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle,
+		value : typeof params.defaultValue == "undefined" ? null : params.defaultValue,
+		store : new Ext.data.SimpleStore({
+			fields : ["id", "value"],
+			data : params.storeData,
+			listeners : params.listeners
+		})
+	};
+	return xx
 }
 function mainGridWindow(properties) {
 	var isBbar = typeof properties.isBbar == "undefined" ? true : properties.isBbar;

@@ -34,15 +34,24 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
 
     private SystemUserSearchBean searchBean ;
 
+    public String save() throws Exception {
+        try {
+            systemUserService.saveUpdate(optType, systemUserInfo) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+
     public String list() throws Exception {
         try {
-            SelectPage<SysStaffUser> selectPage = systemUserService.search(opttype, searchBean, commSearchBean, start, limit) ;
+            SelectPage<SysStaffUser> selectPage = systemUserService.search(optType, searchBean, commSearchBean, start, limit) ;
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;
-            this.msg = handError(e);
+            this.msg = handError(e) ;
         }
-
         return SUCCESS ;
     }
 
@@ -52,7 +61,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
             sysStaffUser_.setPwd(systemUserInfo.getAccessPassword()) ;
             systemUserService.saveUpdate(OptType.update, sysStaffUser_) ;
         } catch (Exception e) {
-            handError(e);
+            handError(e) ;
             this.success = false ;
             this.msg = OSalesConfigProperties.USER_UPDATE_PASSWORD_ERROR ;
         }

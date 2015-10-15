@@ -23,7 +23,7 @@ public interface OSalesConfigProperties {
     
 
     public enum OptType {
-        save, update, check, delete,list,search
+        save, update, check, delete,list,search,searchLike
     }
 
     public enum Status {

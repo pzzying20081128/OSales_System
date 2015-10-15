@@ -12,7 +12,7 @@ public abstract class OSalesSystemABAction extends GeneralAction implements IOSa
 
     private SelectPage<?> selectPage ;
 
-    protected OptType opttype ;
+    protected OptType optType ;
 
     protected CommSearchBean commSearchBean ;
 
@@ -30,12 +30,13 @@ public abstract class OSalesSystemABAction extends GeneralAction implements IOSa
         this.selectPage = selectPage ;
     }
 
-    public void setOpttype(OptType opttype) {
-        this.opttype = opttype ;
-    }
-
+   
     public void setCommSearchBean(CommSearchBean commSearchBean) {
         this.commSearchBean = commSearchBean ;
+    }
+
+    public void setOptType(OptType optType) {
+        this.optType = optType ;
     }
 
 }

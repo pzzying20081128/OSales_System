@@ -68,10 +68,11 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     @Override
     public SysStaffUser searchByAccessName(String accessName) throws SystemOptServiceException {
         //                String sql ="select  systemUser from  SystemUser as  systemUser  where  systemUser.account =:account  ";
-        Map<String, Object> value = ToolsUnits.createSearchMap() ;
-        value.put("account", accessName.trim()) ;
-        value.put("status", OSalesConfigProperties.Status.正常) ;
-        return baseService.findSinglenessByQName(OSalesConfigProperties.query_sysStaffUser_searchByAccessName, value) ;
+//        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+//        value.put("account", accessName.trim()) ;
+//        value.put("status", OSalesConfigProperties.Status.正常) ;
+//        return baseService.findSinglenessByQName(OSalesConfigProperties.query_sysStaffUser_searchByAccessName, value) ;
+        return iSystemUserSearchUnits.searchByAccessName(accessName);
     }
 
     @Override

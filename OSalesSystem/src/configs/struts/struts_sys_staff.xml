@@ -15,5 +15,17 @@
 		</result>
 	</action>
 	
+	<action name="saveSysStaffinfo" class="SysStaffUserManagerAction" method="save">
+		<result type="json">
+			<param name="ignoreHierarchy">false</param>
+			<param name="excludeNullProperties">false</param>
+			<param name="includeProperties">
+				success,msg,
+				systemUserInfo,
+				systemUserInfo.\w+,
+			</param>
+		</result>
+	</action>
+	
 </package>
 </struts>

@@ -36,7 +36,7 @@ public class SysStaffUser extends CommBean {
     @FieldDesc(name = "姓名")
     private String name ;
     
-    @Column(name = "account", length = 1)
+    @Column(name = "account", length = 10)
     @FieldDesc(name = "系统用户")
     private String account ;
 
