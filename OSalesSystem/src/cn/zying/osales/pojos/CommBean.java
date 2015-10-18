@@ -4,8 +4,8 @@ import javax.persistence.Column ;
 import javax.persistence.EnumType ;
 import javax.persistence.Enumerated ;
 import javax.persistence.MappedSuperclass ;
-import javax.persistence.Temporal ;
 
+import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 
 @MappedSuperclass
@@ -15,6 +15,7 @@ public abstract class CommBean implements java.io.Serializable {
 
     @Column(name = "status" ,length=5)
     @Enumerated(EnumType.STRING)
+    @FieldDesc(name = "状态", isShow = true)
     private Status status ;
 
     public Status getStatus() {

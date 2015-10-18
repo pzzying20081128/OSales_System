@@ -1,8 +1,7 @@
-function base_info_staff_save_update_form_panel_windows(params) {
+function base_info_staff_save_update_form_panel_windows(params, actionParams) {
 
 	var userPowerPanel_ = new UserPowerPanel({
 		height : 500
-		,
 	});
 
 	var form_panel = new Ext.form.ERPFormPanel({
@@ -13,37 +12,6 @@ function base_info_staff_save_update_form_panel_windows(params) {
 		autoHeight : false,
 		items : params.field,
 		reader : params.reader
-		,
-		// buttons : [{
-		// text : '提交',
-		// listeners : {
-		// 'click' : function() {
-		// form_panel.submit({
-		// url : params.url,
-		// waitMsg : '正在提交...',
-		// submitEmptyText : false,
-		// params : params.params,
-		// success : function(json) {
-		// if (params.action == "save") {
-		// params.grid.insertRow(json[params.pojo]);
-		// form_panel.reset();
-		// } else {
-		// params.grid.updateRow(json[params.pojo]);
-		// window.close();
-		// }
-		//
-		// }
-		// });
-		// }
-		// }
-		// }, {
-		// text : '关闭',
-		// listeners : {
-		// 'click' : function() {
-		// window.close();
-		// }
-		// }
-		// }]
 	});
 
 	var tabs = new Ext.TabPanel({
@@ -75,7 +43,14 @@ function base_info_staff_save_update_form_panel_windows(params) {
 		listeners : {
 			'tabchange' : function() {// tabchange
 				var tab = tabs.getActiveTab();
+
 				if (tab.id == 'user_info_power') {
+					userPowerPanel_.load({
+						url : "./listPowerByUserId.do",
+						params : {
+							uuid : actionParams.selectId
+						}
+					});
 
 				} else if (tab.id == 'user_info') {
 
@@ -130,6 +105,15 @@ function base_info_staff_save_update_form_panel_windows(params) {
 	this.load = function(params) {
 		form_panel.load(params);
 	}
+
+	// loadPower = function(userid) {
+	// userPowerPanel_.load({
+	// url : "./listPowerByUserId.do",
+	// params : {
+	// uuid : userid
+	// }
+	// });
+	// }
 
 	this.closeWindow = function() {
 		window.close();

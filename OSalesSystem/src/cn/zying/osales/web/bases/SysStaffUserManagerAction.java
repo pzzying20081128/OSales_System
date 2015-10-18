@@ -17,9 +17,9 @@ import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.pojos.SystemUserOptPower ;
 import cn.zying.osales.pojos.SystemUserPower ;
-import cn.zying.osales.service.sysmanage.ISystemUserService ;
-import cn.zying.osales.service.sysmanage.units.SystemUserSearchBean ;
+import cn.zying.osales.units.search.bean.SystemUserSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
+import cn.zying.osales.web.aop.IAopSystemUserService ;
 
 /**
  * 
@@ -36,14 +36,24 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
     private static final long serialVersionUID = 2456639902961437923L ;
 
     @Autowired
-    @Qualifier(ISystemUserService.aop_name)
-    private ISystemUserService systemUserService ;
+    @Qualifier(IAopSystemUserService.aop_name)
+    private IAopSystemUserService systemUserService ;
 
     private SysStaffUser systemUserInfo ;
 
     private SystemUserSearchBean searchBean ;
 
     private String power ;
+    
+    public String remove()throws Exception {
+        try {
+            systemUserService.remove(optType, systemUserInfo , getOSalsesLoginUserId());
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
 
     public String save() throws Exception {
         try {
@@ -68,7 +78,17 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
                 }
             }
             systemUserInfo.setSystemUserPowers(systemUserPowers) ;
-            systemUserService.saveUpdate(optType, systemUserInfo) ;
+            systemUserService.saveUpdate(optType, systemUserInfo , getOSalsesLoginUserId()) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+
+    public String get() throws Exception {
+        try {
+            systemUserInfo = systemUserService.get(uuid) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -91,7 +111,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
         try {
             SysStaffUser sysStaffUser_ = systemUserService.get(getOSalsesLoginUserId()) ;
             sysStaffUser_.setPwd(systemUserInfo.getAccessPassword()) ;
-            systemUserService.saveUpdate(OptType.update, sysStaffUser_) ;
+            systemUserService.saveUpdate(OptType.update, sysStaffUser_  ,getOSalsesLoginUserId() ) ;
         } catch (Exception e) {
             handError(e) ;
             this.success = false ;
@@ -111,6 +131,14 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
 
     public void setPower(String power) {
         this.power = power ;
+    }
+
+    public void setSearchBean(SystemUserSearchBean searchBean) {
+        this.searchBean = searchBean ;
+    }
+
+    public SystemUserSearchBean getSearchBean() {
+        return searchBean ;
     }
 
 }

@@ -1,31 +1,24 @@
 package cn.zying.osales.units ;
 
-import java.util.ArrayList ;
-import java.util.HashMap ;
 import java.util.List ;
-import java.util.Map ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
-import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.powers.IUserPowerMdouleService ;
 import cn.zy.apps.tools.units.powers.UserOptPower ;
 import cn.zy.apps.tools.units.powers.UserPower ;
 import cn.zying.osales.MeunsTree ;
-import cn.zying.osales.OSalesConfigProperties ;
-import cn.zying.osales.pojos.SystemUserOptPower ;
-import cn.zying.osales.pojos.SystemUserPower ;
 import cn.zying.osales.service.ABCommonsService ;
-import cn.zying.osales.service.sysmanage.ISystemUserService ;
+import cn.zying.osales.web.aop.IAopSystemUserService ;
 
 @Component("IUserPowerMdouleService")
 public class UserPowerMdouleService extends ABCommonsService implements IUserPowerMdouleService {
 
     @Autowired
-    @Qualifier(ISystemUserService.aop_name)
-    private ISystemUserService systemUserService ;
+    @Qualifier(IAopSystemUserService.aop_name)
+    private IAopSystemUserService systemUserService ;
 
     @Override
     public String[][] getInitTreeMeuns() {
@@ -36,13 +29,13 @@ public class UserPowerMdouleService extends ABCommonsService implements IUserPow
     @Override
     public List<String> listUserModulePowerBySysUserId(String loginUserId) throws Exception {
 
-        return systemUserService.listUserModulePowerBySysUserId(loginUserId) ;
+        return systemUserService.listUserModulePowerBySysUserId(Integer.parseInt (loginUserId )) ;
     }
 
     @Override
     public List<UserPower<UserOptPower>> searchUserPower(String moduleId, String loginUserId) throws Exception {
 
-        return systemUserService.searchUserPower(moduleId, loginUserId) ;
+        return systemUserService.searchUserPower(moduleId, Integer.parseInt (loginUserId )) ;
     }
 
 }

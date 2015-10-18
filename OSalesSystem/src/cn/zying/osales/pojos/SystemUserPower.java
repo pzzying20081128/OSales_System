@@ -3,8 +3,6 @@ package cn.zying.osales.pojos ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
 import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
@@ -27,7 +25,7 @@ public class SystemUserPower extends UserPower<SystemUserOptPower> {
     private Integer systemUserInfoId ;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sys_system_user_id")
+    @JoinColumn(name = "sys_system_user_id",nullable=false)
     private SysStaffUser sysStaffUser ;
 
     public Integer getIds() {

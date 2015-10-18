@@ -1,4 +1,4 @@
-package cn.zying.osales.service.sysmanage.units ;
+package cn.zying.osales.service.baseinfo.units ;
 
 import org.springframework.stereotype.Component ;
 

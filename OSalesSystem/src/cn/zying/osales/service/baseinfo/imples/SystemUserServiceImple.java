@@ -1,4 +1,4 @@
-package cn.zying.osales.service.sysmanage.imples ;
+package cn.zying.osales.service.baseinfo.imples ;
 
 import java.util.ArrayList ;
 import java.util.HashMap ;
@@ -21,11 +21,11 @@ import cn.zying.osales.pojos.SystemUserOptPower ;
 import cn.zying.osales.pojos.SystemUserPower ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.service.sysmanage.ISystemUserService ;
-import cn.zying.osales.service.sysmanage.units.SystemUserRemoveUnits ;
-import cn.zying.osales.service.sysmanage.units.SystemUserSaveUpdateUnits ;
-import cn.zying.osales.service.sysmanage.units.SystemUserSearchBean ;
-import cn.zying.osales.service.sysmanage.units.SystemUserSearchUnits ;
+import cn.zying.osales.service.baseinfo.ISystemUserService ;
+import cn.zying.osales.service.baseinfo.units.SystemUserRemoveUnits ;
+import cn.zying.osales.service.baseinfo.units.SystemUserSaveUpdateUnits ;
+import cn.zying.osales.service.baseinfo.units.SystemUserSearchUnits ;
+import cn.zying.osales.units.search.bean.SystemUserSearchBean ;
 
 @Component(ISystemUserService.name)
 public class SystemUserServiceImple extends ABCommonsService implements ISystemUserService {
@@ -45,7 +45,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     private SystemUserRemoveUnits iSystemUserRemoveUnits ;
 
     @Override
-    public void saveUpdate(OptType optType, SysStaffUser optSystemUser) throws SystemOptServiceException {
+    public void saveUpdate(OptType optType, SysStaffUser optSystemUser , Integer  optUserId) throws SystemOptServiceException {
         iSystemUserSaveUpdateUnits.saveUpdate(optType, optSystemUser) ;
     }
 
@@ -55,7 +55,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public void remove(OptType optType, SysStaffUser optSystemUser) throws SystemOptServiceException {
+    public void remove(OptType optType, SysStaffUser optSystemUser ,Integer  optUserId) throws SystemOptServiceException {
         iSystemUserRemoveUnits.remove(optType, optSystemUser) ;
     }
 
@@ -68,18 +68,18 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     @Override
     public SysStaffUser searchByAccessName(String accessName) throws SystemOptServiceException {
         //                String sql ="select  systemUser from  SystemUser as  systemUser  where  systemUser.account =:account  ";
-//        Map<String, Object> value = ToolsUnits.createSearchMap() ;
-//        value.put("account", accessName.trim()) ;
-//        value.put("status", OSalesConfigProperties.Status.正常) ;
-//        return baseService.findSinglenessByQName(OSalesConfigProperties.query_sysStaffUser_searchByAccessName, value) ;
-        return iSystemUserSearchUnits.searchByAccessName(accessName);
+        //        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+        //        value.put("account", accessName.trim()) ;
+        //        value.put("status", OSalesConfigProperties.Status.正常) ;
+        //        return baseService.findSinglenessByQName(OSalesConfigProperties.query_sysStaffUser_searchByAccessName, value) ;
+        return iSystemUserSearchUnits.searchByAccessName(accessName) ;
     }
 
     @Override
-    public List<String> listUserModulePowerBySysUserId(String loginUserId) throws Exception {
+    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws Exception {
 
         Map<String, Object> values = new HashMap<String, Object>() ;
-        values.put("systemUserInfoId", Integer.parseInt(loginUserId)) ;
+        values.put("systemUserInfoId", loginUserId) ;
         List<SystemUserPower> result = baseService.findByQName(OSalesConfigProperties.query_sysStaffUser_searchUserPower_userId, values) ;
         List<String> xx = new ArrayList<String>() ;
 
@@ -90,9 +90,9 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, String loginUserId) throws Exception {
+    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws Exception {
         Map<String, Object> values = new HashMap<String, Object>() ;
-        values.put("systemUserInfoId", Integer.parseInt(loginUserId)) ;
+        values.put("systemUserInfoId", loginUserId) ;
         values.put("moduleId", moduleId) ;
         List<SystemUserPower> results = baseService.findByQName(OSalesConfigProperties.query_sysStaffUser_searchUserPower_userId_moduleId, values) ;
 
@@ -120,6 +120,26 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
         }
 
         return userPowers ;
+    }
+
+    @Override
+    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws Exception {
+
+        String sql = "select  DISTINCT  systemUserPower   " +
+
+        "   from SystemUserPower as systemUserPower  "
+
+        + "    left  join   fetch  systemUserPower.userOptPowers   "
+
+        + "    where    systemUserPower.systemUserInfoId =" + loginUserId ;
+
+        return baseService.findByHSQL(sql) ;
+
+    }
+
+    @Override
+    public List<SysStaffUser> searchList(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        return iSystemUserSearchUnits.list(optType, searchBean, commSearchBean, startLimit) ;
     }
 
 }

@@ -1,19 +1,4 @@
 var base_info_staff_grid_column = {
-	// record : [{
-	// name : 'id'
-	// }, {
-	// name : 'name'
-	// }, {
-	// name : 'job'
-	// }, {
-	// name : 'sex'
-	// }, {
-	// name : 'access'
-	// }, {
-	// name : 'departmentParents.name',
-	// mapping : "departmentParents"
-	// }],
-
 	record : [{
 		name : 'id',
 		mapping : 'id'
@@ -32,9 +17,6 @@ var base_info_staff_grid_column = {
 	}, {
 		name : 'phone',
 		mapping : 'phone'
-	}, {
-		name : 'cell',
-		mapping : 'cell'
 	}, {
 		name : 'address',
 		mapping : 'address'
@@ -56,6 +38,9 @@ var base_info_staff_grid_column = {
 	}, {
 		name : 'text',
 		mapping : 'text'
+	}, {
+		name : 'status',
+		mapping : 'status'
 	},],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +51,18 @@ var base_info_staff_grid_column = {
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 
+			if (value == null) {
+				return value;
+			} else {
+				return value;
+			}
+		}
+	}, {
+		header : '状态',
+		width : 80,
+		dataIndex : 'status',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 			if (value == null) {
 				return value;
 			} else {
@@ -93,25 +90,13 @@ var base_info_staff_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				return value;
+				return value == 1 ? "男" : "女";
 			}
 		}
 	}, {
 		header : '手机',
 		width : 200,
 		dataIndex : 'phone',
-		sortable : true,
-		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-			if (value == null) {
-				return value;
-			} else {
-				return value;
-			}
-		}
-	}, {
-		header : '联系电话',
-		width : 200,
-		dataIndex : 'cell',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 			if (value == null) {
@@ -133,18 +118,6 @@ var base_info_staff_grid_column = {
 			}
 		}
 	}, {
-		header : '是否管理员',
-		width : 200,
-		dataIndex : 'isAdmin',
-		sortable : true,
-		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-			if (value == null) {
-				return value;
-			} else {
-				return value;
-			}
-		}
-	}, {
 		header : '是否业务员',
 		width : 200,
 		dataIndex : 'isBizMan',
@@ -153,7 +126,7 @@ var base_info_staff_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				return value;
+				return value == 1 ? "是" : "否";
 			}
 		}
 	}, {
@@ -165,7 +138,7 @@ var base_info_staff_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				return value;
+				return value == 1 ? "是" : "否";
 			}
 		}
 	}, {
@@ -177,7 +150,7 @@ var base_info_staff_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				return value;
+				return value == 1 ? "是" : "否";
 			}
 		}
 	}, {
@@ -189,7 +162,7 @@ var base_info_staff_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				return value;
+				return value == 1 ? "是" : "否";
 			}
 		}
 	}, {

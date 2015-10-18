@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="search" namespace="/" extends="struts-ajax">
+		<action name="*_combo" class="{1}SearchAction" method="search">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					results,
+					results\[\d+\]\.id,
+					results\[\d+\]\.name,
+					results\[\d+\]\.shortName
+				</param>
+			</result>
+		</action>
+
+		<action name="*_simple_*" class="{1}Action" method="{2}">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					result,
+					result.\w+
+				</param>
+			</result>
+		</action>
+
+	</package>
+</struts>
