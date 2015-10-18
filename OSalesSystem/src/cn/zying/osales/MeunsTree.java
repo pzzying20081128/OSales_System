@@ -26,6 +26,8 @@ public class MeunsTree {
 
     private String p1002[] = { "base_product_brand", "产品品牌", "true", "", "base_info", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'}]" } ;
 
+    private String p1003[] = { "base_product_category", "产品类别", "true", "", "base_info", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'}]" } ;
+
     //   
     //    private String p3[] = { "product_classification_management", "产品管理", "false", "font_weight", "0", "0", "[]" } ;
     //    
@@ -116,7 +118,7 @@ public class MeunsTree {
     //    private String p504[] = { "WARRANTY_USERS", "延保用户", "true", "", "REPORT_MANAGEMENT", "0", "[{search:1,label:'查询'},{export:1,label:'导出'}]" } ;
 
     //    private String[][] treeData = { p1, p2,p3, p100, p106,p101, p102, p103,p104, p105,p107, p200, p201, p202, p203, p204,p207 ,p208,p209,p210,p211,p212, p205,p214, p206,p213,p215,p500,p501,p502,p503,p504} ;
-    private String[][] treeData = { p0   , p0001  , p1, p1001, p1002 } ;
+    private String[][] treeData = { p0, p0001, p1, p1001, p1002,p1003 } ;
 
     private String[][] initTreeData() {
         return treeData ;

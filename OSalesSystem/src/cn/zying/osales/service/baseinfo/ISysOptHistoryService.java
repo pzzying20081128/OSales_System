@@ -7,7 +7,6 @@ import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysOptHistory ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.units.search.bean.CombSearchBean ;
 import cn.zying.osales.units.search.bean.SysOptHistorySearchBean ;
 
 public interface ISysOptHistoryService {

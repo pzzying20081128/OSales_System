@@ -10,7 +10,8 @@
 				<param name="includeProperties">
 					success,msg,
 					result,
-					result.\w+
+					result.\w+,
+					result.\w+.\w+
 				</param>
 			</result>
 		</action>

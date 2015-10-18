@@ -3,6 +3,7 @@ package cn.zying.osales.test;
 import cn.zy.apps.tools.dev.service.BuildServiceFile ;
 import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
 import cn.zying.osales.pojos.ProductBrand ;
+import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.SysOptHistory ;
 
 public class TestBuildServiceFile {
@@ -16,7 +17,7 @@ public class TestBuildServiceFile {
         
         String module= "baseinfo";
         
-        Class<?> clazz = ProductBrand.class;
+        Class<?> clazz = ProductCategory.class;
         
         String className=clazz.getSimpleName();
 

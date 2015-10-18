@@ -24,7 +24,8 @@ function base_product_brand_update_windows(moduleId, moduleName, params) {
 		// url
 		url : "./simple_ProductBrand_save.do",
 		params : {
-			optType : "update"
+			optType : "update",
+			"productBrand.id":selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',

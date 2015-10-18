@@ -1,6 +1,7 @@
 package cn.zying.osales.test ;
 import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
 import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
+import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.SysOptHistory ;
 
 
@@ -18,9 +19,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="sys_opt_history";
+        String moduleNmae="base_product_category";
         
-        Class<?> clazz = SysOptHistory.class;
+        Class<?> clazz = ProductCategory.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

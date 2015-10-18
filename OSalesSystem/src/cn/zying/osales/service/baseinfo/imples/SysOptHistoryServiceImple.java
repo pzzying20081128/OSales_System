@@ -16,7 +16,6 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.baseinfo.ISysOptHistoryService ;
 import cn.zying.osales.service.baseinfo.units.SysOptHistorySaveUpdateUnits ;
 import cn.zying.osales.service.baseinfo.units.SysOptHistorySearchUnits ;
-import cn.zying.osales.units.search.bean.CombSearchBean ;
 import cn.zying.osales.units.search.bean.SysOptHistorySearchBean ;
 
 @Component(ISysOptHistoryService.name)

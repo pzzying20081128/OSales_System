@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.pojos.ProductBrand ;
-import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.units.search.bean.ProductBrandSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopProductBrandService ;

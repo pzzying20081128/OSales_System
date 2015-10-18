@@ -4,7 +4,6 @@ import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.GeneralAction ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.ProductBrand ;
 
 public abstract class OSalesSystemABAction<V> extends GeneralAction implements IOSalesSystemABAction {
 
