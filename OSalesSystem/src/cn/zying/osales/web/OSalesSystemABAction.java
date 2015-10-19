@@ -1,13 +1,21 @@
 package cn.zying.osales.web ;
 
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.beans.factory.annotation.Qualifier ;
+
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.GeneralAction ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 
 public abstract class OSalesSystemABAction<V> extends GeneralAction implements IOSalesSystemABAction {
 
     private static final long serialVersionUID = -2062527978326655709L ;
+    
+    @Autowired
+    @Qualifier("PrpertiesAutoWriteObjectService")
+    protected PrpertiesAutoWriteObjectService  writeObjectService; 
 
     private SelectPage<V> selectPage ;
 

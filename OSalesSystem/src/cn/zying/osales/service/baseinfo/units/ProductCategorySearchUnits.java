@@ -1,7 +1,6 @@
 package cn.zying.osales.service.baseinfo.units ;
 
 import java.util.List ;
-
 import java.util.Map ;
 
 import org.springframework.stereotype.Component ;
@@ -70,12 +69,17 @@ public class ProductCategorySearchUnits extends ABCommonsService {
     }
 
     private String createWhere(Map<String, Object> value, ProductCategorySearchBean searchBean, CommSearchBean commSearchBean) {
-        String sqlWhere = " where  1 =1 " ;
+        String sqlWhere = " where     1 =1  " ;
         if (!searchBean.getStatus().equals(Status.全部)) {
             sqlWhere = sqlWhere + " and  productCategory.status ='" + searchBean.getStatus() + "'  " ;
         }
         if(ToolsUnits.isNOtNulll(searchBean.getName()))
         sqlWhere = sqlWhere + " and  productCategory.name  like '%" + searchBean.getName()+ "%'  " ;
+        
+        if(searchBean.getId() !=null )
+            sqlWhere = sqlWhere + " or   productCategory.id  =" +searchBean.getId();
+        
+       
         return sqlWhere ;
     }
 

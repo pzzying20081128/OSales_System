@@ -23,9 +23,9 @@ public class AopProductCategoryService implements IAopProductCategoryService {
     @Qualifier(IProductCategoryService.name)
     private IProductCategoryService iProductCategoryService ;
 
-    public void saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+    public ProductCategory saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
 
-        iProductCategoryService.saveUpdate(optType, optProductCategory) ;
+       return  iProductCategoryService.saveUpdate(optType, optProductCategory) ;
 
     }
 
@@ -41,9 +41,9 @@ public class AopProductCategoryService implements IAopProductCategoryService {
 
     }
 
-    public void remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+    public ProductCategory remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
 
-        iProductCategoryService.remove(optType, optProductCategory) ;
+       return   iProductCategoryService.remove(optType, optProductCategory) ;
 
     }
 

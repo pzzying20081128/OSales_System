@@ -20,7 +20,7 @@ var base_info_staff_search_params = {
 					xtype : 'textfield',
 					style : 'background:#fff1a4;',
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -246,18 +246,18 @@ var base_info_staff_search_params = {
 		var params = {
 			optType : "search",
 			
-			'searchBean.status' : Ext.getCmp('searchBean.status').getValue(),
-			'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
-			'searchBean.account' : Ext.getCmp('searchBean.account').getValue(),
-			
-			'searchBean.isStockMan' : Ext.getCmp('searchBean.isStockMan').getValue(),
-			'searchBean.isTransportMan' : Ext.getCmp('searchBean.isTransportMan').getValue(),
-			'searchBean.isBizMan' : Ext.getCmp('searchBean.isBizMan').getValue(),
-			'searchBean.isGoodsMan' : Ext.getCmp('searchBean.isGoodsMan').getValue(),
-			'searchBean.phone' : Ext.getCmp('searchBean.phone').getValue(),
-			'searchBean.address' : Ext.getCmp('searchBean.address').getValue(),
-			'searchBean.sex' : Ext.getCmp('searchBean.sex').getValue(),
-			'searchBean.text' : Ext.getCmp('searchBean.text').getValue()
+//			'searchBean.status' : Ext.getCmp('searchBean.status').getValue(),
+//			'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
+//			'searchBean.account' : Ext.getCmp('searchBean.account').getValue(),
+//			
+//			'searchBean.isStockMan' : Ext.getCmp('searchBean.isStockMan').getValue(),
+//			'searchBean.isTransportMan' : Ext.getCmp('searchBean.isTransportMan').getValue(),
+//			'searchBean.isBizMan' : Ext.getCmp('searchBean.isBizMan').getValue(),
+//			'searchBean.isGoodsMan' : Ext.getCmp('searchBean.isGoodsMan').getValue(),
+//			'searchBean.phone' : Ext.getCmp('searchBean.phone').getValue(),
+//			'searchBean.address' : Ext.getCmp('searchBean.address').getValue(),
+//			'searchBean.sex' : Ext.getCmp('searchBean.sex').getValue(),
+//			'searchBean.text' : Ext.getCmp('searchBean.text').getValue()
 			
 		}
 		return params;

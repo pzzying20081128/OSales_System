@@ -45,7 +45,7 @@
 	</bean>
 	<bean id="pum" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
 		<property name="persistenceXmlLocations">
-			<list>
+			<list> 
 				<value>classpath:configs/persistence.xml</value>
 			</list>
 		</property>
@@ -55,7 +55,11 @@
 		<aop:pointcut id="service_service" expression="execution(* cn.zying.osales.service..*.*(..))" />
 		<aop:advisor advice-ref="defult_advice" pointcut-ref="service_service" />
 	</aop:config>
-
-	<aop:aspectj-autoproxy proxy-target-class="false" />
+	<!--
+		<aop:aspectj-autoproxy proxy-target-class="true" /> 
+		 -->
+	
+    
+	
 
 </beans>

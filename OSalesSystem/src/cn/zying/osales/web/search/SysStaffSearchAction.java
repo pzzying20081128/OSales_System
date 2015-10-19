@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
-import cn.zy.apps.tools.web.ABSearchAction ;
 import cn.zy.apps.tools.web.SearchUserPowerAction ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysStaffUser ;
@@ -15,7 +14,7 @@ import cn.zying.osales.web.aop.IAopSystemUserService ;
 
 @Component("SysStaffSearchAction")
 @org.springframework.context.annotation.Scope(SearchUserPowerAction.Scope)
-public class SysStaffSearchAction extends ABSearchAction {
+public class SysStaffSearchAction extends ABSalesSearchAction {
     
     private static final long serialVersionUID = -3839042551020091082L ;
 

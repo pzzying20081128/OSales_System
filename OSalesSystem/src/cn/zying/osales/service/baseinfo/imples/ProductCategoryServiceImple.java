@@ -1,7 +1,6 @@
- package  cn.zying.osales.service.baseinfo.imples;
- 
+package cn.zying.osales.service.baseinfo.imples ;
 
-  import java.util.List ;
+import java.util.List ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
@@ -18,57 +17,52 @@ import cn.zying.osales.service.baseinfo.units.ProductCategoryRemoveUnits ;
 import cn.zying.osales.service.baseinfo.units.ProductCategorySaveUpdateUnits ;
 import cn.zying.osales.service.baseinfo.units.ProductCategorySearchUnits ;
 import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
- 
 
 @Component(IProductCategoryService.name)
-public class ProductCategoryServiceImple extends  ABCommonsService  implements IProductCategoryService {
+public class ProductCategoryServiceImple extends ABCommonsService implements IProductCategoryService {
 
-            //@Resource(name="ProductCategorySearchUnits")
-			  @Autowired
-            @Qualifier("ProductCategorySearchUnits")        
-            private  ProductCategorySearchUnits  iProductCategorySearchUnits;
-           
-           //@Resource(name=" ProductCategorySaveUpdateUnits")
-		     @Autowired
-            @Qualifier("ProductCategorySaveUpdateUnits")      
-           private ProductCategorySaveUpdateUnits  iProductCategorySaveUpdateUnits;
-			
-		   
-		      @Autowired
+    //@Resource(name="ProductCategorySearchUnits")
+    @Autowired
+    @Qualifier("ProductCategorySearchUnits")
+    private ProductCategorySearchUnits iProductCategorySearchUnits ;
+
+    //@Resource(name=" ProductCategorySaveUpdateUnits")
+    @Autowired
+    @Qualifier("ProductCategorySaveUpdateUnits")
+    private ProductCategorySaveUpdateUnits iProductCategorySaveUpdateUnits ;
+
+    @Autowired
     @Qualifier("ProductCategoryRemoveUnits")
     private ProductCategoryRemoveUnits iProductCategoryRemoveUnits ;
-		   
-			@Override
-            public void saveUpdate(OptType  optType ,   ProductCategory   optProductCategory )throws SystemOptServiceException{
-        		 iProductCategorySaveUpdateUnits.saveUpdate(optType, optProductCategory);
-        		}
-            
-       	   @Override
-            public SelectPage<ProductCategory > search(OptType  optType ,    
-				   ProductCategorySearchBean  searchBean , CommSearchBean  commSearchBean ,int... startLimit)throws SystemOptServiceException{
-				    return  iProductCategorySearchUnits.search(optType, searchBean,
-					commSearchBean ,startLimit );
-            }
-       	   
-       	 @Override
-         public List<ProductCategory > searchList(OptType  optType ,    
-                        ProductCategorySearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-          
-           return  iProductCategorySearchUnits.list(optType, searchBean,
-                 commSearchBean ,startLimit );
-         
- }
-            
-			@Override
-            public  void   remove(OptType  optType ,   ProductCategory   optProductCategory)throws SystemOptServiceException{
-			    iProductCategoryRemoveUnits.remove(optType, optProductCategory);
-			  }
-			  
-			   @Override
-            public ProductCategory get(Integer id) throws SystemOptServiceException {
-                
-                return baseService.get(id, ProductCategory.class) ;
-            }
-            
-            
+
+    @Override
+    public ProductCategory  saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+        ProductCategory productCategory = iProductCategorySaveUpdateUnits.saveUpdate(optType, optProductCategory) ;
+        prpertiesAutoWriteObjectService.cacheObject(productCategory.getId().toString(), productCategory) ;
+       return  productCategory;
+    }
+
+    @Override
+    public SelectPage<ProductCategory> search(OptType optType, ProductCategorySearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        return iProductCategorySearchUnits.search(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public List<ProductCategory> searchList(OptType optType, ProductCategorySearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iProductCategorySearchUnits.list(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    @Override
+    public ProductCategory  remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+         return   iProductCategoryRemoveUnits.remove(optType, optProductCategory) ;
+    }
+
+    @Override
+    public ProductCategory get(Integer id) throws SystemOptServiceException {
+
+        return baseService.get(id, ProductCategory.class) ;
+    }
+
 }

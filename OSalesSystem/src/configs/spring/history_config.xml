@@ -19,14 +19,12 @@
 				<ref bean="RegBaseInfoModuleHistory" />
 			</list>
 		</property>
-
+ 
 	</bean>
-
-
 
 	<aop:config>
 		<aop:aspect id="historyService" ref="historyServiceAop">
-			<aop:pointcut id="historyexecaction" expression="execution(*  cn.zying.osales.web.aop..*.*(..)) and args(element,..))" />
+			<aop:pointcut id="historyexecaction" expression="execution(*  cn.zying.osales.service..*.*(..)) and args(element,..))" />
 			<aop:after pointcut-ref="historyexecaction" method="afterHistory" />
 			<!-- <aop:before pointcut-ref="historyexecaction" method="beforeHistory" /> -->
 

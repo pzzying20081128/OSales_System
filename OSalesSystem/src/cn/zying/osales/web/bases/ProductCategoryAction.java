@@ -26,8 +26,8 @@ public class ProductCategoryAction extends OSalesSystemABAction<ProductCategory>
 
     public String save() throws Exception {
         try {
-            service.saveUpdate(optType, productCategory) ;
-            this.result = productCategory ;
+            this.result  =  service.saveUpdate(optType, productCategory) ;
+            writeObjectService.intToPrpertiesUnits(result);
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -38,8 +38,8 @@ public class ProductCategoryAction extends OSalesSystemABAction<ProductCategory>
 
     public String remove() throws Exception {
         try {
-            service.remove(optType, productCategory) ;
-            this.result = productCategory ;
+            this.result =   service.remove(optType, productCategory) ;
+            writeObjectService.intToPrpertiesUnits(result);
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -50,8 +50,8 @@ public class ProductCategoryAction extends OSalesSystemABAction<ProductCategory>
 
     public String get() throws Exception {
         try {
-            productCategory = service.get(uuid) ;
-            this.result = productCategory ;
+            this.result = service.get(uuid) ;
+            writeObjectService.intToPrpertiesUnits(result);
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -63,6 +63,7 @@ public class ProductCategoryAction extends OSalesSystemABAction<ProductCategory>
     public String list() throws Exception {
         try {
             SelectPage<ProductCategory> selectPage = service.search(optType, searchBean, commSearchBean, start, limit) ;
+            writeObjectService.intToPrpertiesUnits(selectPage);
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;

@@ -1,13 +1,11 @@
 package cn.zying.osales.web.search ;
 
 import java.util.List ;
-import java.util.Map ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
-import cn.zy.apps.tools.web.ABSearchAction ;
 import cn.zy.apps.tools.web.SearchUserPowerAction ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.ProductCategory ;
@@ -16,7 +14,7 @@ import cn.zying.osales.web.aop.IAopProductCategoryService ;
 
 @Component("ProductCategorySearchAction")
 @org.springframework.context.annotation.Scope(SearchUserPowerAction.Scope)
-public class ProductCategorySearchAction extends ABSearchAction {
+public class ProductCategorySearchAction extends ABSalesSearchAction {
 
     @Autowired
     @Qualifier(IAopProductCategoryService.name)
@@ -28,6 +26,7 @@ public class ProductCategorySearchAction extends ABSearchAction {
     protected List<ProductCategory> searchResult() throws Exception {
         
         searchBean.setName(name);
+        searchBean.setId(uuid);
 
         return service.searchList(OptType.search, searchBean, null, 0, 20) ;
     }

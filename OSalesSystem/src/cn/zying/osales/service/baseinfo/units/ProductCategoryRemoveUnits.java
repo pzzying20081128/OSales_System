@@ -11,19 +11,20 @@ import cn.zying.osales.service.SystemOptServiceException ;
 @Component("ProductCategoryRemoveUnits")
 public class ProductCategoryRemoveUnits extends ABCommonsService {
 
-    public void remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+    public ProductCategory remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
 
         Integer id = optProductCategory.getId() ;
-        ProductCategory removeProductCategory = baseService.load(id, ProductCategory.class) ;
+        ProductCategory removeProductCategory = baseService.get(id, ProductCategory.class) ;
         removeProductCategory.setStatus(Status.删除) ;
 
         baseService.update(removeProductCategory) ;
 
         removeChild(removeProductCategory) ;
+        return removeProductCategory ;
 
     }
 
-    public  void removeChild(ProductCategory removeProductCategory) throws SystemOptServiceException {
+    public void removeChild(ProductCategory removeProductCategory) throws SystemOptServiceException {
         for (ProductCategory productCategory : removeProductCategory.getChilds()) {
             productCategory.setStatus(removeProductCategory.getStatus()) ;
             baseService.update(productCategory) ;

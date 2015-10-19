@@ -92,7 +92,8 @@
 						login.submit({
 							url : 'login.do',
 							// 提交成功的回调函数
-							success : function(json) {
+							success : function(result) {
+								json = result.result;
 								if (json.success == true) {
 									win.close();
 									window.location = './intoMain.do';

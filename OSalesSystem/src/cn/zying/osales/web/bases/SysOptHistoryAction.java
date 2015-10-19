@@ -13,7 +13,7 @@ import cn.zying.osales.web.aop.IAopSysOptHistoryService ;
 
 @Component("SysOptHistoryAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
-public class SysOptHistoryAction extends OSalesSystemABAction {
+public class SysOptHistoryAction extends OSalesSystemABAction<SysOptHistory> {
 
     /**
      * 
@@ -30,6 +30,7 @@ public class SysOptHistoryAction extends OSalesSystemABAction {
         try {
             if(searchBean==null)searchBean=new SysOptHistorySearchBean();
             SelectPage<SysOptHistory> selectPage = service.search(optType, searchBean, commSearchBean, start, limit) ;
+            writeObjectService.intToPrpertiesUnits(selectPage);
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;

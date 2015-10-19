@@ -74,7 +74,7 @@ var base_product_category_grid_column = {
 			if (value == null || typeof ( value ) == 'undefined')
 				return null
 			else
-				return value;
+				return value == 1 ? "有" : "没有";
 
 		}
 	}, {

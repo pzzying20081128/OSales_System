@@ -1,7 +1,7 @@
 function base_product_category_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
+
 	var selection_rows = grid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
@@ -14,7 +14,18 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 		return false;
 	}
 	var selectId = selection_rows[0].id;
-	
+
+	var productCategoryParent = createERPcombo({
+		id : 'productCategory.parentId',
+		name : 'productCategory.parentId',
+		fieldLabel : ' 父类类别',
+		url : "./ProductCategory_combo.do",
+		params : {
+			"searchBean.status" : "有效"
+		},
+		allowBlank : true,
+		forceSelection : false
+	});
 
 	var base_product_category_params = {
 		title : "编辑" + moduleName,
@@ -22,26 +33,38 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 		grid : grid,
 		// 结果路径
 		pojo : "sss",
-		//url
+		// url
 		url : './saveUpdateMaterialManage.action',
 		params : {
 			optType : "update"
 		},
-	   reader : new Ext.data.JsonReader({
+		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
-			root : 'dept',
+			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'dept.name',
+			name : 'productCategory.parent',
+			mapping : 'parent'
+		}, {
+			name : 'productCategory.name',
 			mapping : 'name'
-		}]),
-		//字段
-		field : [
-		{// 第一排
+		}, {
+			name : 'productCategory.text',
+			mapping : 'text'
+		}, {
+			name : 'productCategory.isChild',
+			mapping : 'isChild'
+		}, {
+			name : 'productCategory.status',
+			mapping : 'status'
+		},]),
+		// 字段
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{// 1-1
-				columnWidth : .34,
+			items : [{
+
+				columnWidth : .5,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
@@ -49,11 +72,11 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 					width : 200
 				},
 				items : [{
-					id : 'goods.name',
-					name : 'goods.name',
-					fieldLabel : ' 物料名字',
+					id : 'productCategory.name',
+					name : 'productCategory.name',
+					fieldLabel : ' 类别',
 					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -61,62 +84,62 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
+
 			}, // 1-1 end
-			{// 1-2
-				columnWidth : .33,
+			{
+				columnWidth : .5,
 				layout : 'form',
-				baseCls : 'x-plain',
 				defaultType : 'textfield',
+				baseCls : 'x-plain',
 				defaults : {
 					width : 200
 				},
-				items : [createERPcombo({
-					id : 'goods.classification',
-					name : 'goods.classification',
-					label : "物料类别",
-					url : "./searchMatrialClassification.action",
-					allowBlank : false,
-					forceSelection : false
-					// width : 150
-				})]
-			}// 1-2end
-			, {// 1-3
-				columnWidth : .33,
+				items : [productCategoryParent]
+			}]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : 1,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 200
+					width : 495
 				},
 				items : [{
-
-					id : 'goods.serialNumber',
-					name : 'goods.serialNumber',
-					fieldLabel : ' 物料编号',
+					id : 'productCategory.text',
+					name : 'productCategory.text',
+					fieldLabel : ' 备注',
 					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
 					}
-
 				}]
-			}// 1-3 end
-			]
+			}]
+		}]
 
-		}
-		]
-		
 	}
 
 	var base_product_category_create_window = new base_product_category_save_update_form_panel_windows(base_product_category_params);
-	
-		base_product_category_create_window.load({
-		url : './getStaff.action?uuid=' + goodsId,
-		success : function(form, action) {
-		
+
+	base_product_category_create_window.load({
+		url : './simple_ProductCategory_get.do?uuid=' + selectId,
+		success : function(result) {
+			_result_ = result.result;
+			productCategoryParent.load({
+				params : {
+					uuid : _result_.result.parentId,
+					"searchBean.status" : "全部"
+				},
+				success : function() {
+                      productCategoryParent.setValue(_result_.result.parentId);
+				}
+			});
 		}
 	});
 

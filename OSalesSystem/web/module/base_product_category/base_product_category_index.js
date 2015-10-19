@@ -30,7 +30,6 @@ function create_base_product_category_window(moduleId, moduleName) {
 				handler : function(bt) {
 					base_product_category_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						searchParams : test_search_params
 					});
 				}
 			}, {
@@ -113,7 +112,7 @@ function create_base_product_category_window(moduleId, moduleName) {
 						"productBrand.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-					success : function(response, options) {
+					success : function(result) {
 						mainGrid.reload();
 					}
 				});

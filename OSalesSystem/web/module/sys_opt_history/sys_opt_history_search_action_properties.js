@@ -169,12 +169,12 @@ var sys_opt_history_search_params = {
 	params : function() {
 		var params = {
 			optType : "search",
-			'searchBean.startTime' : Ext.getCmp('searchBean.startTime').getValue(),
-			'searchBean.endTime' : Ext.getCmp('searchBean.endTime').getValue(),
-			'searchBean.classification' : Ext.getCmp('searchBean.classification').getValue(),
-			'searchBean.module' : Ext.getCmp('searchBean.module').getValue(),
-			'searchBean.sysStaffUserId' : Ext.getCmp('searchBean.sysStaffUserId').getValue(),
-			'searchBean.text' : Ext.getCmp('searchBean.text').getValue()
+//			'searchBean.startTime' : Ext.getCmp('searchBean.startTime').getValue(),
+//			'searchBean.endTime' : Ext.getCmp('searchBean.endTime').getValue(),
+//			'searchBean.classification' : Ext.getCmp('searchBean.classification').getValue(),
+//			'searchBean.module' : Ext.getCmp('searchBean.module').getValue(),
+//			'searchBean.sysStaffUserId' : Ext.getCmp('searchBean.sysStaffUserId').getValue(),
+//			'searchBean.text' : Ext.getCmp('searchBean.text').getValue()
 		}
 		return params;
 	}

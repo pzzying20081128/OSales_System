@@ -2,7 +2,6 @@ package cn.zying.osales.test ;
 import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
 import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
 import cn.zying.osales.pojos.ProductCategory ;
-import cn.zying.osales.pojos.SysOptHistory ;
 
 
 

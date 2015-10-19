@@ -59,8 +59,8 @@ var base_product_brand_search_params = {
 	params : function() {
 		var params = {
 			optType : "search",
-			'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
-			'searchBean.status' : Ext.getCmp('searchBean.status').getValue()
+//			'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
+//			'searchBean.status' : Ext.getCmp('searchBean.status').getValue()
 		}
 		return params;
 	}

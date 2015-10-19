@@ -1,8 +1,11 @@
 package cn.zying.osales.units ;
 
+import org.springframework.stereotype.Component ;
+
 import cn.zy.apps.tools.units.AutoWriteObject ;
 import cn.zy.apps.tools.units.SimpleAutoWritePrpertiesObjectService ;
 
+@Component("PrpertiesAutoWriteObjectService")
 public class PrpertiesAutoWriteObjectService extends SimpleAutoWritePrpertiesObjectService {
 
     public static String regexPackage = "^cn.zying.osales(\\.\\D+)*(.pojos|.bean)$" ;

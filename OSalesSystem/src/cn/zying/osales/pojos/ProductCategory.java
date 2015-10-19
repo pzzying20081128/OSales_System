@@ -29,7 +29,7 @@ public class ProductCategory extends CommBean {
     @Column(name = "id")
     private Integer id ;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "parent", nullable = true)
     @FieldDesc(name = "父类类别", isShow = true, mapping = "parent.name", inputShow = false)
     private ProductCategory parent ;

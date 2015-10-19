@@ -90,7 +90,7 @@ function base_product_brand_update_windows(moduleId, moduleName, params) {
 
 	base_product_brand_create_window.load({
 		url : "./simple_ProductBrand_get.do?uuid=" + selectId,
-		success : function(form, action) {
+		success : function(result) {
 
 		}
 	});

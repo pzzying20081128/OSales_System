@@ -339,7 +339,7 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 
 	base_info_staff_create_window.load({
 		url : './getSysStaffinfo.do?uuid=' + selectId,
-		success : function(form, action) {
+		success : function(result) {
 //        base_info_staff_create_window.loadPower(selectId);
 		}
 	});

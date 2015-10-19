@@ -28,7 +28,7 @@ import cn.zying.osales.web.aop.IAopSystemUserService ;
  */
 @Component("SysStaffUserManagerAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
-public class SysStaffUserManagerAction extends OSalesSystemABAction {
+public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser> {
 
     /**
      * 
@@ -79,6 +79,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
             }
             systemUserInfo.setSystemUserPowers(systemUserPowers) ;
             systemUserService.saveUpdate(optType, systemUserInfo , getOSalsesLoginUserId()) ;
+            writeObjectService.intToPrpertiesUnits(systemUserInfo);
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -89,6 +90,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
     public String get() throws Exception {
         try {
             systemUserInfo = systemUserService.get(uuid) ;
+            writeObjectService.intToPrpertiesUnits(systemUserInfo);
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -99,6 +101,9 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction {
     public String list() throws Exception {
         try {
             SelectPage<SysStaffUser> selectPage = systemUserService.search(optType, searchBean, commSearchBean, start, limit) ;
+          
+            writeObjectService.intToPrpertiesUnits(selectPage);
+            
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;

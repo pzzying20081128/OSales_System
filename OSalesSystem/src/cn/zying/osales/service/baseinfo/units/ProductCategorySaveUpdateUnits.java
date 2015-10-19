@@ -18,35 +18,67 @@ public class ProductCategorySaveUpdateUnits extends ABCommonsService {
     @Qualifier("ProductCategoryRemoveUnits")
     private ProductCategoryRemoveUnits productCategoryRemoveUnits ;
 
-    public void saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
-
+    public ProductCategory  saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+           v( optType,  optProductCategory);
         switch (optType) {
         case save:
-            save(optProductCategory) ;
-            break ;
+            return save(optProductCategory) ;
+            
         case update:
-            update(optProductCategory) ;
-            break ;
+            
+            return update(optProductCategory) ;
+            
 
         default:
             throw new SystemOptServiceException("[操作类型错误]") ;
         }
     }
+    
+    
+    private  void v(OptType optType, ProductCategory optProductCategory)throws SystemOptServiceException {
+         
+        String  sql ="select  optProductCategory  from   ProductCategory   as  optProductCategory  where optProductCategory.name ='"
+    
+                 +optProductCategory.getName()+"'   ";
+    
+        ProductCategory productCategory = baseService.findSinglenessByHSQL(sql);
+        
+        switch (optType) {
+        case save:
+                  if(productCategory !=null){
+                      throw new  SystemOptServiceException("类别名重复");
+                  }
+            
+        case update:
+            
+            if(productCategory !=null && ! productCategory.getId().equals(optProductCategory.getId())  ){
+                throw new  SystemOptServiceException("类别名重复");
+            }
+            
 
-    public void save(ProductCategory optProductCategory) throws SystemOptServiceException {
+        default:
+            throw new SystemOptServiceException("[操作类型错误]") ;
+        }
+    
+    }
+
+    public ProductCategory  save(ProductCategory optProductCategory) throws SystemOptServiceException {
         optProductCategory.setStatus(Status.有效) ;
         if (optProductCategory.getParentId() != null) {
             ProductCategory productCategoryParent = baseService.load(optProductCategory.getParentId(), ProductCategory.class) ;
             productCategoryParent.setIsChild(OSalesConfigProperties.isDefault_1) ;
             optProductCategory.setParent(productCategoryParent) ;
             baseService.update(productCategoryParent) ;
+        }else{
+            optProductCategory.setParent(null);
         }
         baseService.save(optProductCategory) ;
+        return optProductCategory;
 
     }
 
-    public void update(ProductCategory optProductCategory) throws SystemOptServiceException {
-        ProductCategory temp = baseService.load(optProductCategory.getId(), ProductCategory.class) ;
+    public ProductCategory  update(ProductCategory optProductCategory) throws SystemOptServiceException {
+        ProductCategory temp = baseService.get(optProductCategory.getId(), ProductCategory.class) ;
         temp.setName(optProductCategory.getName()) ;
         temp.setStatus(optProductCategory.getStatus()) ;
         switch (temp.getStatus()) {
@@ -59,6 +91,7 @@ public class ProductCategorySaveUpdateUnits extends ABCommonsService {
             break ;
         }
         baseService.update(temp) ;
+        return temp;
     }
 
 }

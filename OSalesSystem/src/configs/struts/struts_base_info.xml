@@ -25,7 +25,8 @@
 					selectPage,
 					selectPage.\w+,
 					selectPage.result\[\d+\]\.\w+,
-					selectPage.result\[\d+\]\.\w+result\[\d+\]\.\w+,
+					selectPage.result\[\d+\]\.\w+.\w+,
+					selectPage.result\[\d+\]\.\w+.result\[\d+\]\.\w+,
 				</param>
 			</result>
 		</action>

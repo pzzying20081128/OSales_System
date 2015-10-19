@@ -12,10 +12,13 @@ import org.springframework.web.context.support.WebApplicationContextUtils ;
 import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.baseinfo.ISystemUserService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
+import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
 import cn.zying.osales.units.search.bean.SystemUserSearchBean ;
+import cn.zying.osales.web.aop.IAopProductCategoryService ;
 
 public class SystemConfigInitListener extends ContextLoaderListener implements ServletContextListener {
 
@@ -48,6 +51,8 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         //		loadFeeSubject(springContext);
         //
         loadStaffInfo(springContext, prpertiesAutoWriteObjectService) ;
+
+        loadProductCategory(springContext, prpertiesAutoWriteObjectService) ;
         //
         //		loadStoreInfo(springContext);
         //
@@ -209,6 +214,24 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
     //		}
     //
     //	}
+
+    private void loadProductCategory(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
+        Loggerfactory.info(logger, "start load  ProductType  to Cachefactory ") ;
+
+        IAopProductCategoryService aopProductCategoryService = (IAopProductCategoryService) springContext.getBean(IAopProductCategoryService.name) ;
+
+        ProductCategorySearchBean searchBean = new ProductCategorySearchBean() ;
+
+        searchBean.setStatus(Status.全部) ;
+
+        List<ProductCategory>  ProductCategorys =  aopProductCategoryService.searchList(OptType.search, searchBean, null) ;
+        
+
+        for (ProductCategory productCategory : ProductCategorys) {
+            prpertiesAutoWriteObjectService.cacheObject(productCategory.getId().toString(), productCategory) ;
+        }
+
+    }
 
     private void loadStaffInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
 

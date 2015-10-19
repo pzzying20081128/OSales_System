@@ -11,15 +11,19 @@
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
 
-	<!-- pojos package : cn.ipanel.itd.projects.pojos Service package : cn.ipanel.itd.projects.service.*.I*Service -->
+	<!-- pojos package : cn.ipanel.itd.projects.pojos Service package : cn.ipanel.itd.projects.service.*.I*Service
+ -->
 	<bean id="PrpertiesAutoWriteObjectService" class="cn.zying.osales.units.PrpertiesAutoWriteObjectService" />
+	<!-- 
 	<aop:config>
 		<aop:aspect id="ProServiceReturn" ref="PrpertiesAutoWriteObjectService">
-			<aop:pointcut id="execactionReutrn" expression="execution(* cn.zying.osales.web.aop..*.*(..))" />
+			<aop:pointcut id="execactionReutrn" expression="execution(* cn.zying.osales.web.aopwe..*.*(..))" />
 			<aop:after-returning pointcut-ref="execactionReutrn" method="intToPrpertiesUnits" returning="result" />
 		</aop:aspect>
 	</aop:config>
+ -->
+</beans> 
 
-</beans>
+
 
 
