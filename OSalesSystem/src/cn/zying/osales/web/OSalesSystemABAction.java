@@ -7,15 +7,20 @@ import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.GeneralAction ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.service.IABService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 
 public abstract class OSalesSystemABAction<V> extends GeneralAction implements IOSalesSystemABAction {
 
     private static final long serialVersionUID = -2062527978326655709L ;
-    
+
     @Autowired
     @Qualifier("PrpertiesAutoWriteObjectService")
-    protected PrpertiesAutoWriteObjectService  writeObjectService; 
+    protected PrpertiesAutoWriteObjectService writeObjectService ;
+
+    @Autowired
+    @Qualifier(IABService.name)
+    protected IABService baseService ;
 
     private SelectPage<V> selectPage ;
 

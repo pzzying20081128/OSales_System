@@ -2,6 +2,11 @@ package cn.zying.osales.test ;
 import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
 import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
 import cn.zying.osales.pojos.ProductCategory ;
+import cn.zying.osales.pojos.ProductInfo ;
+import cn.zying.osales.pojos.ProviderInfo ;
+import cn.zying.osales.pojos.StockOrder ;
+import cn.zying.osales.pojos.StoreInfo ;
+import cn.zying.osales.pojos.StorePosition ;
 
 
 
@@ -18,9 +23,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="base_product_category";
+        String moduleNmae="stock_order";
         
-        Class<?> clazz = ProductCategory.class;
+        Class<?> clazz = StockOrder.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

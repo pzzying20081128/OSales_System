@@ -2,17 +2,45 @@ package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
     
+    
+    public static  String CODE_STOCK_ORDER="CGSO";
+
+    public enum StockType {
+        采购订单,直营采购订单
+    }
+
+    public enum ProductInfoType {
+        普通产品, 组合产品
+    }
+
+    public enum StoreType {
+        一般仓库, 专柜, 样品
+    }
+
+    public enum CommodityType {
+        正常商品, 赠品, 均价商品, 券类商品,
+    }
+
+    public enum ReturnType {
+        不确定, 开票前退货, 开票后退货, 全部
+
+    }
+
+    public enum PaymentMethod {
+        月结, 到付, 预付, 全部
+
+    }
+
     ///////////////////////////////////////////////////////////
-    public static  String classification_base_info="基础信息";
-    
-    public static  String classification_base_info_module_base_info_sys_staff="员工信息";
-    
+    public static String classification_base_info = "基础信息" ;
+
+    public static String classification_base_info_module_base_info_sys_staff = "员工信息" ;
 
     ////////////////////////////////////////////////////////////
     public static int isDefault_1 = 1 ;
 
     public static int isDefault_0 = 0 ;
-    
+
     public static int isDefault_all = -1 ;
 
     /////////////////// error///////////////////////////////////
@@ -29,11 +57,11 @@ public interface OSalesConfigProperties {
     String query_sysStaffUser_searchUserPower_userId_moduleId = "sysStaffUser_searchUserPower_userId_moduleId" ;
 
     public enum OptType {
-        save, update, check, delete, list, search, searchLike
+        save, update, check, delete, list, search, searchLike,init
     }
 
     public enum Status {
-        无效, 删除, 有效, 全部
+        无效, 删除, 有效, 全部,初始化
     }
 
 }

@@ -24,6 +24,7 @@ public class SysOptHistoryClassificationModuleSearchAction extends ABSalesSearch
 
     @Override
     protected List<CombSearchBean> searchResult() throws Exception {
+        try {
         List<SysOptHistory> result = service.searchComb(type, name, 0, 20) ;
         List<CombSearchBean> combSearchBeans = new ArrayList<CombSearchBean>() ;
         for (SysOptHistory sysOptHistory : result) {
@@ -45,6 +46,12 @@ public class SysOptHistoryClassificationModuleSearchAction extends ABSalesSearch
 
         }
         return combSearchBeans ;
+        
+    } catch (Exception e) {
+        this.msg = handError(e) ;
+        this.success = false ;
+    }
+     return null;
     }
 
     public String getType() {

@@ -18,7 +18,7 @@ function create_sys_opt_history_window(moduleId, moduleName) {
 				handler : function() {
 					var searchWindex = sys_opt_history_search_windows(moduleId, moduleName, {
 					grid : mainGridModule,
-					searchParams: sys_opt_history_search_params
+//					searchParams: sys_opt_history_search_params
 					});
 				}
 			}]

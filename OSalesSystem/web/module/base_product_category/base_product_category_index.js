@@ -107,9 +107,9 @@ function create_base_product_category_window(moduleId, moduleName) {
 			msg : "是否要删除该条信息",
 			yes : function(YN) {
 				ERPAjaxRequest({
-					url : "./simple_ProductBrand_remove.do",
+					url : "./simple_ProductCategory_remove.do",
 					params : {
-						"productBrand.id" : selectId
+						"productCategory.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(result) {

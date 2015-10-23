@@ -14,14 +14,16 @@
 	<!-- pojos package : cn.ipanel.itd.projects.pojos Service package : cn.ipanel.itd.projects.service.*.I*Service
  -->
 	<bean id="PrpertiesAutoWriteObjectService" class="cn.zying.osales.units.PrpertiesAutoWriteObjectService" />
-	<!-- 
+	
+	<bean id="SalesPrpertiesSetValueService" class="cn.zying.osales.units.SalesPrpertiesSetValueService" />
+	
 	<aop:config>
-		<aop:aspect id="ProServiceReturn" ref="PrpertiesAutoWriteObjectService">
-			<aop:pointcut id="execactionReutrn" expression="execution(* cn.zying.osales.web.aopwe..*.*(..))" />
-			<aop:after-returning pointcut-ref="execactionReutrn" method="intToPrpertiesUnits" returning="result" />
+		<aop:aspect id="ProServiceReturn" ref="SalesPrpertiesSetValueService">
+			<aop:pointcut id="execactionReutrn" expression="execution(* cn.zying.osales.web.aop..*.*(..))" />
+			<aop:after-returning pointcut-ref="execactionReutrn" method="execactionaftereturn" returning="result" />
 		</aop:aspect>
 	</aop:config>
- -->
+ 
 </beans> 
 
 

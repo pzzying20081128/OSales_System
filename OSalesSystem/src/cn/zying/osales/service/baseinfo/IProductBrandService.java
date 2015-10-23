@@ -2,7 +2,9 @@
 
  
  
- import cn.zy.apps.tools.units.CommSearchBean ;
+ import java.util.List ;
+
+import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.ProductBrand ;
@@ -23,6 +25,8 @@ public interface IProductBrandService {
             public SelectPage<ProductBrand > search(OptType  optType ,    
 				           ProductBrandSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
             
+            public List<ProductBrand > searchList(OptType  optType ,    
+                    ProductBrandSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
             
             public  void   remove(OptType  optType ,  ProductBrand   optProductBrand)throws SystemOptServiceException;
             

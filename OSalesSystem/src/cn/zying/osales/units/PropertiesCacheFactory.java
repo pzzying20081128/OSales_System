@@ -3,6 +3,9 @@ package cn.zying.osales.units ;
 import java.util.HashMap ;
 import java.util.Map ;
 
+import cn.zying.osales.pojos.ProductCategory ;
+import cn.zying.osales.pojos.StoreInfo ;
+import cn.zying.osales.pojos.StorePosition ;
 import cn.zying.osales.pojos.SysStaffUser ;
 
 public class PropertiesCacheFactory implements IPropertiesCacheFactory {
@@ -10,21 +13,59 @@ public class PropertiesCacheFactory implements IPropertiesCacheFactory {
     private Map<String, Object> aloneObjectCache = new HashMap<String, Object>() ;
 
     @Override
-    public void cacheObject(Object object) {
+    public void cacheObject(String key, Object object) {
+//        Loggerfactory.print("PropertiesAutoWriteObject   key " + key + "   object  " + object.toString()) ;
         if (object instanceof SysStaffUser) {
             cacheSysStaffUser((SysStaffUser) object) ;
+        } else
+
+        if (object instanceof ProductCategory) {
+            cacheProductCategory(key, (ProductCategory) object) ;
+        } else
+
+        if (object instanceof StoreInfo) {
+            cacheStoreInfo(key, (StoreInfo) object) ;
+        } else
+
+        if (object instanceof StorePosition) {
+            cacheStorePosition(key, (StorePosition) object) ;
+        } else {
+            cacheAloneObject(key, object) ;
         }
 
+    }
+
+    private void cacheAloneObject(String key, Object object) {
+        String key_ = createAloneObjectKey(key, object.getClass()) ;
+        aloneObjectCache.put(key_, object) ;
+    }
+
+    private void cacheStorePosition(String key, StorePosition object) {
+        String key_ = createAloneObjectKey(key, StorePosition.class) ;
+        aloneObjectCache.put(key_, object) ;
+    }
+
+    private void cacheStoreInfo(String key, StoreInfo object) {
+        String key_ = createAloneObjectKey(key, StoreInfo.class) ;
+        aloneObjectCache.put(key_, object) ;
+
+    }
+
+    private void cacheProductCategory(String key, ProductCategory productCategory) {
+        String key_ = createAloneObjectKey(key, ProductCategory.class) ;
+        aloneObjectCache.put(key_, productCategory) ;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <V> V searchCacheObject(String key, Class<V> clazz) {
+
         return (V) searchAloneObject(key, clazz) ;
     }
 
     private Object searchAloneObject(String key, Class<?> clazz) {
         String keys = createAloneObjectKey(key, clazz) ;
+//        System.out.println("================= searchAloneObject  > keys  " + keys + "         clazz    " + clazz.getClass().getSimpleName()) ;
         return aloneObjectCache.get(keys) ;
     }
 

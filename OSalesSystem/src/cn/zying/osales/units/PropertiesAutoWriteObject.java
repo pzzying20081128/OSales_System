@@ -9,7 +9,8 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
     protected IPropertiesCacheFactory cacheFactory = new PropertiesCacheFactory() ;
 
     public void cacheObject(String key, Object object) {
-        cacheFactory.cacheObject(object) ;
+       
+        cacheFactory.cacheObject( key,object) ;
     }
 
     private String regexPackage ;

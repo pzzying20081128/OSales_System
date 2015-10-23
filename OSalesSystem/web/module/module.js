@@ -32,6 +32,7 @@ function createModule(node, userId, params) {
 		}
 
 		case "product_management" : {
+			
 			loadjs.push("./ext3/fileupload/FileUploadField.js");
 			loadjs.push("./ext3/kindeditor/extke.js");
 			loadjs.push("./module/" + moduleId + "/product_course/index.js");
@@ -41,7 +42,23 @@ function createModule(node, userId, params) {
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_search_action_properties.js");
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_search_windows.js");
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_update_windows.js");
+		break;
 		}
+		
+		case "base_store_info":{
+		
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_index.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_create_windows.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_save_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_search_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_search_windows.js");
+			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_update_windows.js");
+		
+			
+			break;
+		}
+		
 		default : {
 
 		}

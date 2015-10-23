@@ -19,16 +19,33 @@ public class ProductCategorySearchAction extends ABSalesSearchAction {
     @Autowired
     @Qualifier(IAopProductCategoryService.name)
     private IAopProductCategoryService service ;
-    
-    private ProductCategorySearchBean  searchBean;
+
+    private ProductCategorySearchBean searchBean ;
 
     @Override
     protected List<ProductCategory> searchResult() throws Exception {
-        
-        searchBean.setName(name);
-        searchBean.setId(uuid);
+        try {
+            searchBean.setName(name) ;
+            searchBean.setId(uuid) ;
+            return service.searchList(OptType.search, searchBean, null, 0, 20) ;
 
-        return service.searchList(OptType.search, searchBean, null, 0, 20) ;
+            //        if (searchBean.getId() != null) {
+            //            for (StoreInfo result : results) {
+            //                if (result.getId().equals(searchBean.getId())) return results ;
+            //            }
+            //            StoreInfo res = service.get(searchBean.getId()) ;
+            //            results.add(0, res) ;
+            //            return results ;
+            //        } else {
+            //            return results ;
+            //        }
+            //        
+
+        } catch (Exception e) {
+            this.msg = handError(e) ;
+            this.success = false ;
+        }
+        return null ;
     }
 
     public ProductCategorySearchBean getSearchBean() {

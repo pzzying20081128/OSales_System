@@ -3,6 +3,11 @@ package cn.zying.osales.test;
 import cn.zy.apps.tools.dev.service.BuildServiceFile ;
 import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
 import cn.zying.osales.pojos.ProductCategory ;
+import cn.zying.osales.pojos.ProductInfo ;
+import cn.zying.osales.pojos.ProviderInfo ;
+import cn.zying.osales.pojos.StockOrder ;
+import cn.zying.osales.pojos.StoreInfo ;
+import cn.zying.osales.pojos.StorePosition ;
 
 public class TestBuildServiceFile {
 
@@ -13,9 +18,9 @@ public class TestBuildServiceFile {
     public static void main(String[] args) throws Exception {
         
         
-        String module= "baseinfo";
+        String module= "stocks";
         
-        Class<?> clazz = ProductCategory.class;
+        Class<?> clazz = StockOrder.class;
         
         String className=clazz.getSimpleName();
 

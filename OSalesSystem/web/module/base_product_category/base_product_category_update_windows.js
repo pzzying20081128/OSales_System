@@ -32,11 +32,12 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 		action : "update",
 		grid : grid,
 		// 结果路径
-		pojo : "sss",
+		pojo : "result",
 		// url
-		url : './saveUpdateMaterialManage.action',
+	url : './simple_ProductCategory_save.do',
 		params : {
-			optType : "update"
+			optType : "update",
+			"productCategory.id":selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
@@ -121,7 +122,33 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}]
-		}]
+		}
+		,{// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+
+				columnWidth : .5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
+				},
+				items : [
+					createLocalCombo({
+					id : 'productCategory.status',
+					name : 'productCategory.status',
+					fieldLabel : ' 状态',
+					storeData : [['有效', "有效"], ['删除', '删除']],
+					defaultValue : null,
+					allowBlank : false
+				})
+			   ]
+
+			}]
+		}
+		]
 
 	}
 
@@ -134,7 +161,7 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 			productCategoryParent.load({
 				params : {
 					uuid : _result_.result.parentId,
-					"searchBean.status" : "全部"
+					"searchBean.status" : "有效",
 				},
 				success : function() {
                       productCategoryParent.setValue(_result_.result.parentId);

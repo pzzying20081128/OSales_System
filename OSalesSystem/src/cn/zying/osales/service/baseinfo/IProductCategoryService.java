@@ -3,7 +3,6 @@
  
  
  import cn.zying.osales.infaces.InfaceProductCategoryService ;
-import cn.zying.osales.web.aop.IAopProductCategoryService ;
 
 public interface IProductCategoryService  extends InfaceProductCategoryService {
     
