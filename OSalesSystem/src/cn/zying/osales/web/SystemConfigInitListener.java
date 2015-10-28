@@ -14,16 +14,19 @@ import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProductBrand ;
 import cn.zying.osales.pojos.ProductCategory ;
+import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.IProviderInfoService ;
 import cn.zying.osales.service.baseinfo.IProductBrandService ;
+import cn.zying.osales.service.baseinfo.IProductInfoService ;
 import cn.zying.osales.service.baseinfo.ISystemUserService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 import cn.zying.osales.units.search.bean.ProductBrandSearchBean ;
 import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
+import cn.zying.osales.units.search.bean.ProductInfoSearchBean ;
 import cn.zying.osales.units.search.bean.ProviderInfoSearchBean ;
 import cn.zying.osales.units.search.bean.StoreInfoSearchBean ;
 import cn.zying.osales.units.search.bean.StorePositionSearchBean ;
@@ -74,7 +77,7 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         //
         //		loadStockContract(springContext);
         //
-        //		loadProductInfo(springContext);
+        loadProductInfo(springContext, prpertiesAutoWriteObjectService) ;
         //
         //		loadSystemConfigs(springContext);
         //
@@ -149,35 +152,21 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
     //
     //	}
 
-    //	private void loadProductInfo(WebApplicationContext springContext) {
-    //		Loggerfactory.info(logger, "start write  ProductInfo  to cache factory  ");
-    //
-    //		IProductInfoService guestInfoService = (IProductInfoService) springContext.getBean(IProductInfoService.name);
-    //
-    //		List<ProductInfo> productInfos = guestInfoService.listproductInfo();
-    //
-    //		for (ProductInfo productInfo : productInfos) {
-    //			ToolsNewUnits.updateProductInfoCache(productInfo);
-    //		}
-    //
-    //		IProductInfoTypeSearchService productInfoTypeSearchService = (IProductInfoTypeSearchService) springContext
-    //				.getBean(IProductInfoTypeSearchService.name);
-    //
-    //		List<ProductType> productTypes = productInfoTypeSearchService.listAll();
-    //
-    //		for (ProductType productType : productTypes) {
-    //			ToolsNewUnits.updateProductTypeCache(productType);
-    //		}
-    //		
-    //		
-    //		List<ProductStoreInfo>  productStoreInfos  = guestInfoService.listAll();
-    //		
-    //	  for(ProductStoreInfo   productStoreInfo : productStoreInfos  ){
-    //	      erpSetPrpertiesUnits.setPrpertiesUnits(productStoreInfo);
-    //	      ToolsNewUnits.updateProductStoreInfoCache(productStoreInfo);
-    //	  }
-    //	
-    //	}
+    private void loadProductInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
+        Loggerfactory.info(logger, "start write  ProductInfo  to cache factory  ") ;
+
+        IProductInfoService guestInfoService = (IProductInfoService) springContext.getBean(IProductInfoService.name) ;
+
+        ProductInfoSearchBean searchBean = new ProductInfoSearchBean() ;
+
+        searchBean.setStatus(Status.全部) ;
+
+        List<ProductInfo> productInfos = guestInfoService.searchList(OptType.search, searchBean, null) ;
+        for(ProductInfo   productInfo : productInfos){
+            prpertiesAutoWriteObjectService.cacheObject(productInfo.getId().toString(), productInfo);
+        }
+
+    }
 
     private void loadProductBrand(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
         Loggerfactory.info(logger, "start write  ProductBrand  to cache factory  ") ;
@@ -225,7 +214,6 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
     //	}
 
     private void loadStoreInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
-        
 
         IAopStoreInfoService storeInfosSearchService = (IAopStoreInfoService) springContext.getBean(IAopStoreInfoService.name) ;
 
@@ -234,8 +222,8 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         searchBean.setStatus(Status.全部) ;
 
         List<StoreInfo> storeInfos = storeInfosSearchService.searchList(OptType.search, searchBean, null) ;
-        
-        Loggerfactory.info(logger, "start write  StoreInfo  to cache factory "+storeInfos.size()) ;
+
+        Loggerfactory.info(logger, "start write  StoreInfo  to cache factory " + storeInfos.size()) ;
 
         for (StoreInfo storeInfo : storeInfos) {
             prpertiesAutoWriteObjectService.cacheObject(storeInfo.getId().toString(), storeInfo) ;
@@ -248,7 +236,7 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         storePositionSearchBean.setStatus(Status.全部) ;
 
         List<StorePosition> storePositions = storePositionService.searchList(OptType.search, storePositionSearchBean, null) ;
-        Loggerfactory.info(logger, "start write  StorePosition   to cache factory   "+storePositions.size()) ;
+        Loggerfactory.info(logger, "start write  StorePosition   to cache factory   " + storePositions.size()) ;
         for (StorePosition storePosition : storePositions) {
             prpertiesAutoWriteObjectService.cacheObject(storePosition.getId().toString(), storePosition) ;
         }

@@ -5,7 +5,10 @@ import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
 import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.ProviderInfo ;
+import cn.zying.osales.pojos.StockInStore ;
+import cn.zying.osales.pojos.StockInStoreDetail ;
 import cn.zying.osales.pojos.StockOrder ;
+import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 
@@ -20,7 +23,7 @@ public class TestBuildServiceFile {
         
         String module= "stocks";
         
-        Class<?> clazz = StockOrder.class;
+        Class<?> clazz = StockInStoreDetail.class;
         
         String className=clazz.getSimpleName();
 

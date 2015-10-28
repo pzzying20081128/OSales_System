@@ -1,14 +1,22 @@
 package cn.zying.osales.units ;
 
+import java.beans.PropertyDescriptor ;
+
+import org.springframework.stereotype.Component ;
+
+import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zy.apps.tools.units.PrpertiesSetValueService ;
 import cn.zy.apps.tools.units.moneys.BuildMoneyFactory ;
 import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
+import cn.zying.osales.pojos.ProductInfo ;
 
+@Component("SalesPrpertiesSetValueService")
 public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
 
-    private static IBuildMoneyFactory buildMoneyFactory = new BuildMoneyFactory() ;
+    private static IBuildMoneyFactory buildMoneyFactory = BuildMoneyFactory.getBuildMoney() ;
 
     public static String regexPackage = "^cn.zying.osales(\\.\\D+)*(.pojos|.bean)$" ;
+
 
     public SalesPrpertiesSetValueService() {
         super(regexPackage) ;
@@ -16,7 +24,7 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
 
     @Override
     protected void handField(String fieldName, Object result) {
-        //         System.out.println("-->  -------------------------------------------------- handField  "+fieldName) ;
+
         if (fieldName.endsWith("MoneyShow")) {
             handMoney(fieldName, result) ;
         }
@@ -24,6 +32,33 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
         if (fieldName.endsWith("TaxRateShow")) {
             handTaxRate(fieldName, result) ;
         }
+
+        //orderCount BoxShow
+        if (fieldName.endsWith("BoxShow")) {
+            handBoxShow(fieldName, result) ;
+        }
+    }
+
+    private void handBoxShow(String fieldName, Object result) {
+        try {
+            PropertyDescriptor[] propertyDescriptors = searchAll(result.getClass()) ;
+            for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+                if (!propertyDescriptor.getPropertyType().equals(ProductInfo.class)) continue ;
+
+                String fieldProductInfo = propertyDescriptor.getDisplayName();
+
+                ProductInfo productInfo = readFieldValue(fieldProductInfo, result) ;
+                
+                String orderCountFieldName = fieldName.substring(0, fieldName.length() - 7) ;
+                Integer orderCount = readFieldValue(orderCountFieldName, result) ;
+                String boxCount = BuildProductInfoUnit.createBoxCount(orderCount, productInfo) ;
+                writeFieldValue(fieldName, result, boxCount) ;
+
+            }
+        } catch (IllegalArgumentException e) {
+            Loggerfactory.error(logger, " handusePosition -> " + e.getMessage()) ;
+        }
+
     }
 
     private void handTaxRate(String fieldName, Object result) {
@@ -51,40 +86,6 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
 
     }
 
-    public static void main(String[] args) {
-
-        String regexPackage = "^zy.apps.demo(\\.\\D+)*(.pojos|.views|.beans)$" ;
-
-        //		PrpertiesSetValueService  prpertiesSetValueService  =new DemoPrpertiesSetValueService(regexPackage);
-        //		Order  order=new Order();
-        //		order.setMoney(1200L);
-        //		List<Order>   orders=new ArrayList<Order>();
-        //		order.setOrders(orders);
-        //		{
-        //			Order  order1=new Order();
-        //			order1.setMoney(200L);
-        //			orders.add(order1);
-        //		}
-        //		
-        //		{
-        //			Order  order2=new Order();
-        //			order2.setMoney(100L);
-        //			orders.add(order2);
-        //		}
-        //		
-        //		try {
-        //			prpertiesSetValueService.execactionaftereturn(order);
-        //			String xx =order.getMoneyMoneyShow();
-        //			System.out.println("==> "+xx);
-        //			for(Order  order_:order.getOrders() ){
-        //				String xx1 =order_.getMoneyMoneyShow();
-        //				System.out.println("==> "+xx1);
-        //			}
-        //		} catch (Exception e) {
-        //			// TODO Auto-generated catch block
-        //			e.printStackTrace();
-        //		}
-
-    }
+  
 
 }

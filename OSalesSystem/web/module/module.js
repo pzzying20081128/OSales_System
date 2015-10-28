@@ -32,7 +32,7 @@ function createModule(node, userId, params) {
 		}
 
 		case "product_management" : {
-			
+
 			loadjs.push("./ext3/fileupload/FileUploadField.js");
 			loadjs.push("./ext3/kindeditor/extke.js");
 			loadjs.push("./module/" + moduleId + "/product_course/index.js");
@@ -42,11 +42,11 @@ function createModule(node, userId, params) {
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_search_action_properties.js");
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_search_windows.js");
 			loadjs.push("./module/" + moduleId + "/product_course/product_course_update_windows.js");
-		break;
+			break;
 		}
-		
-		case "base_store_info":{
-		
+
+		case "base_store_info" : {
+
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_index.js");
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_action_properties.js");
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_create_windows.js");
@@ -54,11 +54,38 @@ function createModule(node, userId, params) {
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_search_action_properties.js");
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_search_windows.js");
 			loadjs.push("./module/" + moduleId + "/base_store_position/base_store_position_update_windows.js");
-		
-			
+
+			break;
+		}
+		case "stock_order" : {
+
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_index.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_create_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_save_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_search_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_search_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_order_detail/stock_order_detail_update_windows.js");
+
 			break;
 		}
 		
+				case "stock_in_store" : {
+
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_index.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_create_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_save_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_search_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_search_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_in_store_detail/stock_in_store_detail_update_windows.js");
+
+			break;
+		}
+		
+		
+		
+
 		default : {
 
 		}

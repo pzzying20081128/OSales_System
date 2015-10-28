@@ -46,7 +46,7 @@ public class SystemUserSaveUpdateUnits extends ABCommonsService {
                 throw new SystemOptServiceException("[" + optSystemUser.getAccount() + "]系统用户重复") ;
             }
         }
-        optSystemUser.setId(SQLUilts.getIUniqueId()) ;
+//        optSystemUser.setId(SQLUilts.getIUniqueId()) ;
         optSystemUser.setStatus(Status.有效) ;
         optSystemUser.setIsAdmin(OSalesConfigProperties.isDefault_0);
         List<SystemUserPower> userPowers = optSystemUser.getSystemUserPowers() ;

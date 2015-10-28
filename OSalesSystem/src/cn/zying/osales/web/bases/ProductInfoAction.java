@@ -27,7 +27,7 @@ public class ProductInfoAction extends OSalesSystemABAction<ProductInfo> {
 
     public String save() throws Exception {
         try {
-            BuildProductInfoUnit.buildToLong(productinfo);
+            BuildProductInfoUnit.buildToLong(productinfo) ;
             this.result = service.saveUpdate(optType, productinfo) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
@@ -75,6 +75,19 @@ public class ProductInfoAction extends OSalesSystemABAction<ProductInfo> {
         return SUCCESS ;
     }
 
+    private Integer providerInfoId ;
+
+    public String selectStockPrice() throws Exception {
+        try {
+            this.result = service.selectStockPrice(uuid, providerInfoId) ;
+            writeObjectService.intToPrpertiesUnits(result) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+
     public ProductInfo getProductinfo() {
         return productinfo ;
     }
@@ -89,6 +102,14 @@ public class ProductInfoAction extends OSalesSystemABAction<ProductInfo> {
 
     public void setSearchBean(ProductInfoSearchBean searchBean) {
         this.searchBean = searchBean ;
+    }
+
+    public Integer getProviderInfoId() {
+        return providerInfoId ;
+    }
+
+    public void setProviderInfoId(Integer providerInfoId) {
+        this.providerInfoId = providerInfoId ;
     }
 
 }

@@ -64,7 +64,7 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 		allowBlank : false,
 		forceSelection : false,
 		select : function(combo, record, index) {
-			id = record.id;
+			
 		}
 	});
 	storePosition.load({
@@ -83,14 +83,6 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 		allowBlank : false,
 		forceSelection : false,
 		select : function(combo, record, index) {
-			id = record.id;
-			storePosition.load({
-				params : {
-					'searchBean.storeInfoId' : id,
-					'searchBean.status' : '有效'
-				}
-
-			});
 		}
 	});
 

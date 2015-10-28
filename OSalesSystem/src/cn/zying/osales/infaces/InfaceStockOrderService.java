@@ -28,6 +28,8 @@ public interface InfaceStockOrderService {
             
             
            public  StockOrder get(Integer id)throws SystemOptServiceException;
+           
+           public void check(Integer id ,Integer  optUserId)throws SystemOptServiceException;
 
 
 }

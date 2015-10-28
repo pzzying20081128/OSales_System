@@ -1,7 +1,5 @@
 package cn.zying.osales.web.stocks ;
 
-import javax.persistence.Access ;
-
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.units.search.bean.StockOrderSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
@@ -29,8 +26,8 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
     private IAopStockOrderService service ;
 
     private StockOrder stockorder ;
-    
-    private StockOrderSearchBean  searchBean;
+
+    private StockOrderSearchBean searchBean ;
 
     public String initStockOrder() throws Exception {
         try {
@@ -58,6 +55,16 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
         return SUCCESS ;
     }
 
+    public String check() throws Exception {
+        try {
+            service.check(stockorder.getId(), getOSalsesLoginUserId()) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+
     public String update() throws Exception {
         try {
             stockorder.setRecordManId(getOSalsesLoginUserId()) ;
@@ -69,11 +76,11 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
         }
         return SUCCESS ;
     }
-    
+
     public String get() throws Exception {
         try {
-         
-            this.result = service.get(uuid);
+
+            this.result = service.get(uuid) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -81,7 +88,7 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
         }
         return SUCCESS ;
     }
-    
+
     public String list() throws Exception {
         try {
             SelectPage<StockOrder> selectPage = service.search(optType, searchBean, commSearchBean, start, limit) ;
@@ -94,10 +101,10 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
 
         return SUCCESS ;
     }
-    
+
     public String remove() throws Exception {
         try {
-            this.result = service.remove(OptType.delete, stockorder);
+            this.result = service.remove(OptType.delete, stockorder) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;

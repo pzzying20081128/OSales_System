@@ -3,7 +3,9 @@
 <struts>
 	<package name="base_info" namespace="/" extends="struts-ajax">
 
-		<action name="simple_*_*" class="{1}Action" method="{2}">
+	    <!-- 
+	    
+	    		<action name="simple_*_*" class="{1}Action" method="{2}">
 			<result type="json">
 				<param name="ignoreHierarchy">false</param>
 				<param name="excludeNullProperties">false</param>
@@ -30,6 +32,8 @@
 				</param>
 			</result>
 		</action>
+	     -->
+
 
 	</package>
 </struts>

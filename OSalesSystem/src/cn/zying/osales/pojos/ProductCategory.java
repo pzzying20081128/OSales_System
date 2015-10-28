@@ -6,15 +6,13 @@ import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
-import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zying.osales.pojos.commons.CommBean ;
 
 /**
  * 产品信息表
@@ -24,11 +22,7 @@ import cn.zy.apps.tools.jpa.FieldDesc ;
 public class ProductCategory extends CommBean {
     private static final long serialVersionUID = -2184091312240111071L ;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id ;
-
+   
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "parent", nullable = true)
     @FieldDesc(name = "父类类别", isShow = true, mapping = "parent.name", inputShow = false)
@@ -57,13 +51,6 @@ public class ProductCategory extends CommBean {
     @FieldDesc(name = "是否有子类别", isShow = true, desc = "0:无;1:有")
     private Integer isChild ;
 
-    public Integer getId() {
-        return id ;
-    }
-
-    public void setId(Integer id) {
-        this.id = id ;
-    }
 
     public ProductCategory getParent() {
         return parent ;

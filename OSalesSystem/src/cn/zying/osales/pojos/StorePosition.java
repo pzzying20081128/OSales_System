@@ -3,14 +3,12 @@ package cn.zying.osales.pojos;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
-import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.Table ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zying.osales.pojos.commons.CommBean ;
 
 
 
@@ -19,10 +17,7 @@ import cn.zy.apps.tools.jpa.FieldDesc ;
 public class StorePosition extends CommBean {
 
     private static final long serialVersionUID = -4433696835387380184L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_info_id")
     @FieldDesc(name = "仓库",isShow=false,mapping="storeInfo.name")
@@ -39,13 +34,7 @@ public class StorePosition extends CommBean {
     @Column(name = "text")
     private String text;
 
-    public Integer getId() {
-        return id ;
-    }
-
-    public void setId(Integer id) {
-        this.id = id ;
-    }
+  
 
     public StoreInfo getStoreInfo() {
         return storeInfo ;

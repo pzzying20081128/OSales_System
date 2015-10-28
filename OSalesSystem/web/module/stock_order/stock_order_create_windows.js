@@ -3,6 +3,8 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 	
 	var order =  params.order;
+	
+	var detailParams = params.detailParams;
 
 	var stock_order_params = {
 		title : "新增" + moduleName,
@@ -290,6 +292,6 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 
 	}
 
-	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params);
+	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params,detailParams);
 
 }

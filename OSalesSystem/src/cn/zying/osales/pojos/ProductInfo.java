@@ -5,9 +5,6 @@ import javax.persistence.Entity ;
 import javax.persistence.EnumType ;
 import javax.persistence.Enumerated ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
-import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.OneToOne ;
@@ -17,6 +14,7 @@ import javax.persistence.Transient ;
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
+import cn.zying.osales.pojos.commons.CommBean ;
 
 // Generated 2013-6-20 10:53:13 by Hibernate Tools 3.4.0.CR1
 
@@ -26,13 +24,9 @@ import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 
 @Entity
 @Table(name = "base_product_info")
-public class ProductInfo   extends  CommBean  implements java.io.Serializable {
+public class ProductInfo extends CommBean implements java.io.Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id ;
-
+  
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_category_id")
     @FieldDesc(name = "类别", isShow = true, mapping = "productCategory.name", inputShow = false)
@@ -104,6 +98,28 @@ public class ProductInfo   extends  CommBean  implements java.io.Serializable {
     @Transient
     @FieldDesc(name = "最大采购价", isShow = false)
     private String maxStockPriceMoneyHide ;
+
+    //查询的含税采购价 
+    @Transient
+    private Long stockPrice ;
+
+    @Transient
+    private String stockPriceMoneyShow ;
+
+    @Transient
+    private String stockPriceMoneyHide ;
+    
+    //查询的末含税采购价 
+    @Transient
+    private Long stockNoTaxPrice ;
+
+    @Transient
+    private String stockNoTaxPriceMoneyShow ;
+
+    @Transient
+    private String stockNoTaxPriceMoneyHide ;
+    
+    
 
     // 销售价
     @Column(name = "sales_price")
@@ -296,13 +312,7 @@ public class ProductInfo   extends  CommBean  implements java.io.Serializable {
         return baseUnitBoxUnit ;
     }
 
-    public Integer getId() {
-        return id ;
-    }
 
-    public void setId(Integer id) {
-        this.id = id ;
-    }
 
     public ProductCategory getProductCategory() {
         return productCategory ;
@@ -311,8 +321,6 @@ public class ProductInfo   extends  CommBean  implements java.io.Serializable {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory ;
     }
-
-
 
     public String getShortName() {
         return shortName ;
@@ -570,8 +578,6 @@ public class ProductInfo   extends  CommBean  implements java.io.Serializable {
         this.salesBoxNoTaxPrice = salesBoxNoTaxPrice ;
     }
 
-
-
     public String getShelfLife() {
         return shelfLife ;
     }
@@ -742,6 +748,54 @@ public class ProductInfo   extends  CommBean  implements java.io.Serializable {
 
     public void setSalesBoxNoTaxPriceMoneyHide(String salesBoxNoTaxPriceMoneyHide) {
         this.salesBoxNoTaxPriceMoneyHide = salesBoxNoTaxPriceMoneyHide ;
+    }
+
+    public Long getStockPrice() {
+        return stockPrice ;
+    }
+
+    public void setStockPrice(Long stockPrice) {
+        this.stockPrice = stockPrice ;
+    }
+
+    public String getStockPriceMoneyShow() {
+        return stockPriceMoneyShow ;
+    }
+
+    public void setStockPriceMoneyShow(String stockPriceMoneyShow) {
+        this.stockPriceMoneyShow = stockPriceMoneyShow ;
+    }
+
+    public String getStockPriceMoneyHide() {
+        return stockPriceMoneyHide ;
+    }
+
+    public void setStockPriceMoneyHide(String stockPriceMoneyHide) {
+        this.stockPriceMoneyHide = stockPriceMoneyHide ;
+    }
+
+    public Long getStockNoTaxPrice() {
+        return stockNoTaxPrice ;
+    }
+
+    public void setStockNoTaxPrice(Long stockNoTaxPrice) {
+        this.stockNoTaxPrice = stockNoTaxPrice ;
+    }
+
+    public String getStockNoTaxPriceMoneyShow() {
+        return stockNoTaxPriceMoneyShow ;
+    }
+
+    public void setStockNoTaxPriceMoneyShow(String stockNoTaxPriceMoneyShow) {
+        this.stockNoTaxPriceMoneyShow = stockNoTaxPriceMoneyShow ;
+    }
+
+    public String getStockNoTaxPriceMoneyHide() {
+        return stockNoTaxPriceMoneyHide ;
+    }
+
+    public void setStockNoTaxPriceMoneyHide(String stockNoTaxPriceMoneyHide) {
+        this.stockNoTaxPriceMoneyHide = stockNoTaxPriceMoneyHide ;
     }
 
 }

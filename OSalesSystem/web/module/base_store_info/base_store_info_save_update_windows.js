@@ -19,14 +19,14 @@ function base_store_info_save_update_form_panel_windows(params,positonParams) {
 						params : params.params,
 						success : function(result) {
 							json = result.result;
-							params.grid.insertRow(json[params.pojo]);
+						
 							if (params.action == "save") {
-
+	                           params.grid.insertRow(json[params.pojo]);
 								showMsgYN({
 									msg : "是否要同时增加库位",
 									yes : function(YN) {
 										   
-											window.close();
+										window.close();
 										base_store_position_create_windows(positonParams.moduleId, positonParams.moduleName, {
 											grid : positonParams.positonGrid,
 											storeId:json[params.pojo].id

@@ -15,7 +15,7 @@ public interface IAopStockOrderService  extends InfaceStockOrderService   {
             public StockOrder   saveUpdate(OptType  optType ,   StockOrder   optStockOrder ,int optUserId )throws SystemOptServiceException;
             
                 
-         
+            
             
        
             

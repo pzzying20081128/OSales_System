@@ -10,7 +10,7 @@ Ext.apply(Ext.form.VTypes, {
 	chinese : function(val, field) {
 		var reg = /^[\u4e00-\u9fa5]+$/i;
 		if (!reg.test(val))
-			return false;
+			return false; 
 		return true
 	},
 	chineseText : "请输入中文",
@@ -1002,7 +1002,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 						showErrorMsg("信息提示", "加载数据失败！");
 				else if (loadParams != null) {
 					if (typeof loadParams.success == "function")
-						var jsonData = store_.reader.jsonData;
+						var jsonData = store.reader.jsonData;
 					loadParams.success({
 						"r" : r,
 						"options" : options,
@@ -1040,6 +1040,8 @@ var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
 var NoAllowBlankStyle = "background:#fff1a4;";
 var AllowBlankStyle = "background:#ffffff;";
+var NoAllowBlankColor = "#fff1a4";
+var AllowBlankColor = "#ffffff";
 function updateUserPasswdWindows() {
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
@@ -1867,6 +1869,9 @@ Ext.form.ERPComboBox = Ext.extend(Ext.form.ComboBox, {
 	},
 	load : function(params) {
 		this.store.loads(params)
+	},
+	clear : function() {
+		this.clearValue()
 	},
 	listeners : {
 		keyup : function(textField, e) {

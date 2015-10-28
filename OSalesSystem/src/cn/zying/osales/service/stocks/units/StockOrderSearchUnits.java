@@ -71,6 +71,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
         if (searchBean.getStatus() == null || !searchBean.getStatus().equals(Status.全部)) {
             sqlWhere = sqlWhere + "  and  stockOrder.status  ='" + searchBean.getStatus() + "'  " ;
         }
+        
         return sqlWhere ;
     }
 

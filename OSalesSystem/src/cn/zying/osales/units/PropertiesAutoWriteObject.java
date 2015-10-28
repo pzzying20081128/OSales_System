@@ -1,16 +1,19 @@
 package cn.zying.osales.units ;
 
+import javax.persistence.Table ;
+
 import cn.zy.apps.tools.units.AutoWriteObject ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.ToolsUnitsException ;
+import cn.zying.osales.pojos.SysStaffUser ;
 
 public class PropertiesAutoWriteObject extends AutoWriteObject {
 
     protected IPropertiesCacheFactory cacheFactory = new PropertiesCacheFactory() ;
 
     public void cacheObject(String key, Object object) {
-       
-        cacheFactory.cacheObject( key,object) ;
+
+        cacheFactory.cacheObject(key, object) ;
     }
 
     private String regexPackage ;
@@ -31,7 +34,29 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
 
         boolean result = ToolsUnits.regex(regexPackage, classes.getPackage().getName()) ;
 
+        if (result == true) {
+            //SysStaffUser
+            {
+                Table table = classes.getAnnotation(Table.class) ;
+                if (table != null) {
+                    String name = table.name() ;
+                    if (name.startsWith("base_")) result = true ;
+                    else
+                        result = false ;
+                }
+            }
+
+        }
+        if (result == false) {
+            result = filterClass(classes) ;
+        }
         return result ;
+    }
+
+    private boolean filterClass(Class<?> classes) {
+        boolean result = classes.equals(SysStaffUser.class) ;
+        return result ;
+
     }
 
     @Override

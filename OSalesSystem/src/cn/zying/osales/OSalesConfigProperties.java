@@ -3,8 +3,12 @@ package cn.zying.osales ;
 public interface OSalesConfigProperties {
     
     
+    //采购订单代号
     public static  String CODE_STOCK_ORDER="CGSO";
-
+   //采购入库单
+    public static  String CODE_STOCK_IN_STORE="CGRK";
+    
+    
     public enum StockType {
         采购订单,直营采购订单
     }
@@ -61,7 +65,7 @@ public interface OSalesConfigProperties {
     }
 
     public enum Status {
-        无效, 删除, 有效, 全部,初始化
+        无效, 删除, 有效, 全部,初始化,已审核
     }
 
 }

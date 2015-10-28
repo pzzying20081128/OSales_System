@@ -9,25 +9,37 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SearchUserPowerAction ;
+import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.service.IABService ;
 import cn.zying.osales.units.search.bean.CombSearchBean ;
+import cn.zying.osales.units.search.bean.ProductInfoSearchBean ;
+import cn.zying.osales.web.aop.IAopProductInfoService ;
 
 @Component("ProductInfoSearchAction")
 @org.springframework.context.annotation.Scope(SearchUserPowerAction.Scope)
 public class ProductInfoSearchAction extends ABSalesSearchAction {
 
     private enum SelecType {
-        baseUnit, boxUnit
+        baseUnit, boxUnit, productInfo
     }
 
     @Autowired
     @Qualifier(IABService.name)
     private IABService baseService ;
 
+    @Autowired
+    @Qualifier(IAopProductInfoService.name)
+    private IAopProductInfoService aopProductInfoService ;
+
     private SelecType selectype ;
 
+    private ProductInfoSearchBean searchBean ;
+
+    @SuppressWarnings("unchecked")
     @Override
-    protected List<CombSearchBean> searchResult() throws Exception {
+    protected List searchResult() throws Exception {
+
         switch (selectype) {
         case baseUnit:
 
@@ -37,13 +49,41 @@ public class ProductInfoSearchAction extends ABSalesSearchAction {
 
             return selectBoxUnit(name) ;
 
+        case productInfo:
+
+            return selectProductInfo(name) ;
+
         default:
             throw new Exception("selectype " + selectype + "  error  ") ;
         }
 
     }
 
-    public void setSelectype(SelecType selectype) {
+    private List<ProductInfo> selectProductInfo(String name) throws Exception {
+        searchBean.setName(name) ;
+
+        List<ProductInfo> results = aopProductInfoService.searchList(OptType.search, searchBean, null, 0, 20) ;
+        if (searchBean.getId() != null) {
+            boolean ishave = false ;
+            for (ProductInfo result : results) {
+                if (result.getId().equals(searchBean.getId())) {
+                    ishave = true ;
+                    break ;
+                }
+            }
+            if (ishave == false) {
+                ProductInfo res = aopProductInfoService.get(searchBean.getId()) ;
+                results.add(0, res) ;
+            }
+
+        } else {
+
+        }
+        writeObjectService.intToPrpertiesUnits(results) ;
+        return results ;
+    }
+
+    public void setSelectype(SelecType selectype) throws Exception {
         this.selectype = selectype ;
     }
 
@@ -108,6 +148,14 @@ public class ProductInfoSearchAction extends ABSalesSearchAction {
             combSearchBean.setName(result) ;
         }
         return combSearchBeans ;
+    }
+
+    public ProductInfoSearchBean getSearchBean() {
+        return searchBean ;
+    }
+
+    public void setSearchBean(ProductInfoSearchBean searchBean) {
+        this.searchBean = searchBean ;
     }
 
 }

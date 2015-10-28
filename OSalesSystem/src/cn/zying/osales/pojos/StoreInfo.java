@@ -6,23 +6,18 @@ import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
-import javax.persistence.Id ;
 import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.StoreType ;
+import cn.zying.osales.pojos.commons.CommBean ;
 
 @Entity
 @Table(name = "base_store_info")
 public class StoreInfo extends CommBean {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id ;
+   
 
     @Column(name = "name", length = 20)
     @FieldDesc(name = "仓库名称")
@@ -47,13 +42,7 @@ public class StoreInfo extends CommBean {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "storeInfo")
     private List<StorePosition> storePositions ;
 
-    public Integer getId() {
-        return id ;
-    }
-
-    public void setId(Integer id) {
-        this.id = id ;
-    }
+   
 
     public String getName() {
         return name ;

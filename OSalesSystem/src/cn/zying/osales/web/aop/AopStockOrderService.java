@@ -56,4 +56,10 @@ public class AopStockOrderService implements IAopStockOrderService {
 
     }
 
+    @Override
+    public void check(Integer id, Integer optUserId) throws SystemOptServiceException {
+        iStockOrderService.check(id, optUserId) ;
+
+    }
+
 }

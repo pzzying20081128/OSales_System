@@ -14,10 +14,19 @@ import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
 import cn.zying.osales.pojos.ProductInfo ;
 
 public class BuildProductInfoUnit {
+    
+    
+    public static String createBoxCount(Integer count, ProductInfo productInfo) {
+        if (count == null || productInfo == null) return null ;
+        Integer x = productInfo.getBoxCount() ;
+        if (x == null) x = 1 ;
+        String xx = count / x + productInfo.getBoxUnit() + (count % x != 0 ? count % x + productInfo.getBaseUnit() : "") ;
+        return xx.trim() ;
+    }
+
+    private static IBuildMoneyFactory buildMoneyFactory = BuildMoneyFactory.getBuildMoney() ;
 
     private static Logger logger = Loggerfactory.instance(BuildProductInfoUnit.class) ;
-
-    private static IBuildMoneyFactory buildMoneyFactory = new BuildMoneyFactory() ;
 
     private static String[] moneyfields = new String[] { "maxStockPriceMoneyShow", "stockTaxRateTaxRateShow",
 
@@ -85,7 +94,7 @@ public class BuildProductInfoUnit {
 
                     /////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    Long moneyLong_ = buildMoneyFactory.switchRateToLongPrecision(taxRateShow) ;
+                    Long moneyLong_ = buildMoneyFactory.switchRateToLongPercent(taxRateShow) ;
 
                     String moneyfield_ = moneyfield.substring(0, moneyfield.length() - 11) ;
 

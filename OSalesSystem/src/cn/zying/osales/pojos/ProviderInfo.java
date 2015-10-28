@@ -5,9 +5,6 @@ import javax.persistence.Entity ;
 import javax.persistence.EnumType ;
 import javax.persistence.Enumerated ;
 import javax.persistence.FetchType ;
-import javax.persistence.GeneratedValue ;
-import javax.persistence.GenerationType ;
-import javax.persistence.Id ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.Table ;
@@ -15,6 +12,7 @@ import javax.persistence.Table ;
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.PaymentMethod ;
 import cn.zying.osales.OSalesConfigProperties.ReturnType ;
+import cn.zying.osales.pojos.commons.CommBean ;
 
 
 
@@ -27,10 +25,7 @@ import cn.zying.osales.OSalesConfigProperties.ReturnType ;
 @Table(name = "base_provider_info")
 public class ProviderInfo  extends CommBean {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+
 	@Column(name = "name", length = 200)
 	@FieldDesc(name = "供应商")
 	private String name;
@@ -105,13 +100,7 @@ public class ProviderInfo  extends CommBean {
 	@FieldDesc(name = "备注")
 	private String text;
 
-    public Integer getId() {
-        return id ;
-    }
-
-    public void setId(Integer id) {
-        this.id = id ;
-    }
+   
 
     public String getName() {
         return name ;

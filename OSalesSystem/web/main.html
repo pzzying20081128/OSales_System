@@ -20,23 +20,51 @@
 
 
 <script type="text/javascript">
-
+	
 </script>
 
 
 <script type="text/javascript">
+	function retention_accuracy(intValue) {
+		return intValue.toFixed(2);
+	}
+	function switchBoxCount(orderCount_, productInfo) {
+		var xx = true;// + true ; - false;
+		var _orderCount_ = orderCount_;
+		if (orderCount_ < 0) {
+			xx = false;
+			_orderCount_ = -_orderCount_;
+		}
+		if (productInfo.boxCount == null || productInfo.boxCount == ""
+				|| orderCount_ == 0)
+			return null;
 
-function unlogin(){
-	window.location.href="./exit.do"
-}
+		x = Math.floor(_orderCount_ / productInfo.boxCount);
+		y = (_orderCount_ % productInfo.boxCount);
+		var result;
+		if (y == 0) {
+			result = x;
+		} else {
+			result = x + "." + y;
+		}
 
-	function init(userId,userName, loginUser, regGUest) {
+		if (xx == false)
+			result = "-" + result;
+		return result;
+
+	}
+
+	function unlogin() {
+		window.location.href = "./exit.do"
+	}
+
+	function init(userId, userName, loginUser, regGUest) {
 		Ext.QuickTips.init();
 		var isUnlogin = false;
-		IndexPanel(userId,userName, loginUser, regGUest,{
-			openModule:function(node,userId){
+		IndexPanel(userId, userName, loginUser, regGUest, {
+			openModule : function(node, userId) {
 				//alert("node : "+node+"   userId  "+userId);
-				createModule(node,userId);
+				createModule(node, userId);
 			}
 		});
 		document.oncontextmenu = function(e) {
@@ -46,13 +74,10 @@ function unlogin(){
 </script>
 
 <style type="text/css">
-
-
-  .upload-icon {
-       // width:100px
-         background: url('./ext3/fileupload/css/image_add.png') no-repeat 0 0 !important;
-        }
-      
+.upload-icon { //
+	width: 100px background:   url('./ext3/fileupload/css/image_add.png')
+		no-repeat 0 0 !important;
+}
 
 .x-grid-row-page-total {
 	background-color: #C9D8FC;
@@ -156,7 +181,7 @@ function unlogin(){
 .my-disabled {
 	color: black;
 	cursor: default;
-	background-color: background:   none repeat scroll 0% 0%
+	background-color: background:     none repeat scroll 0% 0%
 		rgb(237, 245, 252);
 }
 
@@ -190,7 +215,7 @@ function unlogin(){
 
 #img { //
 	z-index: -1; //
-	filter: alpha(opacity =     85);
+	filter: alpha(opacity =         85);
 	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
 	//
 	position: absolute;
@@ -206,7 +231,7 @@ function unlogin(){
 
 .imgTop { //
 	z-index: -1; //
-	filter: alpha(opacity =     85);
+	filter: alpha(opacity =         85);
 	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
 	//
 	position: absolute;
@@ -220,8 +245,6 @@ function unlogin(){
 	background-size: 100% 100%;
 }
 
-
-
 .ext-el-mask {
 	z-index: 20000;
 	position: absolute;
@@ -229,7 +252,7 @@ function unlogin(){
 	left: 0;
 	-moz-opacity: 0.5;
 	opacity: .30;
-	filter: alpha(opacity =   50);
+	filter: alpha(opacity =       50);
 	background-color: #fffffff;
 	width: 100%;
 	height: 100%;

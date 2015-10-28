@@ -15,6 +15,22 @@ import cn.zying.osales.service.SystemOptServiceException ;
 @Component("StockOrderSaveUpdateUnits")
 public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
+    public void updateSumMoney(Integer optStockOrderId) throws SystemOptServiceException {
+        StockOrder stockOrder = baseService.load(optStockOrderId, StockOrder.class) ;
+        String sql = "select  sum(stockOrderDetail.orderCount) ,sum(stockOrderDetail.taxMoney) ,sum(stockOrderDetail.noTaxMoney)      from    StockOrderDetail as  stockOrderDetail    where stockOrderDetail.stockOrderId = " + optStockOrderId ;
+
+        Object[] result = baseService.findSinglenessByHSQL(sql) ;
+
+        stockOrder.setOrderCount( result[0] ==null ? null : ((Long) result[0] ).intValue()) ;
+
+        stockOrder.setTaxSumMoney( result[1] ==null ? null : (Long) result[1]) ;
+
+        stockOrder.setNoTaxSumMoney( result[2] ==null ? null :(Long) result[2]) ;
+
+        baseService.update(stockOrder) ;
+
+    }
+
     public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
         switch (optType) {
@@ -33,6 +49,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
     private StockOrder init(StockOrder optStockOrder) {
         optStockOrder.setStatus(Status.初始化) ;
+       
         baseService.save(optStockOrder) ;
 
         return optStockOrder ;
