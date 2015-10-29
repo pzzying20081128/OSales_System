@@ -25,6 +25,7 @@ function stock_order_save_update_form_panel_windows(params, detailParams) {
 							json = result.result;
 							if (params.action == "save") {
 								params.grid.insertRow(json[params.pojo]);
+								params.grid.getSelectionModel().selectFirstRow();
 								window.close();
 								// showMsgYN({
 								// msg : "是否要同时增加订单明细",

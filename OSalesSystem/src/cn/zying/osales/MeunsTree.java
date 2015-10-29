@@ -36,7 +36,7 @@ public class MeunsTree {
 
     private String p2[] = { "stock_manage", "采购信息", "false", "font_weight", "0", "0", "[]" } ;
 
-    private String p2001[] = { "stock_order", "采购订单", "true", "", "stock_manage", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'}]" } ;
+    private String p2001[] = { "stock_order", "采购订单", "true", "", "stock_manage", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'} ]" } ;
 
     private String p2002[] = { "stock_store_reveive", "采购进货单", "true", "", "stock_manage", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'}]" } ;
 

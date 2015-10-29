@@ -39,6 +39,23 @@
 				</param>
 			</result>
 		</action>
+		
+		<action name="power" class="SalesUserPowerAction" method="listPowerByUser">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					isroot,
+					powerMap,
+					powerMap.\w+,
+					powerMap.\w+\[\d+\]\.powerName,
+					powerMap.\w+\[\d+\]\.powerCode,
+					powerMap.\w+\[\d+\]\.isUse
+
+				</param>
+			</result>
+		</action>
 	
 
 	</package>

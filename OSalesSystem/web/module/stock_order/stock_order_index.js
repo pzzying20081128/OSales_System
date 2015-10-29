@@ -1,5 +1,70 @@
 function create_stock_order_window(moduleId, moduleName) {
 
+	var addButton = new Ext.Toolbar.Button({
+		id : moduleId + '_add',
+		key : 'add',
+		xtype : "tbbutton",
+		text : "增加",
+		// keyBinding : createCreateKey(),
+		handler : function(bt) {
+			ERPAjaxRequest({
+				url : "./simple_StockOrder_initStockOrder.do",
+				// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+				success : function(result) {
+					order = result.result.result;
+					stock_order_create_windows(moduleId, moduleName, {
+						grid : mainGridModule,
+						order : order,
+						detailParams : detailParams
+					});
+				}
+			});
+		}
+	});
+
+	var editButton = new Ext.Toolbar.Button({
+		id : moduleId + '_edit',
+		xtype : "tbbutton",
+		text : "编辑",
+		key : 'edit',
+		disabled : true,
+		// keyBinding : createEditKey(),
+		handler : function(bt) {
+			stock_order_update_windows(moduleId, moduleName, {
+				grid : mainGridModule
+
+			});
+		}
+	});
+
+	var checkButton = new Ext.Toolbar.Button({
+		id : moduleId + '_check',
+		xtype : "tbbutton",
+		text : "审核",
+		key : 'check',
+		disabled : true,
+		// keyBinding : createSearchKey(),
+		handler : function() {
+			var searchWindex = stock_order_check_windows(moduleId, moduleName, {
+				grid : mainGridModule
+			});
+		}
+	});
+
+	deleteButton = new Ext.Toolbar.Button({
+		id : moduleId + '_delete',
+		xtype : "tbbutton",
+		text : "删除",
+		key : 'delete',
+		disabled : true,
+		// keyBinding : createDeleteKey(),
+		handler : function(bt) {
+			stock_order_delete_windows(moduleId, moduleName, {
+				grid : mainGridModule
+			});
+		}
+	});
+
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
@@ -10,50 +75,10 @@ function create_stock_order_window(moduleId, moduleName) {
 		column : stock_order_grid_column.column,
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
-			items : [{
-				id : moduleId + '_add',
-				xtype : "tbbutton",
-				text : "增加",
-				// keyBinding : createCreateKey(),
-				handler : function(bt) {
-					ERPAjaxRequest({
-						url : "./simple_StockOrder_initStockOrder.do",
-						// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-						success : function(result) {
-							order = result.result.result;
-							stock_order_create_windows(moduleId, moduleName, {
-								grid : mainGridModule,
-								order : order,
-								detailParams : detailParams
-							});
-						}
-					});
-				}
-			}, {
-				id : moduleId + '_edit',
-				xtype : "tbbutton",
-				text : "编辑",
-				// keyBinding : createEditKey(),
-				handler : function(bt) {
-					stock_order_update_windows(moduleId, moduleName, {
-						grid : mainGridModule
-
-					});
-				}
-			}, {
-				id : moduleId + '_delete',
-				xtype : "tbbutton",
-				text : "删除",
-				// keyBinding : createDeleteKey(),
-				handler : function(bt) {
-					stock_order_delete_windows(moduleId, moduleName, {
-						grid : mainGridModule
-
-					});
-				}
-			}, {
+			items : [addButton, editButton, deleteButton, {
 				id : moduleId + '_search',
 				xtype : "tbbutton",
+				key : "search",
 				text : "查询",
 				// keyBinding : createSearchKey(),
 				handler : function() {
@@ -62,31 +87,29 @@ function create_stock_order_window(moduleId, moduleName) {
 						searchParams : stock_order_search_params
 					});
 				}
-			}
-
-			,
-
-			{
-				id : moduleId + '_check',
-				xtype : "tbbutton",
-				text : "审核",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = stock_order_check_windows(moduleId, moduleName, {
-						grid : mainGridModule
-
-					});
-				}
-			}
-
-			]
-
+			}, checkButton]
 		},
 		init : {
 			// 行被选择
-			select : function(rowDataId, data, sm, rowIdx, r) {
-
-				stock_detail_grid.load({
+			select : function(rowDataId, data) {
+				status = data.status;
+				if (status == '已审核') {
+					mainGrid.openButton(false);
+					checkButton.setText("取消审核");
+					checkButton.enable();
+					stockdetailGrid.openAllButton(false);
+				} else {
+					checkButton.setText("审核");
+					mainGrid.openButton(true);
+					// ///////////////////////////////
+                    if(  mainGrid.getisAdmin() ==1 ||  mainGrid.searchPower("add").isUse ==1 ||  mainGrid.searchPower("edit").isUse ==1  || mainGrid.searchPower("delete").isUse ==1   ){
+                    	stockdetailGrid.openAllButton(true);
+                    }else{
+                    	stockdetailGrid.openAllButton(false);
+                    }
+				}
+                ////////////////////////////////////////////
+				stockdetailGrid.load({
 					params : {
 						'searchBean.stockOrderId' : rowDataId
 					}
@@ -102,14 +125,16 @@ function create_stock_order_window(moduleId, moduleName) {
 
 	var mainGrid = mainGridModule.getGrid();
 
-	var stock_detail_grid = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName, {
+	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName, {
 
 		orderGrid : mainGrid
 
 	});
 
+	stockdetailGrid = stockdetail.getGrid();
+
 	var detailParams = {
-		detailGrid : stock_detail_grid,
+		detailGrid : stockdetailGrid,
 		orderGrid : mainGrid,
 		moduleId : moduleId + "_stock_detail",
 		moduleName : moduleName + "明细"
@@ -146,7 +171,7 @@ function create_stock_order_window(moduleId, moduleName) {
 
 			// height : "atuo",
 			title : '库位',
-			items : stock_detail_grid
+			items : stockdetailGrid
 
 			// items : sales_order_store_out_panel_print
 		})
@@ -158,7 +183,7 @@ function create_stock_order_window(moduleId, moduleName) {
 		title : moduleName,
 		items : [layout],// 里面所包含的组件
 		// 用于权限
-		// grids:[mainGrid],
+		grids : [mainGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

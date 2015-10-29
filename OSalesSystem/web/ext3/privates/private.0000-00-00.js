@@ -13,7 +13,7 @@ Ext.apply(Ext.form.VTypes, {
 			return false;
 		return true
 	},
-	chineseText : "请输入中文",
+	chineseText : "请输入中文", 
 	age : function(val, field) {
 		try {
 			if (parseInt(val) >= 18 && parseInt(val) <= 100)
@@ -567,31 +567,64 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	savecol : false,
 	checkboxColumn : null,
 	rowdblclickKey : null,
-	powerList : null,
+	powerMap : null,
 	isAdmin : false,
 	setPowerList : function(powerList_) {
-		this.powerList = powerList_
+		var map = new Map;
+		if (powerList_ == null)
+			return;
+		for (var i = 0; i < powerList_.length; i++)
+			map.put(powerList_[i].powerName, powerList_[i]);
+		this.powerMap = map
 	},
 	setIsAdmin : function(isAdmin_) {
 		this.isAdmin = isAdmin_
 	},
-	getPowerList : function() {
+	getPowerMap : function() {
 		var grid = this.getGrid();
-		return grid.powerList
+		return grid.powerMap
 	},
 	getisAdmin : function() {
 		var grid = this.getGrid();
 		return grid.isAdmin
 	},
 	searchPower : function(key) {
-		var isAdmin_ = this.getisAdmin();
-		if (isAdmin_ == 1)
-			return 1;
-		var powerList_ = this.getPowerList();
-		for (var i = 0; i < powerList_.length; i++)
-			if (powerList_[i].powerName == key)
-				return powerList_[i];
-		return null
+		var _map_ = this.getPowerMap();
+		power = _map_.get(key);
+		return power
+	},
+	openAllButton : function(isOpen) {
+		var _map_ = this.getPowerMap();
+		var tbar = this.getTopToolbar();
+		var items = tbar.items.items;
+		for (var i = 0; i < items.length; i++) {
+			var opt = items[i];
+			if (isOpen == true)
+				opt.enable();
+			else
+				opt.disable()
+		}
+	},
+	openButton : function(isOpen) {
+		var grid = this.getGrid();
+		var isAdmin = grid.isAdmin;
+		if (isAdmin == 1)
+			this.openAllButton(true);
+		else {
+			var _map_ = this.getPowerMap();
+			var tbar = this.getTopToolbar();
+			var items = tbar.items.items;
+			for (var i = 0; i < items.length; i++) {
+				var opt = items[i];
+				var power = _map_.get(opt.key);
+				if (power == null)
+					alert(opt.text + "  is set error ! ");
+				else if (power.isUse == 1 && isOpen == true)
+					opt.enable();
+				else
+					opt.disable()
+			}
+		}
 	},
 	isHavePower : function(optName) {
 		if (this.powerList == null)
@@ -802,7 +835,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var moduleId = this.moduleId;
 		var grid = this.getGrid();
 		ERPAjaxRequest({
-			url : "./power.jhtml",
+			url : "./power.do",
 			params : {
 				moduleId : moduleId
 			},
@@ -810,7 +843,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 				var json = result.result;
 				var powerMap = json.powerMap;
 				var power = powerMap[moduleId];
-				var isAdmin_ = json.isAdmin;
+				var isAdmin_ = json.isroot;
 				grid.setIsAdmin(isAdmin_);
 				if (power == null || typeof power == "undefined")
 					grid.setPowerList(null);
@@ -849,49 +882,9 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		this.getSelectionModel().on("rowselect", function(sm, rowIdx, r) {
 			if (typeof prams == "undefined")
 				return;
-			if (typeof Ext.getCmp(moduleId + "_checked") == "undefined") {
-				if (typeof prams.select != "undefined" && typeof prams.select == "function")
-					prams.select(r.id, r.json, sm, rowIdx, r);
-				return
-			} else {
-				Ext.getCmp(moduleId + "_checked").setDisabled(false);
-				var checked = null;
-				if (typeof prams != "undefined") {
-					if (typeof prams.status == "function")
-						checked = prams.status(r.data);
-					if (checked == null)
-						showErrorMsg("错误", "状态取值错误[没设置 【status】！");
-					if (typeof checkName_ == "undefined" || checkName_ == null || checkName_ === "")
-						checkName_ = "审核";
-					if (typeof selModule == "undefined") {
-						if (checked == "checked" || checked == 1)
-							Ext.getCmp(moduleId + "_checked").setText("取消" + checkName_);
-						else
-							Ext.getCmp(moduleId + "_checked").setText(checkName_);
-						if (typeof prams.select == "function")
-							;
-					} else {
-						var selection_rows = thisGrid.getSelectionModel().getSelections();
-						var xx = null;
-						for (var index = 0; index < selection_rows.length; index++) {
-							checked = prams.status(selection_rows[index].data);
-							if (xx != null && xx != checked) {
-								xx = -1;
-								break
-							} else
-								xx = checked
-						}
-						if (xx == -1) {
-							showErrorMsg("错误", "所选择的单据出现二种以上状态!");
-							Ext.getCmp(moduleId + "_checked").setDisabled(true)
-						} else if (checked == "checked" || checked == 1)
-							Ext.getCmp(moduleId + "_checked").setText("取消" + checkName_);
-						else
-							Ext.getCmp(moduleId + "_checked").setText(checkName_)
-					}
-					prams.select(r.id, r.json, sm, rowIdx, r)
-				}
-			}
+			dataJson = typeof r.json == "undefined" ? r.data : r.json;
+			if (typeof prams.select != "undefined" && typeof prams.select == "function")
+				prams.select(r.id, dataJson, sm, rowIdx, r)
 		})
 	},
 	load : function(loadParams) {
@@ -2168,5 +2161,55 @@ function mainGridWindow(properties) {
 	}
 	this.load = function(params) {
 		grid.load(params)
+	}
+}
+var Map = function() {
+	this._entrys = new Array;
+	this.put = function(key, value) {
+		if (key == null || key == undefined)
+			return;
+		var index = this._getIndex(key);
+		if (index == -1) {
+			var entry = new Object;
+			entry.key = key;
+			entry.value = value;
+			this._entrys[this._entrys.length] = entry
+		} else
+			this._entrys[index].value = value
+	};
+	this.get = function(key) {
+		var index = this._getIndex(key);
+		return index != -1 ? this._entrys[index].value : null
+	};
+	this.remove = function(key) {
+		var index = this._getIndex(key);
+		if (index != -1)
+			this._entrys.splice(index, 1)
+	};
+	this.clear = function() {
+		this._entrys.length = 0
+	};
+	this.contains = function(key) {
+		var index = this._getIndex(key);
+		return index != -1 ? true : false
+	};
+	this.getCount = function() {
+		return this._entrys.length
+	};
+	this.getEntrys = function() {
+		return this._entrys
+	};
+	this._getIndex = function(key) {
+		if (key == null || key == undefined)
+			return -1;
+		var _length = this._entrys.length;
+		for (var i = 0; i < _length; i++) {
+			var entry = this._entrys[i];
+			if (entry == null || entry == undefined)
+				continue;
+			if (entry.key === key)
+				return i
+		}
+		return -1
 	}
 };

@@ -91,7 +91,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
         optStockOrder.setRecordMan(recordMan) ;
 
-        Integer stockManId = optStockOrder.getRecordManId() ;
+        Integer stockManId = optStockOrder.getStockManId();
         if (stockManId != null) {
             SysStaffUser stockMan = baseService.load(stockManId, SysStaffUser.class) ;
 

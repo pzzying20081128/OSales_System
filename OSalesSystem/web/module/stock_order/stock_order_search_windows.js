@@ -19,8 +19,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.OrderNumber',
-					name : 'stockorder.OrderNumber',
+					id : 'searchBean.OrderNumber',
+					name : 'searchBean.OrderNumber',
 					fieldLabel : ' 订单编号',
 					xtype : 'textfield',
 					style : AllowBlankStyle,
@@ -42,8 +42,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [createLocalCombo({
-					id : 'stockorder.stockType',
-					name : 'stockorder.stockType',
+					id : 'searchBean.stockType',
+					name : 'searchBean.stockType',
 					fieldLabel : ' 订单类型',
 					storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
 					defaultValue : null,
@@ -58,8 +58,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 			// width : 180
 			// },
 			// items : [{
-			// id : 'stockorder.orderDate',
-			// name : 'stockorder.orderDate',
+			// id : 'searchBean.orderDate',
+			// name : 'searchBean.orderDate',
 			// fieldLabel : ' 订单日期',
 			// xtype : 'datefield',
 			// style : NoAllowBlankStyle,
@@ -89,8 +89,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 455
 				},
 				items : [createERPcombo({
-					id : 'stockorder.providerInfoId',
-					name : 'stockorder.providerInfoId',
+					id : 'searchBean.providerInfoId',
+					name : 'searchBean.providerInfoId',
 					fieldLabel : ' 供应商',
 					url : "./ProviderInfo_combo.do?searchBean.status=有效",
 					allowBlank : true,
@@ -117,8 +117,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [createERPcombo({
-					id : 'stockorder.stockManId',
-					name : 'stockorder.stockManId',
+					id : 'searchBean.stockManId',
+					name : 'searchBean.stockManId',
 					fieldLabel : ' 采购员',
 					url : "./SysStaff_combo.do?searchBean.status=全部",
 					allowBlank : true,
@@ -139,8 +139,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.taxSumMoneyMoneyShow',
-					name : 'stockorder.taxSumMoneyMoneyShow',
+					id : 'searchBean.taxSumMoneyMoneyShow',
+					name : 'searchBean.taxSumMoneyMoneyShow',
 					fieldLabel : ' 含税总金额',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
@@ -160,8 +160,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.noTaxSumMoneyMoneyShow',
-					name : 'stockorder.noTaxSumMoneyMoneyShow',
+					id : 'searchBean.noTaxSumMoneyMoneyShow',
+					name : 'searchBean.noTaxSumMoneyMoneyShow',
 					fieldLabel : ' 没税总金额',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
@@ -182,8 +182,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 			// width : 180
 			// },
 			// items : [{
-			// id : 'stockorder.stockDate',
-			// name : 'stockorder.stockDate',
+			// id : 'searchBean.stockDate',
+			// name : 'searchBean.stockDate',
 			// fieldLabel : ' 采购日期',
 			// xtype : 'datefield',
 			// style : NoAllowBlankStyle,
@@ -211,8 +211,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.orderCount',
-					name : 'stockorder.orderCount',
+					id : 'searchBean.orderCount',
+					name : 'searchBean.orderCount',
 					fieldLabel : ' 订购数量',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
@@ -233,8 +233,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.stockManId1',
-					name : 'stockorder.stockManId1',
+					id : 'searchBean.stockManId1',
+					name : 'searchBean.stockManId1',
 					fieldLabel : ' 合同',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
@@ -260,8 +260,8 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 725
 				},
 				items : [{
-					id : 'stockorder.text',
-					name : 'stockorder.text',
+					id : 'searchBean.text',
+					name : 'searchBean.text',
 					fieldLabel : '  备注',
 					xtype : 'textfield',
 					style : AllowBlankStyle,
