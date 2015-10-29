@@ -21,11 +21,11 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
         Object[] result = baseService.findSinglenessByHSQL(sql) ;
 
-        stockOrder.setOrderCount( result[0] ==null ? null : ((Long) result[0] ).intValue()) ;
+        stockOrder.setOrderCount(result[0] == null ? null : ((Long) result[0]).intValue()) ;
 
-        stockOrder.setTaxSumMoney( result[1] ==null ? null : (Long) result[1]) ;
+        stockOrder.setTaxSumMoney(result[1] == null ? null : (Long) result[1]) ;
 
-        stockOrder.setNoTaxSumMoney( result[2] ==null ? null :(Long) result[2]) ;
+        stockOrder.setNoTaxSumMoney(result[2] == null ? null : (Long) result[2]) ;
 
         baseService.update(stockOrder) ;
 
@@ -49,7 +49,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
     private StockOrder init(StockOrder optStockOrder) {
         optStockOrder.setStatus(Status.初始化) ;
-       
+
         baseService.save(optStockOrder) ;
 
         return optStockOrder ;

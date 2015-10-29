@@ -1,18 +1,9 @@
- package  cn.zying.osales.web.aop;
+package cn.zying.osales.web.aop ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceProviderInfoService ;
+import cn.zying.osales.infaces.InfaceProviderInfoService ;
 
+public interface IAopProviderInfoService extends InfaceProviderInfoService {
 
-public interface IAopProviderInfoService  extends InfaceProviderInfoService   {
-    
-            public String name="IAopProviderInfoService";
-            
-                
-         
-            
-       
-            
+    public String name = "IAopProviderInfoService" ;
 
 }

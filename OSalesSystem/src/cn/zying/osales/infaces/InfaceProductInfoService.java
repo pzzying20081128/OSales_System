@@ -23,7 +23,7 @@ public interface InfaceProductInfoService {
     public ProductInfo remove(OptType optType, ProductInfo optProductInfo) throws SystemOptServiceException ;
 
     public ProductInfo get(Integer id) throws SystemOptServiceException ;
-    
-    public  ProductInfo  selectStockPrice(Integer  id ,Integer providerInfoId)throws SystemOptServiceException ;
+
+    public ProductInfo selectStockPrice(Integer id, Integer providerInfoId) throws SystemOptServiceException ;
 
 }

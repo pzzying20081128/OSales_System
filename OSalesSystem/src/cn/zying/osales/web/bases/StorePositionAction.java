@@ -73,8 +73,6 @@ public class StorePositionAction extends OSalesSystemABAction<StorePosition> {
         return SUCCESS ;
     }
 
-   
-
     public StorePositionSearchBean getSearchBean() {
         return searchBean ;
     }
@@ -91,5 +89,4 @@ public class StorePositionAction extends OSalesSystemABAction<StorePosition> {
         this.storeposition = storeposition ;
     }
 
-  
 }

@@ -17,8 +17,6 @@ import cn.zying.osales.pojos.commons.CommBean ;
 @Table(name = "base_store_info")
 public class StoreInfo extends CommBean {
 
-   
-
     @Column(name = "name", length = 20)
     @FieldDesc(name = "仓库名称")
     private String name ;
@@ -41,8 +39,6 @@ public class StoreInfo extends CommBean {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "storeInfo")
     private List<StorePosition> storePositions ;
-
-   
 
     public String getName() {
         return name ;

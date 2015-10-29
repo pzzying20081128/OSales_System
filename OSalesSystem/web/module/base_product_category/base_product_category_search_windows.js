@@ -7,100 +7,100 @@ function base_product_category_search_windows(moduleId, moduleName, params) {
 		// autoHeight : false,
 		labelWidth : 60,
 		items : [{// 第一排
-		layout : 'column',
-		baseCls : 'x-plain',
-		items : [{
-
-			columnWidth : .5,
-			layout : 'form',
-			defaultType : 'textfield',
+			layout : 'column',
 			baseCls : 'x-plain',
-			defaults : {
-				width : 200
-			},
 			items : [{
-				id : 'searchBean.name',
-				name : 'searchBean.name',
-				fieldLabel : ' 类别',
-				xtype : 'textfield',
-				style : AllowBlankStyle,
-				blankText : '不能为空！',
-				allowBlank : true,
-				listeners : {
-					'specialkey' : function(field, e) {
-					}
-				}
-			}]
 
-		}, // 1-1 end
-		{
-			columnWidth : .5,
-			layout : 'form',
-			defaultType : 'textfield',
-			baseCls : 'x-plain',
-			defaults : {
-				width : 200
-			},
-			items : [createERPcombo({
-				id : 'productCategory.parentId',
-				name : 'productCategory.parentId',
-				fieldLabel : ' 父类类别',
-				url : "./ProductCategory_combo.do",
-				params : {
-					"searchBean.status" : "全部"
+				columnWidth : .5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
 				},
-				allowBlank : true,
-				forceSelection : false
-			})]
-		}]
-	}, {// 第二排
-		layout : 'column',
-		baseCls : 'x-plain',
-		items : [{
-			columnWidth : 1,
-			layout : 'form',
-			defaultType : 'textfield',
-			baseCls : 'x-plain',
-			defaults : {
-				width : 495
-			},
-			items : [{
-				id : 'searchBean.text',
-				name : 'searchBean.text',
-				fieldLabel : ' 备注',
-				xtype : 'textfield',
-				style : AllowBlankStyle,
-				blankText : '不能为空！',
-				allowBlank : true,
-				listeners : {
-					'specialkey' : function(field, e) {
+				items : [{
+					id : 'searchBean.name',
+					name : 'searchBean.name',
+					fieldLabel : ' 类别',
+					xtype : 'textfield',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
 					}
-				}
+				}]
+
+			}, // 1-1 end
+			{
+				columnWidth : .5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
+				},
+				items : [createERPcombo({
+					id : 'productCategory.parentId',
+					name : 'productCategory.parentId',
+					fieldLabel : ' 父类类别',
+					url : "./ProductCategory_combo.do",
+					params : {
+						"searchBean.status" : "全部"
+					},
+					allowBlank : true,
+					forceSelection : false
+				})]
 			}]
-		}]
-	}, {// 第二排
-		layout : 'column',
-		baseCls : 'x-plain',
-		items : [{
-
-			columnWidth : .5,
-			layout : 'form',
-			defaultType : 'textfield',
+		}, {// 第二排
+			layout : 'column',
 			baseCls : 'x-plain',
-			defaults : {
-				width : 200
-			},
-			items : [createLocalCombo({
-				id : 'searchBean.status',
-				name : 'searchBean.status',
-				fieldLabel : ' 状态',
-				storeData : [['有效', "有效"], ['删除', '删除'], ["全部", "全部"]],
-				defaultValue : null,
-				allowBlank : true
-			})]
+			items : [{
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 495
+				},
+				items : [{
+					id : 'searchBean.text',
+					name : 'searchBean.text',
+					fieldLabel : ' 备注',
+					xtype : 'textfield',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
 
-		}]
-	}],
+				columnWidth : .5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
+				},
+				items : [createLocalCombo({
+					id : 'searchBean.status',
+					name : 'searchBean.status',
+					fieldLabel : ' 状态',
+					storeData : [['有效', "有效"], ['删除', '删除'], ["全部", "全部"]],
+					defaultValue : null,
+					allowBlank : true
+				})]
+
+			}]
+		}],
 		buttons : [{
 			text : '提交',
 			listeners : {
@@ -129,7 +129,7 @@ function base_product_category_search_windows(moduleId, moduleName, params) {
 
 						});
 
-						//window.close();
+						// window.close();
 
 					} else {
 						showErrorMsg("错误", "请检查查询数据的正确性");

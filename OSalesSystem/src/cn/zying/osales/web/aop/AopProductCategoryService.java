@@ -1,7 +1,5 @@
 package cn.zying.osales.web.aop ;
 
-
-
 import java.util.List ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
@@ -25,7 +23,7 @@ public class AopProductCategoryService implements IAopProductCategoryService {
 
     public ProductCategory saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
 
-       return  iProductCategoryService.saveUpdate(optType, optProductCategory) ;
+        return iProductCategoryService.saveUpdate(optType, optProductCategory) ;
 
     }
 
@@ -43,7 +41,7 @@ public class AopProductCategoryService implements IAopProductCategoryService {
 
     public ProductCategory remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
 
-       return   iProductCategoryService.remove(optType, optProductCategory) ;
+        return iProductCategoryService.remove(optType, optProductCategory) ;
 
     }
 

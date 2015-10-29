@@ -2,7 +2,7 @@
  * 主要用户设置查询的一些参数
  */
 var base_product_brand_search_params = {
-	
+
 	verification : function() {
 		// if (Ext.getCmp('staffSearchBean.selectName').getValue() == true &&
 		// ( Ext.getCmp('staffSearchBean.name').getValue() == null
@@ -15,9 +15,10 @@ var base_product_brand_search_params = {
 	},
 	params : function() {
 		var params = {
-			optType : "search",
-//			'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
-//			'searchBean.status' : Ext.getCmp('searchBean.status').getValue()
+			optType : "search"
+			,
+			// 'searchBean.name' : Ext.getCmp('searchBean.name').getValue(),
+			// 'searchBean.status' : Ext.getCmp('searchBean.status').getValue()
 		}
 		return params;
 	}

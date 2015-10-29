@@ -1,6 +1,4 @@
 function create_base_store_info_window(moduleId, moduleName) {
-	
-
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
@@ -20,7 +18,7 @@ function create_base_store_info_window(moduleId, moduleName) {
 				handler : function(bt) {
 					base_store_info_create_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						positonParams:positonParams
+						positonParams : positonParams
 					});
 				}
 			}, {
@@ -62,12 +60,12 @@ function create_base_store_info_window(moduleId, moduleName) {
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-                store_position_grid.load({
-                  params:{
-                  	'searchBean.storeInfoId':rowDataId,
-                  	"searchBean.status":'有效'
-                  }
-                });
+				store_position_grid.load({
+					params : {
+						'searchBean.storeInfoId' : rowDataId,
+						"searchBean.status" : '有效'
+					}
+				});
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -79,15 +77,15 @@ function create_base_store_info_window(moduleId, moduleName) {
 	var mainGrid = mainGridModule.getGrid();
 
 	var store_position_grid = new create_base_store_position_window(moduleId + "_store_position", moduleName, {
-		
+
 		storeGrid : mainGrid
-	
+
 	});
-	
-		var positonParams={
-		positonGrid:store_position_grid,
-		moduleId:moduleId + "_store_position",
-		moduleName:moduleName
+
+	var positonParams = {
+		positonGrid : store_position_grid,
+		moduleId : moduleId + "_store_position",
+		moduleName : moduleName
 	}
 
 	var layout = new Ext.Panel({
@@ -133,9 +131,9 @@ function create_base_store_info_window(moduleId, moduleName) {
 	});
 	window.showWin();
 	mainGrid.load({
-	   params:{
-	   	'searchBean.status':'有效'
-	   }
+		params : {
+			'searchBean.status' : '有效'
+		}
 	});
 
 	function base_store_info_delete_windows(moduleId, moduleName, params) {

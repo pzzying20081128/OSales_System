@@ -1,9 +1,9 @@
 function stock_order_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
-	var order =  params.order;
-	
+
+	var order = params.order;
+
 	var detailParams = params.detailParams;
 
 	var stock_order_params = {
@@ -16,7 +16,8 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 		url : './simple_StockOrder_save.do',
 		params : {
 			optType : "save",
-			'stockorder.id':order.id,
+			'stockorder.id' : order.id
+			,
 		},
 		// 字段
 		field : [{// 第一排
@@ -39,7 +40,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
-					value:order.orderNumber,
+					value : order.orderNumber,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -292,6 +293,6 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 
 	}
 
-	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params,detailParams);
+	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params, detailParams);
 
 }

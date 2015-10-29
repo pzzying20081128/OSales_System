@@ -45,7 +45,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     private SystemUserRemoveUnits iSystemUserRemoveUnits ;
 
     @Override
-    public void saveUpdate(OptType optType, SysStaffUser optSystemUser , Integer  optUserId) throws SystemOptServiceException {
+    public void saveUpdate(OptType optType, SysStaffUser optSystemUser, Integer optUserId) throws SystemOptServiceException {
         iSystemUserSaveUpdateUnits.saveUpdate(optType, optSystemUser) ;
     }
 
@@ -55,7 +55,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public void remove(OptType optType, SysStaffUser optSystemUser ,Integer  optUserId) throws SystemOptServiceException {
+    public void remove(OptType optType, SysStaffUser optSystemUser, Integer optUserId) throws SystemOptServiceException {
         iSystemUserRemoveUnits.remove(optType, optSystemUser) ;
     }
 

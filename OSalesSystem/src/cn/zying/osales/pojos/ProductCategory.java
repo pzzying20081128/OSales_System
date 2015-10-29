@@ -22,8 +22,7 @@ import cn.zying.osales.pojos.commons.CommBean ;
 public class ProductCategory extends CommBean {
     private static final long serialVersionUID = -2184091312240111071L ;
 
-   
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent", nullable = true)
     @FieldDesc(name = "父类类别", isShow = true, mapping = "parent.name", inputShow = false)
     private ProductCategory parent ;
@@ -50,7 +49,6 @@ public class ProductCategory extends CommBean {
     @Column(name = "is_child")
     @FieldDesc(name = "是否有子类别", isShow = true, desc = "0:无;1:有")
     private Integer isChild ;
-
 
     public ProductCategory getParent() {
         return parent ;

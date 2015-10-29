@@ -101,7 +101,7 @@ public class ProductInfoSaveUpdateUnits extends ABCommonsService {
             "salesNoTaxPrice", "salesTaxPrice", "shelfLife", "shortName", "stockTaxRate", "storeInfo", "storePosition", "text"
 
             ) ;
-            baseService.update(oldProductInfo);
+            baseService.update(oldProductInfo) ;
         } catch (Exception e) {
             throw new SystemOptServiceException(e) ;
         }

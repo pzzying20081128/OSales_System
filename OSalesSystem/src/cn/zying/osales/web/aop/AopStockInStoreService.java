@@ -10,8 +10,10 @@ import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.StockInStore ;
+import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockInStoreService ;
+import cn.zying.osales.service.stocks.IStockOrderService ;
 import cn.zying.osales.units.search.bean.StockInStoreSearchBean ;
 
 @Component(IAopStockInStoreService.name)
@@ -20,6 +22,10 @@ public class AopStockInStoreService implements IAopStockInStoreService {
     @Autowired
     @Qualifier(IStockInStoreService.name)
     private IStockInStoreService iStockInStoreService ;
+
+    @Autowired
+    @Qualifier(IStockOrderService.name)
+    private IStockOrderService orderService ;
 
     public StockInStore saveUpdate(OptType optType, StockInStore optStockInStore) throws SystemOptServiceException {
 
@@ -47,6 +53,20 @@ public class AopStockInStoreService implements IAopStockInStoreService {
 
     public StockInStore get(Integer id) throws SystemOptServiceException {
         return iStockInStoreService.get(id) ;
+
+    }
+
+    @Override
+    public StockInStore searchStockInStoreDetails(Integer id) throws SystemOptServiceException {
+        StockInStore stockInStore = iStockInStoreService.get(id) ;
+        StockOrder stockOrder = orderService.get(id) ;
+        stockInStore.setStockOrder(stockOrder) ;
+        return stockInStore ;
+    }
+
+    @Override
+    public void check(Integer id, Integer optUserId) throws SystemOptServiceException {
+        iStockInStoreService.check(id, optUserId) ;
 
     }
 

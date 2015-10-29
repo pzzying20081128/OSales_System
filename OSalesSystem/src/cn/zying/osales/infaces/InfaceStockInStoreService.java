@@ -1,4 +1,4 @@
-package cn.zying.osales.infaces;
+package cn.zying.osales.infaces ;
 
 import java.util.List ;
 
@@ -10,24 +10,20 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StockInStoreSearchBean ;
 
 public interface InfaceStockInStoreService {
-    
-    
-       /**
-             *  增加或更新
-             */
-            public StockInStore   saveUpdate(OptType  optType ,   StockInStore   optStockInStore )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<StockInStore > search(OptType  optType ,    
-				           StockInStoreSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<StockInStore > searchList(OptType  optType ,    
-				           StockInStoreSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  StockInStore    remove(OptType  optType ,  StockInStore   optStockInStore)throws SystemOptServiceException;
-            
-            
-           public  StockInStore get(Integer id)throws SystemOptServiceException;
 
+    /**
+          *  增加或更新
+          */
+    public StockInStore saveUpdate(OptType optType, StockInStore optStockInStore) throws SystemOptServiceException ;
+
+    public SelectPage<StockInStore> search(OptType optType, StockInStoreSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public List<StockInStore> searchList(OptType optType, StockInStoreSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public StockInStore remove(OptType optType, StockInStore optStockInStore) throws SystemOptServiceException ;
+
+    public StockInStore get(Integer id) throws SystemOptServiceException ;
+
+    public void check(Integer id, Integer optUserId) throws SystemOptServiceException ;
 
 }

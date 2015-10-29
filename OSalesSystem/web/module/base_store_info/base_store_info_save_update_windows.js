@@ -1,4 +1,4 @@
-function base_store_info_save_update_form_panel_windows(params,positonParams) {
+function base_store_info_save_update_form_panel_windows(params, positonParams) {
 
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
@@ -19,21 +19,21 @@ function base_store_info_save_update_form_panel_windows(params,positonParams) {
 						params : params.params,
 						success : function(result) {
 							json = result.result;
-						
+
 							if (params.action == "save") {
-	                           params.grid.insertRow(json[params.pojo]);
+								params.grid.insertRow(json[params.pojo]);
 								showMsgYN({
 									msg : "是否要同时增加库位",
 									yes : function(YN) {
-										   
+
 										window.close();
 										base_store_position_create_windows(positonParams.moduleId, positonParams.moduleName, {
 											grid : positonParams.positonGrid,
-											storeId:json[params.pojo].id
+											storeId : json[params.pojo].id
 										});
 									},
 									no : function() {
-									
+
 										// form_panel.reset();
 										window.close();
 									}

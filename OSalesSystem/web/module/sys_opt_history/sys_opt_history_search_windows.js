@@ -163,7 +163,8 @@ function sys_opt_history_search_windows(moduleId, moduleName, params) {
 			listeners : {
 				'click' : function() {
 
-					if (!search_params.verification())return;
+					if (!search_params.verification())
+						return;
 					grid.removeAll();
 					from = form_panel.getForm();
 					if (from.isValid()) {

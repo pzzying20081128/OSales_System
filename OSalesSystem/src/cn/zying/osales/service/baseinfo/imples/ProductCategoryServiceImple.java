@@ -36,10 +36,10 @@ public class ProductCategoryServiceImple extends ABCommonsService implements IPr
     private ProductCategoryRemoveUnits iProductCategoryRemoveUnits ;
 
     @Override
-    public ProductCategory  saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+    public ProductCategory saveUpdate(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
         ProductCategory productCategory = iProductCategorySaveUpdateUnits.saveUpdate(optType, optProductCategory) ;
         prpertiesAutoWriteObjectService.cacheObject(productCategory.getId().toString(), productCategory) ;
-       return  productCategory;
+        return productCategory ;
     }
 
     @Override
@@ -55,8 +55,8 @@ public class ProductCategoryServiceImple extends ABCommonsService implements IPr
     }
 
     @Override
-    public ProductCategory  remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
-         return   iProductCategoryRemoveUnits.remove(optType, optProductCategory) ;
+    public ProductCategory remove(OptType optType, ProductCategory optProductCategory) throws SystemOptServiceException {
+        return iProductCategoryRemoveUnits.remove(optType, optProductCategory) ;
     }
 
     @Override

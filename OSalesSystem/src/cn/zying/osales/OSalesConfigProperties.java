@@ -1,16 +1,18 @@
 package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
-    
-    
+
     //采购订单代号
-    public static  String CODE_STOCK_ORDER="CGSO";
-   //采购入库单
-    public static  String CODE_STOCK_IN_STORE="CGRK";
-    
-    
+    public static String CODE_STOCK_ORDER = "CGSO" ;
+
+    //采购入库单
+    public static String CODE_STOCK_IN_STORE = "CGRK" ;
+
+    //采购进货单
+    public static String CODE_STOCK_STORE_RECEIVE = "CGJH" ;
+
     public enum StockType {
-        采购订单,直营采购订单
+        采购订单, 直营采购订单
     }
 
     public enum ProductInfoType {
@@ -61,11 +63,11 @@ public interface OSalesConfigProperties {
     String query_sysStaffUser_searchUserPower_userId_moduleId = "sysStaffUser_searchUserPower_userId_moduleId" ;
 
     public enum OptType {
-        save, update, check, delete, list, search, searchLike,init
+        save, update, check, delete, list, search, searchLike, init
     }
 
     public enum Status {
-        无效, 删除, 有效, 全部,初始化,已审核
+        无效, 删除, 有效, 全部, 初始化, 已审核
     }
 
 }

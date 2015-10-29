@@ -9,6 +9,8 @@ import cn.zying.osales.pojos.StockInStore ;
 import cn.zying.osales.pojos.StockInStoreDetail ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.StockOrderDetail ;
+import cn.zying.osales.pojos.StockStoreReceive ;
+import cn.zying.osales.pojos.StockStoreReceiveDetail ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 
@@ -23,7 +25,7 @@ public class TestBuildServiceFile {
         
         String module= "stocks";
         
-        Class<?> clazz = StockInStoreDetail.class;
+        Class<?> clazz = StockStoreReceiveDetail.class;
         
         String className=clazz.getSimpleName();
 

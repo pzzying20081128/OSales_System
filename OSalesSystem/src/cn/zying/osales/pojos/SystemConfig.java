@@ -25,15 +25,15 @@ public class SystemConfig implements java.io.Serializable {
     @Column(name = "id")
     private Integer id ;
 
-    @Column(name = "title" , length = 20)
+    @Column(name = "title", length = 20)
     @FieldDesc(name = "配置项", isShow = true)
     private String title ;
 
-    @Column(name = "config_key", unique = true , length = 10)
+    @Column(name = "config_key", unique = true, length = 10)
     @FieldDesc(name = "配置KEY", isShow = false)
     private String configKey ;
 
-    @Column(name = "config_value" , length = 100)
+    @Column(name = "config_value", length = 100)
     @FieldDesc(name = "配置说明", isShow = true)
     private String configValue ;
 

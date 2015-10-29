@@ -3,8 +3,8 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 	detailGrid = params.grid;
 
 	stockOrder = params.stockOrder;
-	
-	orderGrid  =  params.orderGrid;
+
+	orderGrid = params.orderGrid;
 
 	function computeCountMoney() {
 		if (productInfo.getValue() == null || productInfo.getValue() == "请输入查询值")
@@ -97,7 +97,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 					taxPriceMoneyShow.setValue(productInfo_e.stockPriceMoneyShow);
 					noTaxPriceMoneyShow.setValue(productInfo_e.stockNoTaxPriceMoneyShow);
 					taxRateTaxRateShow.setValue(productInfo_e.stockTaxRateTaxRateShow);
-					
+
 					if (productInfo_e.isBox) {
 						orderCount.setReadOnly(true);
 						orderCount.getEl().setStyle("background", AllowBlankColor);
@@ -503,6 +503,6 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 	}
 
 	var stock_order_detail_create_window = new stock_order_detail_save_update_form_panel_windows(stock_order_detail_params, {
-	orderGrid:orderGrid
+		orderGrid : orderGrid
 	});
 }

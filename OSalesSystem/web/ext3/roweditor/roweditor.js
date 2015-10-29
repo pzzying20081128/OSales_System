@@ -211,7 +211,7 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
 		}
 
 		var changes = {}, r = this.record, hasChange = false, cm = this.grid.colModel, fields = this.items.items;
-		//alert(this.update);
+		// alert(this.update);
 		for (var i = 0, len = cm.getColumnCount(); i < len; i++) {
 			if (!cm.isHidden(i)) {
 				var dindex = cm.getDataIndex(i);
@@ -348,11 +348,11 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
 			elements : 'body',
 			layout : 'table',
 			width : ( this.minButtonWidth * 2 ) + ( this.frameWidth * 2 ) + ( this.buttonPad * 4 ), // width
-																									// must
-																									// be
-																									// specified
-																									// for
-																									// IE
+			// must
+			// be
+			// specified
+			// for
+			// IE
 			items : [{
 				ref : 'saveBtn',
 				itemId : 'saveBtn',
@@ -412,7 +412,7 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
 		//
 		var value;
 		if (field == "" && column.id != null && column.id == "numberer") {
-			value = rowIndex+1;
+			value = rowIndex + 1;
 		} else if (field == 'isSelect') {
 			value = null
 		} else

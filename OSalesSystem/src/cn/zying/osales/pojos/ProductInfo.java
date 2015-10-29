@@ -26,7 +26,6 @@ import cn.zying.osales.pojos.commons.CommBean ;
 @Table(name = "base_product_info")
 public class ProductInfo extends CommBean implements java.io.Serializable {
 
-  
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_category_id")
     @FieldDesc(name = "类别", isShow = true, mapping = "productCategory.name", inputShow = false)
@@ -108,7 +107,7 @@ public class ProductInfo extends CommBean implements java.io.Serializable {
 
     @Transient
     private String stockPriceMoneyHide ;
-    
+
     //查询的末含税采购价 
     @Transient
     private Long stockNoTaxPrice ;
@@ -118,8 +117,6 @@ public class ProductInfo extends CommBean implements java.io.Serializable {
 
     @Transient
     private String stockNoTaxPriceMoneyHide ;
-    
-    
 
     // 销售价
     @Column(name = "sales_price")
@@ -311,8 +308,6 @@ public class ProductInfo extends CommBean implements java.io.Serializable {
         baseUnitBoxUnit = baseUnitBoxUnit + (ToolsUnits.isNOtNulll(boxUnit) ? "/" + boxUnit : "") ;
         return baseUnitBoxUnit ;
     }
-
-
 
     public ProductCategory getProductCategory() {
         return productCategory ;

@@ -3,7 +3,6 @@ function base_provider_info_update_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 
 	var selection_rows = grid.getSelectionModel().getSelections();
-	
 
 	if (selection_rows == null) {
 		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
@@ -24,7 +23,7 @@ function base_provider_info_update_windows(moduleId, moduleName, params) {
 		allowBlank : true,
 		forceSelection : false,
 		width : 160,
-		autoLoad:true,
+		autoLoad : true,
 		params : {
 			'searchBean.status' : "有效",
 			'searchBean.id' : selection_rows[0].data.stockManId
@@ -513,16 +512,16 @@ function base_provider_info_update_windows(moduleId, moduleName, params) {
 	base_provider_info_create_window.load({
 		url : './simple_ProviderInfo_get.do?uuid=' + selectId,
 		success : function(result) {
-//			json = result.result.result;
-//			stockMan.load({
-//				params : {
-//					'searchBean.status' : "有效",
-//					'searchBean.id' : json.stockManId
-//				},
-//				success : function() {
-//					stockMan.setValue(json.stockManId);
-//				}
-//			});
+			// json = result.result.result;
+			// stockMan.load({
+			// params : {
+			// 'searchBean.status' : "有效",
+			// 'searchBean.id' : json.stockManId
+			// },
+			// success : function() {
+			// stockMan.setValue(json.stockManId);
+			// }
+			// });
 		}
 	});
 

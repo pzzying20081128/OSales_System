@@ -3,7 +3,7 @@ function sys_opt_history_save_update_form_panel_windows(params) {
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
 		frame : true,
-//		bodyStyle : 'padding:5px 5px 0',
+		// bodyStyle : 'padding:5px 5px 0',
 		height : 400,
 		autoHeight : false,
 		items : params.field,

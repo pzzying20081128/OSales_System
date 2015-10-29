@@ -12,10 +12,10 @@ public class SelectProductStockPriceUnit extends ABCommonsService {
     public ProductInfo selectStockPrice(Integer id, Integer providerInfoId) throws SystemOptServiceException {
 
         ProductInfo productInfo = baseService.get(id, ProductInfo.class) ;
-        
-        productInfo.setStockPrice(productInfo.getMaxStockPrice());
-        productInfo.setStockTaxRate(productInfo.getStockTaxRate());
-        productInfo.setStockNoTaxPrice(23456789L);
+
+        productInfo.setStockPrice(productInfo.getMaxStockPrice()) ;
+        productInfo.setStockTaxRate(productInfo.getStockTaxRate()) ;
+        productInfo.setStockNoTaxPrice(23456789L) ;
 
         return productInfo ;
     }

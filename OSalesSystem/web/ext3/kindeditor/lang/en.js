@@ -1,11 +1,11 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 
 KindEditor.lang({
 	source : 'Source',
@@ -215,13 +215,17 @@ KindEditor.lang({
 		'Trebuchet MS' : 'Trebuchet MS',
 		'Verdana' : 'Verdana'
 	},
-	'lineheight.lineHeight' : [
-		{'1' : 'Line height 1'},
-		{'1.5' : 'Line height 1.5'},
-		{'2' : 'Line height 2'},
-		{'2.5' : 'Line height 2.5'},
-		{'3' : 'Line height 3'}
-	],
+	'lineheight.lineHeight' : [{
+		'1' : 'Line height 1'
+	}, {
+		'1.5' : 'Line height 1.5'
+	}, {
+		'2' : 'Line height 2'
+	}, {
+		'2.5' : 'Line height 2.5'
+	}, {
+		'3' : 'Line height 3'
+	}],
 	'template.selectTemplate' : 'Template',
 	'template.replaceContent' : 'Replace current content',
 	'template.fileList' : {

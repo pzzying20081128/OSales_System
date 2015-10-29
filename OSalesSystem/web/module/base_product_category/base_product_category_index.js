@@ -29,7 +29,8 @@ function create_base_product_category_window(moduleId, moduleName) {
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					base_product_category_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
+						grid : mainGridModule
+						,
 					});
 				}
 			}, {

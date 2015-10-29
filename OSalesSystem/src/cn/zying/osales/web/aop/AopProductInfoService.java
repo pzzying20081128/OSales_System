@@ -56,7 +56,7 @@ public class AopProductInfoService implements IAopProductInfoService {
     @Override
     public ProductInfo selectStockPrice(Integer id, Integer providerInfoId) throws SystemOptServiceException {
 
-        return iProductInfoService.selectStockPrice(id,providerInfoId) ;
+        return iProductInfoService.selectStockPrice(id, providerInfoId) ;
     }
 
 }

@@ -314,11 +314,11 @@ function stock_order_detail_update_windows(moduleId, moduleName, params) {
 		// 结果路径
 		pojo : "result",
 		// url
-			url : './simple_StockOrderDetail_update.do',
-			
+		url : './simple_StockOrderDetail_update.do',
+
 		params : {
 			optType : "update",
-				'stockorderdetail.id' : selectId
+			'stockorderdetail.id' : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',

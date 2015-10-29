@@ -42,7 +42,7 @@ public class SysOptHistorySearchUnits extends ABCommonsService {
 
     private List<SysOptHistory> list(String sqlWhere, Map<String, Object> value, int... startLimit) throws SystemOptServiceException {
         String sql_ = sql + sqlWhere + "   order by  sysOptHistory.optTime  desc  " ;
-        Loggerfactory.print(sql_);
+        Loggerfactory.print(sql_) ;
         List<SysOptHistory> result = baseService.findByHSQL(sql_, value, startLimit) ;
         return result ;
     }
@@ -64,15 +64,14 @@ public class SysOptHistorySearchUnits extends ABCommonsService {
         if (ToolsUnits.isNOtNulll(searchBean.getModule())) {
             sqlWhere = sqlWhere + "  and    sysOptHistory.module ='" + searchBean.getModule() + "' " ;
         }
-        if (searchBean.getStartTime()!= null) {
-            sqlWhere = sqlWhere + "  and    sysOptHistory.optTime >= '"+DateToolsUilts.dateToString(searchBean.getStartTime(),"yyyy-MM-dd")+" 00:00:00'" ;
-//            value.put("optTime", searchBean.getOptTime()) ;
+        if (searchBean.getStartTime() != null) {
+            sqlWhere = sqlWhere + "  and    sysOptHistory.optTime >= '" + DateToolsUilts.dateToString(searchBean.getStartTime(), "yyyy-MM-dd") + " 00:00:00'" ;
+            //            value.put("optTime", searchBean.getOptTime()) ;
         }
-        if (searchBean.getEndTime()!= null) {
-            sqlWhere = sqlWhere + "  and    sysOptHistory.optTime <= '"+DateToolsUilts.dateToString(searchBean.getEndTime(),"yyyy-MM-dd")+" 23:59:59'" ;
-//            value.put("optTime", searchBean.getOptTime()) ;
+        if (searchBean.getEndTime() != null) {
+            sqlWhere = sqlWhere + "  and    sysOptHistory.optTime <= '" + DateToolsUilts.dateToString(searchBean.getEndTime(), "yyyy-MM-dd") + " 23:59:59'" ;
+            //            value.put("optTime", searchBean.getOptTime()) ;
         }
-
 
         if (searchBean.getSysStaffUserId() != null) {
             sqlWhere = sqlWhere + "  and    sysOptHistory.sysStaffUserId = " + searchBean.getSysStaffUserId() ;

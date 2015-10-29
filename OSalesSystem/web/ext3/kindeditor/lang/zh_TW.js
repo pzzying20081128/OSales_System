@@ -1,11 +1,11 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 
 KindEditor.lang({
 	source : '原始碼',
@@ -218,13 +218,17 @@ KindEditor.lang({
 		'Tahoma' : 'Tahoma',
 		'Verdana' : 'Verdana'
 	},
-	'lineheight.lineHeight' : [
-		{'1' : '单倍行距'},
-		{'1.5' : '1.5倍行距'},
-		{'2' : '2倍行距'},
-		{'2.5' : '2.5倍行距'},
-		{'3' : '3倍行距'}
-	],
+	'lineheight.lineHeight' : [{
+		'1' : '单倍行距'
+	}, {
+		'1.5' : '1.5倍行距'
+	}, {
+		'2' : '2倍行距'
+	}, {
+		'2.5' : '2.5倍行距'
+	}, {
+		'3' : '3倍行距'
+	}],
 	'template.selectTemplate' : '可選樣板',
 	'template.replaceContent' : '取代當前內容',
 	'template.fileList' : {

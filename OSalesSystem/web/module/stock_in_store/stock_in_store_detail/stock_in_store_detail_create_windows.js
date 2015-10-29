@@ -14,41 +14,36 @@ function stock_in_store_detail_create_windows(moduleId, moduleName, params) {
 			optType : "save"
 		},
 		// 字段
-		field : [
-		{// 第一排
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{
-			}, // 1-1 end
+			items : [{}, // 1-1 end
 			{
-			
+
 			}// 1-2end
 			, {
-			
+
 			}// 1-3 end
 			, {
-			
+
 			}// 1-3 end
 			]
-		},
-			{// 第二排
+		}, {// 第二排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{
-			}, // 1-1 end
+			items : [{}, // 1-1 end
 			{
-			
+
 			}// 1-2end
 			, {
-			
+
 			}// 1-3 end
-			,{
-			
+			, {
+
 			}// 1-3 end
 			]
-		}
-		]
-		
+		}]
+
 	}
 
 	var stock_in_store_detail_create_window = new stock_in_store_detail_save_update_form_panel_windows(stock_in_store_detail_params);

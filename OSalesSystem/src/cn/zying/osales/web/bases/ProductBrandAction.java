@@ -23,12 +23,12 @@ public class ProductBrandAction extends OSalesSystemABAction<ProductBrand> {
     private ProductBrand productBrand ;
 
     private ProductBrandSearchBean searchBean ;
-    
+
     public String save() throws Exception {
         try {
             aopProductBrandService.saveUpdate(optType, productBrand) ;
-            this.result = productBrand;
-            writeObjectService.intToPrpertiesUnits( this.result );
+            this.result = productBrand ;
+            writeObjectService.intToPrpertiesUnits(this.result) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -40,8 +40,8 @@ public class ProductBrandAction extends OSalesSystemABAction<ProductBrand> {
     public String remove() throws Exception {
         try {
             aopProductBrandService.remove(optType, productBrand) ;
-            writeObjectService.intToPrpertiesUnits( productBrand );
-            this.result = productBrand;
+            writeObjectService.intToPrpertiesUnits(productBrand) ;
+            this.result = productBrand ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -53,8 +53,8 @@ public class ProductBrandAction extends OSalesSystemABAction<ProductBrand> {
     public String get() throws Exception {
         try {
             productBrand = aopProductBrandService.get(uuid) ;
-            writeObjectService.intToPrpertiesUnits( productBrand );
-            this.result = productBrand;
+            writeObjectService.intToPrpertiesUnits(productBrand) ;
+            this.result = productBrand ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -66,7 +66,7 @@ public class ProductBrandAction extends OSalesSystemABAction<ProductBrand> {
     public String list() throws Exception {
         try {
             SelectPage<ProductBrand> selectPage = aopProductBrandService.search(optType, searchBean, commSearchBean, start, limit) ;
-            writeObjectService.intToPrpertiesUnits( selectPage );
+            writeObjectService.intToPrpertiesUnits(selectPage) ;
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;
@@ -99,6 +99,5 @@ public class ProductBrandAction extends OSalesSystemABAction<ProductBrand> {
     public void setResult(ProductBrand result) {
         this.result = result ;
     }
-    
-    
+
 }

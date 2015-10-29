@@ -62,8 +62,8 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 				items : [createLocalCombo({
 					id : 'searchBean.status',
 					name : 'searchBean.status',
-					fieldLabel : ' 状态', //删除, 有效, 全部
-					storeData : [["全部", "全部"], ["有效", "有效"],["删除", "删除"]],
+					fieldLabel : ' 状态', // 删除, 有效, 全部
+					storeData : [["全部", "全部"], ["有效", "有效"], ["删除", "删除"]],
 					defaultValue : "全部",
 					allowBlank : false
 				})]
@@ -84,7 +84,7 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.isStockMan',
 					name : 'searchBean.isStockMan',
 					fieldLabel : ' 采购员',
-					storeData : [[-1,"全部"],[1, "是"], [0, "否"]],
+					storeData : [[-1, "全部"], [1, "是"], [0, "否"]],
 					defaultValue : -1,
 					allowBlank : false
 				})]
@@ -100,7 +100,7 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.isTransportMan',
 					name : 'searchBean.isTransportMan',
 					fieldLabel : '  运输员',
-					storeData : [[-1,"全部"],[1, "是"], [0, "否"]],
+					storeData : [[-1, "全部"], [1, "是"], [0, "否"]],
 					defaultValue : -1,
 					allowBlank : false
 				})]
@@ -116,7 +116,7 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.isBizMan',
 					name : 'searchBean.isBizMan',
 					fieldLabel : ' 业务员',
-					storeData : [[-1,"全部"],[1, "是"], [0, "否"]],
+					storeData : [[-1, "全部"], [1, "是"], [0, "否"]],
 					defaultValue : -1,
 					allowBlank : false
 				})]
@@ -133,7 +133,7 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.isGoodsMan',
 					name : 'searchBean.isGoodsMan',
 					fieldLabel : ' 理货员',
-					storeData : [[-1,"全部"],[1, "是"], [0, "否"]],
+					storeData : [[-1, "全部"], [1, "是"], [0, "否"]],
 					defaultValue : -1,
 					allowBlank : false,
 					listeners : {
@@ -211,7 +211,7 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.sex',
 					name : 'searchBean.sex',
 					fieldLabel : ' 性别',
-					storeData : [[-1, "全部"],[1, "男"], [0, "女"]],
+					storeData : [[-1, "全部"], [1, "男"], [0, "女"]],
 					defaultValue : -1,
 					allowBlank : true
 				})]
@@ -254,12 +254,12 @@ function base_info_staff_search_windows(moduleId, moduleName, params) {
 						// 对将要提交的参数进行过滤，去掉emptyText文字
 						for (var param in submitValues1) {
 							if (from.findField(param) && from.findField(param).emptyText == submitValues1[param]) {
-							    submitValues1[param] = '';
-//								thisForm.findField(param).setValue("");
+								submitValues1[param] = '';
+								// thisForm.findField(param).setValue("");
 							}
 						}
-                        
-						Ext.apply(submitValues1 ,search_params.params() );
+
+						Ext.apply(submitValues1, search_params.params());
 						grid.load({
 							params : submitValues1,
 							success : function() {

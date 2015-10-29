@@ -64,7 +64,7 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 		allowBlank : false,
 		forceSelection : false,
 		select : function(combo, record, index) {
-			
+
 		}
 	});
 	storePosition.load({

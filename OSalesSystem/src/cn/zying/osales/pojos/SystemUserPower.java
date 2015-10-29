@@ -18,14 +18,14 @@ public class SystemUserPower extends UserPower<SystemUserOptPower> {
 
     @Id
     @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    //    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ids ;
 
     @Column(name = "sys_system_user_id", insertable = false, updatable = false)
     private Integer systemUserInfoId ;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sys_system_user_id",nullable=false)
+    @JoinColumn(name = "sys_system_user_id", nullable = false)
     private SysStaffUser sysStaffUser ;
 
     public Integer getIds() {

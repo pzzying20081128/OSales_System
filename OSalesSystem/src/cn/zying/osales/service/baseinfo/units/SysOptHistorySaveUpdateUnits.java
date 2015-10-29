@@ -33,7 +33,7 @@ public class SysOptHistorySaveUpdateUnits extends ABCommonsService {
         SysStaffUser sysStaffUser = baseService.load(sysStaffUserId, SysStaffUser.class) ;
 
         optSysOptHistory.setSysStaffUser(sysStaffUser) ;
-        
+
         baseService.save(optSysOptHistory) ;
 
     }

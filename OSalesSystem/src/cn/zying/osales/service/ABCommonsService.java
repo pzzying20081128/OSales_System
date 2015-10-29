@@ -5,17 +5,14 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 
-
 public abstract class ABCommonsService {
-    
+
     @Autowired
     @Qualifier(IABService.name)
-    protected IABService baseService;
-    
+    protected IABService baseService ;
+
     @Autowired
     @Qualifier("PrpertiesAutoWriteObjectService")
-    protected  PrpertiesAutoWriteObjectService  prpertiesAutoWriteObjectService  ;
-
-    
+    protected PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService ;
 
 }

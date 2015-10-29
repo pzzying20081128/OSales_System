@@ -10,7 +10,7 @@ Ext.apply(Ext.form.VTypes, {
 	chinese : function(val, field) {
 		var reg = /^[\u4e00-\u9fa5]+$/i;
 		if (!reg.test(val))
-			return false; 
+			return false;
 		return true
 	},
 	chineseText : "请输入中文",

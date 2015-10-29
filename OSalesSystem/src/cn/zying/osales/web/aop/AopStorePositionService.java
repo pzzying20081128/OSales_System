@@ -14,49 +14,40 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.baseinfo.IStorePositionService ;
 import cn.zying.osales.units.search.bean.StorePositionSearchBean ;
 
-
-
 @Component(IAopStorePositionService.name)
 public class AopStorePositionService implements IAopStorePositionService {
 
-    @Autowired  
+    @Autowired
     @Qualifier(IStorePositionService.name)
     private IStorePositionService iStorePositionService ;
 
-     public StorePosition  saveUpdate(OptType  optType ,   StorePosition   optStorePosition )throws SystemOptServiceException{
-	
-	     return  iStorePositionService.saveUpdate(  optType ,    optStorePosition );
-	 
-	 }
-            
-       	  
-     public SelectPage<StorePosition > search(OptType  optType ,    
-				           StorePositionSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-	
-	 return  iStorePositionService.search(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-					
-	}
-	  
-	public List<StorePosition > searchList(OptType  optType ,    
-				           StorePositionSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			 return  iStorePositionService.searchList(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-            
+    public StorePosition saveUpdate(OptType optType, StorePosition optStorePosition) throws SystemOptServiceException {
+
+        return iStorePositionService.saveUpdate(optType, optStorePosition) ;
+
     }
-            
-    public  StorePosition    remove(OptType  optType ,  StorePosition   optStorePosition)throws SystemOptServiceException{
-			
-			   return  iStorePositionService.remove(  optType ,   optStorePosition);
-			
-	}
-            
-            
-           public  StorePosition get(Integer id)throws SystemOptServiceException
-		   {
-		           return  iStorePositionService.get( id);
-		   
-		   }
+
+    public SelectPage<StorePosition> search(OptType optType, StorePositionSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStorePositionService.search(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public List<StorePosition> searchList(OptType optType, StorePositionSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStorePositionService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public StorePosition remove(OptType optType, StorePosition optStorePosition) throws SystemOptServiceException {
+
+        return iStorePositionService.remove(optType, optStorePosition) ;
+
+    }
+
+    public StorePosition get(Integer id) throws SystemOptServiceException {
+        return iStorePositionService.get(id) ;
+
+    }
 
 }

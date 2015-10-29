@@ -49,17 +49,15 @@ public class SystemLog implements java.io.Serializable {
     private Integer systemUserId ;
 
     // 做什么
-    @Column(name = "what" , length = 200)
+    @Column(name = "what", length = 200)
     private String what ;
 
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date ;
 
-    @Column(name = "module_name" , length = 100)
+    @Column(name = "module_name", length = 100)
     private String moduleName ;
-
-    
 
     public SystemLog() {
     }

@@ -42,14 +42,12 @@ public class StockInStoreCreateUnits extends ABCommonsService {
         SysStaffUser recordMan = baseService.load(stockOrder.getRecordManId(), SysStaffUser.class) ;
 
         stockInStore.setRecordMan(recordMan) ;
-        
-        stockInStore.setRecordDate(DateToolsUilts.getnowDate());
+
+        stockInStore.setRecordDate(DateToolsUilts.getnowDate()) ;
 
         try {
-            
-          
-            
-            ToolsUnits.copyBeanProperties(stockInStore, stockOrder, "noTaxSumMoney", "orderCount", "remarks", "taxSumMoney","stockType") ;
+
+            ToolsUnits.copyBeanProperties(stockInStore, stockOrder, "noTaxSumMoney", "orderCount", "remarks", "taxSumMoney", "stockType") ;
 
             List<StockInStoreDetail> stockInStoreDetails = new ArrayList<StockInStoreDetail>() ;
 
@@ -62,21 +60,18 @@ public class StockInStoreCreateUnits extends ABCommonsService {
                 stockInStoreDetails.add(stockInStoreDetail) ;
 
                 stockInStoreDetail.setStockInStore(stockInStore) ;
-                
-                stockInStoreDetail.setStockOrderDetail(stockOrderDetail);
+
+                stockInStoreDetail.setStockOrderDetail(stockOrderDetail) ;
 
                 ProductInfo productInfo = baseService.load(stockOrderDetail.getProductInfoId(), ProductInfo.class) ;
 
                 stockInStoreDetail.setProductInfo(productInfo) ;
-                
-                stockInStoreDetail.setStoreInfo(stockOrderDetail.getStoreInfo());
-                
-                stockInStoreDetail.setStorePosition(stockOrderDetail.getStorePosition());
-           
-                ToolsUnits.copyBeanProperties(stockInStoreDetail, stockOrderDetail, "noTaxMoney","taxMoney", "noTaxPrice","taxPrice", "orderBox", "orderCount", "taxRate") ;
-                
-                
-                
+
+                stockInStoreDetail.setStoreInfo(stockOrderDetail.getStoreInfo()) ;
+
+                stockInStoreDetail.setStorePosition(stockOrderDetail.getStorePosition()) ;
+
+                ToolsUnits.copyBeanProperties(stockInStoreDetail, stockOrderDetail, "noTaxMoney", "taxMoney", "noTaxPrice", "taxPrice", "orderBox", "orderCount", "taxRate") ;
 
             }
             baseService.save(stockInStore) ;

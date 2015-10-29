@@ -48,9 +48,6 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
     }
 
     private void switchObject(StockOrderDetail optStockOrderDetail) {
-       
-
-        
 
         Integer productInfoId = optStockOrderDetail.getProductInfoId() ;
 
@@ -81,16 +78,6 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         switchObject(optStockOrderDetail) ;
 
         StockOrderDetail stockOrderDetail = baseService.get(optStockOrderDetail.getId(), StockOrderDetail.class) ;
-
-        optStockOrderDetail.getNoTaxMoney() ;
-        optStockOrderDetail.getNoTaxPrice() ;
-        optStockOrderDetail.getOrderBox() ;
-        optStockOrderDetail.getOrderCount() ;
-        optStockOrderDetail.getProductInfo() ;
-        optStockOrderDetail.getTaxMoney() ;
-        optStockOrderDetail.getTaxPrice() ;
-        optStockOrderDetail.getTaxRate() ;
-        optStockOrderDetail.getText() ;
 
         try {
             ToolsUnits.copyBeanProperties(stockOrderDetail, optStockOrderDetail, "noTaxMoney"

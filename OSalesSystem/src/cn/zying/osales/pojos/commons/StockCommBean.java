@@ -15,7 +15,7 @@ import cn.zying.osales.pojos.ProviderInfo ;
 
 @MappedSuperclass
 public class StockCommBean extends CommOrderBean {
-    
+
     // 供应商
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_info_id")
@@ -25,7 +25,7 @@ public class StockCommBean extends CommOrderBean {
     @Column(name = "provider_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "供应商")
     private Integer providerInfoId ;
-    
+
     @Column(name = "tax_sum_money")
     @FieldDesc(name = "含税总金额", isShow = false)
     private Long taxSumMoney ;
@@ -53,7 +53,7 @@ public class StockCommBean extends CommOrderBean {
     @Column(name = "order_count")
     @FieldDesc(name = "订购数量")
     private Integer orderCount ;
-    
+
     // 采购订单类型
     @Column(name = "stock_type")
     @Enumerated(EnumType.STRING)

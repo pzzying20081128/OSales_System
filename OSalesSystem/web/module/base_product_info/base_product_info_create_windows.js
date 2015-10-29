@@ -437,17 +437,18 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 					fieldLabel : ' 供应商',
 					url : "./ProviderInfo_combo.do?searchBean.status=有效",
 					allowBlank : false,
-					forceSelection : false,
-//					select : function(combo, record, index) {
-//						id = record.id;
-//						storePosition.load({
-//							params : {
-//								'searchBean.storeInfoId' : id,
-//								'searchBean.status' : '有效'
-//							}
-//
-//						});
-//					}
+					forceSelection : false
+					,
+					// select : function(combo, record, index) {
+					// id = record.id;
+					// storePosition.load({
+					// params : {
+					// 'searchBean.storeInfoId' : id,
+					// 'searchBean.status' : '有效'
+					// }
+					//
+					// });
+					// }
 				})]
 			}, {
 

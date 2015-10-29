@@ -1,18 +1,9 @@
- package  cn.zying.osales.web.aop;
+package cn.zying.osales.web.aop ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStorePositionService ;
+import cn.zying.osales.infaces.InfaceStorePositionService ;
 
+public interface IAopStorePositionService extends InfaceStorePositionService {
 
-public interface IAopStorePositionService  extends InfaceStorePositionService   {
-    
-            public String name="IAopStorePositionService";
-            
-                
-         
-            
-       
-            
+    public String name = "IAopStorePositionService" ;
 
 }

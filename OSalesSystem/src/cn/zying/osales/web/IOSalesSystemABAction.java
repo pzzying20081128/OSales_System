@@ -1,7 +1,5 @@
-package cn.zying.osales.web;
+package cn.zying.osales.web ;
 
 public interface IOSalesSystemABAction {
-    
-           
 
 }

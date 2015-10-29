@@ -28,7 +28,7 @@ public interface ISystemUserService {
 
     public SelectPage<SysStaffUser> search(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
 
-    public  List<SysStaffUser> searchList(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+    public List<SysStaffUser> searchList(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
 
     public void remove(OptType optType, SysStaffUser optSystemUser, Integer optUserId) throws SystemOptServiceException ;
 

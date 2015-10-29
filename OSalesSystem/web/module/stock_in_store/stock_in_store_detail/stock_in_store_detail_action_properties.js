@@ -2,12 +2,10 @@ var stock_in_store_detail_grid_column = {
 	record : [{
 		name : 'productInfo.name',
 		mapping : 'productInfo'
-	},
-	{
-	  name:"productInfoId",
-	  mapping:"productInfoId"
-	},
-		{
+	}, {
+		name : "productInfoId",
+		mapping : "productInfoId"
+	}, {
 		name : 'taxPrice',
 		mapping : 'taxPrice'
 	}, {
@@ -67,7 +65,7 @@ var stock_in_store_detail_grid_column = {
 	}, {
 		name : 'storePosition.name',
 		mapping : 'storePosition'
-	},{
+	}, {
 		name : 'storeInfoId',
 		mapping : 'storeInfoId'
 	}, {

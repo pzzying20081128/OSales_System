@@ -1,4 +1,4 @@
-package cn.zying.osales.infaces;
+package cn.zying.osales.infaces ;
 
 import java.util.List ;
 
@@ -10,24 +10,18 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StockOrderDetailSearchBean ;
 
 public interface InfaceStockOrderDetailService {
-    
-    
-       /**
-             *  增加或更新
-             */
-            public StockOrderDetail   saveUpdate(OptType  optType ,   StockOrderDetail   optStockOrderDetail )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<StockOrderDetail > search(OptType  optType ,    
-				           StockOrderDetailSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<StockOrderDetail > searchList(OptType  optType ,    
-				           StockOrderDetailSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  StockOrderDetail    remove(OptType  optType ,  StockOrderDetail   optStockOrderDetail)throws SystemOptServiceException;
-            
-            
-           public  StockOrderDetail get(Integer id)throws SystemOptServiceException;
 
+    /**
+          *  增加或更新
+          */
+    public StockOrderDetail saveUpdate(OptType optType, StockOrderDetail optStockOrderDetail) throws SystemOptServiceException ;
+
+    public SelectPage<StockOrderDetail> search(OptType optType, StockOrderDetailSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public List<StockOrderDetail> searchList(OptType optType, StockOrderDetailSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public StockOrderDetail remove(OptType optType, StockOrderDetail optStockOrderDetail) throws SystemOptServiceException ;
+
+    public StockOrderDetail get(Integer id) throws SystemOptServiceException ;
 
 }

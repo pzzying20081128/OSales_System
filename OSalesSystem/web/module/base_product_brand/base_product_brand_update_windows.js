@@ -25,7 +25,7 @@ function base_product_brand_update_windows(moduleId, moduleName, params) {
 		url : "./simple_ProductBrand_save.do",
 		params : {
 			optType : "update",
-			"productBrand.id":selectId
+			"productBrand.id" : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
@@ -76,7 +76,7 @@ function base_product_brand_update_windows(moduleId, moduleName, params) {
 					id : 'productBrand.status',
 					name : 'productBrand.status',
 					fieldLabel : ' 状态',
-					storeData : [["无效", "无效"], ["删除", "删除"], ["有效", "有效"] ],
+					storeData : [["无效", "无效"], ["删除", "删除"], ["有效", "有效"]],
 					defaultValue : null,
 					allowBlank : true
 				})]

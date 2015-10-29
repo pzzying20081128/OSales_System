@@ -56,15 +56,11 @@ public class CommOrderBean extends CommBean {
 
     @Column(name = "print_count")
     private Integer printCount = 0 ;
-    
+
     // 采购进货入库编号
     @Column(name = "number")
     @FieldDesc(name = "单号")
     private String number ;
-    
-    
-    
-
 
     public String getRemarks() {
         return remarks ;

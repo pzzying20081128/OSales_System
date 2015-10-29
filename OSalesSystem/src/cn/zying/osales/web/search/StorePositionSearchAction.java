@@ -16,7 +16,6 @@ import cn.zying.osales.web.aop.IAopStorePositionService ;
 @org.springframework.context.annotation.Scope(SearchUserPowerAction.Scope)
 public class StorePositionSearchAction extends ABSalesSearchAction {
 
-  
     private static final long serialVersionUID = 6608488468321414319L ;
 
     @Autowired
@@ -28,25 +27,24 @@ public class StorePositionSearchAction extends ABSalesSearchAction {
     @Override
     protected List<StorePosition> searchResult() throws Exception {
         try {
-            List<StorePosition>  results =   service.searchList(OptType.search, searchBean, null, 0, 20) ;
-        
-        if (searchBean.getId() != null) {
-            for (StorePosition result : results) {
-                if (result.getId().equals(searchBean.getId())) return results ;
+            List<StorePosition> results = service.searchList(OptType.search, searchBean, null, 0, 20) ;
+
+            if (searchBean.getId() != null) {
+                for (StorePosition result : results) {
+                    if (result.getId().equals(searchBean.getId())) return results ;
+                }
+                StorePosition res = service.get(searchBean.getId()) ;
+                results.add(0, res) ;
+                return results ;
+            } else {
+                return results ;
             }
-            StorePosition res = service.get(searchBean.getId()) ;
-            results.add(0, res) ;
-            return results ;
-        } else {
-            return results ;
+
+        } catch (Exception e) {
+            this.msg = handError(e) ;
+            this.success = false ;
+            return null ;
         }
-        
-    } catch (Exception e) {
-        this.msg = handError(e) ;
-        this.success = false ;
-        return null;
-    }
-   
 
     }
 

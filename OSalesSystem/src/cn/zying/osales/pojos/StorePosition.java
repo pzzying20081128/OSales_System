@@ -1,4 +1,4 @@
-package cn.zying.osales.pojos;
+package cn.zying.osales.pojos ;
 
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
@@ -10,31 +10,27 @@ import javax.persistence.Table ;
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.pojos.commons.CommBean ;
 
-
-
 @Entity
 @Table(name = "base_store_position")
 public class StorePosition extends CommBean {
 
-    private static final long serialVersionUID = -4433696835387380184L;
+    private static final long serialVersionUID = -4433696835387380184L ;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_info_id")
-    @FieldDesc(name = "仓库",isShow=false,mapping="storeInfo.name")
-    private StoreInfo storeInfo;
+    @FieldDesc(name = "仓库", isShow = false, mapping = "storeInfo.name")
+    private StoreInfo storeInfo ;
 
     @Column(name = "store_info_id", insertable = false, updatable = false)
-    @FieldDesc(name = "仓库",isShow=false,mapping="storeInfo.name")
-    private Integer storeInfoId;
+    @FieldDesc(name = "仓库", isShow = false, mapping = "storeInfo.name")
+    private Integer storeInfoId ;
 
     @Column(name = "name")
     @FieldDesc(name = "库位")
-    private String name;
+    private String name ;
 
     @Column(name = "text")
-    private String text;
-
-  
+    private String text ;
 
     public StoreInfo getStoreInfo() {
         return storeInfo ;
@@ -68,5 +64,4 @@ public class StorePosition extends CommBean {
         this.text = text ;
     }
 
-   
 }

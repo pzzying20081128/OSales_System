@@ -1,17 +1,9 @@
- package  cn.zying.osales.web.aop;
+package cn.zying.osales.web.aop ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStockOrderDetailService ;
+import cn.zying.osales.infaces.InfaceStockOrderDetailService ;
 
-public interface IAopStockOrderDetailService  extends InfaceStockOrderDetailService   {
-    
-            public String name="IAopStockOrderDetailService";
-            
-                
-         
-            
-       
-            
+public interface IAopStockOrderDetailService extends InfaceStockOrderDetailService {
+
+    public String name = "IAopStockOrderDetailService" ;
 
 }

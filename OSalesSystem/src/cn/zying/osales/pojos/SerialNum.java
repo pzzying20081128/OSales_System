@@ -1,4 +1,4 @@
-package cn.zying.osales.pojos;
+package cn.zying.osales.pojos ;
 
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
@@ -16,56 +16,59 @@ import javax.persistence.Table ;
 @Table(name = "sys_serial_num")
 public class SerialNum implements java.io.Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
-	@Column(name = "pre")
-	private String pre;
-	@Column(name = "serial_num")
-	private Integer serialNum;
-	@Column(name = "date")
-	private String date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id ;
 
-	public SerialNum() {
-	}
+    @Column(name = "pre")
+    private String pre ;
 
-	public SerialNum(String pre, Integer serialNum, String date) {
-		this.pre = pre;
-		this.serialNum = serialNum;
-		this.date = date;
-	}
+    @Column(name = "serial_num")
+    private Integer serialNum ;
 
-	public Integer getId() {
-		return this.id;
-	}
+    @Column(name = "date")
+    private String date ;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public SerialNum() {
+    }
 
-	public String getPre() {
-		return this.pre;
-	}
+    public SerialNum(String pre, Integer serialNum, String date) {
+        this.pre = pre ;
+        this.serialNum = serialNum ;
+        this.date = date ;
+    }
 
-	public void setPre(String pre) {
-		this.pre = pre;
-	}
+    public Integer getId() {
+        return this.id ;
+    }
 
-	public Integer getSerialNum() {
-		return this.serialNum;
-	}
+    public void setId(Integer id) {
+        this.id = id ;
+    }
 
-	public void setSerialNum(Integer serialNum) {
-		this.serialNum = serialNum;
-	}
+    public String getPre() {
+        return this.pre ;
+    }
 
-	public String getDate() {
-		return this.date;
-	}
+    public void setPre(String pre) {
+        this.pre = pre ;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public Integer getSerialNum() {
+        return this.serialNum ;
+    }
+
+    public void setSerialNum(Integer serialNum) {
+        this.serialNum = serialNum ;
+    }
+
+    public String getDate() {
+        return this.date ;
+    }
+
+    public void setDate(String date) {
+        this.date = date ;
+    }
 
 }

@@ -46,9 +46,9 @@ public class SystemUserSaveUpdateUnits extends ABCommonsService {
                 throw new SystemOptServiceException("[" + optSystemUser.getAccount() + "]系统用户重复") ;
             }
         }
-//        optSystemUser.setId(SQLUilts.getIUniqueId()) ;
+        //        optSystemUser.setId(SQLUilts.getIUniqueId()) ;
         optSystemUser.setStatus(Status.有效) ;
-        optSystemUser.setIsAdmin(OSalesConfigProperties.isDefault_0);
+        optSystemUser.setIsAdmin(OSalesConfigProperties.isDefault_0) ;
         List<SystemUserPower> userPowers = optSystemUser.getSystemUserPowers() ;
         userPowers = setId(userPowers, optSystemUser) ;
         optSystemUser.setSystemUserPowers(userPowers) ;
@@ -57,7 +57,7 @@ public class SystemUserSaveUpdateUnits extends ABCommonsService {
     }
 
     private List<SystemUserPower> setId(List<SystemUserPower> systemUserPowers, SysStaffUser optSystemUser) {
-        if(systemUserPowers ==null) return systemUserPowers;
+        if (systemUserPowers == null) return systemUserPowers ;
         for (SystemUserPower systemUserPower : systemUserPowers) {
             systemUserPower.setIds(SQLUilts.getIUniqueId()) ;
             systemUserPower.setSysStaffUser(optSystemUser) ;
@@ -80,11 +80,10 @@ public class SystemUserSaveUpdateUnits extends ABCommonsService {
     public void update(SysStaffUser optSystemUser) throws SystemOptServiceException {
         SysStaffUser optSystemUser_ = baseService.load(optSystemUser.getId(), SysStaffUser.class) ;
         optSystemUser.setStatus(optSystemUser_.getStatus()) ;
-        optSystemUser.setIsAdmin(optSystemUser_.getIsAdmin());
-        if(ToolsUnits.isNOtNulll(optSystemUser.getPwd()))
-        optSystemUser.setPwd(optSystemUser.getPwd());
-        else{
-            optSystemUser.setPwd(optSystemUser_.getPwd());
+        optSystemUser.setIsAdmin(optSystemUser_.getIsAdmin()) ;
+        if (ToolsUnits.isNOtNulll(optSystemUser.getPwd())) optSystemUser.setPwd(optSystemUser.getPwd()) ;
+        else {
+            optSystemUser.setPwd(optSystemUser_.getPwd()) ;
         }
         if (optSystemUser.getSystemUserPowers().size() != 0) {
             removePower(optSystemUser_) ;

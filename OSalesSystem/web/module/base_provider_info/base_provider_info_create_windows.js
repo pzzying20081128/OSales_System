@@ -137,7 +137,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 				createLocalCombo({
 					id : 'providerinfo.returnType',
 					name : 'providerinfo.returnType',
-					fieldLabel : ' 退货类型', //不确定, 开票前退货, 开票后退货
+					fieldLabel : ' 退货类型', // 不确定, 开票前退货, 开票后退货
 					storeData : [['不确定', "不确定"], ['开票前退货', '开票前退货'], ['开票后退货', '开票后退货']],
 					defaultValue : null,
 					allowBlank : false
@@ -159,7 +159,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.contactMan',
 					fieldLabel : ' 联系人',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -182,7 +182,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.phone',
 					fieldLabel : ' 联系电话',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -210,7 +210,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.fax',
 					fieldLabel : ' 传真',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -233,7 +233,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.web',
 					fieldLabel : ' 网址',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -256,7 +256,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.qq',
 					fieldLabel : ' qq',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -279,7 +279,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.mail',
 					fieldLabel : ' 电子邮箱',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -319,7 +319,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.bank1',
 					fieldLabel : ' 银行帐号',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -342,7 +342,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.bank2',
 					fieldLabel : ' 银行帐号',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -365,7 +365,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.text',
 					fieldLabel : ' 备注',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -392,7 +392,7 @@ function base_provider_info_create_windows(moduleId, moduleName, params) {
 					name : 'providerinfo.settleTime',
 					fieldLabel : ' 帐期',
 					xtype : 'textfield',
-						style : AllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {

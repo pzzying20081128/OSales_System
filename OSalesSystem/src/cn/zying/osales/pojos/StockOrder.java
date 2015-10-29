@@ -26,8 +26,6 @@ import cn.zying.osales.pojos.commons.StockCommBean ;
 // 采购订单
 public class StockOrder extends StockCommBean implements java.io.Serializable {
 
-
-
     // 采购订单编号
     @Column(name = "order_number")
     @Index(name = "num_index")
@@ -66,10 +64,6 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
     @FieldDesc(name = "采购日期")
     private Date stockDate ;
 
-
-
-   
-
     public SysStaffUser getStockMan() {
         return stockMan ;
     }
@@ -93,8 +87,6 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
     public void setStockDate(Date stockDate) {
         this.stockDate = stockDate ;
     }
-
-
 
     public List<StockOrderDetail> getStockOrderDetails() {
         return stockOrderDetails ;

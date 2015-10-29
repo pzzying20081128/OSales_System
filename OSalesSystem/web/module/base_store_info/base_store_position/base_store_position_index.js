@@ -78,24 +78,25 @@ function create_base_store_position_window(moduleId, moduleName, params) {
 					});
 				}
 			}
-//			, 
-//				{
-//				id : moduleId + '_search',
-//				xtype : "tbbutton",
-//				text : "查询",
-//				// keyBinding : createSearchKey(),
-//				handler : function() {
-//					var selectionId = returnSelectGridId(storeGrid);
-//					if (selectionId == false)
-//						return;
-//					var searchWindex = base_store_position_search_windows(moduleId, moduleName, {
-//						grid : mainGridModule,
-//						storeGrid : storeGrid,
-//						storeId : selectionId
-//					});
-//				}
-//			}
-			
+			// ,
+			// {
+			// id : moduleId + '_search',
+			// xtype : "tbbutton",
+			// text : "查询",
+			// // keyBinding : createSearchKey(),
+			// handler : function() {
+			// var selectionId = returnSelectGridId(storeGrid);
+			// if (selectionId == false)
+			// return;
+			// var searchWindex = base_store_position_search_windows(moduleId,
+			// moduleName, {
+			// grid : mainGridModule,
+			// storeGrid : storeGrid,
+			// storeId : selectionId
+			// });
+			// }
+			// }
+
 			]
 
 		},

@@ -9,7 +9,7 @@ function base_product_brand_create_windows(moduleId, moduleName, params) {
 		// 结果路径
 		pojo : "result",
 		// url
-			url : "./simple_ProductBrand_save.do",
+		url : "./simple_ProductBrand_save.do",
 		params : {
 			optType : "save"
 		},
@@ -39,28 +39,28 @@ function base_product_brand_create_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}, // 1-1 end
-//			{
-//				columnWidth : 1,
-//				layout : 'form',
-//				defaultType : 'textfield',
-//				baseCls : 'x-plain',
-//				defaults : {
-//					width : 300
-//				},
-//				items : [{
-//					id : 'productbrand.status',
-//					name : 'productbrand.status',
-//					fieldLabel : ' 状态',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
-//				}]
-//			}// 1-2end
+			// {
+			// columnWidth : 1,
+			// layout : 'form',
+			// defaultType : 'textfield',
+			// baseCls : 'x-plain',
+			// defaults : {
+			// width : 300
+			// },
+			// items : [{
+			// id : 'productbrand.status',
+			// name : 'productbrand.status',
+			// fieldLabel : ' 状态',
+			// xtype : 'textfield',
+			// style : NoAllowBlankStyle,
+			// blankText : '不能为空！',
+			// allowBlank : false,
+			// listeners : {
+			// 'specialkey' : function(field, e) {
+			// }
+			// }
+			// }]
+			// }// 1-2end
 			]
 		}]
 

@@ -2,7 +2,7 @@
  * 主要用户设置查询的一些参数
  */
 var base_product_category_search_params = {
-	
+
 	verification : function() {
 
 		return true;

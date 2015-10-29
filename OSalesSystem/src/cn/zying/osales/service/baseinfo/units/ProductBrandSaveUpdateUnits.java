@@ -32,9 +32,9 @@ public class ProductBrandSaveUpdateUnits extends ABCommonsService {
     }
 
     public void update(ProductBrand optProductBrand) throws SystemOptServiceException {
-        ProductBrand   productBrand=baseService.load(optProductBrand.getId(), ProductBrand.class);
-        productBrand.setName(optProductBrand.getName());
-        productBrand.setStatus(optProductBrand.getStatus());
+        ProductBrand productBrand = baseService.load(optProductBrand.getId(), ProductBrand.class) ;
+        productBrand.setName(optProductBrand.getName()) ;
+        productBrand.setStatus(optProductBrand.getStatus()) ;
         baseService.update(productBrand) ;
     }
 

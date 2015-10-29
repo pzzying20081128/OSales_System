@@ -1,7 +1,6 @@
- package  cn.zying.osales.service.baseinfo.imples;
- 
+package cn.zying.osales.service.baseinfo.imples ;
 
-  import java.util.List ;
+import java.util.List ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
@@ -18,57 +17,50 @@ import cn.zying.osales.service.baseinfo.units.StoreInfoRemoveUnits ;
 import cn.zying.osales.service.baseinfo.units.StoreInfoSaveUpdateUnits ;
 import cn.zying.osales.service.baseinfo.units.StoreInfoSearchUnits ;
 import cn.zying.osales.units.search.bean.StoreInfoSearchBean ;
- 
 
 @Component(IStoreInfoService.name)
-public class StoreInfoServiceImple extends  ABCommonsService  implements IStoreInfoService {
+public class StoreInfoServiceImple extends ABCommonsService implements IStoreInfoService {
 
-            //@Resource(name="StoreInfoSearchUnits")
-			  @Autowired
-            @Qualifier("StoreInfoSearchUnits")        
-            private  StoreInfoSearchUnits  iStoreInfoSearchUnits;
-           
-           //@Resource(name=" StoreInfoSaveUpdateUnits")
-		     @Autowired
-            @Qualifier("StoreInfoSaveUpdateUnits")      
-           private StoreInfoSaveUpdateUnits  iStoreInfoSaveUpdateUnits;
-			
-		   
-		      @Autowired
+    //@Resource(name="StoreInfoSearchUnits")
+    @Autowired
+    @Qualifier("StoreInfoSearchUnits")
+    private StoreInfoSearchUnits iStoreInfoSearchUnits ;
+
+    //@Resource(name=" StoreInfoSaveUpdateUnits")
+    @Autowired
+    @Qualifier("StoreInfoSaveUpdateUnits")
+    private StoreInfoSaveUpdateUnits iStoreInfoSaveUpdateUnits ;
+
+    @Autowired
     @Qualifier("StoreInfoRemoveUnits")
     private StoreInfoRemoveUnits iStoreInfoRemoveUnits ;
-		   
-			@Override
-            public StoreInfo saveUpdate(OptType  optType ,   StoreInfo   optStoreInfo )throws SystemOptServiceException{
-        	     return 	 iStoreInfoSaveUpdateUnits.saveUpdate(optType, optStoreInfo);
-        		}
-            
-       	   @Override
-            public SelectPage<StoreInfo > search(OptType  optType ,    
-				   StoreInfoSearchBean  searchBean , CommSearchBean  commSearchBean ,int... startLimit)throws SystemOptServiceException{
-				    return  iStoreInfoSearchUnits.search(optType, searchBean,
-					commSearchBean ,startLimit );
-            }
-			
-			 @Override
-			public List<StoreInfo > searchList(OptType  optType ,    
-				           StoreInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			  return  iStoreInfoSearchUnits.list(optType, searchBean,
-					commSearchBean ,startLimit );
-            
+
+    @Override
+    public StoreInfo saveUpdate(OptType optType, StoreInfo optStoreInfo) throws SystemOptServiceException {
+        return iStoreInfoSaveUpdateUnits.saveUpdate(optType, optStoreInfo) ;
     }
-            
-			@Override
-            public  StoreInfo   remove(OptType  optType ,   StoreInfo   optStoreInfo)throws SystemOptServiceException{
-			      return   iStoreInfoRemoveUnits.remove(optType, optStoreInfo);
-			  }
-			  
-			   @Override
-            public StoreInfo get(Integer id) throws SystemOptServiceException {
-                
-                return baseService.get(id, StoreInfo.class) ;
-            }
-            
-            
+
+    @Override
+    public SelectPage<StoreInfo> search(OptType optType, StoreInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        return iStoreInfoSearchUnits.search(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public List<StoreInfo> searchList(OptType optType, StoreInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStoreInfoSearchUnits.list(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    @Override
+    public StoreInfo remove(OptType optType, StoreInfo optStoreInfo) throws SystemOptServiceException {
+        return iStoreInfoRemoveUnits.remove(optType, optStoreInfo) ;
+    }
+
+    @Override
+    public StoreInfo get(Integer id) throws SystemOptServiceException {
+
+        return baseService.get(id, StoreInfo.class) ;
+    }
+
 }

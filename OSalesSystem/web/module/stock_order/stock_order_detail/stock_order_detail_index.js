@@ -30,9 +30,9 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 						showErrorMsg('提示信息', '只能选择一行数据记录');
 						return false;
 					}
-					
-//					var stockOrder_ = selection_rows[0].data;
-//					stockOrder_.id = selection_rows[0].id;
+
+					// var stockOrder_ = selection_rows[0].data;
+					// stockOrder_.id = selection_rows[0].id;
 
 					stock_order_detail_create_windows(moduleId, moduleName, {
 						grid : mainGridModule.getGrid(),
@@ -49,7 +49,7 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 				handler : function(bt) {
 					stock_order_detail_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						orderGrid:orderGrid
+						orderGrid : orderGrid
 						,
 						// searchParams : test_search_params
 					});
@@ -131,14 +131,13 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(result) {
-						
-									mainGrid.reload();
-									
+
+						mainGrid.reload();
+
 						json = result.result.result;
-						
+
 						orderGrid.updateRow(json.stockOrder);
-						
-			
+
 					}
 				});
 			}

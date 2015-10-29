@@ -11,13 +11,9 @@ import cn.zying.osales.pojos.commons.CommBean ;
 @Table(name = "base_product_brand")
 public class ProductBrand extends CommBean {
 
-
-
-    @Column(name = "name",length=20 )
+    @Column(name = "name", length = 20)
     @FieldDesc(name = "品牌")
     private String name ;
-
-   
 
     public String getName() {
         return name ;
@@ -26,5 +22,5 @@ public class ProductBrand extends CommBean {
     public void setName(String name) {
         this.name = name ;
     }
-    
+
 }

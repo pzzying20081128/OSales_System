@@ -14,8 +14,7 @@ import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
 import cn.zying.osales.pojos.ProductInfo ;
 
 public class BuildProductInfoUnit {
-    
-    
+
     public static String createBoxCount(Integer count, ProductInfo productInfo) {
         if (count == null || productInfo == null) return null ;
         Integer x = productInfo.getBoxCount() ;

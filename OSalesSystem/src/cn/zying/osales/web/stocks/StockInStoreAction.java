@@ -80,6 +80,17 @@ public class StockInStoreAction extends OSalesSystemABAction<StockInStore> {
         return SUCCESS ;
     }
 
+    public String check() throws Exception {
+        try {
+            service.check(uuid, getOSalsesLoginUserId()) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+
+        return SUCCESS ;
+    }
+
     public StockInStore getStockinstore() {
         return stockinstore ;
     }

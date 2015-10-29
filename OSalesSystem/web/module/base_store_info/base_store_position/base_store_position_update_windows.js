@@ -27,7 +27,7 @@ function base_store_position_update_windows(moduleId, moduleName, params) {
 		url : './simple_StorePosition_save.do',
 		params : {
 			optType : "update",
-			"storeposition.id":selectId
+			"storeposition.id" : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',

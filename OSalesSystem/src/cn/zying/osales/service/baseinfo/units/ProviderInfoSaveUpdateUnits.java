@@ -45,7 +45,7 @@ public class ProviderInfoSaveUpdateUnits extends ABCommonsService {
     }
 
     public ProviderInfo update(ProviderInfo optProviderInfo) throws SystemOptServiceException {
-        
+
         if (optProviderInfo.getStockManId() != null) {
 
             Integer stockManId = optProviderInfo.getStockManId() ;
@@ -55,7 +55,7 @@ public class ProviderInfoSaveUpdateUnits extends ABCommonsService {
             optProviderInfo.setStockMan(sysStaffUser) ;
         }
         baseService.update(optProviderInfo) ;
-        
+
         return optProviderInfo ;
     }
 

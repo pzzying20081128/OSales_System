@@ -162,8 +162,8 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         searchBean.setStatus(Status.全部) ;
 
         List<ProductInfo> productInfos = guestInfoService.searchList(OptType.search, searchBean, null) ;
-        for(ProductInfo   productInfo : productInfos){
-            prpertiesAutoWriteObjectService.cacheObject(productInfo.getId().toString(), productInfo);
+        for (ProductInfo productInfo : productInfos) {
+            prpertiesAutoWriteObjectService.cacheObject(productInfo.getId().toString(), productInfo) ;
         }
 
     }

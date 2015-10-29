@@ -7,13 +7,11 @@ import cn.zy.apps.tools.units.DateToolsUilts ;
 
 public abstract class ABBaseRegisterHistory implements IRegisterHistory {
 
-    protected  org.apache.log4j.Logger logger = Loggerfactory.instance(ABBaseRegisterHistory.class) ;
-
-
+    protected org.apache.log4j.Logger logger = Loggerfactory.instance(ABBaseRegisterHistory.class) ;
 
     @Override
     public void register(HistoryType historyType, String classification, String module, String operate, String desc, Object tagetObject, String loginUserAttrIndex, Object... args) {
-        Loggerfactory.error(logger, "reg  history   classification   : " + classification+"  module  "+module+"   operate "+operate+"  desc  "+desc+"   "+tagetObject.getClass()) ;
+        Loggerfactory.error(logger, "reg  history   classification   : " + classification + "  module  " + module + "   operate " + operate + "  desc  " + desc + "   " + tagetObject.getClass()) ;
         try {
             Integer loginSysUserId = (Integer) args[Integer.parseInt(loginUserAttrIndex)] ;
             regUserlastOptTime(loginSysUserId, args) ;
@@ -35,34 +33,33 @@ public abstract class ABBaseRegisterHistory implements IRegisterHistory {
     }
 
     public void abRegister(HistoryType historyType, String classification, String module, String operate, String desc, Integer loginSysUserId, Object... args) {
-  
+
         switch (historyType) {
         case after:
             optafter(module, operate, desc, loginSysUserId, args) ;
             break ;
 
         case before:
-            optbefore( module, operate, desc, loginSysUserId, args) ;
+            optbefore(module, operate, desc, loginSysUserId, args) ;
             break ;
 
         case exception:
-            optexception( module, operate, desc, loginSysUserId, args) ;
+            optexception(module, operate, desc, loginSysUserId, args) ;
             break ;
 
         }
-        
 
     }
 
-    protected void optafter( String module, String operate, String desc, Integer loginSysUserId, Object... args) {
+    protected void optafter(String module, String operate, String desc, Integer loginSysUserId, Object... args) {
 
     }
 
-    protected void optbefore( String module, String operate, String desc, Integer loginSysUserId, Object... args) {
+    protected void optbefore(String module, String operate, String desc, Integer loginSysUserId, Object... args) {
 
     }
 
-    protected void optexception( String module, String operate, String desc, Integer loginSysUserId, Object... args) {
+    protected void optexception(String module, String operate, String desc, Integer loginSysUserId, Object... args) {
 
     }
 }

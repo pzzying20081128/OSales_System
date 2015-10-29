@@ -1,12 +1,12 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-* Arabic Translation By daif alotaibi (http://daif.net/)
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php Arabic Translation By daif
+ *          alotaibi (http://daif.net/)
+ ******************************************************************************/
 
 KindEditor.lang({
 	source : 'عرض المصدر',
@@ -216,13 +216,17 @@ KindEditor.lang({
 		'Trebuchet MS' : 'Trebuchet MS',
 		'Verdana' : 'Verdana'
 	},
-	'lineheight.lineHeight' : [
-		{'1' : 'إرتفاع السطر 1'},
-		{'1.5' : 'إرتفاع السطر 1.5'},
-		{'2' : 'إرتفاع السطر 2'},
-		{'2.5' : 'إرتفاع السطر 2.5'},
-		{'3' : 'إرتفاع السطر 3'}
-	],
+	'lineheight.lineHeight' : [{
+		'1' : 'إرتفاع السطر 1'
+	}, {
+		'1.5' : 'إرتفاع السطر 1.5'
+	}, {
+		'2' : 'إرتفاع السطر 2'
+	}, {
+		'2.5' : 'إرتفاع السطر 2.5'
+	}, {
+		'3' : 'إرتفاع السطر 3'
+	}],
 	'template.selectTemplate' : 'قالب',
 	'template.replaceContent' : 'إستبدال المحتوى الحالي',
 	'template.fileList' : {

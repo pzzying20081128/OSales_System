@@ -88,7 +88,7 @@ function base_provider_info_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.status',
 					name : 'searchBean.status',
 					fieldLabel : ' 状态',
-					storeData : [['全部', "全部"],['有效', "有效"], ['无效', '无效']],
+					storeData : [['全部', "全部"], ['有效', "有效"], ['无效', '无效']],
 					defaultValue : "全部",
 					allowBlank : true
 				})]
@@ -110,7 +110,7 @@ function base_provider_info_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.paymentMethod',
 					name : 'searchBean.paymentMethod',
 					fieldLabel : ' 付款方式', // 月结, 到付, 预付
-					storeData : [['全部', "全部"],['到付', '到付'], ['月结', '月结'], ['预付', '预付']],
+					storeData : [['全部', "全部"], ['到付', '到付'], ['月结', '月结'], ['预付', '预付']],
 					defaultValue : "全部",
 					allowBlank : true
 				})]
@@ -130,7 +130,7 @@ function base_provider_info_search_windows(moduleId, moduleName, params) {
 					id : 'searchBean.returnType',
 					name : 'searchBean.returnType',
 					fieldLabel : ' 退货类型', // 不确定, 开票前退货, 开票后退货
-					storeData : [['全部', "全部"],['不确定', "不确定"], ['开票前退货', '开票前退货'], ['开票后退货', '开票后退货']],
+					storeData : [['全部', "全部"], ['不确定', "不确定"], ['开票前退货', '开票前退货'], ['开票后退货', '开票后退货']],
 					defaultValue : "全部",
 					allowBlank : true
 				})

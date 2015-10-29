@@ -1,4 +1,4 @@
-package  cn.zying.osales.service.stocks.units ;
+package cn.zying.osales.service.stocks.units ;
 
 import java.util.List ;
 import java.util.Map ;
@@ -15,21 +15,19 @@ import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StockInStoreSearchBean ;
 
-
 @Component("StockInStoreSearchUnits")
 public class StockInStoreSearchUnits extends ABCommonsService {
 
-    public SelectPage<StockInStore> search(OptType optType,
-		                            StockInStoreSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+    public SelectPage<StockInStore> search(OptType optType, StockInStoreSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         SelectPage<StockInStore> selectPage = new SelectPage<StockInStore>() ;
 
-		Map<String, Object> value=ToolsUnits.createSearchMap();
-			
-		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
-				
-        List<StockInStore> result = list(sqlWhere,value,startLimit) ;
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
 
-        Long sum = sum(sqlWhere,value) ;
+        String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
+
+        List<StockInStore> result = list(sqlWhere, value, startLimit) ;
+
+        Long sum = sum(sqlWhere, value) ;
 
         selectPage.setCount(sum) ;
 
@@ -38,46 +36,44 @@ public class StockInStoreSearchUnits extends ABCommonsService {
         return selectPage ;
 
     }
-	
-	
-	    public List<StockInStore> list(OptType optType,
-		                            StockInStoreSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+
+    public List<StockInStore> list(OptType optType, StockInStoreSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         SelectPage<StockInStore> selectPage = new SelectPage<StockInStore>() ;
 
-		Map<String, Object> value=ToolsUnits.createSearchMap();
-			
-		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
-				
-        List<StockInStore> result = list(sqlWhere,value,startLimit) ;
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
 
-     
+        String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
+
+        List<StockInStore> result = list(sqlWhere, value, startLimit) ;
 
         return result ;
 
     }
-	
 
-	 private  String sql ="select  stockInStore   from  StockInStore as  stockInStore   inner join  fetch stockInStore.stockOrder     ";   
-    private   List<StockInStore> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
-   String sql_ =sql+ sqlWhere ;
-        List<StockInStore>  result = baseService.findByHSQL(sql_, value, startLimit);
-        return result;
+    private String sql = "select  stockInStore   from  StockInStore as  stockInStore   inner join  fetch stockInStore.stockOrder     " ;
+
+    private List<StockInStore> list(String sqlWhere, Map<String, Object> value, int... startLimit) throws SystemOptServiceException {
+        String sql_ = sql + sqlWhere ;
+        List<StockInStore> result = baseService.findByHSQL(sql_, value, startLimit) ;
+        return result ;
     }
- private  String sqlsum =" select  count(stockInStore.id)   from  StockInStore as  stockInStore inner join   stockInStore.stockOrder  ";   
-    private Long sum(String sqlWhere ,Map<String, Object> value) throws SystemOptServiceException {
- String sql_ =sqlsum+ sqlWhere ;
-        Long  sum = baseService.findSinglenessByHSQL(sql_, value);
-        return sum;
+
+    private String sqlsum = " select  count(stockInStore.id)   from  StockInStore as  stockInStore inner join   stockInStore.stockOrder  " ;
+
+    private Long sum(String sqlWhere, Map<String, Object> value) throws SystemOptServiceException {
+        String sql_ = sqlsum + sqlWhere ;
+        Long sum = baseService.findSinglenessByHSQL(sql_, value) ;
+        return sum ;
     }
-	
-	 private String createWhere(Map<String, Object> value,StockInStoreSearchBean searchBean ,CommSearchBean commSearchBean){
-        String sqlWhere=" where  1 =1 ";
-        if(searchBean.getStatus() ==null  || searchBean.getStatus().equals(Status.全部)){
-            
-        }else{
-            sqlWhere = sqlWhere+"   and   stockInStore.status ='"+searchBean.getStatus()+"'  ";
+
+    private String createWhere(Map<String, Object> value, StockInStoreSearchBean searchBean, CommSearchBean commSearchBean) {
+        String sqlWhere = " where  1 =1 " ;
+        if (searchBean.getStatus() == null || searchBean.getStatus().equals(Status.全部)) {
+
+        } else {
+            sqlWhere = sqlWhere + "   and   stockInStore.status ='" + searchBean.getStatus() + "'  " ;
         }
-        return sqlWhere;
+        return sqlWhere ;
     }
 
 }

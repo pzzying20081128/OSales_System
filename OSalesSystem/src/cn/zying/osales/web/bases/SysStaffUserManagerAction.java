@@ -44,10 +44,10 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
     private SystemUserSearchBean searchBean ;
 
     private String power ;
-    
-    public String remove()throws Exception {
+
+    public String remove() throws Exception {
         try {
-            systemUserService.remove(optType, systemUserInfo , getOSalsesLoginUserId());
+            systemUserService.remove(optType, systemUserInfo, getOSalsesLoginUserId()) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -78,8 +78,8 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
                 }
             }
             systemUserInfo.setSystemUserPowers(systemUserPowers) ;
-            systemUserService.saveUpdate(optType, systemUserInfo , getOSalsesLoginUserId()) ;
-            writeObjectService.intToPrpertiesUnits(systemUserInfo);
+            systemUserService.saveUpdate(optType, systemUserInfo, getOSalsesLoginUserId()) ;
+            writeObjectService.intToPrpertiesUnits(systemUserInfo) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -90,7 +90,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
     public String get() throws Exception {
         try {
             systemUserInfo = systemUserService.get(uuid) ;
-            writeObjectService.intToPrpertiesUnits(systemUserInfo);
+            writeObjectService.intToPrpertiesUnits(systemUserInfo) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -101,9 +101,9 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
     public String list() throws Exception {
         try {
             SelectPage<SysStaffUser> selectPage = systemUserService.search(optType, searchBean, commSearchBean, start, limit) ;
-          
-            writeObjectService.intToPrpertiesUnits(selectPage);
-            
+
+            writeObjectService.intToPrpertiesUnits(selectPage) ;
+
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;
@@ -116,7 +116,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
         try {
             SysStaffUser sysStaffUser_ = systemUserService.get(getOSalsesLoginUserId()) ;
             sysStaffUser_.setPwd(systemUserInfo.getAccessPassword()) ;
-            systemUserService.saveUpdate(OptType.update, sysStaffUser_  ,getOSalsesLoginUserId() ) ;
+            systemUserService.saveUpdate(OptType.update, sysStaffUser_, getOSalsesLoginUserId()) ;
         } catch (Exception e) {
             handError(e) ;
             this.success = false ;

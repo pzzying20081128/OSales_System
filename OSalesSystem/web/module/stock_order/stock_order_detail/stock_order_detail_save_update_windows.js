@@ -19,7 +19,7 @@ function stock_order_detail_save_update_form_panel_windows(params, detailParams)
 						submitEmptyText : false,
 						params : params.params,
 						success : function(result) {
-							 var json = result.result;
+							var json = result.result;
 							if (params.action == "save") {
 								params.grid.insertRow(json[params.pojo]);
 								orderGrid.updateRow(json[params.pojo].stockOrder);

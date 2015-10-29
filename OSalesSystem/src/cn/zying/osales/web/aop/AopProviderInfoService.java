@@ -14,8 +14,6 @@ import cn.zying.osales.service.IProviderInfoService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.ProviderInfoSearchBean ;
 
-
-
 @Component(IAopProviderInfoService.name)
 public class AopProviderInfoService implements IAopProviderInfoService {
 
@@ -23,40 +21,33 @@ public class AopProviderInfoService implements IAopProviderInfoService {
     @Qualifier(IProviderInfoService.name)
     private IProviderInfoService iProviderInfoService ;
 
-     public ProviderInfo  saveUpdate(OptType  optType ,   ProviderInfo   optProviderInfo )throws SystemOptServiceException{
-	
-	     return  iProviderInfoService.saveUpdate(  optType ,    optProviderInfo );
-	 
-	 }
-            
-       	  
-     public SelectPage<ProviderInfo > search(OptType  optType ,    
-				           ProviderInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-	
-	 return  iProviderInfoService.search(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-					
-	}
-	
-	public List<ProviderInfo > searchList(OptType  optType ,    
-				           ProviderInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			 return  iProviderInfoService.searchList(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-            
+    public ProviderInfo saveUpdate(OptType optType, ProviderInfo optProviderInfo) throws SystemOptServiceException {
+
+        return iProviderInfoService.saveUpdate(optType, optProviderInfo) ;
+
     }
-            
-    public  ProviderInfo    remove(OptType  optType ,  ProviderInfo   optProviderInfo)throws SystemOptServiceException{
-			
-			   return  iProviderInfoService.remove(  optType ,   optProviderInfo);
-			
-	}
-            
-            
-           public  ProviderInfo get(Integer id)throws SystemOptServiceException
-		   {
-		           return  iProviderInfoService.get( id);
-		   
-		   }
+
+    public SelectPage<ProviderInfo> search(OptType optType, ProviderInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iProviderInfoService.search(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public List<ProviderInfo> searchList(OptType optType, ProviderInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iProviderInfoService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public ProviderInfo remove(OptType optType, ProviderInfo optProviderInfo) throws SystemOptServiceException {
+
+        return iProviderInfoService.remove(optType, optProviderInfo) ;
+
+    }
+
+    public ProviderInfo get(Integer id) throws SystemOptServiceException {
+        return iProviderInfoService.get(id) ;
+
+    }
 
 }

@@ -20,6 +20,5 @@ public interface ISysOptHistoryService {
 
     public SelectPage<SysOptHistory> search(OptType optType, SysOptHistorySearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
 
-    
-    public List<SysOptHistory> searchComb(String type, String name ,int...startLimit) throws SystemOptServiceException ;
+    public List<SysOptHistory> searchComb(String type, String name, int... startLimit) throws SystemOptServiceException ;
 }

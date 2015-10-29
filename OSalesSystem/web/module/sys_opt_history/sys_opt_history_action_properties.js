@@ -56,7 +56,7 @@ var sys_opt_history_grid_column = {
 			if (value == null) {
 				return value;
 			} else {
-				
+
 				if (value == null)
 					return null
 				else if (value.name == null)

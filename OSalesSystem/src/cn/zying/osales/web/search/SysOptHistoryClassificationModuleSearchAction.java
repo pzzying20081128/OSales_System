@@ -25,33 +25,33 @@ public class SysOptHistoryClassificationModuleSearchAction extends ABSalesSearch
     @Override
     protected List<CombSearchBean> searchResult() throws Exception {
         try {
-        List<SysOptHistory> result = service.searchComb(type, name, 0, 20) ;
-        List<CombSearchBean> combSearchBeans = new ArrayList<CombSearchBean>() ;
-        for (SysOptHistory sysOptHistory : result) {
-            CombSearchBean combSearchBean = new CombSearchBean() ;
-            combSearchBeans.add(combSearchBean) ;
-            switch (type) {
-            case "classification": {
-                combSearchBean.setId(sysOptHistory.getClassification()) ;
-                combSearchBean.setName(sysOptHistory.getClassification()) ;
-                break ;
-            }
-            case "module": {
-                combSearchBean.setId(sysOptHistory.getModule()) ;
-                combSearchBean.setName(sysOptHistory.getModule()) ;
-                break ;
-            }
+            List<SysOptHistory> result = service.searchComb(type, name, 0, 20) ;
+            List<CombSearchBean> combSearchBeans = new ArrayList<CombSearchBean>() ;
+            for (SysOptHistory sysOptHistory : result) {
+                CombSearchBean combSearchBean = new CombSearchBean() ;
+                combSearchBeans.add(combSearchBean) ;
+                switch (type) {
+                case "classification": {
+                    combSearchBean.setId(sysOptHistory.getClassification()) ;
+                    combSearchBean.setName(sysOptHistory.getClassification()) ;
+                    break ;
+                }
+                case "module": {
+                    combSearchBean.setId(sysOptHistory.getModule()) ;
+                    combSearchBean.setName(sysOptHistory.getModule()) ;
+                    break ;
+                }
+
+                }
 
             }
+            return combSearchBeans ;
 
+        } catch (Exception e) {
+            this.msg = handError(e) ;
+            this.success = false ;
         }
-        return combSearchBeans ;
-        
-    } catch (Exception e) {
-        this.msg = handError(e) ;
-        this.success = false ;
-    }
-     return null;
+        return null ;
     }
 
     public String getType() {

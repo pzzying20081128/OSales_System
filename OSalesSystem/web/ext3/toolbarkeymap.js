@@ -1,4 +1,3 @@
-
 Ext.ux.ToolbarKeyMap = Ext.extend(Object, ( function() {
 	var kb, owner, mappings;
 	var showHotKey = true;

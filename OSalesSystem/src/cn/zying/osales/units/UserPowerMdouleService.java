@@ -29,13 +29,13 @@ public class UserPowerMdouleService extends ABCommonsService implements IUserPow
     @Override
     public List<String> listUserModulePowerBySysUserId(String loginUserId) throws Exception {
 
-        return systemUserService.listUserModulePowerBySysUserId(Integer.parseInt (loginUserId )) ;
+        return systemUserService.listUserModulePowerBySysUserId(Integer.parseInt(loginUserId)) ;
     }
 
     @Override
     public List<UserPower<UserOptPower>> searchUserPower(String moduleId, String loginUserId) throws Exception {
 
-        return systemUserService.searchUserPower(moduleId, Integer.parseInt (loginUserId )) ;
+        return systemUserService.searchUserPower(moduleId, Integer.parseInt(loginUserId)) ;
     }
 
 }

@@ -16,7 +16,6 @@ import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 
-
 @MappedSuperclass
 public class StockDetailCommBean extends DetailCommBean {
 
@@ -128,7 +127,7 @@ public class StockDetailCommBean extends DetailCommBean {
 
     @Column(name = "store_position_id", insertable = false, updatable = false)
     private Integer storePositionId ;
-    
+
     // 生产日期
     @Column(name = "produce_date")
     @Temporal(TemporalType.DATE)

@@ -8,6 +8,8 @@ import cn.zying.osales.pojos.StockInStore ;
 import cn.zying.osales.pojos.StockInStoreDetail ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.StockOrderDetail ;
+import cn.zying.osales.pojos.StockStoreReceive ;
+import cn.zying.osales.pojos.StockStoreReceiveDetail ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 
@@ -26,9 +28,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_in_store_detail";
+        String moduleNmae="stock_store_reveive_detail";
         
-        Class<?> clazz = StockInStoreDetail.class;
+        Class<?> clazz = StockStoreReceiveDetail.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

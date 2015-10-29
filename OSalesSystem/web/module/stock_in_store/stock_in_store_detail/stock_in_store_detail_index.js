@@ -53,7 +53,8 @@ function create_stock_in_store_detail_window(moduleId, moduleName, params) {
 						return;
 					stock_in_store_detail_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						mainData:select_rows
+						mainData : select_rows,
+						mainGrid : main_Grid
 					});
 				}
 			}, {

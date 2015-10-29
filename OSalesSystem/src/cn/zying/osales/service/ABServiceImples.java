@@ -18,7 +18,7 @@ public class ABServiceImples extends ERPBaseService implements IABService {
         String num = "" ;
         Date date = new Date() ;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd") ;
-           Long total_count = this.findSinglenessByHSQL("SELECT COUNT(*) FROM SerialNum WHERE pre='" + prefix + "' AND date= '" + sdf.format(date) + "'") ;
+        Long total_count = this.findSinglenessByHSQL("SELECT COUNT(*) FROM SerialNum WHERE pre='" + prefix + "' AND date= '" + sdf.format(date) + "'") ;
         List<SerialNum> list ;
         if (total_count > 0) list = this.findByHSQL("FROM SerialNum WHERE pre='" + prefix + "'  AND date= '" + sdf.format(date) + "' ORDER BY id ASC  ", total_count.intValue() - 1, total_count.intValue()) ;
         else

@@ -27,8 +27,8 @@ public class UserLoginAction extends LoginAction<SysStaffUser> {
     protected SessionUser<SysStaffUser> isValidate(String userName, String userPasswd) {
         SysStaffUser systemUser = systemUserService.searchByAccessName(userName) ;
         if (systemUser == null || !systemUser.getPwd().equals(userPasswd)) {
-            Loggerfactory.error(logger, " systemUser "+systemUser +"     "+(systemUser!=null ? systemUser.getPwd():"空"));
-            this.msg = ( systemUser == null ? OSalesConfigProperties.USER_PASSWORD_ERROR + "[0]" : OSalesConfigProperties.USER_PASSWORD_ERROR + "[1]") ;
+            Loggerfactory.error(logger, " systemUser " + systemUser + "     " + (systemUser != null ? systemUser.getPwd() : "空")) ;
+            this.msg = (systemUser == null ? OSalesConfigProperties.USER_PASSWORD_ERROR + "[0]" : OSalesConfigProperties.USER_PASSWORD_ERROR + "[1]") ;
             return null ;
         } else {
             SessionUser<SysStaffUser> sessionUser = new SessionUser<SysStaffUser>() ;

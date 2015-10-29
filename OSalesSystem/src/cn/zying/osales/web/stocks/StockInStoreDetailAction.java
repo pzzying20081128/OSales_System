@@ -8,23 +8,27 @@ import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.StockInStore ;
 import cn.zying.osales.pojos.StockInStoreDetail ;
-import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.StockOrderDetail ;
+import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.StockInStoreDetailSearchBean ;
-import cn.zying.osales.units.search.bean.StockInStoreSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockInStoreDetailService ;
 import cn.zying.osales.web.aop.IAopStockInStoreService ;
 import cn.zying.osales.web.aop.IAopStockOrderDetailService ;
-import cn.zying.osales.web.aop.IAopStockOrderService ;
 
 @Component("StockInStoreDetailAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
 public class StockInStoreDetailAction extends OSalesSystemABAction<StockInStoreDetail> {
 
+    private static final long serialVersionUID = 6504438201408756157L ;
+
     @Autowired
     @Qualifier(IAopStockInStoreDetailService.name)
     private IAopStockInStoreDetailService service ;
+
+    @Autowired
+    @Qualifier(IAopStockInStoreService.name)
+    private IAopStockInStoreService aopStockInStoreService ;
 
     @Autowired
     @Qualifier(IAopStockOrderDetailService.name)
@@ -49,10 +53,12 @@ public class StockInStoreDetailAction extends OSalesSystemABAction<StockInStoreD
 
     public String saveUpdate() throws Exception {
         try {
-
+            BuildMoneyUnits.build(stockInstoredetail) ;
             this.result = service.saveUpdate(optType, stockInstoredetail) ;
             StockOrderDetail stockOrderDetail = stockOrderDetailService.get(result.getStockOrderDetailId()) ;
             this.result.setStockOrderDetail(stockOrderDetail) ;
+            StockInStore stockInStore = aopStockInStoreService.searchStockInStoreDetails(this.result.getStockInStoreId()) ;
+            this.result.setStockInStore(stockInStore) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -104,7 +110,5 @@ public class StockInStoreDetailAction extends OSalesSystemABAction<StockInStoreD
     public void setSearchBean(StockInStoreDetailSearchBean searchBean) {
         this.searchBean = searchBean ;
     }
-
- 
 
 }

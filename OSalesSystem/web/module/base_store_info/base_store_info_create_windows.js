@@ -1,8 +1,8 @@
 function base_store_info_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
-	var positonParams   =  params.positonParams;
+
+	var positonParams = params.positonParams;
 
 	var base_store_info_params = {
 		title : "新增" + moduleName,
@@ -53,7 +53,7 @@ function base_store_info_create_windows(moduleId, moduleName, params) {
 				items : [createLocalCombo({
 					id : 'storeinfo.storeType',
 					name : 'storeinfo.storeType',
-					fieldLabel : ' 仓库类型', //一般仓库;专柜;样品
+					fieldLabel : ' 仓库类型', // 一般仓库;专柜;样品
 					storeData : [['一般仓库', "一般仓库"]],
 					defaultValue : "一般仓库",
 					allowBlank : true
@@ -161,7 +161,6 @@ function base_store_info_create_windows(moduleId, moduleName, params) {
 
 	}
 
-	var base_store_info_create_window = new base_store_info_save_update_form_panel_windows(base_store_info_params,
-	positonParams);
+	var base_store_info_create_window = new base_store_info_save_update_form_panel_windows(base_store_info_params, positonParams);
 
 }

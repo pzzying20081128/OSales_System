@@ -289,7 +289,7 @@ var base_product_info_grid_column = {
 				return value.name;
 
 		}
-	},  {
+	}, {
 		header : '最大采购价',
 		width : 200,
 		dataIndex : 'maxStockPriceMoneyShow',

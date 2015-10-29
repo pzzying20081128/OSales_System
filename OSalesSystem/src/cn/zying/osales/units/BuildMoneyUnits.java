@@ -18,7 +18,7 @@ public class BuildMoneyUnits {
 
     private static Logger logger = Loggerfactory.instance(BuildMoneyUnits.class) ;
 
-    public  static <V> void build(V result) {
+    public static <V> void build(V result) {
 
         PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(result.getClass()) ;
 
@@ -38,7 +38,7 @@ public class BuildMoneyUnits {
     private static void handTaxRate(PropertyDescriptor propertyDescriptor, String fieldName, Object result) {
 
         String taxRate_show = readFieldValue(propertyDescriptor, fieldName, result) ;
-        if(taxRate_show==null)return ;
+        if (taxRate_show == null) return ;
         Long money = buildMoneyFactory.switchRateToLongPercent(Double.parseDouble(taxRate_show)) ;
 
         String money_field = fieldName.substring(0, fieldName.length() - 11) ;
@@ -49,8 +49,8 @@ public class BuildMoneyUnits {
     private static void handMoney(PropertyDescriptor propertyDescriptor, String fieldName, Object result) {
 
         String money_show = readFieldValue(propertyDescriptor, fieldName, result) ;
-        
-       if(money_show==null)return ;
+
+        if (money_show == null) return ;
 
         Long money = buildMoneyFactory.switchMoneyToLongPrecision(Double.parseDouble(money_show)) ;
 
@@ -87,7 +87,7 @@ public class BuildMoneyUnits {
         StockOrderDetail stockOrderDetail = new StockOrderDetail() ;
         stockOrderDetail.setNoTaxMoneyMoneyShow("23.34") ;
         BuildMoneyUnits.build(stockOrderDetail) ;
-        Long xx = stockOrderDetail.getNoTaxMoney();
+        Long xx = stockOrderDetail.getNoTaxMoney() ;
         System.out.println("==>  " + xx) ;
     }
 

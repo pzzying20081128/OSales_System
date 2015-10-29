@@ -38,22 +38,39 @@ function create_stock_in_store_window(moduleId, moduleName) {
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = stock_in_store_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : stock_in_store_search_params
+						grid : mainGridModule
+						,
+
 					});
 				}
-			}]
+			},
+
+			{
+				id : moduleId + '_check',
+				xtype : "tbbutton",
+				text : "审核",
+				// keyBinding : createSearchKey(),
+				handler : function() {
+					var searchWindex = stock_in_store_check_windows(moduleId, moduleName, {
+						grid : mainGridModule,
+						detailGrid : detail_grid
+
+					});
+				}
+			}
+
+			]
 
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-                detail_grid.load({
-                  params:{
-                  	'searchBean.stockInStoreId':rowDataId,
-                  	"searchBean.status":'有效'
-                  }
-                });
+				detail_grid.load({
+					params : {
+						'searchBean.stockInStoreId' : rowDataId,
+						"searchBean.status" : '有效'
+					}
+				});
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -63,17 +80,14 @@ function create_stock_in_store_window(moduleId, moduleName) {
 	});
 
 	var mainGrid = mainGridModule.getGrid();
-	
-	
-		var detail_grid = new create_stock_in_store_detail_window(moduleId + "_detail", moduleName, {
-		
+
+	var detail_grid = new create_stock_in_store_detail_window(moduleId + "_detail", moduleName, {
+
 		mainGrid : mainGrid
-	
+
 	});
-	
-	
-	
-		var layout = new Ext.Panel({
+
+	var layout = new Ext.Panel({
 		layout : 'border',
 		width : 600,
 		height : 600,
@@ -105,8 +119,6 @@ function create_stock_in_store_window(moduleId, moduleName) {
 
 		]
 	});
-	
-	
 
 	var window = new Ext.ERPWindow({
 		title : moduleName,
@@ -150,6 +162,45 @@ function create_stock_in_store_window(moduleId, moduleName) {
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {
 						mainGrid.reload();
+					}
+				});
+			}
+		});
+	}
+
+	function stock_in_store_check_windows(moduleId, moduleName, params) {
+		var mainGridModule = params.grid;
+		var mainGrid = mainGridModule.getGrid();
+
+		var detailGrid = params.detailGrid;
+
+		var selection_rows = mainGrid.getSelectionModel().getSelections();
+
+		if (selection_rows == null) {
+			showErrorMsg('提示信息', '请选择要审核的数据记录');
+			return false;
+		}
+
+		if (selection_rows.length != 1) {
+			showErrorMsg('提示信息', '只能选择一行数据记录！！');
+			return false;
+		}
+		var selectId = selection_rows[0].id;
+		showMsgYN({
+			msg : "是否要审核该条信息",
+			yes : function(YN) {
+				ERPAjaxRequest({
+					url : "./simple_StockInStore_check.do",
+					params : {
+						"uuid" : selectId
+					},
+					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+					success : function(response, options) {
+						mainGrid.reload({
+							success : function() {
+								detailGrid.removeAll();
+							}
+						});
 					}
 				});
 			}

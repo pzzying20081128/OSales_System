@@ -17,7 +17,6 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
 
     public static String regexPackage = "^cn.zying.osales(\\.\\D+)*(.pojos|.bean)$" ;
 
-
     public SalesPrpertiesSetValueService() {
         super(regexPackage) ;
     }
@@ -45,10 +44,10 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
             for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
                 if (!propertyDescriptor.getPropertyType().equals(ProductInfo.class)) continue ;
 
-                String fieldProductInfo = propertyDescriptor.getDisplayName();
+                String fieldProductInfo = propertyDescriptor.getDisplayName() ;
 
                 ProductInfo productInfo = readFieldValue(fieldProductInfo, result) ;
-                
+
                 String orderCountFieldName = fieldName.substring(0, fieldName.length() - 7) ;
                 Integer orderCount = readFieldValue(orderCountFieldName, result) ;
                 String boxCount = BuildProductInfoUnit.createBoxCount(orderCount, productInfo) ;
@@ -85,7 +84,5 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
         writeFieldValue(fieldName, result, money_show) ;
 
     }
-
-  
 
 }

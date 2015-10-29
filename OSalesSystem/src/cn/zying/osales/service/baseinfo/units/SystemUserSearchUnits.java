@@ -97,19 +97,19 @@ public class SystemUserSearchUnits extends ABCommonsService {
                     sqlWhere = sqlWhere + " and  sysStaffUser.status ='" + searchBean.getStatus() + "'" ;
                 }
 
-                if (searchBean.getIsBizMan() !=null && searchBean.getIsBizMan() != OSalesConfigProperties.isDefault_all) {
+                if (searchBean.getIsBizMan() != null && searchBean.getIsBizMan() != OSalesConfigProperties.isDefault_all) {
                     sqlWhere = sqlWhere + " and  sysStaffUser.isBizMan =" + searchBean.getIsBizMan() ;
                 }
-                if (searchBean.getIsGoodsMan() !=null && searchBean.getIsGoodsMan() != OSalesConfigProperties.isDefault_all) {
+                if (searchBean.getIsGoodsMan() != null && searchBean.getIsGoodsMan() != OSalesConfigProperties.isDefault_all) {
                     sqlWhere = sqlWhere + " and  sysStaffUser.isGoodsMan =" + searchBean.getIsGoodsMan() ;
                 }
-                if (searchBean.getIsStockMan() !=null && searchBean.getIsStockMan() != OSalesConfigProperties.isDefault_all) {
+                if (searchBean.getIsStockMan() != null && searchBean.getIsStockMan() != OSalesConfigProperties.isDefault_all) {
                     sqlWhere = sqlWhere + " and  sysStaffUser.isStockMan =" + searchBean.getIsStockMan() ;
                 }
-                if (searchBean.getIsTransportMan() !=null && searchBean.getIsTransportMan() != OSalesConfigProperties.isDefault_all) {
+                if (searchBean.getIsTransportMan() != null && searchBean.getIsTransportMan() != OSalesConfigProperties.isDefault_all) {
                     sqlWhere = sqlWhere + " and  sysStaffUser.isTransportMan =" + searchBean.getIsTransportMan() ;
                 }
-                if (searchBean.getSex() !=null && searchBean.getSex() != OSalesConfigProperties.isDefault_all) {
+                if (searchBean.getSex() != null && searchBean.getSex() != OSalesConfigProperties.isDefault_all) {
                     sqlWhere = sqlWhere + " and  sysStaffUser.sex =" + searchBean.getSex() ;
                 }
                 if (ToolsUnits.isNOtNulll(searchBean.getName())) {

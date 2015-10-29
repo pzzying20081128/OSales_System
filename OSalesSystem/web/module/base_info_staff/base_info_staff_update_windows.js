@@ -25,7 +25,7 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 		url : './saveSysStaffinfo.do',
 		params : {
 			optType : "update",
-	   "systemUserInfo.id":selectId
+			"systemUserInfo.id" : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
@@ -332,15 +332,14 @@ function base_info_staff_update_windows(moduleId, moduleName, params) {
 
 	}
 
-	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(
-	base_info_staff_params,{
-	  selectId:selectId
+	var base_info_staff_create_window = new base_info_staff_save_update_form_panel_windows(base_info_staff_params, {
+		selectId : selectId
 	});
 
 	base_info_staff_create_window.load({
 		url : './getSysStaffinfo.do?uuid=' + selectId,
 		success : function(result) {
-//        base_info_staff_create_window.loadPower(selectId);
+			// base_info_staff_create_window.loadPower(selectId);
 		}
 	});
 

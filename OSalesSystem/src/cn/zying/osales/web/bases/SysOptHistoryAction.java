@@ -1,4 +1,4 @@
-package cn.zying.osales.web.bases;
+package cn.zying.osales.web.bases ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
@@ -9,7 +9,6 @@ import cn.zying.osales.pojos.SysOptHistory ;
 import cn.zying.osales.units.search.bean.SysOptHistorySearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopSysOptHistoryService ;
-
 
 @Component("SysOptHistoryAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
@@ -22,15 +21,15 @@ public class SysOptHistoryAction extends OSalesSystemABAction<SysOptHistory> {
 
     @Autowired
     @Qualifier(IAopSysOptHistoryService.name)
-    private IAopSysOptHistoryService  service ;
-    
-    private SysOptHistorySearchBean  searchBean;
-    
+    private IAopSysOptHistoryService service ;
+
+    private SysOptHistorySearchBean searchBean ;
+
     public String list() throws Exception {
         try {
-            if(searchBean==null)searchBean=new SysOptHistorySearchBean();
+            if (searchBean == null) searchBean = new SysOptHistorySearchBean() ;
             SelectPage<SysOptHistory> selectPage = service.search(optType, searchBean, commSearchBean, start, limit) ;
-            writeObjectService.intToPrpertiesUnits(selectPage);
+            writeObjectService.intToPrpertiesUnits(selectPage) ;
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {
             this.success = false ;
@@ -46,5 +45,5 @@ public class SysOptHistoryAction extends OSalesSystemABAction<SysOptHistory> {
     public SysOptHistorySearchBean getSearchBean() {
         return searchBean ;
     }
-   
+
 }

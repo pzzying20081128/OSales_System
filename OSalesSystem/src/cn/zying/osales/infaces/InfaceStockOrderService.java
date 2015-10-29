@@ -1,4 +1,4 @@
-package cn.zying.osales.infaces;
+package cn.zying.osales.infaces ;
 
 import java.util.List ;
 
@@ -10,26 +10,20 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StockOrderSearchBean ;
 
 public interface InfaceStockOrderService {
-    
-    
-       /**
-             *  增加或更新
-             */
-            public StockOrder   saveUpdate(OptType  optType ,   StockOrder   optStockOrder )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<StockOrder > search(OptType  optType ,    
-				           StockOrderSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<StockOrder > searchList(OptType  optType ,    
-				           StockOrderSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  StockOrder    remove(OptType  optType ,  StockOrder   optStockOrder)throws SystemOptServiceException;
-            
-            
-           public  StockOrder get(Integer id)throws SystemOptServiceException;
-           
-           public void check(Integer id ,Integer  optUserId)throws SystemOptServiceException;
 
+    /**
+          *  增加或更新
+          */
+    public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException ;
+
+    public SelectPage<StockOrder> search(OptType optType, StockOrderSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public List<StockOrder> searchList(OptType optType, StockOrderSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public StockOrder remove(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException ;
+
+    public StockOrder get(Integer id) throws SystemOptServiceException ;
+
+    public void check(Integer id, Integer optUserId) throws SystemOptServiceException ;
 
 }

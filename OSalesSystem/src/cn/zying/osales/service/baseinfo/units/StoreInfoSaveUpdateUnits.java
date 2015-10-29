@@ -25,14 +25,14 @@ public class StoreInfoSaveUpdateUnits extends ABCommonsService {
     }
 
     public StoreInfo save(StoreInfo optStoreInfo) throws SystemOptServiceException {
-                 baseService.save(optStoreInfo);
-                 return optStoreInfo;
+        baseService.save(optStoreInfo) ;
+        return optStoreInfo ;
 
     }
 
     public StoreInfo update(StoreInfo optStoreInfo) throws SystemOptServiceException {
-                  baseService.update(optStoreInfo);
-                  return optStoreInfo;
+        baseService.update(optStoreInfo) ;
+        return optStoreInfo ;
     }
 
 }

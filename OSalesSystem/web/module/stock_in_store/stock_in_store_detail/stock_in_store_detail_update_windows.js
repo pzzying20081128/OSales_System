@@ -4,6 +4,8 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 
+	var mainGrid = params.mainGrid;
+
 	var selection_rows = grid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
@@ -18,8 +20,8 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 	var selectId = selection_rows[0].id;
 
 	productInfo = createERPcombo({
-		id : 'stockInstoredetail.productInfo.name',
-		name : 'stockInstoredetail.productInfo.name',
+		id : 'stockInstoredetail.productInfoId',
+		name : 'stockInstoredetail.productInfoId',
 		fieldLabel : '入库产品',
 		url : "./ProductInfo_detailscombo.do?selectype=productInfo",
 		params : {
@@ -312,10 +314,11 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		title : "编辑" + moduleName,
 		action : "update",
 		grid : grid,
+		mainGrid : mainGrid,
 		// 结果路径
-		pojo : "sss",
+		pojo : "result",
 		// url
-		url : './saveUpdateMaterialManage.action',
+		url : './simple_StockInStoreDetail_saveUpdate.do',
 		params : {
 			optType : "update",
 			"stockInstoredetail.id" : selectId
@@ -327,10 +330,6 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		}, [{
 			name : 'stockinstoredetail.stockOrder.productInfoName',
 			mapping : 'stockOrderDetail.productInfo.name'
-		}, {
-			name : 'stockInstoredetail.productInfo.name',
-			mapping : 'productInfo.name'
-
 		}, {
 			name : 'stockInstoredetail.productInfoId',
 			mapping : 'productInfoId'

@@ -372,8 +372,8 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 	}
 
 	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params);
-	
-//	stock_order_create_window.loadform(selection_rows[0].data);
+
+	// stock_order_create_window.loadform(selection_rows[0].data);
 
 	stock_order_create_window.load({
 		url : './simple_StockOrder_get.do?uuid=' + selectId,

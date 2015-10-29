@@ -34,10 +34,10 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 		// 结果路径
 		pojo : "result",
 		// url
-	url : './simple_ProductCategory_save.do',
+		url : './simple_ProductCategory_save.do',
 		params : {
 			optType : "update",
-			"productCategory.id":selectId
+			"productCategory.id" : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
@@ -122,8 +122,7 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}]
-		}
-		,{// 第二排
+		}, {// 第二排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{
@@ -135,20 +134,17 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 200
 				},
-				items : [
-					createLocalCombo({
+				items : [createLocalCombo({
 					id : 'productCategory.status',
 					name : 'productCategory.status',
 					fieldLabel : ' 状态',
 					storeData : [['有效', "有效"], ['删除', '删除']],
 					defaultValue : null,
 					allowBlank : false
-				})
-			   ]
+				})]
 
 			}]
-		}
-		]
+		}]
 
 	}
 
@@ -161,10 +157,11 @@ function base_product_category_update_windows(moduleId, moduleName, params) {
 			productCategoryParent.load({
 				params : {
 					uuid : _result_.result.parentId,
-					"searchBean.status" : "有效",
+					"searchBean.status" : "有效"
+					,
 				},
 				success : function() {
-                      productCategoryParent.setValue(_result_.result.parentId);
+					productCategoryParent.setValue(_result_.result.parentId);
 				}
 			});
 		}

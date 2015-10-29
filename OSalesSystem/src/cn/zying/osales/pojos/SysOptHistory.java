@@ -47,7 +47,7 @@ public class SysOptHistory {
     @FieldDesc(name = "操作人员", mapping = "sysStaffUser.name")
     private SysStaffUser sysStaffUser ;
 
-    @Column(name = "sys_staff_user_id" ,insertable=false,updatable=false)
+    @Column(name = "sys_staff_user_id", insertable = false, updatable = false)
     @FieldDesc(name = "模块", isShow = false)
     private Integer sysStaffUserId ;
 

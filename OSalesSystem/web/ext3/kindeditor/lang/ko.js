@@ -1,11 +1,11 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Composite <ukjinplant@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet Copyright (C) 2006-2011
+ * kindsoft.net
+ * 
+ * @author Composite <ukjinplant@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ ******************************************************************************/
 
 KindEditor.lang({
 	source : '소스',
@@ -220,13 +220,17 @@ KindEditor.lang({
 		'Trebuchet MS' : 'Trebuchet MS',
 		'Verdana' : 'Verdana'
 	},
-	'lineheight.lineHeight' : [
-		{'1' : '행간 1'},
-		{'1.5' : '행간 1.5'},
-		{'2' : '행간 2'},
-		{'2.5' : '행간 2.5'},
-		{'3' : '행간 3'}
-	],
+	'lineheight.lineHeight' : [{
+		'1' : '행간 1'
+	}, {
+		'1.5' : '행간 1.5'
+	}, {
+		'2' : '행간 2'
+	}, {
+		'2.5' : '행간 2.5'
+	}, {
+		'3' : '행간 3'
+	}],
 	'template.selectTemplate' : '템플릿',
 	'template.replaceContent' : '내용 바꾸기',
 	'template.fileList' : {

@@ -1,4 +1,4 @@
-package cn.zying.osales.infaces;
+package cn.zying.osales.infaces ;
 
 import java.util.List ;
 
@@ -10,24 +10,18 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StoreInfoSearchBean ;
 
 public interface InfaceStoreInfoService {
-    
-    
-       /**
-             *  增加或更新
-             */
-            public StoreInfo   saveUpdate(OptType  optType ,   StoreInfo   optStoreInfo )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<StoreInfo > search(OptType  optType ,    
-				           StoreInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<StoreInfo > searchList(OptType  optType ,    
-				           StoreInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  StoreInfo    remove(OptType  optType ,  StoreInfo   optStoreInfo)throws SystemOptServiceException;
-            
-            
-           public  StoreInfo get(Integer id)throws SystemOptServiceException;
 
+    /**
+          *  增加或更新
+          */
+    public StoreInfo saveUpdate(OptType optType, StoreInfo optStoreInfo) throws SystemOptServiceException ;
+
+    public SelectPage<StoreInfo> search(OptType optType, StoreInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public List<StoreInfo> searchList(OptType optType, StoreInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public StoreInfo remove(OptType optType, StoreInfo optStoreInfo) throws SystemOptServiceException ;
+
+    public StoreInfo get(Integer id) throws SystemOptServiceException ;
 
 }

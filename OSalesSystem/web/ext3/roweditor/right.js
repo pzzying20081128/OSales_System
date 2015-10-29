@@ -20,8 +20,7 @@ Ext.ux.ToastWindow = Ext.extend(Ext.Window, {
 		this.body.update(msg);
 	},
 	setTitle : function(title, iconCls) {
-		Ext.ux.ToastWindow.superclass.setTitle.call(this, title, iconCls
-				|| this.iconCls);
+		Ext.ux.ToastWindow.superclass.setTitle.call(this, title, iconCls || this.iconCls);
 	},
 	onRender : function(ct, position) {
 		Ext.ux.ToastWindow.superclass.onRender.call(this, ct, position);
@@ -36,7 +35,7 @@ Ext.ux.ToastWindow = Ext.extend(Ext.Window, {
 			Ext.ux.ToastWindowMgr.positions.remove(this.pos);
 			this.task.cancel();
 		}, this);
-//		this.task.delay(4000);
+		// this.task.delay(4000);
 	},
 	animShow : function() {
 		this.pos = 0;
@@ -44,8 +43,7 @@ Ext.ux.ToastWindow = Ext.extend(Ext.Window, {
 			this.pos++;
 		Ext.ux.ToastWindowMgr.positions.push(this.pos);
 		this.setSize(250, 150);
-		this.el.alignTo(document, "br-br", [ -20,
-				-20 - ((this.getSize().height + 10) * this.pos) ]);
+		this.el.alignTo(document, "br-br", [-20, -20 - ( ( this.getSize().height + 10 ) * this.pos )]);
 		this.el.slideIn('b', {
 			duration : 2,
 			callback : this.afterShow,
@@ -67,82 +65,81 @@ Ext.ux.ToastWindow = Ext.extend(Ext.Window, {
 	 */
 
 Ext.namespace("Ext.mango");
-(function() {
+( function() {
 
-Ext.mango.showToolbar = Ext.extend(Ext.Toolbar, {
-	height:25,
-	margins: {right: 10},
-//	getShowMsg:null,
-//	setShowMessage : function(data) {
-//		this.showMessages.setText(msg);
-//	},
+	Ext.mango.showToolbar = Ext.extend(Ext.Toolbar, {
+		height : 25,
+		margins : {
+			right : 10
+		},
+		// getShowMsg:null,
+		// setShowMessage : function(data) {
+		// this.showMessages.setText(msg);
+		// },
 
-	initComponent : function() {
-		
-		this.displayItem =new Ext.Toolbar.TextItem({});''
-		 this.items=  []; // Fill
-		 this.items.push('->');
-         this.items.push(this.displayItem = new Ext.Toolbar.TextItem({}));
-		 
-		 Ext.mango.showToolbar.superclass.initComponent.call(this);
-		 this.bindStore(this.store);
-		 
-	},
-	
-	bindStore : function(store, initial){
-        var doLoad;
-        if(!initial && this.store){
-            this.store.un('beforeload', this.beforeLoad, this);
-            this.store.un('load', this.onLoad, this);
-            this.store.un('exception', this.onLoadError, this);
-            if(store !== this.store && this.store.autoDestroy){
-                this.store.destroy();
-            }
-        }
-        if(store){
-            store = Ext.StoreMgr.lookup(store);
-//            
-//            store.on('load', 
-//            		
-//            		function (records, options, success,action) {
-//              alert("ww");
-//             }
-//            
-//            );
-            
-            store.on({
-                scope: this,
-                load:   		
-            		this.onLoad
-                  
-         
-        });
-        this.store = store;
-        }
-       
-    },
-    // private
-    onLoad : function (records, options, success) {
-    	var text;
-    	if(typeof(getShowMsg)==null){
-    		
-    	}else{
-    		 var data=records.reader.jsonData;
-    		 text=this.getShowMsg(data);
-    		 this.updateInfo(text);
-    	}
-       
-    	
-       },
-    // private
-    updateInfo : function(text){
-        if(this.items){
-         	 this.displayItem.setText(text);
-        }
-    },
-	
-}); 
-})();
+		initComponent : function() {
+
+			this.displayItem = new Ext.Toolbar.TextItem({});
+			''
+			this.items = []; // Fill
+			this.items.push('->');
+			this.items.push(this.displayItem = new Ext.Toolbar.TextItem({}));
+
+			Ext.mango.showToolbar.superclass.initComponent.call(this);
+			this.bindStore(this.store);
+
+		},
+
+		bindStore : function(store, initial) {
+			var doLoad;
+			if (!initial && this.store) {
+				this.store.un('beforeload', this.beforeLoad, this);
+				this.store.un('load', this.onLoad, this);
+				this.store.un('exception', this.onLoadError, this);
+				if (store !== this.store && this.store.autoDestroy) {
+					this.store.destroy();
+				}
+			}
+			if (store) {
+				store = Ext.StoreMgr.lookup(store);
+				//            
+				// store.on('load',
+				//            		
+				// function (records, options, success,action) {
+				// alert("ww");
+				// }
+				//            
+				// );
+
+				store.on({
+					scope : this,
+					load : this.onLoad
+
+				});
+				this.store = store;
+			}
+
+		},
+		// private
+		onLoad : function(records, options, success) {
+			var text;
+			if (typeof ( getShowMsg ) == null) {
+
+			} else {
+				var data = records.reader.jsonData;
+				text = this.getShowMsg(data);
+				this.updateInfo(text);
+			}
+
+		},
+		// private
+		updateInfo : function(text) {
+			if (this.items) {
+				this.displayItem.setText(text);
+			}
+		}
+		,
+
+	});
+} )();
 Ext.preg('ERPShowToolbar', Ext.mango.showToolbar);
-
-

@@ -1,17 +1,9 @@
- package  cn.zying.osales.service.baseinfo;
+package cn.zying.osales.service.baseinfo ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStoreInfoService ;
+import cn.zying.osales.infaces.InfaceStoreInfoService ;
 
-public interface IStoreInfoService  extends InfaceStoreInfoService { 
-    
-            public String name="IStoreInfoService";
-            
-                
-        
-            
-            
-            
+public interface IStoreInfoService extends InfaceStoreInfoService {
+
+    public String name = "IStoreInfoService" ;
 
 }
