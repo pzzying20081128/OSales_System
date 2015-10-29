@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm:entity-mappings version="2.0" xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd ">
+
+	<orm:named-query name="sysStaffUser_searchByAccessName">
+		<orm:query>
+			select systemUser from SysStaffUser as systemUser where systemUser.account =:account and systemUser.status=:status
+		</orm:query>
+	</orm:named-query>
+
+	<orm:named-query name="sysStaffUser_searchUserPower_userId">
+		<orm:query>
+			select DISTINCT systemUserPower from SystemUserPower as systemUserPower
+
+			left join fetch systemUserPower.userOptPowers
+
+			where systemUserPower.systemUserInfoId =:systemUserInfoId
+
+		</orm:query>
+	</orm:named-query>
+	
+	<orm:named-query name="sysStaffUser_searchUserPower_userId_moduleId">
+		<orm:query>
+			select DISTINCT systemUserPower from SystemUserPower as systemUserPower
+
+			left join fetch systemUserPower.userOptPowers
+
+			where 
+			
+			systemUserPower.systemUserInfoId =:systemUserInfoId
+			
+			and
+			
+			systemUserPower.moduleId =:moduleId
+			
+
+		</orm:query>
+	</orm:named-query>
+
+
+
+
+</orm:entity-mappings>
