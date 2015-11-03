@@ -14,9 +14,6 @@ import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
 import cn.zying.osales.pojos.StockOrderDetail ;
 
 public class BuildMoneyUnits {
-    
-    
-  
 
     private static IBuildMoneyFactory buildMoneyFactory = BuildMoneyFactory.getBuildMoney() ;
 
@@ -53,7 +50,7 @@ public class BuildMoneyUnits {
     private static void handMoney(PropertyDescriptor propertyDescriptor, String fieldName, Object result) {
 
         String money_show = readFieldValue(propertyDescriptor, fieldName, result) ;
-        
+
         if (!ToolsUnits.isNOtNulll(money_show)) return ;
 
         Long money = buildMoneyFactory.switchMoneyToLongPrecision(Double.parseDouble(money_show)) ;

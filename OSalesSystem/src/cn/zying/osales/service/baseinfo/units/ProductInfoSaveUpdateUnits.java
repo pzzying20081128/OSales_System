@@ -31,7 +31,7 @@ public class ProductInfoSaveUpdateUnits extends ABCommonsService {
         }
     }
 
-    private  ProductInfo save(ProductInfo optProductInfo) throws SystemOptServiceException {
+    private ProductInfo save(ProductInfo optProductInfo) throws SystemOptServiceException {
 
         setProperties(optProductInfo) ;
 

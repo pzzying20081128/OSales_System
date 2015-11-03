@@ -7,9 +7,6 @@ public class StockStoreReceiveSearchBean extends StockStoreReceive {
     private String stockOrderNumber ;
 
     private String stockInStoreNumber ;
-    
-    
-    
 
     public String getStockOrderNumber() {
         return stockOrderNumber ;
@@ -26,7 +23,5 @@ public class StockStoreReceiveSearchBean extends StockStoreReceive {
     public void setStockInStoreNumber(String stockInStoreNumber) {
         this.stockInStoreNumber = stockInStoreNumber ;
     }
-
-  
 
 }

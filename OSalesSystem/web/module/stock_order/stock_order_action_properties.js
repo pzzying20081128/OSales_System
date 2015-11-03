@@ -69,7 +69,11 @@ var stock_order_grid_column = {
 	}, {
 		name : 'status',
 		mapping : 'status'
-	}],
+	}, {
+		name : "stockProductType",
+		mapping : "stockProductType"
+	} //
+	],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	column : [new Ext.grid.ERPRowNumberer(), {
@@ -234,7 +238,24 @@ var stock_order_grid_column = {
 				return value;
 
 		}
-	}, {
+	}, { // 采购类型 
+
+		header : '采购类型',
+		width : 200,
+		dataIndex : 'stockProductType',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+
+	},
+
+	{
 		header : '录入人',
 		width : 200,
 		dataIndex : 'recordMan.name',

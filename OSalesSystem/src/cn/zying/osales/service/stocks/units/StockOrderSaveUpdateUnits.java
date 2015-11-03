@@ -4,10 +4,12 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StockOrder ;
+import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -15,21 +17,63 @@ import cn.zying.osales.service.SystemOptServiceException ;
 @Component("StockOrderSaveUpdateUnits")
 public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
-    public void updateSumMoney(Integer optStockOrderId) throws SystemOptServiceException {
-        StockOrder stockOrder = baseService.load(optStockOrderId, StockOrder.class) ;
-        String sql = "select  sum(stockOrderDetail.orderCount) ,sum(stockOrderDetail.taxMoney) ,sum(stockOrderDetail.noTaxMoney)      from    StockOrderDetail as  stockOrderDetail    where stockOrderDetail.stockOrderId = " + optStockOrderId ;
+    public void updateSumMoney(StockOrder stockOrder, StockOrderDetail stockOrderDetail, OptSum optSum) throws SystemOptServiceException {
 
-        Object[] result = baseService.findSinglenessByHSQL(sql) ;
+        //        StockOrder stockOrder = baseService.load(stockOrder_.getId(), StockOrder.class) ;
 
-        stockOrder.setOrderCount(result[0] == null ? null : ((Long) result[0]).intValue()) ;
+        Integer orderCount = stockOrder.getOrderCount() == null ? 0 : stockOrder.getOrderCount() ;
 
-        stockOrder.setTaxSumMoney(result[1] == null ? null : (Long) result[1]) ;
+        Long noTaxSumMoney = stockOrder.getNoTaxSumMoney() == null ? 0 : stockOrder.getNoTaxSumMoney() ;
 
-        stockOrder.setNoTaxSumMoney(result[2] == null ? null : (Long) result[2]) ;
+        Long taxSumMoney = stockOrder.getTaxSumMoney() == null ? 0 : stockOrder.getTaxSumMoney() ;
+
+        switch (optSum) {
+        case add:
+            orderCount = orderCount + stockOrderDetail.getOrderCount() ;
+
+            noTaxSumMoney = noTaxSumMoney + stockOrderDetail.getNoTaxMoney() ;
+
+            taxSumMoney = taxSumMoney + stockOrderDetail.getTaxMoney() ;
+            break ;
+        case del:
+
+            orderCount = orderCount - stockOrderDetail.getOrderCount() ;
+
+            noTaxSumMoney = noTaxSumMoney - stockOrderDetail.getNoTaxMoney() ;
+
+            taxSumMoney = taxSumMoney - stockOrderDetail.getTaxMoney() ;
+
+            break ;
+
+        default:
+            throw new SystemOptServiceException("optSum  error !  " + optSum) ;
+        }
+
+        stockOrder.setOrderCount(orderCount) ;
+
+        stockOrder.setTaxSumMoney(taxSumMoney) ;
+
+        stockOrder.setNoTaxSumMoney(noTaxSumMoney) ;
 
         baseService.update(stockOrder) ;
 
     }
+
+    //    public void updateSumMoney(Integer optStockOrderId) throws SystemOptServiceException {
+    //        StockOrder stockOrder = baseService.load(optStockOrderId, StockOrder.class) ;
+    //        String sql = "select  sum(stockOrderDetail.orderCount) ,sum(stockOrderDetail.taxMoney) ,sum(stockOrderDetail.noTaxMoney)      from    StockOrderDetail as  stockOrderDetail    where stockOrderDetail.stockOrderId = " + optStockOrderId ;
+    //
+    //        Object[] result = baseService.findSinglenessByHSQL(sql) ;
+    //
+    //        stockOrder.setOrderCount(result[0] == null ? null : ((Long) result[0]).intValue()) ;
+    //
+    //        stockOrder.setTaxSumMoney(result[1] == null ? null : (Long) result[1]) ;
+    //
+    //        stockOrder.setNoTaxSumMoney(result[2] == null ? null : (Long) result[2]) ;
+    //
+    //        baseService.update(stockOrder) ;
+    //
+    //    }
 
     public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
@@ -91,7 +135,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
         optStockOrder.setRecordMan(recordMan) ;
 
-        Integer stockManId = optStockOrder.getStockManId();
+        Integer stockManId = optStockOrder.getStockManId() ;
         if (stockManId != null) {
             SysStaffUser stockMan = baseService.load(stockManId, SysStaffUser.class) ;
 

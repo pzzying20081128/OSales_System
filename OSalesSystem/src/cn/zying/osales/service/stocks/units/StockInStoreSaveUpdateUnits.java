@@ -48,12 +48,21 @@ public class StockInStoreSaveUpdateUnits extends ABCommonsService {
 
         switch (optType) {
 
+        case save:
+            return save(optStockInStore) ;
+
         case update:
             return update(optStockInStore) ;
 
         default:
             throw new SystemOptServiceException("[操作类型错误]") ;
         }
+    }
+
+    private StockInStore save(StockInStore optStockInStore) throws SystemOptServiceException {
+         baseService.save(optStockInStore) ;
+
+         return optStockInStore;
     }
 
     public StockInStore update(StockInStore optStockInStore) throws SystemOptServiceException {

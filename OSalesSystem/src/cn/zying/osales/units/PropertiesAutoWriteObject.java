@@ -33,17 +33,15 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
 
     @Override
     protected boolean filterSetProperties(Class<?> classes) {
-        
-      
 
         boolean result = ToolsUnits.regex(regexPackage, classes.getPackage().getName()) ;
 
         if (result == true) {
             //SysStaffUser
             {
-                if(classes.equals(CombinedProduct.class) || classes.equals(CombinedProductDetails.class) ) {
+                if (classes.equals(CombinedProduct.class) || classes.equals(CombinedProductDetails.class)) {
                     result = false ;
-                }else{
+                } else {
                     Table table = classes.getAnnotation(Table.class) ;
                     if (table != null) {
                         String name = table.name() ;
@@ -52,7 +50,7 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
                             result = false ;
                     }
                 }
-        
+
             }
 
         }

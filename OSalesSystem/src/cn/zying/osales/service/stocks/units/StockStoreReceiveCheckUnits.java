@@ -19,7 +19,7 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
             check(stockStoreReceive, optUserId) ;
             break ;
         case 已审核:
-           
+
             break ;
 
         default:
@@ -30,7 +30,7 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
     private void check(StockStoreReceive stockStoreReceive, Integer optUserId) throws SystemOptServiceException {
         SysStaffUser checkMan = baseService.load(optUserId, SysStaffUser.class) ;
         stockStoreReceive.setCheckMan(checkMan) ;
-        stockStoreReceive.setStatus(Status.已审核);
+        stockStoreReceive.setStatus(Status.已审核) ;
         stockStoreReceive.setCheckDate(DateToolsUilts.getnowDate()) ;
         baseService.update(stockStoreReceive) ;
 

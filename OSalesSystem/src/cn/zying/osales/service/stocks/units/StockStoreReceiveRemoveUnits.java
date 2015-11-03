@@ -15,7 +15,7 @@ public class StockStoreReceiveRemoveUnits extends ABCommonsService {
 
         Integer id = optStockStoreReceive.getId() ;
         StockStoreReceive removeStockStoreReceive = baseService.get(id, StockStoreReceive.class) ;
-        removeStockStoreReceive.setStatus(Status.删除);
+        removeStockStoreReceive.setStatus(Status.删除) ;
         baseService.update(removeStockStoreReceive) ;
         return removeStockStoreReceive ;
     }

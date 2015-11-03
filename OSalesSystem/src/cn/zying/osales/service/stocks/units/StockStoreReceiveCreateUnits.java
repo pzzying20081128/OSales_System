@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
-import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.OSalesConfigProperties.OrderSimpleName ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -26,19 +26,19 @@ public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
     public void createStockInStore(OptType optType, StockType stockType, StockInStore stockInStoreImtp) throws SystemOptServiceException {
 
-        ProviderInfo providerInfo = stockInStoreImtp.getProviderInfo();
+        ProviderInfo providerInfo = stockInStoreImtp.getProviderInfo() ;
 
         StockStoreReceive stockStoreReceive = new StockStoreReceive() ;
 
         stockStoreReceive.setStockInStore(stockInStoreImtp) ;
 
-        stockStoreReceive.setNumber(baseService.genSerialNum(OSalesConfigProperties.CODE_STOCK_STORE_RECEIVE)) ;
+        stockStoreReceive.setNumber(baseService.genSerialNum(OrderSimpleName.CGSR.name())) ;
 
         stockStoreReceive.setStatus(Status.有效) ;
 
         stockStoreReceive.setProviderInfo(providerInfo) ;
 
-        SysStaffUser recordMan = stockInStoreImtp.getRecordMan();
+        SysStaffUser recordMan = stockInStoreImtp.getRecordMan() ;
 
         stockStoreReceive.setRecordMan(recordMan) ;
 
@@ -62,7 +62,7 @@ public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
                 stockStoreReceiveDetail.setStockStoreReceive(stockStoreReceive) ;
 
-                ProductInfo productInfo = stockInStoreDetail.getProductInfo();
+                ProductInfo productInfo = stockInStoreDetail.getProductInfo() ;
 
                 stockStoreReceiveDetail.setProductInfo(productInfo) ;
 

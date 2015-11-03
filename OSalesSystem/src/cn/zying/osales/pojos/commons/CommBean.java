@@ -28,10 +28,10 @@ public abstract class CommBean implements java.io.Serializable {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "状态", isShow = true)
     private Status status ;
-    
+
     @Transient
     //查询
-    private List<Status> statuses;
+    private List<Status> statuses ;
 
     public Status getStatus() {
         return status ;

@@ -62,10 +62,10 @@ public class CommOrderBean extends CommBean {
     @Column(name = "number")
     @FieldDesc(name = "单号")
     private String number ;
-    
+
     @Column(name = "create_time")
     @Temporal(TemporalType.DATE)
-    private Date createTime=DateToolsUilts.getnowDate();;
+    private Date createTime = DateToolsUilts.getnowDate() ; ;
 
     public String getRemarks() {
         return remarks ;

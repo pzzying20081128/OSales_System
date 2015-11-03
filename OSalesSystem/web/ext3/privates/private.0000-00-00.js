@@ -17,7 +17,7 @@ Ext.apply(Ext.form.VTypes, {
 	age : function(val, field) {
 		try {
 			if (parseInt(val) >= 18 && parseInt(val) <= 100)
-				return true; 
+				return true;
 			return false
 		} catch (err) {
 			return false
@@ -39,7 +39,7 @@ Ext.apply(Ext.form.VTypes, {
 			if (/^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i.test(val))
 				return true;
 			return false
-		} catch (e) {
+		} catch (e) {  
 			return false
 		}
 	},
@@ -1072,7 +1072,7 @@ var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
 var NoAllowBlankStyle = "background:#fff1a4;";
 var AllowBlankStyle = "background:#ffffff;";
-var showBlankStyle = "background:#99FFFF;";
+var showBlankStyle = "background:#99FFCC;";
 var NoAllowBlankColor = "#fff1a4";
 var AllowBlankColor = "#ffffff";
 function updateUserPasswdWindows() {
@@ -2171,7 +2171,7 @@ Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
 	xtype : "textfield",
 	blankText : "不能为空!",
 	allowBlank : false,
-	style : AllowBlankStyle
+	style : showBlankStyle
 });
 Ext.reg("ERPShowText", Ext.form.ERPShowTextField);
 Ext.form.ERPShowEditText = Ext.extend(Ext.form.TextField, {
@@ -2268,16 +2268,19 @@ function createLocalCombo(params) {
 			Ext.form.ComboBox.superclass.reset.call(this);
 			this.setValue(this.defaultValue)
 		},
+		disabled : typeof params.disabled == "undefined" ? false : params.disabled,
 		allowBlank : typeof params.allowBlank == "undefined" ? false : params.allowBlank,
 		style : typeof params.allowBlank == "undefined" ? NoAllowBlankStyle : params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle,
 		value : typeof params.defaultValue == "undefined" ? null : params.defaultValue,
+		listeners : params.listeners,
 		store : new Ext.data.SimpleStore({
 			fields : ["id", "value"],
 			data : params.storeData,
-			listeners : params.listeners
+			listeners : params.storelisteners
 		})
 	};
-	return xx
+	var comboBox = new Ext.form.ComboBox(xx);
+	return comboBox
 }
 function mainGridWindow(properties) {
 	var detailGrid = null;

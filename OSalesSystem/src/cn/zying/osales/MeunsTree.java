@@ -11,11 +11,11 @@ public class MeunsTree {
     public static MeunsTree instance() {
         return meunsTree ;
     }
-  
+
     public static String[][] initTreeDatas() {
         return meunsTree.initTreeData() ;
     }
-  
+
     private String p0[] = { "sys_info", "系统信息", "false", "font_weight", "0", "0", "[]" } ;
 
     private String p0001[] = { "sys_opt_history", "操作日志", "true", "", "sys_info", "0", "[{search:1,label:'查询'}]" } ;
@@ -34,12 +34,8 @@ public class MeunsTree {
 
     private String p1006[] = { "base_product_info", "产品信息", "true", "", "base_info", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'}]" } ;
 
-
     private String p1007[] = { "base_combined_product", "组合产品", "true", "", "base_info", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
-    
-    
-    
     private String p2[] = { "stock_manage", "采购信息", "false", "font_weight", "0", "0", "[]" } ;
 
     private String p2001[] = { "stock_order", "采购订单", "true", "", "stock_manage", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'} ]" } ;
@@ -49,6 +45,12 @@ public class MeunsTree {
     private String p6[] = { "storage_room_manage", "库房管理", "false", "font_weight", "0", "0", "[]" } ;
 
     private String p6001[] = { "stock_in_store", "采购入库单", "true", "", "storage_room_manage", "0", "[{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
+
+    private String p7[] = { "produce_manage", "生产管理", "false", "font_weight", "0", "0", "[]" } ;
+
+    private String p7001[] = { "produce_combined_product", "组合产品生产", "true", "", "produce_manage", "0", "[{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
+
+    //    
 
     //   
     //    private String p3[] = { "product_classification_management", "产品管理", "false", "font_weight", "0", "0", "[]" } ;
@@ -140,7 +142,7 @@ public class MeunsTree {
     //    private String p504[] = { "WARRANTY_USERS", "延保用户", "true", "", "REPORT_MANAGEMENT", "0", "[{search:1,label:'查询'},{export:1,label:'导出'}]" } ;
 
     //    private String[][] treeData = { p1, p2,p3, p100, p106,p101, p102, p103,p104, p105,p107, p200, p201, p202, p203, p204,p207 ,p208,p209,p210,p211,p212, p205,p214, p206,p213,p215,p500,p501,p502,p503,p504} ;
-    private String[][] treeData = { p0, p0001, p1, p1001, p1002, p1003, p1004, p1005, p1006, p1007 , p2, p2001, p2002, p6, p6001 } ;
+    private String[][] treeData = { p0, p0001, p1, p1001, p1002, p1003, p1004, p1005, p1006, p1007, p2, p2001, p2002, p6, p6001, p7, p7001 } ;
 
     private String[][] initTreeData() {
         return treeData ;

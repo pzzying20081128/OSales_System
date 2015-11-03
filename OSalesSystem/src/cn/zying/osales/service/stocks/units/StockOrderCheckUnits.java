@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
+import cn.zying.osales.service.produce.units.ProduceComBinedProductCreateUnits ;
 
 @Component("StockOrderCheckUnits")
 public class StockOrderCheckUnits extends ABCommonsService {
@@ -18,6 +20,10 @@ public class StockOrderCheckUnits extends ABCommonsService {
     @Autowired
     @Qualifier("StockInStoreCreateUnits")
     private StockInStoreCreateUnits stockInStoreCreateUnits ;
+
+    @Autowired
+    @Qualifier("ProduceComBinedProductCreateUnits")
+    private ProduceComBinedProductCreateUnits produceComBinedProductCreateUnits ;
 
     public void check(Integer stockOrderId, Integer checkManId) throws SystemOptServiceException {
 
@@ -37,13 +43,33 @@ public class StockOrderCheckUnits extends ABCommonsService {
     }
 
     private void check(StockOrder stockOrder, Integer checkManId) throws SystemOptServiceException {
-        stockOrder.setStatus(Status.已审核) ;
-        SysStaffUser checkMan = baseService.load(checkManId, SysStaffUser.class) ;
-        stockOrder.setCheckMan(checkMan) ;
-        stockOrder.setCheckDate(DateToolsUilts.getnowDate()) ;
-        baseService.update(stockOrder) ;
-        stockInStoreCreateUnits.createStockInStore(OptType.check, stockOrder.getStockType(), stockOrder) ;
+
+        ProductInfoType productInfoType = stockOrder.getStockProductType() ;
+
+        switch (productInfoType) {
+        case 普通产品: {
+            stockOrder.setStatus(Status.已审核) ;
+            SysStaffUser checkMan = baseService.load(checkManId, SysStaffUser.class) ;
+            stockOrder.setCheckMan(checkMan) ;
+            stockOrder.setCheckDate(DateToolsUilts.getnowDate()) ;
+            baseService.update(stockOrder) ;
+            stockInStoreCreateUnits.createStockInStore(OptType.check, stockOrder.getStockType(), stockOrder) ;
+        }
+            break ;
+
+        case 组合产品: {
+            stockOrder.setStatus(Status.已审核) ;
+            SysStaffUser checkMan = baseService.load(checkManId, SysStaffUser.class) ;
+            stockOrder.setCheckMan(checkMan) ;
+            stockOrder.setCheckDate(DateToolsUilts.getnowDate()) ;
+            baseService.update(stockOrder) ;
+            produceComBinedProductCreateUnits.create(OptType.check, stockOrder.getStockType(), stockOrder) ;
+        }
+            break ;
+
+        default:
+            throw new SystemOptServiceException("ProductInfoType  ERROR ! " + productInfoType) ;
+        }
 
     }
-
 }

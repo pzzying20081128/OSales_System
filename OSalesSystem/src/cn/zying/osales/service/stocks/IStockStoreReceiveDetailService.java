@@ -1,17 +1,9 @@
- package  cn.zying.osales.service.stocks;
+package cn.zying.osales.service.stocks ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStockStoreReceiveDetailService ;
+import cn.zying.osales.infaces.InfaceStockStoreReceiveDetailService ;
 
-public interface IStockStoreReceiveDetailService  extends InfaceStockStoreReceiveDetailService { 
-    
-            public String name="IStockStoreReceiveDetailService";
-            
-                
-        
-            
-            
-            
+public interface IStockStoreReceiveDetailService extends InfaceStockStoreReceiveDetailService {
+
+    public String name = "IStockStoreReceiveDetailService" ;
 
 }

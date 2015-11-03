@@ -1,19 +1,23 @@
 package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
-    
-    public enum OptSum{
-        add,del
+
+    public enum OptSum {
+        add, del
     }
 
-    //采购订单代号
-    public static String CODE_STOCK_ORDER = "CGSO" ;
+    //采购订单代号 CGSO
 
-    //采购入库单
-    public static String CODE_STOCK_IN_STORE = "CGRK" ;
+    //采购入库单CGRK 
 
-    //采购进货单
-    public static String CODE_STOCK_STORE_RECEIVE = "CGJH" ;
+    //采购进货单 CGSR
+
+    //快速生产 CGSR
+
+    // 单据简称
+    public enum OrderSimpleName {
+        KSSC, CGSR, CGRK, CGSO
+    }
 
     public enum StockType {
         采购订单, 直营采购订单
@@ -71,7 +75,7 @@ public interface OSalesConfigProperties {
     }
 
     public enum Status {
-        无效, 删除, 有效, 全部, 初始化, 已审核
+        无效, 删除, 有效, 全部, 初始化, 已审核, 等待其他审核
     }
 
 }

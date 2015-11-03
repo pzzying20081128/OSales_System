@@ -1,19 +1,7 @@
 package cn.zying.osales.test ;
 import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
 import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
-import cn.zying.osales.pojos.CombinedProduct ;
-import cn.zying.osales.pojos.CombinedProductDetails ;
-import cn.zying.osales.pojos.ProductCategory ;
-import cn.zying.osales.pojos.ProductInfo ;
-import cn.zying.osales.pojos.ProviderInfo ;
-import cn.zying.osales.pojos.StockInStore ;
-import cn.zying.osales.pojos.StockInStoreDetail ;
-import cn.zying.osales.pojos.StockOrder ;
-import cn.zying.osales.pojos.StockOrderDetail ;
-import cn.zying.osales.pojos.StockStoreReceive ;
-import cn.zying.osales.pojos.StockStoreReceiveDetail ;
-import cn.zying.osales.pojos.StoreInfo ;
-import cn.zying.osales.pojos.StorePosition ;
+import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
 
 
 
@@ -30,9 +18,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="base_combined_product_detail";
+        String moduleNmae="produce_combined_product_detail";
         
-        Class<?> clazz = CombinedProductDetails.class;
+        Class<?> clazz = ProduceComBinedProductDetail.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

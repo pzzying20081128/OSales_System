@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.StockOrder ;
@@ -32,7 +33,7 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         default:
             throw new SystemOptServiceException("[操作类型错误]") ;
         }
-        stockOrderSaveUpdateUnits.updateSumMoney(stockOrderDetail.getStockOrderId()) ;
+
         return stockOrderDetail ;
     }
 
@@ -43,7 +44,7 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         optStockOrderDetail.setStockOrder(stockOrder) ;
         switchObject(optStockOrderDetail) ;
         baseService.save(optStockOrderDetail) ;
-
+        stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, optStockOrderDetail, OptSum.add) ;
         return optStockOrderDetail ;
     }
 
@@ -79,12 +80,19 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
 
         StockOrderDetail stockOrderDetail = baseService.get(optStockOrderDetail.getId(), StockOrderDetail.class) ;
 
+        StockOrder stockOrder = baseService.load(stockOrderDetail.getStockOrderId(), StockOrder.class) ;
+
+        stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, stockOrderDetail, OptSum.del) ;
+
         try {
             ToolsUnits.copyBeanProperties(stockOrderDetail, optStockOrderDetail, "noTaxMoney"
 
             , "noTaxPrice", "orderBox", "orderCount", "productInfo", "taxMoney", "taxPrice", "taxRate", "text") ;
 
             baseService.update(stockOrderDetail) ;
+
+            stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, stockOrderDetail, OptSum.add) ;
+
             return stockOrderDetail ;
         } catch (Exception e) {
             throw new SystemOptServiceException(e) ;

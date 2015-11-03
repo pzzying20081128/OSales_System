@@ -18,14 +18,10 @@ import cn.zying.osales.pojos.commons.BaseProductInfo ;
 @Table(name = "base_product_info")
 public class ProductInfo extends BaseProductInfo implements java.io.Serializable {
 
-   
-
     // 商品类型
     //    @Column(name = "commodity_type")
     //    @FieldDesc(name = "商品类型")
     //    private CommodityType commodityType ;
-
-    
 
     //    @Column(name = "stand_price")
     //    // 标准核准价
@@ -142,9 +138,5 @@ public class ProductInfo extends BaseProductInfo implements java.io.Serializable
     public void setLastSalesTaxPriceMoneyHide(String lastSalesTaxPriceMoneyHide) {
         this.lastSalesTaxPriceMoneyHide = lastSalesTaxPriceMoneyHide ;
     }
-
-    
-
- 
 
 }

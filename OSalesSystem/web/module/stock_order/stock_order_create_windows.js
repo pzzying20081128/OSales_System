@@ -6,6 +6,16 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 
 	var detailParams = params.detailParams;
 
+	var stockType = createLocalCombo({
+		id : 'stockorder.stockType',
+		name : 'stockorder.stockType',
+		fieldLabel : ' 订单类型',
+		storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
+		defaultValue : null,
+		allowBlank : false,
+//		disabled:true
+	});
+
 	var stock_order_params = {
 		title : "新增" + moduleName,
 		action : "save",
@@ -55,14 +65,20 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [createLocalCombo({
-					id : 'stockorder.stockType',
-					name : 'stockorder.stockType',
-					fieldLabel : ' 订单类型',
-					storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
+				items : [
+
+				createLocalCombo({
+					id : 'stockorder.stockProductType',
+					name : 'stockorder.stockProductType',
+					fieldLabel : ' 采购类型',
+					storeData : [['普通产品', "普通产品"], ['组合产品', '组合产品']],
 					defaultValue : null,
-					allowBlank : false
-				})]
+					allowBlank : false,
+					
+
+				})
+
+				]
 			}, {
 				columnWidth : .33,
 				layout : 'form',
@@ -71,23 +87,8 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
-					id : 'stockorder.orderDate',
-					name : 'stockorder.orderDate',
-					fieldLabel : ' 订单日期',
-					xtype : 'datefield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					format : 'Y-m-d',
-					allowBlank : true,
-					value : new Date(),
-					listeners : {
-						'specialkey' : function(field, e) {
-
-						}
-					}
-				}]
-			},]
+				items : [stockType]
+			}]
 		},
 		// ////////////////////////////////////////////////////////
 		{// 第二排
@@ -157,7 +158,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					name : 'stockorder.taxSumMoneyMoneyShow',
 					fieldLabel : ' 含税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					// style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -178,7 +179,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					name : 'stockorder.noTaxSumMoneyMoneyShow',
 					fieldLabel : ' 没税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					// style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -229,7 +230,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					name : 'stockorder.orderCount',
 					fieldLabel : ' 订购数量',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					// style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -251,7 +252,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					name : 'stockorder.stockManId1',
 					fieldLabel : ' 合同',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					// style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -260,7 +261,31 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}// 1-2end
-			]
+			, {
+				columnWidth : .33,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 180
+				},
+				items : [{
+					id : 'stockorder.orderDate',
+					name : 'stockorder.orderDate',
+					fieldLabel : ' 订单日期',
+					xtype : 'datefield',
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					format : 'Y-m-d',
+					allowBlank : true,
+					value : new Date(),
+					listeners : {
+						'specialkey' : function(field, e) {
+
+						}
+					}
+				}]
+			}]
 		}, {
 			layout : 'column',
 			baseCls : 'x-plain',

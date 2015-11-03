@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
+import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -21,7 +23,11 @@ public class StockOrderDetailRemoveUnits extends ABCommonsService {
         Integer id = optStockOrderDetail.getId() ;
         StockOrderDetail removeStockOrderDetail = baseService.get(id, StockOrderDetail.class) ;
         baseService.remove(removeStockOrderDetail) ;
-        stockOrderSaveUpdateUnits.updateSumMoney(removeStockOrderDetail.getStockOrderId()) ;
+
+        StockOrder stockOrder = baseService.load(removeStockOrderDetail.getStockOrderId(), StockOrder.class) ;
+
+        stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, removeStockOrderDetail, OptSum.add) ;
+
         return removeStockOrderDetail ;
     }
 

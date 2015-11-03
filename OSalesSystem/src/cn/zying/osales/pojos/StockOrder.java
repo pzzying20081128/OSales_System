@@ -8,6 +8,8 @@ import java.util.List ;
 import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
+import javax.persistence.EnumType ;
+import javax.persistence.Enumerated ;
 import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
@@ -17,14 +19,13 @@ import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 import cn.zying.osales.pojos.commons.StockCommBean ;
 
 @Entity
 @Table(name = "stock_order")
 // 采购订单
 public class StockOrder extends StockCommBean implements java.io.Serializable {
-
-    
 
     // 采购员
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,6 +36,11 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
     @Column(name = "stock_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "采购员")
     private Integer stockManId ;
+
+    @Column(name = "stock_product_type")
+    @Enumerated(EnumType.STRING)
+    @FieldDesc(name = "采购类型", desc = { "普通产品:普通产品", "组合产品:组合产品" })
+    private ProductInfoType stockProductType ;
 
     //	// 合同
     //	@ManyToOne(fetch = FetchType.LAZY)
@@ -98,5 +104,12 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
         this.stockManId = stockManId ;
     }
 
+    public ProductInfoType getStockProductType() {
+        return stockProductType ;
+    }
+
+    public void setStockProductType(ProductInfoType stockProductType) {
+        this.stockProductType = stockProductType ;
+    }
 
 }

@@ -14,8 +14,6 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockStoreReceiveDetailService ;
 import cn.zying.osales.units.search.bean.StockStoreReceiveDetailSearchBean ;
 
-
-
 @Component(IAopStockStoreReceiveDetailService.name)
 public class AopStockStoreReceiveDetailService implements IAopStockStoreReceiveDetailService {
 
@@ -23,40 +21,33 @@ public class AopStockStoreReceiveDetailService implements IAopStockStoreReceiveD
     @Qualifier(IStockStoreReceiveDetailService.name)
     private IStockStoreReceiveDetailService iStockStoreReceiveDetailService ;
 
-     public StockStoreReceiveDetail  saveUpdate(OptType  optType ,   StockStoreReceiveDetail   optStockStoreReceiveDetail )throws SystemOptServiceException{
-	
-	     return  iStockStoreReceiveDetailService.saveUpdate(  optType ,    optStockStoreReceiveDetail );
-	 
-	 }
-            
-       	  
-     public SelectPage<StockStoreReceiveDetail > search(OptType  optType ,    
-				           StockStoreReceiveDetailSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-	
-	 return  iStockStoreReceiveDetailService.search(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-					
-	}
-	
-	public List<StockStoreReceiveDetail > searchList(OptType  optType ,    
-				           StockStoreReceiveDetailSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			 return  iStockStoreReceiveDetailService.searchList(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-            
+    public StockStoreReceiveDetail saveUpdate(OptType optType, StockStoreReceiveDetail optStockStoreReceiveDetail) throws SystemOptServiceException {
+
+        return iStockStoreReceiveDetailService.saveUpdate(optType, optStockStoreReceiveDetail) ;
+
     }
-            
-    public  StockStoreReceiveDetail    remove(OptType  optType ,  StockStoreReceiveDetail   optStockStoreReceiveDetail)throws SystemOptServiceException{
-			
-			   return  iStockStoreReceiveDetailService.remove(  optType ,   optStockStoreReceiveDetail);
-			
-	}
-            
-            
-           public  StockStoreReceiveDetail get(Integer id)throws SystemOptServiceException
-		   {
-		           return  iStockStoreReceiveDetailService.get( id);
-		   
-		   }
+
+    public SelectPage<StockStoreReceiveDetail> search(OptType optType, StockStoreReceiveDetailSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStockStoreReceiveDetailService.search(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public List<StockStoreReceiveDetail> searchList(OptType optType, StockStoreReceiveDetailSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStockStoreReceiveDetailService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public StockStoreReceiveDetail remove(OptType optType, StockStoreReceiveDetail optStockStoreReceiveDetail) throws SystemOptServiceException {
+
+        return iStockStoreReceiveDetailService.remove(optType, optStockStoreReceiveDetail) ;
+
+    }
+
+    public StockStoreReceiveDetail get(Integer id) throws SystemOptServiceException {
+        return iStockStoreReceiveDetailService.get(id) ;
+
+    }
 
 }

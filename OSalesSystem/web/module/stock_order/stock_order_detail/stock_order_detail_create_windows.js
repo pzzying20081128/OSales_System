@@ -58,7 +58,8 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		url : "./ProductInfo_detailscombo.do?selectype=productInfo",
 		params : {
 			'searchBean.status' : '有效',
-			'searchBean.providerInfoId' : stockOrder.providerInfoId
+			'searchBean.providerInfoId' : stockOrder.providerInfoId,
+			'searchBean.productInfoType' : stockOrder.stockProductType
 		},
 		allowBlank : false,
 		forceSelection : false,

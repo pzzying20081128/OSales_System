@@ -29,15 +29,15 @@ public class StockStoreReceiveSaveUpdateUnits extends ABCommonsService {
     }
 
     public StockStoreReceive update(StockStoreReceive optStockStoreReceive) throws SystemOptServiceException {
-        
-        StockStoreReceive  stockStoreReceive =baseService.get(optStockStoreReceive.getId(), StockStoreReceive.class); 
-        
-        stockStoreReceive.setText(optStockStoreReceive.getText());
-        
-        stockStoreReceive.setRemarks(optStockStoreReceive.getRemarks());
-        
-        baseService.update(stockStoreReceive);
-        
+
+        StockStoreReceive stockStoreReceive = baseService.get(optStockStoreReceive.getId(), StockStoreReceive.class) ;
+
+        stockStoreReceive.setText(optStockStoreReceive.getText()) ;
+
+        stockStoreReceive.setRemarks(optStockStoreReceive.getRemarks()) ;
+
+        baseService.update(stockStoreReceive) ;
+
         return stockStoreReceive ;
     }
 

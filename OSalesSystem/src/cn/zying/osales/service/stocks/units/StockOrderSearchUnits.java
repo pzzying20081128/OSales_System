@@ -38,7 +38,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
     }
 
     public List<StockOrder> list(OptType optType, StockOrderSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-        
+
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
 
         String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
@@ -69,7 +69,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
         String sqlWhere = " where  1 = 1 " ;
         if (searchBean.getStatus() == null || searchBean.getStatus().equals(Status.全部)) {
             sqlWhere = sqlWhere + "  and  stockOrder.status  !='" + Status.初始化 + "'  " ;
-        }else{
+        } else {
             sqlWhere = sqlWhere + "  and  stockOrder.status  ='" + searchBean.getStatus() + "'  " ;
         }
 
