@@ -4,8 +4,8 @@ function base_product_info_save_update_form_panel_windows(params) {
 		labelWidth : 55,
 		frame : true,
 		// bodyStyle : 'padding:5px 5px 0',
-		height : 400,
-		autoHeight : false,
+//		height : 400,
+//		autoHeight : false,
 		items : params.field,
 		reader : params.reader,
 		buttons : [{
@@ -45,7 +45,7 @@ function base_product_info_save_update_form_panel_windows(params) {
 		closable : true,
 		width : 930,
 		// height : 400,
-		autoHeight : false,
+//		autoHeight : false,
 		items : [form_panel]
 	});
 	window.showWin();

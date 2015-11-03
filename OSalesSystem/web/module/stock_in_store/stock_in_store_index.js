@@ -1,5 +1,21 @@
 function create_stock_in_store_window(moduleId, moduleName) {
 
+	var checkButton = new  Ext.Toolbar.Button({
+		// id : moduleId + '_check',
+		xtype : "tbbutton",
+		text : "审核",
+		disabled : true,
+		key : "check",
+		// keyBinding : createSearchKey(),
+		handler : function() {
+			var searchWindex = stock_in_store_check_windows(moduleId, moduleName, {
+				grid : mainGridModule,
+				detailGrid : detail_grid
+
+			});
+		}
+	});
+
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
@@ -11,9 +27,11 @@ function create_stock_in_store_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				id : moduleId + '_edit',
+				// id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
+				key : "edit",
+				disabled : true,
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					stock_in_store_update_windows(moduleId, moduleName, {
@@ -21,9 +39,11 @@ function create_stock_in_store_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				id : moduleId + '_delete',
+				// id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
+				key : "delete",
+				disabled : true,
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					stock_in_store_delete_windows(moduleId, moduleName, {
@@ -32,9 +52,11 @@ function create_stock_in_store_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				id : moduleId + '_search',
+				// id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
+				disabled : true,
+				key : "search",
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = stock_in_store_search_windows(moduleId, moduleName, {
@@ -43,21 +65,7 @@ function create_stock_in_store_window(moduleId, moduleName) {
 
 					});
 				}
-			},
-
-			{
-				id : moduleId + '_check',
-				xtype : "tbbutton",
-				text : "审核",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = stock_in_store_check_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						detailGrid : detail_grid
-
-					});
-				}
-			}
+			}, checkButton
 
 			]
 
@@ -65,6 +73,7 @@ function create_stock_in_store_window(moduleId, moduleName) {
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
+				stockSelect(data, checkButton, detail_grid);
 				detail_grid.load({
 					params : {
 						'searchBean.stockInStoreId' : rowDataId,
@@ -85,6 +94,12 @@ function create_stock_in_store_window(moduleId, moduleName) {
 
 		mainGrid : mainGrid
 
+	});
+
+	mainGrid.addSetButton({
+		addSet : {
+			grids : [mainGrid, detail_grid]
+		}
 	});
 
 	var layout = new Ext.Panel({
@@ -124,7 +139,7 @@ function create_stock_in_store_window(moduleId, moduleName) {
 		title : moduleName,
 		items : [layout],// 里面所包含的组件
 		// 用于权限
-		// grids:[mainGrid],
+		 grids:[mainGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

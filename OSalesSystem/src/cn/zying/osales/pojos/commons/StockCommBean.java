@@ -1,5 +1,7 @@
 package cn.zying.osales.pojos.commons ;
 
+import java.util.List ;
+
 import javax.persistence.Column ;
 import javax.persistence.EnumType ;
 import javax.persistence.Enumerated ;
@@ -59,6 +61,16 @@ public class StockCommBean extends CommOrderBean {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "订单类型")
     private StockType stockType ;
+
+    //为了查询
+    @Transient
+    private List<StockType> stockTypes ;
+
+    @Transient
+    private List<Integer> providerInfoIds ;
+
+    @Transient
+    private List<Integer> productInfoIds ;
 
     public Long getTaxSumMoney() {
         return taxSumMoney ;
@@ -138,6 +150,30 @@ public class StockCommBean extends CommOrderBean {
 
     public void setStockType(StockType stockType) {
         this.stockType = stockType ;
+    }
+
+    public List<StockType> getStockTypes() {
+        return stockTypes ;
+    }
+
+    public void setStockTypes(List<StockType> stockTypes) {
+        this.stockTypes = stockTypes ;
+    }
+
+    public List<Integer> getProviderInfoIds() {
+        return providerInfoIds ;
+    }
+
+    public void setProviderInfoIds(List<Integer> providerInfoIds) {
+        this.providerInfoIds = providerInfoIds ;
+    }
+
+    public List<Integer> getProductInfoIds() {
+        return productInfoIds ;
+    }
+
+    public void setProductInfoIds(List<Integer> productInfoIds) {
+        this.productInfoIds = productInfoIds ;
     }
 
 }

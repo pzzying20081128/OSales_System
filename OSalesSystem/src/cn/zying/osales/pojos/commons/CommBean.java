@@ -1,5 +1,7 @@
 package cn.zying.osales.pojos.commons ;
 
+import java.util.List ;
+
 import javax.persistence.Column ;
 import javax.persistence.EnumType ;
 import javax.persistence.Enumerated ;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue ;
 import javax.persistence.GenerationType ;
 import javax.persistence.Id ;
 import javax.persistence.MappedSuperclass ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
@@ -25,6 +28,10 @@ public abstract class CommBean implements java.io.Serializable {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "状态", isShow = true)
     private Status status ;
+    
+    @Transient
+    //查询
+    private List<Status> statuses;
 
     public Status getStatus() {
         return status ;
@@ -40,6 +47,14 @@ public abstract class CommBean implements java.io.Serializable {
 
     public void setId(Integer id) {
         this.id = id ;
+    }
+
+    public List<Status> getStatuses() {
+        return statuses ;
+    }
+
+    public void setStatuses(List<Status> statuses) {
+        this.statuses = statuses ;
     }
 
 }

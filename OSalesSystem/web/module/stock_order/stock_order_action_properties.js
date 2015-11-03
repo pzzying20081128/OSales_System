@@ -1,7 +1,7 @@
 var stock_order_grid_column = {
 	record : [{
-		name : 'orderNumber',
-		mapping : 'orderNumber'
+		name : 'number',
+		mapping : 'number'
 	}, {
 		name : 'providerInfo.name',
 		mapping : 'providerInfo'
@@ -75,7 +75,7 @@ var stock_order_grid_column = {
 	column : [new Ext.grid.ERPRowNumberer(), {
 		header : '订单编号',
 		width : 200,
-		dataIndex : 'orderNumber',
+		dataIndex : 'number',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 

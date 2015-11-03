@@ -68,10 +68,10 @@ performance
     <proxool:proxool>
         <proxool:alias>db</proxool:alias>  
           
-         <proxool:driver-url>jdbc:mysql://127.0.0.1:3306/open_sales?haracterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</proxool:driver-url>
+         <proxool:driver-url>jdbc:mysql://127.0.0.1:3306/osales?haracterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</proxool:driver-url>
         <proxool:driver-class>com.mysql.jdbc.Driver</proxool:driver-class>
         <proxool:driver-properties>
-            <proxool:property name="user" value="admin"/>
+            <proxool:property name="user" value="root"/>
 			<proxool:property name="password" value="123456"/> 
         </proxool:driver-properties>  
         

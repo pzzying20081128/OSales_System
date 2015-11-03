@@ -1,10 +1,12 @@
 function create_stock_order_window(moduleId, moduleName) {
 
 	var addButton = new Ext.Toolbar.Button({
-		id : moduleId + '_add',
+		// id : moduleId + '_add',
 		key : 'add',
 		xtype : "tbbutton",
 		text : "增加",
+
+		disabled : true,
 		// keyBinding : createCreateKey(),
 		handler : function(bt) {
 			ERPAjaxRequest({
@@ -23,7 +25,7 @@ function create_stock_order_window(moduleId, moduleName) {
 	});
 
 	var editButton = new Ext.Toolbar.Button({
-		id : moduleId + '_edit',
+		// id : moduleId + '_edit',
 		xtype : "tbbutton",
 		text : "编辑",
 		key : 'edit',
@@ -38,7 +40,7 @@ function create_stock_order_window(moduleId, moduleName) {
 	});
 
 	var checkButton = new Ext.Toolbar.Button({
-		id : moduleId + '_check',
+		// id : moduleId + '_check',
 		xtype : "tbbutton",
 		text : "审核",
 		key : 'check',
@@ -52,10 +54,11 @@ function create_stock_order_window(moduleId, moduleName) {
 	});
 
 	deleteButton = new Ext.Toolbar.Button({
-		id : moduleId + '_delete',
+		// id : moduleId + '_delete',
 		xtype : "tbbutton",
 		text : "删除",
 		key : 'delete',
+
 		disabled : true,
 		// keyBinding : createDeleteKey(),
 		handler : function(bt) {
@@ -76,12 +79,15 @@ function create_stock_order_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [addButton, editButton, deleteButton, {
-				id : moduleId + '_search',
+				// id : moduleId + '_search',
 				xtype : "tbbutton",
 				key : "search",
 				text : "查询",
+
 				// keyBinding : createSearchKey(),
+				disabled : true,
 				handler : function() {
+					stockdetailGrid.openAllButton(false);
 					var searchWindex = stock_order_search_windows(moduleId, moduleName, {
 						grid : mainGridModule,
 						searchParams : stock_order_search_params
@@ -92,29 +98,13 @@ function create_stock_order_window(moduleId, moduleName) {
 		init : {
 			// 行被选择
 			select : function(rowDataId, data) {
-				status = data.status;
-				if (status == '已审核') {
-					mainGrid.openButton(false);
-					checkButton.setText("取消审核");
-					checkButton.enable();
-					stockdetailGrid.openAllButton(false);
-				} else {
-					checkButton.setText("审核");
-					mainGrid.openButton(true);
-					// ///////////////////////////////
-                    if(  mainGrid.getisAdmin() ==1 ||  mainGrid.searchPower("add").isUse ==1 ||  mainGrid.searchPower("edit").isUse ==1  || mainGrid.searchPower("delete").isUse ==1   ){
-                    	stockdetailGrid.openAllButton(true);
-                    }else{
-                    	stockdetailGrid.openAllButton(false);
-                    }
-				}
-                ////////////////////////////////////////////
+				stockSelect(data, checkButton, stockdetailGrid);
+				// //////////////////////////////////////////
 				stockdetailGrid.load({
 					params : {
 						'searchBean.stockOrderId' : rowDataId
 					}
 				});
-
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -140,11 +130,11 @@ function create_stock_order_window(moduleId, moduleName) {
 		moduleName : moduleName + "明细"
 	}
 
-	// var positonParams={
-	// positonGrid:store_position_grid,
-	// moduleId:moduleId + "_store_position",
-	// moduleName:moduleName
-	// }
+	mainGrid.addSetButton({
+		addSet : {
+			grids : [mainGrid, stockdetailGrid]
+		}
+	});
 
 	var layout = new Ext.Panel({
 		layout : 'border',
@@ -170,7 +160,7 @@ function create_stock_order_window(moduleId, moduleName) {
 			margins : '0 0 0 0',
 
 			// height : "atuo",
-			title : '库位',
+			title : '明细',
 			items : stockdetailGrid
 
 			// items : sales_order_store_out_panel_print
@@ -199,16 +189,13 @@ function create_stock_order_window(moduleId, moduleName) {
 		var mainGridModule = params.grid;
 		var mainGrid = mainGridModule.getGrid();
 		var selection_rows = mainGrid.getSelectionModel().getSelections();
-
-		if (selection_rows == null) {
-			showErrorMsg('提示信息', '请选择要审核的订单');
-			return false;
-		}
-
-		if (selection_rows.length != 1) {
-			showErrorMsg('提示信息', '只能选择一条数据记录');
-			return false;
-		}
+		if (!stockOpptCheck(selection_rows, "审核", null))
+			return;
+		// if ( selection_rows[0].data.status =="删除") {
+		// showErrorMsg('提示信息',
+		// '本条信息的状态是['+selection_rows[0].data.status+']不能'+opt );
+		// return false;
+		// }
 		var selectId = selection_rows[0].id;
 		showMsgYN({
 			msg : "是否要审核该条订单",
@@ -220,10 +207,9 @@ function create_stock_order_window(moduleId, moduleName) {
 					},
 					success : function(response, options) {
 						mainGrid.reload({
-
 							success : function() {
-
-								stock_detail_grid.removeAll();
+								stockdetailGrid.removeAll();
+								stockdetailGrid.openAllButton(false);
 							}
 
 						});
@@ -238,15 +224,24 @@ function create_stock_order_window(moduleId, moduleName) {
 		var mainGrid = mainGridModule.getGrid();
 		var selection_rows = mainGrid.getSelectionModel().getSelections();
 
-		if (selection_rows == null) {
-			showErrorMsg('提示信息', '请选择要删除的数据记录！！');
-			return false;
-		}
+		if (!stockOpptCheck(selection_rows, "删除", "有效"))
+			return;
+		// if (selection_rows == null) {
+		// showErrorMsg('提示信息', '请选择要删除的数据记录！！');
+		// return false;
+		// }
+		//
+		// if (selection_rows.length != 1) {
+		// showErrorMsg('提示信息', '只能选择一行数据记录！！');
+		// return false;
+		// }
+		//
+		// if (selection_rows[0].data.status != '有效') {
+		// showErrorMsg('提示信息', '本条信息的状态是[' + selection_rows[0].data.status +
+		// ']不能删除');
+		// return false;
+		// }
 
-		if (selection_rows.length != 1) {
-			showErrorMsg('提示信息', '只能选择一行数据记录！！');
-			return false;
-		}
 		var selectId = selection_rows[0].id;
 		showMsgYN({
 			msg : "是否要删除该条信息",
@@ -260,7 +255,8 @@ function create_stock_order_window(moduleId, moduleName) {
 					success : function(response, options) {
 						mainGrid.reload({
 							success : function() {
-								stock_detail_grid.removeAll();
+								stockdetailGrid.removeAll();
+								stockdetailGrid.openAllButton(false);
 							}
 						});
 					}

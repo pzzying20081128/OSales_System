@@ -5,7 +5,7 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 	var form_panel = new Ext.form.ERPFormPanel({
 		// height : 400,
 		// autoHeight : false,
-		labelWidth : 60,
+//		labelWidth : 60,
 		items : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
@@ -50,29 +50,28 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					allowBlank : true
 				})]
 			}, {
-			// columnWidth : .33,
-			// layout : 'form',
-			// defaultType : 'textfield',
-			// baseCls : 'x-plain',
-			// defaults : {
-			// width : 180
-			// },
-			// items : [{
-			// id : 'searchBean.orderDate',
-			// name : 'searchBean.orderDate',
-			// fieldLabel : ' 订单日期',
-			// xtype : 'datefield',
-			// style : NoAllowBlankStyle,
-			// blankText : '不能为空！',
-			// format : 'Y-m-d',
-			// allowBlank : true,
-			// value : new Date(),
-			// listeners : {
-			// 'specialkey' : function(field, e) {
-			//
-			// }
-			// }
-			// }]
+			 columnWidth : .33,
+			 layout : 'form',
+			 defaultType : 'textfield',
+			 baseCls : 'x-plain',
+			 defaults : {
+			 width : 180
+			 },
+			 items : [{
+			
+					id : 'searchBean.stockManId1',
+					name : 'searchBean.stockManId1',
+					fieldLabel : ' 合同',
+					xtype : 'ERPShowText',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				
+			 }]
 			}]
 		},
 		// ////////////////////////////////////////////////////////
@@ -126,128 +125,61 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 					width : 160
 				})]
 			}]
-		}, {// 第二排
-			layout : 'column',
-			baseCls : 'x-plain',
-			labelWidth : 70,
-			items : [{
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 180
-				},
-				items : [{
-					id : 'searchBean.taxSumMoneyMoneyShow',
-					name : 'searchBean.taxSumMoneyMoneyShow',
-					fieldLabel : ' 含税总金额',
-					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			}, {
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 180
-				},
-				items : [{
-					id : 'searchBean.noTaxSumMoneyMoneyShow',
-					name : 'searchBean.noTaxSumMoneyMoneyShow',
-					fieldLabel : ' 没税总金额',
-					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			}, {
-
-			// columnWidth : .33,
-			// layout : 'form',
-			// defaultType : 'textfield',
-			// baseCls : 'x-plain',
-			// defaults : {
-			// width : 180
-			// },
-			// items : [{
-			// id : 'searchBean.stockDate',
-			// name : 'searchBean.stockDate',
-			// fieldLabel : ' 采购日期',
-			// xtype : 'datefield',
-			// style : NoAllowBlankStyle,
-			// blankText : '不能为空！',
-			// format : 'Y-m-d',
-			// allowBlank : true,
-			// value : new Date(),
-			// listeners : {
-			// 'specialkey' : function(field, e) {
-			//
-			// }
-			// }
-			// }]
-			}]
-		}, {// 第二排
-			layout : 'column',
-			baseCls : 'x-plain',
-			labelWidth : 70,
-			items : [{
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 180
-				},
-				items : [{
-					id : 'searchBean.orderCount',
-					name : 'searchBean.orderCount',
-					fieldLabel : ' 订购数量',
-					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			}, // 1-1 end
-			{
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 180
-				},
-				items : [{
-					id : 'searchBean.stockManId1',
-					name : 'searchBean.stockManId1',
-					fieldLabel : ' 合同',
-					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			}// 1-2end
-			]
 		}, {
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 70,
+			items : [{// 1-1
+				columnWidth : 0.33,
+				layout : 'form',
+				defaultType : 'checkbox',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 180
+				},
+				items : [{
+					id : 'searchBean.startTime',
+					name : 'searchBean.startTime',
+					fieldLabel : ' 进货时间',
+					xtype : 'datefield',
+					format : 'Y-m-d',
+					// style : NoAllowBlankStyle,
+					// blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			},
+
+			{// 1-1
+				columnWidth : 0.33,
+				layout : 'form',
+				defaultType : 'checkbox',
+				baseCls : 'x-plain',
+				format : 'Y-m-d',
+				 labelWidth : 70,
+				defaults : {
+					width : 180
+				},
+				items : [{
+					id : 'searchBean.endTime',
+					name : 'searchBean.endTime',
+					fieldLabel : '     到',
+					xtype : 'datefield',
+					format : 'Y-m-d',
+					// style : NoAllowBlankStyle,
+					// blankText : '不能为空！',
+					allowBlank : true,
+
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}]
+		},  {
 			layout : 'column',
 			baseCls : 'x-plain',
 			labelWidth : 70,
@@ -257,7 +189,7 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 725
+					width : 727
 				},
 				items : [{
 					id : 'searchBean.text',
@@ -320,7 +252,7 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 	});
 
 	var window = new Ext.ERPDefaultsWindow({
-		title : "查询工单",
+		title : "查询",
 		closable : true,
 		width : 860,
 		height : 400,

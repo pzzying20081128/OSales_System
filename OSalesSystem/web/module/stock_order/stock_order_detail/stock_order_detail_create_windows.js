@@ -57,13 +57,15 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		fieldLabel : ' 产品',
 		url : "./ProductInfo_detailscombo.do?selectype=productInfo",
 		params : {
-			'searchBean.status' : '有效'
+			'searchBean.status' : '有效',
+			'searchBean.providerInfoId' : stockOrder.providerInfoId
 		},
 		allowBlank : false,
 		forceSelection : false,
 
-		select : function(combo, record, index) {
-			productInfoSelect = record.json;
+		select : function(results) { //combo, record, index
+			
+			productInfoSelect = results.record.json;
 			ERPAjaxRequest({
 				url : "./simple_ProductInfo_selectStockPrice.do",
 				params : {

@@ -8,6 +8,8 @@
 <script type="text/javascript" src="./ext3/adapter/ext/ext-base.min.js"></script>
 <script type="text/javascript" src="./ext3/my-ext-all-debug.min.js"></script>
 <script type="text/javascript" src="./ext3/ext-basex-debug.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./ext3/boxselect/superboxselect.css" />
+<script type="text/javascript" src="./ext3/boxselect/SuperBoxSelect.js"></script>
 
 <script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
 <script type="text/javascript" src="./module/module.js"></script>
@@ -20,6 +22,40 @@
 
 
 <script type="text/javascript">
+	function  stockOpptCheck(selection_rows , opt,action){
+		if (selection_rows == null) {
+			showErrorMsg('提示信息', '请选择要['+opt+']的数据记录');
+			return false;
+		}
+
+		if (selection_rows.length != 1) {
+			showErrorMsg('提示信息', opt+'时,只能选择一行数据记录');
+			return false;
+		}
+		if(action !=null ){
+		if ( selection_rows[0].data.status !=action) {
+			showErrorMsg('提示信息', '本条信息的状态是['+selection_rows[0].data.status+']不能'+opt  );
+			return false;
+		}
+		}
+		return true;
+	}
+	
+	function  stockSelect(data,checkButton ,detailGrid){
+		status = data.status;
+		checkButton.enable();
+		if (status == '已审核') {
+			checkButton.setText("取消审核");
+			detailGrid.openAllButton(false);
+		} else if (status == '有效') {
+			checkButton.setText("审核");
+			detailGrid.openAllButton(true);
+		} else {
+			checkButton.disable();
+			checkButton.setText("已删除");
+			detailGrid.openAllButton(false);
+		}
+	}
 	
 </script>
 
@@ -181,8 +217,8 @@
 .my-disabled {
 	color: black;
 	cursor: default;
-	background-color: background:     none repeat scroll 0% 0%
-		rgb(237, 245, 252);
+	//background-color:#99FFFF; 
+	background:     none repeat scroll 0% 0% ;
 }
 
 .my-disabled .x-form-trigger-over {

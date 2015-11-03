@@ -68,7 +68,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
     private String createWhere(Map<String, Object> value, StockOrderSearchBean searchBean, CommSearchBean commSearchBean) {
         String sqlWhere = " where  1 = 1 " ;
         if (searchBean.getStatus() == null || searchBean.getStatus().equals(Status.全部)) {
-            
+            sqlWhere = sqlWhere + "  and  stockOrder.status  !='" + Status.初始化 + "'  " ;
         }else{
             sqlWhere = sqlWhere + "  and  stockOrder.status  ='" + searchBean.getStatus() + "'  " ;
         }

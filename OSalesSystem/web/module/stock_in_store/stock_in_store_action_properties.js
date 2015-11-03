@@ -1,6 +1,6 @@
 var stock_in_store_grid_column = {
 	record : [{
-		name : 'stockOrder.orderNumber',
+		name : 'stockOrder.number',
 		mapping : 'stockOrder'
 	}, {
 		name : 'providerInfo.name',
@@ -78,16 +78,16 @@ var stock_in_store_grid_column = {
 	}, {
 		header : '采购订单号',
 		width : 200,
-		dataIndex : 'stockOrder.orderNumber',
+		dataIndex : 'stockOrder.number',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 
 			if (value == null || typeof ( value ) == 'undefined')
 				return null
-			else if (value.orderNumber == null || typeof ( value.orderNumber ) == 'undefined')
+			else if (value.number == null || typeof ( value.number ) == 'undefined')
 				return null
 			else
-				return value.orderNumber;
+				return value.number;
 
 		}
 	}, {

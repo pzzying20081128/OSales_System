@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zying.osales.OSalesConfigProperties ;
+import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -23,9 +24,9 @@ import cn.zying.osales.service.SystemOptServiceException ;
 @Component("StockStoreReceiveCreateUnits")
 public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
-    public void createStockInStore(StockType stockType, StockInStore stockInStoreImtp) throws SystemOptServiceException {
+    public void createStockInStore(OptType optType, StockType stockType, StockInStore stockInStoreImtp) throws SystemOptServiceException {
 
-        ProviderInfo providerInfo = baseService.load(stockInStoreImtp.getProviderInfoId(), ProviderInfo.class) ;
+        ProviderInfo providerInfo = stockInStoreImtp.getProviderInfo();
 
         StockStoreReceive stockStoreReceive = new StockStoreReceive() ;
 
@@ -37,7 +38,7 @@ public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
         stockStoreReceive.setProviderInfo(providerInfo) ;
 
-        SysStaffUser recordMan = baseService.load(stockInStoreImtp.getRecordManId(), SysStaffUser.class) ;
+        SysStaffUser recordMan = stockInStoreImtp.getRecordMan();
 
         stockStoreReceive.setRecordMan(recordMan) ;
 
@@ -61,7 +62,7 @@ public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
                 stockStoreReceiveDetail.setStockStoreReceive(stockStoreReceive) ;
 
-                ProductInfo productInfo = baseService.load(stockInStoreDetail.getProductInfoId(), ProductInfo.class) ;
+                ProductInfo productInfo = stockInStoreDetail.getProductInfo();
 
                 stockStoreReceiveDetail.setProductInfo(productInfo) ;
 
@@ -73,6 +74,15 @@ public class StockStoreReceiveCreateUnits extends ABCommonsService {
 
             }
             baseService.save(stockStoreReceive) ;
+
+            if (stockType.equals(StockType.直营采购订单)) {
+                stockStoreReceive.setCheckDate(DateToolsUilts.getnowDate()) ;
+                stockStoreReceive.setCheckMan(stockInStoreImtp.getCheckMan()) ;
+                stockStoreReceive.setStatus(Status.已审核) ;
+                baseService.update(stockStoreReceive) ;
+
+            }
+
         } catch (Exception e) {
             throw new SystemOptServiceException(e) ;
         }

@@ -4,8 +4,8 @@ function base_provider_info_save_update_form_panel_windows(params) {
 		labelWidth : 55,
 		frame : true,
 		// bodyStyle : 'padding:5px 5px 0',
-		height : 400,
-		autoHeight : false,
+//		height : 400,
+//		autoHeight : false,
 		items : params.field,
 		reader : params.reader,
 		buttons : [{
@@ -43,9 +43,9 @@ function base_provider_info_save_update_form_panel_windows(params) {
 	var window = new Ext.ERPDefaultsWindow({
 		title : params.title,
 		closable : true,
-		width : 1200,
-		height : 400,
-		autoHeight : false,
+		width : 1100,
+//		height : 400,
+//		autoHeight : false,
 		items : [form_panel]
 	});
 	window.showWin();

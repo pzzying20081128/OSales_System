@@ -45,12 +45,14 @@ function base_info_staff_save_update_form_panel_windows(params, actionParams) {
 				var tab = tabs.getActiveTab();
 
 				if (tab.id == 'user_info_power') {
-					userPowerPanel_.load({
-						url : "./listPowerByUserId.do",
-						params : {
-							uuid : actionParams.selectId
-						}
-					});
+					if (typeof ( actionParams ) != "undefined" && typeof ( actionParams.selectId ) != "undefined") {
+						userPowerPanel_.load({
+							url : "./listPowerByUserId.do",
+							params : {
+								uuid : actionParams.selectId
+							}
+						});
+					}
 
 				} else if (tab.id == 'user_info') {
 

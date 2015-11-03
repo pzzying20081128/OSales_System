@@ -65,7 +65,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
             initOrder(optStockOrder) ;
 
-            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "orderNumber", "stockType", "providerInfo", "stockMan", "stockDate") ;
+            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "number", "stockType", "providerInfo", "stockMan", "stockDate") ;
 
             baseService.update(optStockOrder) ;
 

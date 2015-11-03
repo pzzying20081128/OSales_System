@@ -3,16 +3,24 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 
 	var selection_rows = grid.getSelectionModel().getSelections();
+	
+	if(!stockOpptCheck(selection_rows, "编辑","有效"))return ;
 
-	if (selection_rows == null) {
-		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
-		return false;
-	}
-
-	if (selection_rows.length != 1) {
-		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
-		return false;
-	}
+//	if (selection_rows == null) {
+//		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
+//		return false;
+//	}
+//
+//	if (selection_rows.length != 1) {
+//		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
+//		return false;
+//	}
+//	
+//	if ( selection_rows[0].data.status !='有效') {
+//		showErrorMsg('提示信息', '本条信息的状态是['+selection_rows[0].data.status+']不能编辑'  );
+//		return false;
+//	}
+	
 	var selectId = selection_rows[0].id;
 
 	providerInfo = createERPcombo({
@@ -71,8 +79,8 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'stockorder.orderNumber',
-			mapping : 'orderNumber'
+			name : 'stockorder.number',
+			mapping : 'number'
 		}, {
 			name : 'stockorder.providerInfo',
 			mapping : 'providerInfo'
@@ -139,8 +147,8 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.orderNumber',
-					name : 'stockorder.orderNumber',
+					id : 'stockorder.number',
+					name : 'stockorder.number',
 					fieldLabel : ' 订单编号',
 					xtype : 'textfield',
 					style : NoAllowBlankStyle,

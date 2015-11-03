@@ -33,7 +33,7 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
         try {
             StockOrder stockorder = new StockOrder() ;
             String orderNumber = baseService.genSerialNum(OSalesConfigProperties.CODE_STOCK_ORDER) ;
-            stockorder.setOrderNumber(orderNumber) ;
+            stockorder.setNumber(orderNumber) ;
             this.result = service.saveUpdate(OptType.init, stockorder, getOSalsesLoginUserId()) ;
 
         } catch (Exception e) {

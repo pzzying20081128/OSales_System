@@ -3,11 +3,14 @@ package cn.zying.osales.service.stocks.units ;
 import java.util.ArrayList ;
 import java.util.List ;
 
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zying.osales.OSalesConfigProperties ;
+import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -22,11 +25,14 @@ import cn.zying.osales.service.SystemOptServiceException ;
 
 @Component("StockInStoreCreateUnits")
 public class StockInStoreCreateUnits extends ABCommonsService {
+    
+    @Autowired
+    @Qualifier("StockStoreReceiveCreateUnits")
+    private StockStoreReceiveCreateUnits  stockStoreReceiveCreateUnits; 
 
-    public void createStockInStore(StockType stockType, StockOrder stockOrder_) throws SystemOptServiceException {
+    public void createStockInStore(OptType optType  ,StockType stockType, StockOrder stockOrder) throws SystemOptServiceException {
 
-        StockOrder stockOrder = stockOrder_ ;
-
+    
         ProviderInfo providerInfo = baseService.load(stockOrder.getProviderInfoId(), ProviderInfo.class) ;
 
         StockInStore stockInStore = new StockInStore() ;
@@ -75,6 +81,16 @@ public class StockInStoreCreateUnits extends ABCommonsService {
 
             }
             baseService.save(stockInStore) ;
+            
+            if(stockType.equals(StockType.直营采购订单)){
+                stockInStore.setCheckDate(DateToolsUilts.getnowDate());
+                stockInStore.setCheckMan(stockOrder.getCheckMan());
+                stockInStore.setStatus(Status.已审核);
+                baseService.update(stockInStore);
+                StockInStore stockInStore_ = baseService.load(stockInStore.getId(), StockInStore.class);
+                stockStoreReceiveCreateUnits.createStockInStore(optType,stockType, stockInStore);
+            }
+            
         } catch (Exception e) {
             throw new SystemOptServiceException(e) ;
         }

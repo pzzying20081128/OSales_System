@@ -32,8 +32,8 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'stockinstore.stockOrder.orderNumber',
-			mapping : 'stockOrder.orderNumber'
+			name : 'stockinstore.stockOrder.number',
+			mapping : 'stockOrder.number'
 		}, {
 			name : 'stockinstore.number',
 			mapping : 'number'
@@ -101,8 +101,8 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 				},
 				items : [{
 
-					id : 'stockinstore.stockOrder.orderNumber',
-					name : 'stockinstore.stockOrder.orderNumber',
+					id : 'stockinstore.stockOrder.number',
+					name : 'stockinstore.stockOrder.number',
 					fieldLabel : ' 采购订单号',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,

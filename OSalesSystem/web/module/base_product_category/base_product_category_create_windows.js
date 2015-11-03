@@ -74,9 +74,9 @@ function base_product_category_create_windows(moduleId, moduleName, params) {
 					name : 'productCategory.text',
 					fieldLabel : ' 备注',
 					xtype : 'textfield',
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}

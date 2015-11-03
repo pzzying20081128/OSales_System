@@ -11,9 +11,10 @@ function create_base_info_staff_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				id : moduleId + '_add',
+//				id : moduleId + '_add',
 				xtype : "tbbutton",
 				text : "增加",
+				key:"add",
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					base_info_staff_create_windows(moduleId, moduleName, {
@@ -23,9 +24,10 @@ function create_base_info_staff_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				id : moduleId + '_edit',
+//				id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
+				key:"edit",
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					base_info_staff_update_windows(moduleId, moduleName, {
@@ -35,20 +37,21 @@ function create_base_info_staff_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				id : moduleId + '_delete',
+//				id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
+				key:"delete",
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					base_info_staff_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
 					});
 				}
 			}, {
-				id : moduleId + '_search',
+//				id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
+				key:"search",
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = base_info_staff_search_windows(moduleId, moduleName, {
@@ -72,12 +75,18 @@ function create_base_info_staff_window(moduleId, moduleName) {
 	});
 
 	var mainGrid = mainGridModule.getGrid();
+	
+	mainGrid.addSetButton({
+		addSet : {
+			grids : [mainGrid]
+		}
+	});
 
 	var window = new Ext.ERPWindow({
 		title : moduleName,
 		items : [mainGrid],// 里面所包含的组件
 		// 用于权限
-		// grids:[mainGrid],
+		 grids:[mainGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

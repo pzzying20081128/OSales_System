@@ -8,11 +8,15 @@ import org.apache.commons.beanutils.PropertyUtils ;
 import org.apache.log4j.Logger ;
 
 import cn.zy.apps.tools.logger.Loggerfactory ;
+import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.moneys.BuildMoneyFactory ;
 import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
 import cn.zying.osales.pojos.StockOrderDetail ;
 
 public class BuildMoneyUnits {
+    
+    
+  
 
     private static IBuildMoneyFactory buildMoneyFactory = BuildMoneyFactory.getBuildMoney() ;
 
@@ -38,7 +42,7 @@ public class BuildMoneyUnits {
     private static void handTaxRate(PropertyDescriptor propertyDescriptor, String fieldName, Object result) {
 
         String taxRate_show = readFieldValue(propertyDescriptor, fieldName, result) ;
-        if (taxRate_show == null) return ;
+        if (!ToolsUnits.isNOtNulll(taxRate_show)) return ;
         Long money = buildMoneyFactory.switchRateToLongPercent(Double.parseDouble(taxRate_show)) ;
 
         String money_field = fieldName.substring(0, fieldName.length() - 11) ;
@@ -49,8 +53,8 @@ public class BuildMoneyUnits {
     private static void handMoney(PropertyDescriptor propertyDescriptor, String fieldName, Object result) {
 
         String money_show = readFieldValue(propertyDescriptor, fieldName, result) ;
-
-        if (money_show == null) return ;
+        
+        if (!ToolsUnits.isNOtNulll(money_show)) return ;
 
         Long money = buildMoneyFactory.switchMoneyToLongPrecision(Double.parseDouble(money_show)) ;
 

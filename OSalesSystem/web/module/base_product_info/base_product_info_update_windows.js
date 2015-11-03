@@ -243,7 +243,7 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 	var salesNoTaxPriceMoneyShow = new Ext.form.TextField({
 		id : 'productinfo.salesNoTaxPriceMoneyShow',
 		name : 'productinfo.salesNoTaxPriceMoneyShow',
-		fieldLabel : ' 没含税单价',
+		fieldLabel : ' 末含税单价',
 		xtype : 'textfield',
 		style : AllowBlankStyle,
 		blankText : '不能为空！',
@@ -261,11 +261,11 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 	var salesBoxTaxPriceMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'productinfo.salesBoxTaxPriceMoneyShow',
 		name : 'productinfo.salesBoxTaxPriceMoneyShow',
-		fieldLabel : ' 含税销售箱/件价格',
+		fieldLabel : ' 含税箱销售价',
 		xtype : 'textfield',
 		vtype : 'money',
 		style : AllowBlankStyle,
-		labelStyle : "font-size:10px",
+		labelStyle : "font-size:12px",
 		blankText : '不能为空！',
 		allowBlank : false,
 		enableKeyEvents : true,
@@ -278,10 +278,10 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 	var salesBoxNoTaxMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'productinfo.salesBoxNoTaxPriceMoneyShow',
 		name : 'productinfo.salesBoxNoTaxPriceMoneyShow',
-		fieldLabel : ' 没含税销售箱/件价格',
+		fieldLabel : ' 末税箱销售价',
 		xtype : 'ERPShowText',
 		style : AllowBlankStyle,
-		labelStyle : "font-size:10px",
+		labelStyle : "font-size:12px",
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -818,10 +818,10 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 				items : [{
 					id : 'productinfo.lastStockTaxPriceMoneyShow',
 					name : 'productinfo.lastStockTaxPriceMoneyShow',
-					fieldLabel : ' 最后含税采购价',
+					fieldLabel : ' 最后采购价',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
-					labelStyle : "font-size:11px",
+//					labelStyle : "font-size:10px",
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -842,10 +842,10 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 				items : [{
 					id : 'productinfo.lastSalesTaxPriceMoneyShow',
 					name : 'productinfo.lastSalesTaxPriceMoneyShow',
-					fieldLabel : ' 最后含税销售价',
+					fieldLabel : ' 最后销售价',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
-					labelStyle : "font-size:11px",
+//					labelStyle : "font-size:10px",
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -854,6 +854,35 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 					}
 				}]
 
+			},
+			{
+				
+				
+
+				columnWidth : .33,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+						width : 200
+				},
+				items : [{
+					id : 'productinfo.productInfoType',
+					name : 'productinfo.productInfoType',
+					fieldLabel : '产品类型',
+					xtype : 'ERPShowText',
+					style : AllowBlankStyle,
+//					labelStyle : "font-size:11px",
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+
+			
+			
 			}
 
 			]

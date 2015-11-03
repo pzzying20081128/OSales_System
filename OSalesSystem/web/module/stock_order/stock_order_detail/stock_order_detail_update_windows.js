@@ -15,6 +15,7 @@ function stock_order_detail_update_windows(moduleId, moduleName, params) {
 		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
 		return false;
 	}
+	
 	var selectId = selection_rows[0].id;
 	// /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -184,7 +185,8 @@ function stock_order_detail_update_windows(moduleId, moduleName, params) {
 		success : function() {
 			storePositionId.load({
 				params : {
-					'searchBean.id' : selection_rows[0].storePositionId
+					'searchBean.id' : selection_rows[0].storePositionId,
+					'searchBean.storeInfoId' : selection_rows[0].storeInfoId
 				}
 			});
 		}

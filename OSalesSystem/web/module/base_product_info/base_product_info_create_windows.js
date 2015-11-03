@@ -166,11 +166,11 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 	var salesBoxTaxPriceMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'productinfo.salesBoxTaxPriceMoneyShow',
 		name : 'productinfo.salesBoxTaxPriceMoneyShow',
-		fieldLabel : ' 含税销售箱/件价格',
+		fieldLabel : ' 含税箱销售价',
 		xtype : 'textfield',
 		vtype : 'money',
 		style : AllowBlankStyle,
-		labelStyle : "font-size:10px",
+//		labelStyle : "font-size:10px",
 		blankText : '不能为空！',
 		allowBlank : false,
 		enableKeyEvents : true,
@@ -183,10 +183,10 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 	var salesBoxNoTaxMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'productinfo.salesBoxNoTaxMoneyShow',
 		name : 'productinfo.salesBoxNoTaxMoneyShow',
-		fieldLabel : ' 没含税销售箱/件价格',
+		fieldLabel : ' 末税箱销售价',
 		xtype : 'ERPShowText',
 		style : AllowBlankStyle,
-		labelStyle : "font-size:10px",
+//		labelStyle : "font-size:10px",
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -349,9 +349,9 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 					fieldLabel : ' 仓库',
 					url : "./StoreInfo_combo.do?searchBean.status=有效",
 					allowBlank : false,
-					forceSelection : false,
-					select : function(combo, record, index) {
-						id = record.id;
+					forceSelection : true,
+					select : function(result) {
+						id = result.record.id;
 						storePosition.load({
 							params : {
 								'searchBean.storeInfoId' : id,
@@ -698,10 +698,10 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 				items : [{
 					id : 'productinfo.lastStockTaxPriceMoneyShow',
 					name : 'productinfo.lastStockTaxPriceMoneyShow',
-					fieldLabel : ' 最后含税采购价',
+					fieldLabel : ' 最后采购价',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
-					labelStyle : "font-size:11px",
+//					labelStyle : "font-size:11px",
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -722,10 +722,10 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 				items : [{
 					id : 'productinfo.lastSalesTaxPriceMoneyShow',
 					name : 'productinfo.lastSalesTaxPriceMoneyShow',
-					fieldLabel : ' 最后含税销售价',
+					fieldLabel : ' 最后销售价',
 					xtype : 'ERPShowText',
 					style : AllowBlankStyle,
-					labelStyle : "font-size:11px",
+//					labelStyle : "font-size:11px",
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -734,7 +734,7 @@ function base_product_info_create_windows(moduleId, moduleName, params) {
 					}
 				}]
 
-			}
+			},{}
 
 			]
 		}, {// 第二排

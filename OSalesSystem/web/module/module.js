@@ -23,6 +23,16 @@ function createModule(node, userId, params) {
 			loadjs.push("./ext3/privates/power/user_power_opt.js");
 			break;
 		}
+		case "base_combined_product" :{
+		    loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_index.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_create_windows.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_save_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_search_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_search_windows.js");
+			loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_update_windows.js");	
+		    break;
+		}
 
 //		case "product_classification_management" : {
 //			// alert("dddd 1");

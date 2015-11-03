@@ -17,6 +17,8 @@ import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.pojos.SystemUserOptPower ;
 import cn.zying.osales.pojos.SystemUserPower ;
+import cn.zying.osales.pojos.UserGridConfigs ;
+import cn.zying.osales.service.baseinfo.ISystemGridColConfigService ;
 import cn.zying.osales.units.search.bean.SystemUserSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopSystemUserService ;
@@ -126,6 +128,51 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
         return SUCCESS ;
     }
 
+    private String module_name ;
+
+    private String data_indexs ;
+
+    private String col_names ;
+
+    private String col_hiddens ;
+
+    private String col_widths ;
+
+    private String col_indexs ;
+
+    @Autowired
+    @Qualifier(ISystemGridColConfigService.name)
+    private ISystemGridColConfigService systemGridColConfigService ;
+
+    public String col_chonig_grid() throws Exception {
+
+        Integer user_actor = this.getOSalsesLoginUserId() ;
+        try {
+            systemGridColConfigService.saveUserGridConfig(module_name, data_indexs, col_names, col_hiddens, col_widths, col_indexs, user_actor) ;
+        } catch (Exception e) {
+            this.msg = handError(e) ;
+            this.success = false ;
+        }
+        success = true ;
+        return SUCCESS ;
+    }
+
+    private List<UserGridConfigs> userGridConfigs ;
+
+    public String fetch_hidden_col() throws Exception {
+        try {
+            Integer user_actor = this.getOSalsesLoginUserId() ;
+            userGridConfigs = systemGridColConfigService.find(module_name, user_actor) ;
+            writeObjectService.intToPrpertiesUnits(userGridConfigs) ;
+
+        } catch (Exception e) {
+            this.msg = handError(e) ;
+            this.success = false ;
+        }
+        success = true ;
+        return SUCCESS ;
+    }
+
     public SysStaffUser getSystemUserInfo() {
         return systemUserInfo ;
     }
@@ -144,6 +191,62 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
 
     public SystemUserSearchBean getSearchBean() {
         return searchBean ;
+    }
+
+    public String getModule_name() {
+        return module_name ;
+    }
+
+    public void setModule_name(String module_name) {
+        this.module_name = module_name ;
+    }
+
+    public String getData_indexs() {
+        return data_indexs ;
+    }
+
+    public void setData_indexs(String data_indexs) {
+        this.data_indexs = data_indexs ;
+    }
+
+    public String getCol_names() {
+        return col_names ;
+    }
+
+    public void setCol_names(String col_names) {
+        this.col_names = col_names ;
+    }
+
+    public String getCol_hiddens() {
+        return col_hiddens ;
+    }
+
+    public void setCol_hiddens(String col_hiddens) {
+        this.col_hiddens = col_hiddens ;
+    }
+
+    public String getCol_widths() {
+        return col_widths ;
+    }
+
+    public void setCol_widths(String col_widths) {
+        this.col_widths = col_widths ;
+    }
+
+    public String getCol_indexs() {
+        return col_indexs ;
+    }
+
+    public void setCol_indexs(String col_indexs) {
+        this.col_indexs = col_indexs ;
+    }
+
+    public List<UserGridConfigs> getUserGridConfigs() {
+        return userGridConfigs ;
+    }
+
+    public void setUserGridConfigs(List<UserGridConfigs> userGridConfigs) {
+        this.userGridConfigs = userGridConfigs ;
     }
 
 }

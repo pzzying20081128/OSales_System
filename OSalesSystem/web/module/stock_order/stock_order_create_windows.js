@@ -33,14 +33,14 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					width : 180
 				},
 				items : [{
-					id : 'stockorder.OrderNumber',
-					name : 'stockorder.OrderNumber',
+					id : 'stockorder.number',
+					name : 'stockorder.number',
 					fieldLabel : ' 订单编号',
 					xtype : 'textfield',
 					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
-					value : order.orderNumber,
+					value : order.number,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}

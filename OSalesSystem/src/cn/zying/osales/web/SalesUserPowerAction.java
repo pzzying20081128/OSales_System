@@ -69,6 +69,9 @@ public class SalesUserPowerAction extends SearchUserPowerAction {
         return SUCCESS ;
     }
 
+    
+
+
     public Integer getUuid() {
         return uuid ;
     }

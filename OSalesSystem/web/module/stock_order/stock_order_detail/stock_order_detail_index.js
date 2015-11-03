@@ -3,10 +3,11 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 	var orderGrid = params.orderGrid;
 
 	addDetailButton = new Ext.Toolbar.Button({
-		id : moduleId + '_add',
+//		id : moduleId + '_add',
 		xtype : "tbbutton",
 		text : "增加",
 		disabled : true,
+		key:"add",
 		// keyBinding : createCreateKey(),
 		handler : function(bt) {
 
@@ -21,9 +22,11 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 				showErrorMsg('提示信息', '只能选择一行数据记录');
 				return false;
 			}
+
+			sorder = ( typeof ( selection_rows[0].json ) == 'undefined' ) ? selection_rows[0].data : selection_rows[0].json;
 			stock_order_detail_create_windows(moduleId, moduleName, {
 				grid : mainGridModule.getGrid(),
-				stockOrder : selection_rows[0].json,
+				stockOrder : sorder,
 				orderGrid : orderGrid
 
 			});
@@ -31,10 +34,11 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 	});
 
 	editDetailButton = new Ext.Toolbar.Button({
-		id : moduleId + '_edit',
+//		id : moduleId + '_edit',
 		xtype : "tbbutton",
 		text : "编辑",
 		disabled : true,
+			key:"edit",
 		// keyBinding : createEditKey(),
 		handler : function(bt) {
 			stock_order_detail_update_windows(moduleId, moduleName, {
@@ -45,10 +49,11 @@ function create_stock_order_detail_window(moduleId, moduleName, params) {
 	});
 
 	deleteDetailButton = new Ext.Toolbar.Button({
-		id : moduleId + '_delete',
+//		id : moduleId + '_delete',
 		xtype : "tbbutton",
 		text : "删除",
 		disabled : true,
+			key:"delete",
 		// keyBinding : createDeleteKey(),
 		handler : function(bt) {
 			stock_order_detail_delete_windows(moduleId, moduleName, {

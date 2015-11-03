@@ -10,6 +10,7 @@ import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.StockStoreReceive ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -49,7 +50,11 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
 
     }
 
-    private String sql = "select  stockStoreReceive   from   StockStoreReceive  as  stockStoreReceive   " ;
+    private String sql = "select  stockStoreReceive   from   StockStoreReceive  as  stockStoreReceive   " +
+
+    "  inner join  fetch   stockStoreReceive.stockInStore  as stockInStore   " +
+
+    " inner join   fetch   stockInStore.stockOrder as  stockOrder   " ;
 
     private List<StockStoreReceive> list(String sqlWhere, Map<String, Object> value, int... startLimit) throws SystemOptServiceException {
         String sql_ = sql + sqlWhere ;
@@ -57,7 +62,11 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
         return result ;
     }
 
-    private String sqlsum = "select  count(stockStoreReceive.id)   from   StockStoreReceive  as  stockStoreReceive" ;
+    private String sqlsum = "select  count(stockStoreReceive.id)   from   StockStoreReceive  as  stockStoreReceive   " +
+
+    "  inner join     stockStoreReceive.stockInStore  as stockInStore   " +
+
+    " inner join      stockInStore.stockOrder as  stockOrder   " ;
 
     private Long sum(String sqlWhere, Map<String, Object> value) throws SystemOptServiceException {
         String sql_ = sqlsum + sqlWhere ;
@@ -72,6 +81,38 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
         } else {
             sqlWhere = sqlWhere + "  and   stockStoreReceive.status ='" + searchBean.getStatus() + "' " ;
         }
+
+        if (searchBean.getStatuses() == null || searchBean.getStatuses().size() == 0) {
+
+        } else {
+            sqlWhere = sqlWhere + "  and   stockStoreReceive.status  in (:status) " ;
+            value.put("status", searchBean.getStatuses()) ;
+        }
+
+        if (ToolsUnits.isNOtNulll(searchBean.getStockOrderNumber())) {
+            sqlWhere = sqlWhere + "   and  stockOrder.number  like '%" + searchBean.getStockOrderNumber() + "%'" ;
+        }
+
+        if (ToolsUnits.isNOtNulll(searchBean.getStockInStoreNumber())) {
+            sqlWhere = sqlWhere + "   and  stockInStore.number  like '%" + searchBean.getStockInStoreNumber() + "%'" ;
+        }
+
+        if (ToolsUnits.isNOtNulll(searchBean.getNumber())) {
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.number  like '%" + searchBean.getNumber() + "%'" ;
+        }
+
+        List<Integer> providerInfoIds = ToolsUnits.filterNULL(searchBean.getProviderInfoIds()) ;
+        if (providerInfoIds != null && providerInfoIds.size() > 0) {
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.providerInfoId  in (:providerInfoIds)" ;
+            value.put("providerInfoIds", searchBean.getProviderInfoIds()) ;
+        }
+
+        List<StockType> stockType = ToolsUnits.filterNULL(searchBean.getStockTypes()) ;
+        if (stockType != null && stockType.size() > 0) {
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.stockType in ( :stockTypes )" ;
+            value.put("stockTypes", searchBean.getStockTypes()) ;
+        }
+
         return sqlWhere ;
     }
 

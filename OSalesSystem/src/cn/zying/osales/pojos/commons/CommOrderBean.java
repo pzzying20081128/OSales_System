@@ -11,6 +11,7 @@ import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.pojos.SysStaffUser ;
 
 @MappedSuperclass
@@ -61,6 +62,10 @@ public class CommOrderBean extends CommBean {
     @Column(name = "number")
     @FieldDesc(name = "单号")
     private String number ;
+    
+    @Column(name = "create_time")
+    @Temporal(TemporalType.DATE)
+    private Date createTime=DateToolsUilts.getnowDate();;
 
     public String getRemarks() {
         return remarks ;
@@ -140,6 +145,14 @@ public class CommOrderBean extends CommBean {
 
     public void setNumber(String number) {
         this.number = number ;
+    }
+
+    public Date getCreateTime() {
+        return createTime ;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime ;
     }
 
 }

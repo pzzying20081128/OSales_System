@@ -13,11 +13,11 @@ Ext.apply(Ext.form.VTypes, {
 			return false;
 		return true
 	},
-	chineseText : "请输入中文", 
+	chineseText : "请输入中文",
 	age : function(val, field) {
 		try {
 			if (parseInt(val) >= 18 && parseInt(val) <= 100)
-				return true;
+				return true; 
 			return false
 		} catch (err) {
 			return false
@@ -158,7 +158,7 @@ Ext.apply(Ext.form.VTypes, {
 	alphaText : "请输入英文字母",
 	money : function(val, field) {
 		try {
-			if (/^(?:[1-9]\d{0,3}|0)(?:\.\d+)?$/.test(val))
+			if (/^\d{1,10}(\.\d{1,4})?$/.test(val))
 				return true;
 			else
 				return false
@@ -599,13 +599,15 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var items = tbar.items.items;
 		for (var i = 0; i < items.length; i++) {
 			var opt = items[i];
+			if (typeof opt.key == "undefined")
+				continue;
 			if (isOpen == true)
 				opt.enable();
 			else
 				opt.disable()
 		}
 	},
-	openButton : function(isOpen) {
+	openButton : function(params) {
 		var grid = this.getGrid();
 		var isAdmin = grid.isAdmin;
 		if (isAdmin == 1)
@@ -616,13 +618,15 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			var items = tbar.items.items;
 			for (var i = 0; i < items.length; i++) {
 				var opt = items[i];
+				if (typeof opt.key == "undefined")
+					continue;
 				var power = _map_.get(opt.key);
 				if (power == null)
 					alert(opt.text + "  is set error ! ");
-				else if (power.isUse == 1 && isOpen == true)
-					opt.enable();
+				else if (power.isUse != 1)
+					opt.disable();
 				else
-					opt.disable()
+					opt.enable()
 			}
 		}
 	},
@@ -761,7 +765,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var colModel_ = this.colModel;
 		var moduleId = this.moduleId;
 		if (typeof moduleId == "undefined") {
-			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId ! moduleId:TREEID");
+			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId !moduleId:TREEID");
 			return
 		}
 		var cmConfigs = colModel_.config;
@@ -798,7 +802,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 				col_indexs = i
 		}
 		Ext.Ajax.request({
-			url : "sysuser/col_chonig_opt.action",
+			url : "./col_chonig_grid.do",
 			params : {
 				module_name : moduleId,
 				data_indexs : data_indexs,
@@ -809,25 +813,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			},
 			success : function(response, options) {
 			}
-		});
-		for (var i = 1; i < cmConfigs.length; i++) {
-			var cmConfig = cmConfigs[i];
-			var hidden = cmConfig.hidden == null ? "0" : cmConfig.hidden == true ? 1 : 0;
-			var dataIndex_ = cmConfig.dataIndex;
-			Ext.Ajax.request({
-				url : "sysuser/col_move_opt.action",
-				params : {
-					module_name : moduleId,
-					old_colIndex : 0,
-					new_colIndex : i,
-					dataIndex : dataIndex_,
-					col_name : cmConfig.header,
-					is_hidden : hidden
-				},
-				success : function(response, options) {
-				}
-			})
-		}
+		})
 	},
 	removeOptBt : function() {
 	},
@@ -860,9 +846,34 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if (modulePower_ != null && typeof modulePower_ != "undefined")
 						modulePower_.modulePower(moduleId, power)
 				}
+				grid.openButton({
+					check : true
+				});
 				return json
 			}
 		})
+	},
+	addSetButton : function(params) {
+		var grid = this.getGrid();
+		if (typeof params.addSet != "undefined") {
+			var toolbar = grid.getTopToolbar();
+			if (typeof toolbar != "undefined") {
+				toolbar.addButton(new Ext.Toolbar.Fill);
+				toolbar.addButton({
+					xtype : "tbbutton",
+					text : "保存设置",
+					disabled : false,
+					handler : function(bt) {
+						if (typeof params.addSet.grids != "undefined") {
+							var grids = params.addSet.grids;
+							for (var i = 0; i < grids.length; i++)
+								grids[i].saveColModule();
+							showMsg("信息", "保存设置成功")
+						}
+					}
+				})
+			}
+		}
 	},
 	initPanel : function(prams) {
 		var moduleId = this.moduleId;
@@ -885,6 +896,34 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			dataJson = typeof r.json == "undefined" ? r.data : r.json;
 			if (typeof prams.select != "undefined" && typeof prams.select == "function")
 				prams.select(r.id, dataJson, sm, rowIdx, r)
+		});
+		ERPAjaxRequest({
+			url : "./sysuser/fetch_hidden_col.do",
+			params : {
+				module_name : moduleId
+			},
+			success : function(result) {
+				var cmConfigs = colModel_.config;
+				var json = result.result;
+				var hiddenCount = 0;
+				for (var i = 0; i < json.userGridConfigs.length; i++) {
+					for (var j = 1; j < cmConfigs.length; j++) {
+						var cmConfig = cmConfigs[j];
+						if (cmConfig.dataIndex == json.userGridConfigs[i].colDataIndex) {
+							if (json.userGridConfigs[i].hidden == 1) {
+								colModel_.setHidden(j, true);
+								hiddenCount++
+							} else
+								colModel_.setHidden(j, false);
+							colModel_.moveColumn(j, json.userGridConfigs[i].colIndex);
+							colModel_.setColumnWidth(json.userGridConfigs[i].colIndex, json.userGridConfigs[i].colWidth, true);
+							break
+						}
+					}
+					if (hiddenCount == json.userGridConfigs.length)
+						colModel_.setHidden(1, false)
+				}
+			}
 		})
 	},
 	load : function(loadParams) {
@@ -1033,6 +1072,7 @@ var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
 var NoAllowBlankStyle = "background:#fff1a4;";
 var AllowBlankStyle = "background:#ffffff;";
+var showBlankStyle = "background:#99FFFF;";
 var NoAllowBlankColor = "#fff1a4";
 var AllowBlankColor = "#ffffff";
 function updateUserPasswdWindows() {
@@ -1962,11 +2002,139 @@ function createERPcombo(params) {
 		listeners : {
 			"select" : function(combo, record, index) {
 				if (typeof params.select != "undefined")
-					params.select(combo, record, index)
+					params.select({
+						combo : combo,
+						record : record,
+						index : index
+					})
 			}
 		}
 	};
 	sss = new Ext.form.ERPComboBox(xx);
+	return sss
+}
+Ext.form.ERPBoxSelect = Ext.extend(Ext.ux.form.SuperBoxSelect, {
+	resizable : true,
+	allowAddNewData : true,
+	valueField : "id",
+	displayField : "name",
+	mode : "remote",
+	triggerAction : "all",
+	blankText : "不能为空！",
+	emptyText : "请输入查询值",
+	allowBlank : true,
+	triggerAction : "all",
+	queryParam : "name",
+	editable : true,
+	readOnly : false,
+	forceSelection : true,
+	minChars : 1,
+	style : "background:FFFFFF;",
+	forceFormValue : false,
+	value : null,
+	inType : "int",
+	initComponent : function() {
+		var comboBox = this;
+		Ext.form.ERPBoxSelect.superclass.initComponent.call(this);
+		this.store.on("beforeload", function(store, options) {
+			var o = store.baseParams;
+			Ext.apply(o, options.params);
+			this.baseParams = o
+		})
+	},
+	load : function(params) {
+		this.store.loads(params)
+	}
+});
+Ext.reg("ERPBoxSelect", Ext.form.ERPBoxSelect);
+function createERPBoxSelect(params) {
+	var xx = {
+		id : params.id,
+		hiddenName : params.name,
+		fieldLabel : params.fieldLabel,
+		xtype : "ERPBoxSelect",
+		valueField : "id",
+		displayField : "name",
+		width : typeof params.width == "undefined" ? 200 : params.width,
+		allowBlank : typeof params.allowBlank == "undefined" ? false : params.allowBlank,
+		style : typeof params.allowBlank == "undefined" ? NoAllowBlankStyle : params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle,
+		store : new Ext.data.ERPComboStore({
+			autoload : typeof params.autoload == "undefined" ? false : params.autoload,
+			baseParams : params.params,
+			proxy : new Ext.data.HttpProxy({
+				url : params.url
+			}),
+			reader : new Ext.data.JsonReader({
+				id : "id",
+				root : "results"
+			}, Ext.data.Record.create([{
+				name : "id"
+			}, {
+				name : "name"
+			}])),
+			listeners : {
+				"load" : function() {
+					if (typeof params.load != "undefined")
+						params.load()
+				}
+			}
+		}),
+		listeners : {
+			"select" : function(combo, record, index) {
+				if (typeof params.select != "undefined")
+					params.select({
+						combo : combo,
+						record : record,
+						index : index
+					})
+			}
+		}
+	};
+	sss = new Ext.form.ERPBoxSelect(xx);
+	return sss
+}
+function createERPlocalBoxSelect(params) {
+	var xx = {
+		id : params.id,
+		hiddenName : params.name,
+		fieldLabel : params.fieldLabel,
+		mode : "local",
+		xtype : "ERPBoxSelect",
+		valueField : "id",
+		displayField : "name",
+		editable : false,
+		width : typeof params.width == "undefined" ? 200 : params.width,
+		allowBlank : typeof params.allowBlank == "undefined" ? false : params.allowBlank,
+		style : typeof params.allowBlank == "undefined" ? NoAllowBlankStyle : params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle,
+		defaultValue : typeof params.defaultValue == "undefined" ? null : params.defaultValue,
+		reset : function() {
+			if (this.clearFilterOnReset && this.mode == "local")
+				this.store.clearFilter();
+			Ext.form.ComboBox.superclass.reset.call(this);
+			this.setValue(this.defaultValue)
+		},
+		store : new Ext.data.SimpleStore({
+			fields : ["id", "name"],
+			data : params.localdata,
+			listeners : {
+				"load" : function() {
+					if (typeof params.load != "undefined")
+						params.load()
+				}
+			}
+		}),
+		listeners : {
+			"select" : function(combo, record, index) {
+				if (typeof params.select != "undefined")
+					params.select({
+						combo : combo,
+						record : record,
+						index : index
+					})
+			}
+		}
+	};
+	sss = new Ext.form.ERPBoxSelect(xx);
 	return sss
 };
 function showErrorMsg(title, message) {
@@ -1974,7 +2142,7 @@ function showErrorMsg(title, message) {
 		title : title,
 		buttons : Ext.MessageBox.OK,
 		msg : message,
-		width : 350,
+		width : 400,
 		modal : true,
 		icon : Ext.Msg.ERROR
 	})
@@ -1983,8 +2151,8 @@ function showMsg(title, messages) {
 	Ext.MessageBox.show({
 		title : title,
 		buttons : Ext.MessageBox.OK,
-		msg : message,
-		width : 500,
+		msg : messages,
+		width : 400,
 		modal : true,
 		icon : Ext.Msg.INFO
 	})
@@ -2007,14 +2175,14 @@ Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg("ERPShowText", Ext.form.ERPShowTextField);
 Ext.form.ERPShowEditText = Ext.extend(Ext.form.TextField, {
-	disabled : true,
+	disabled : false,
 	disabledClass : "my-disabled",
 	xtype : "textfield",
 	blankText : "不能为空!",
 	allowBlank : false,
-	style : AllowBlankStyle,
-	editable : true,
-	readOnly : false
+	style : showBlankStyle,
+	editable : false,
+	readOnly : true
 });
 Ext.reg("ERPShowEditText", Ext.form.ERPShowTextField);
 function ERPAjaxRequest(reqParams) {
@@ -2112,6 +2280,13 @@ function createLocalCombo(params) {
 	return xx
 }
 function mainGridWindow(properties) {
+	var detailGrid = null;
+	this.setDetailGrid = function(detailGrid) {
+		this.detailGrid = detailGrid
+	};
+	this.getDetailGrid = function() {
+		return this.detailGridl
+	};
 	var isBbar = typeof properties.isBbar == "undefined" ? true : properties.isBbar;
 	var moduleId = properties.moduleId;
 	var store = new Ext.data.ERPStore({
@@ -2155,6 +2330,15 @@ function mainGridWindow(properties) {
 		tbar : properties.tbar
 	});
 	grid.initPanel(properties.init);
+	var tbar = grid.getTopToolbar();
+	var items = tbar.items.items;
+	for (var i = 0; i < items.length; i++)
+		items[i].disable();
+	grid.addSetButton({
+		addSet : {
+			grids : detailGrid == null ? [grid] : [grid, detailGrid]
+		}
+	});
 	this.getGrid = getGrid_;
 	function getGrid_() {
 		return grid

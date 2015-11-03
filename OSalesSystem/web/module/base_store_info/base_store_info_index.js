@@ -1,4 +1,6 @@
 function create_base_store_info_window(moduleId, moduleName) {
+	
+	
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
@@ -11,9 +13,10 @@ function create_base_store_info_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				id : moduleId + '_add',
+				// id : moduleId + '_add',
 				xtype : "tbbutton",
 				text : "增加",
+				key : "add",
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					base_store_info_create_windows(moduleId, moduleName, {
@@ -25,6 +28,7 @@ function create_base_store_info_window(moduleId, moduleName) {
 				id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
+				key : "edit",
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					base_store_info_update_windows(moduleId, moduleName, {
@@ -36,6 +40,7 @@ function create_base_store_info_window(moduleId, moduleName) {
 				id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
+				key : "delete",
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					base_store_info_delete_windows(moduleId, moduleName, {
@@ -47,6 +52,7 @@ function create_base_store_info_window(moduleId, moduleName) {
 				id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
+				key : "search",
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = base_store_info_search_windows(moduleId, moduleName, {
@@ -76,11 +82,15 @@ function create_base_store_info_window(moduleId, moduleName) {
 
 	var mainGrid = mainGridModule.getGrid();
 
-	var store_position_grid = new create_base_store_position_window(moduleId + "_store_position", moduleName, {
+
+		var store_position_grid = new create_base_store_position_window(moduleId + "_store_position", moduleName, {
 
 		storeGrid : mainGrid
 
 	});
+	
+	mainGridModule.setDetailGrid(store_position_grid);
+
 
 	var positonParams = {
 		positonGrid : store_position_grid,
@@ -125,7 +135,7 @@ function create_base_store_info_window(moduleId, moduleName) {
 		title : moduleName,
 		items : [layout],// 里面所包含的组件
 		// 用于权限
-		// grids:[mainGrid],
+		 grids:[mainGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

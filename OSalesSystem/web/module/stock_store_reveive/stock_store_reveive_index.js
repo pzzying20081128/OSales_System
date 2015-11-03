@@ -1,6 +1,53 @@
 function create_stock_store_reveive_window(moduleId, moduleName) {
 
+	checkButton = new Ext.Toolbar.Button({
+		// id : moduleId + '_check',
+		xtype : "tbbutton",
+		key : "check",
+		text : "审核",
+		disabled : true,
+		check : "check",
+		// keyBinding : createSearchKey(),
+		handler : function() {
+			var searchWindex = stock_store_reveive_check_windows(moduleId, moduleName, {
+				grid : mainGridModule,
+				detailGrid : detailGrid
+
+			});
+		}
+	});
+
+	searchButton = new Ext.Toolbar.Button({
+		// id : moduleId + '_search',
+		xtype : "tbbutton",
+		text : "查询",
+//		key : "search",
+		disabled : false,
+//		check : "show",
+		// keyBinding : createSearchKey(),
+		handler : function() {
+			detailGrid.removeAll();
+			var searchWindex = stock_store_reveive_search_windows(moduleId, moduleName, {
+				grid : mainGridModule,
+				searchParams : stock_store_reveive_search_params
+			});
+		}
+	});
+
+	printButton = new Ext.Toolbar.Button({
+		// id : moduleId + '_search',
+		xtype : "tbbutton",
+		text : "打印",
+		key : "print",
+		disabled : true,
+		check : "show",
+		// keyBinding : createSearchKey(),
+		handler : function() {
+		}
+	});
+
 	var mainGridModule = new mainGridWindow({
+
 		moduleId : moduleId,
 		// list grid
 		url : "./list_StockStoreReceive_list.do",
@@ -11,64 +58,58 @@ function create_stock_store_reveive_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				id : moduleId + '_edit',
+				// id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
+				key : "edit",
+				disabled : true,
+				check : "hide",
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					stock_store_reveive_update_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
-
 					});
 				}
 			}, {
-				id : moduleId + '_delete',
+				// id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
+				key : "delete",
+				disabled : true,
+				check : "hide",
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					stock_store_reveive_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
 					});
 				}
-			}, {
-				id : moduleId + '_search',
-				xtype : "tbbutton",
-				text : "查询",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = stock_store_reveive_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : stock_store_reveive_search_params
-					});
-				}
-			}, {
-				id : moduleId + '_check',
-				xtype : "tbbutton",
-				text : "审核",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = stock_store_reveive_check_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						detailGrid : detailGrid
-
-					});
-				}
-			}
-
-			]
-
+			}, searchButton, checkButton, printButton]
 		},
 		init : {
 			// 行被选择
-			select : function(rowDataId, data, sm, rowIdx, r) {
+			select : function(rowDataId, data) {
+				status = data.status;
+				if (status == '已审核') {
+					checkButton.setText("取消审核");
+					mainGrid.openButton({
+						check : true
+					});
+				} else if (status == '有效') {
+					checkButton.setText("审核");
+					mainGrid.openButton({
+						check : false
+					});
+				}else{
+					
+				}
+				// //////////////////////////////////////////
+
 				detailGrid.load({
 					params : {
 						"searchBean.stockStoreReceiveId" : rowDataId
 					}
 				});
+
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -81,8 +122,14 @@ function create_stock_store_reveive_window(moduleId, moduleName) {
 
 	var detailGrid = new create_stock_store_reveive_detail_window(moduleId + "_detail", moduleName, {
 
-		mainGrid : mainGrid
+		mainGrid : mainGridModule.getGrid()
 
+	});
+	
+	mainGrid.addSetButton({
+	addSet:{
+		grids : [mainGrid, detailGrid]
+	}
 	});
 
 	var layout = new Ext.Panel({
@@ -122,7 +169,7 @@ function create_stock_store_reveive_window(moduleId, moduleName) {
 		title : moduleName,
 		items : [layout],// 里面所包含的组件
 		// 用于权限
-		// grids:[mainGrid],
+		grids : [mainGrid, detailGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

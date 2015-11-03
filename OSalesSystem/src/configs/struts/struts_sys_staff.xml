@@ -72,8 +72,26 @@
 			</result>
 		</action>
 		
-		
-		
+		<action name="col_chonig_grid" class="SysStaffUserManagerAction" method="col_chonig_grid">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				    success
+				</param>
+			</result>
+		</action>
+		<action name="fetch_hidden_col" class="SysStaffUserManagerAction" method="fetch_hidden_col">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,
+					userGridConfigs,
+					userGridConfigs\[\d+\]\.\w+
+				</param>
+			</result>
+		</action>
 	
 	</package>
 </struts>

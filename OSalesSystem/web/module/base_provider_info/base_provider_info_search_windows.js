@@ -463,7 +463,7 @@ function base_provider_info_search_windows(moduleId, moduleName, params) {
 	});
 
 	var window = new Ext.ERPDefaultsWindow({
-		title : "查询工单",
+		title : "查询",
 		closable : true,
 		width : 1100,
 		// height : 400,

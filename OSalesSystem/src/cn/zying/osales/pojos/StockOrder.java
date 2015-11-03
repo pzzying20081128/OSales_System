@@ -16,8 +16,6 @@ import javax.persistence.Table ;
 import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
 
-import org.hibernate.annotations.Index ;
-
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.pojos.commons.StockCommBean ;
 
@@ -26,11 +24,7 @@ import cn.zying.osales.pojos.commons.StockCommBean ;
 // 采购订单
 public class StockOrder extends StockCommBean implements java.io.Serializable {
 
-    // 采购订单编号
-    @Column(name = "order_number")
-    @Index(name = "num_index")
-    @FieldDesc(name = "订单编号")
-    private String orderNumber ;
+    
 
     // 采购员
     @ManyToOne(fetch = FetchType.LAZY)
@@ -104,12 +98,5 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
         this.stockManId = stockManId ;
     }
 
-    public String getOrderNumber() {
-        return orderNumber ;
-    }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber ;
-    }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
+import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.SysStaffUser ;
@@ -41,7 +42,7 @@ public class StockOrderCheckUnits extends ABCommonsService {
         stockOrder.setCheckMan(checkMan) ;
         stockOrder.setCheckDate(DateToolsUilts.getnowDate()) ;
         baseService.update(stockOrder) ;
-        stockInStoreCreateUnits.createStockInStore(stockOrder.getStockType(), stockOrder) ;
+        stockInStoreCreateUnits.createStockInStore(OptType.check, stockOrder.getStockType(), stockOrder) ;
 
     }
 

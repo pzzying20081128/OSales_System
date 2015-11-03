@@ -70,6 +70,9 @@ public class ProductInfoSearchUnits extends ABCommonsService {
         if (searchBean.getStatus() != null && !searchBean.getStatus().equals(Status.全部)) {
             sqlWhere = sqlWhere + "   and   productInfo.status  ='" + searchBean.getStatus() + "'  " ;
         }
+        if(searchBean.getProviderInfoId() !=null){
+            sqlWhere = sqlWhere + "   and   productInfo.providerInfoId  ="+searchBean.getProviderInfoId() ;
+        }
         return sqlWhere ;
     }
 

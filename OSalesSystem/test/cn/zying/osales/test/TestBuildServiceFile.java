@@ -2,6 +2,8 @@ package cn.zying.osales.test;
 
 import cn.zy.apps.tools.dev.service.BuildServiceFile ;
 import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
+import cn.zying.osales.pojos.CombinedProduct ;
+import cn.zying.osales.pojos.CombinedProductDetails ;
 import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.ProviderInfo ;
@@ -23,9 +25,9 @@ public class TestBuildServiceFile {
     public static void main(String[] args) throws Exception {
         
         
-        String module= "stocks";
+        String module= "baseinfo";
         
-        Class<?> clazz = StockStoreReceiveDetail.class;
+        Class<?> clazz = CombinedProductDetails.class;
         
         String className=clazz.getSimpleName();
 

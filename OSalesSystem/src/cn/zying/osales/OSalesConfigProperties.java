@@ -1,6 +1,10 @@
 package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
+    
+    public enum OptSum{
+        add,del
+    }
 
     //采购订单代号
     public static String CODE_STOCK_ORDER = "CGSO" ;

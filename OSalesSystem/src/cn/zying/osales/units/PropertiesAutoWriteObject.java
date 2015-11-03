@@ -5,6 +5,8 @@ import javax.persistence.Table ;
 import cn.zy.apps.tools.units.AutoWriteObject ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.ToolsUnitsException ;
+import cn.zying.osales.pojos.CombinedProduct ;
+import cn.zying.osales.pojos.CombinedProductDetails ;
 import cn.zying.osales.pojos.SysStaffUser ;
 
 public class PropertiesAutoWriteObject extends AutoWriteObject {
@@ -31,19 +33,26 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
 
     @Override
     protected boolean filterSetProperties(Class<?> classes) {
+        
+      
 
         boolean result = ToolsUnits.regex(regexPackage, classes.getPackage().getName()) ;
 
         if (result == true) {
             //SysStaffUser
             {
-                Table table = classes.getAnnotation(Table.class) ;
-                if (table != null) {
-                    String name = table.name() ;
-                    if (name.startsWith("base_")) result = true ;
-                    else
-                        result = false ;
+                if(classes.equals(CombinedProduct.class) || classes.equals(CombinedProductDetails.class) ) {
+                    result = false ;
+                }else{
+                    Table table = classes.getAnnotation(Table.class) ;
+                    if (table != null) {
+                        String name = table.name() ;
+                        if (name.startsWith("base_")) result = true ;
+                        else
+                            result = false ;
+                    }
                 }
+        
             }
 
         }
