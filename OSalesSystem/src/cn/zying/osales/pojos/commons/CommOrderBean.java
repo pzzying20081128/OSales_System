@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne ;
 import javax.persistence.MappedSuperclass ;
 import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zy.apps.tools.units.DateToolsUilts ;
@@ -65,8 +66,13 @@ public class CommOrderBean extends CommBean {
 
     @Column(name = "create_time")
     @Temporal(TemporalType.DATE)
-    private Date createTime = DateToolsUilts.getnowDate() ; ;
-
+    private Date createTime = DateToolsUilts.getnowDate() ;
+    
+    
+    @Transient
+    private Date startTime;
+    @Transient
+    private Date endTime;
     public String getRemarks() {
         return remarks ;
     }
@@ -153,6 +159,22 @@ public class CommOrderBean extends CommBean {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime ;
+    }
+
+    public Date getStartTime() {
+        return startTime ;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime ;
+    }
+
+    public Date getEndTime() {
+        return endTime ;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime ;
     }
 
 }

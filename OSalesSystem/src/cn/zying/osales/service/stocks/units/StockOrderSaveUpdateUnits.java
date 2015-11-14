@@ -4,8 +4,10 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zy.apps.tools.units.ToolsUnitsException ;
 import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StockOrder ;
@@ -59,26 +61,9 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
     }
 
-    //    public void updateSumMoney(Integer optStockOrderId) throws SystemOptServiceException {
-    //        StockOrder stockOrder = baseService.load(optStockOrderId, StockOrder.class) ;
-    //        String sql = "select  sum(stockOrderDetail.orderCount) ,sum(stockOrderDetail.taxMoney) ,sum(stockOrderDetail.noTaxMoney)      from    StockOrderDetail as  stockOrderDetail    where stockOrderDetail.stockOrderId = " + optStockOrderId ;
-    //
-    //        Object[] result = baseService.findSinglenessByHSQL(sql) ;
-    //
-    //        stockOrder.setOrderCount(result[0] == null ? null : ((Long) result[0]).intValue()) ;
-    //
-    //        stockOrder.setTaxSumMoney(result[1] == null ? null : (Long) result[1]) ;
-    //
-    //        stockOrder.setNoTaxSumMoney(result[2] == null ? null : (Long) result[2]) ;
-    //
-    //        baseService.update(stockOrder) ;
-    //
-    //    }
-
     public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
         switch (optType) {
-
         case init:
             return init(optStockOrder) ;
 
@@ -99,8 +84,46 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
         return optStockOrder ;
     }
 
+    public void check(StockOrder optStockOrder) throws SystemOptServiceException {
+
+        String sql = "   select  count(stockOrder.id)  from  StockOrder as stockOrder   where  stockOrder.number='"
+
+        + optStockOrder.getNumber() + "'  "
+
+        + "  and   stockOrder.id !=" + optStockOrder.getId() ;
+
+        Long cont = baseService.selectSumByHSQL(sql) ;
+
+        if (cont == null || cont.intValue() == 0) {
+
+        } else {
+            throw new SystemOptServiceException("采购单号重复") ;
+        }
+
+        ProductInfoType productInfoType = optStockOrder.getStockProductType() ;
+
+        String productInfoTypeSql = "   select  count(stockOrderDetail.id)  from  StockOrderDetail  as stockOrderDetail   " +
+
+        "    inner join  stockOrderDetail.productInfo as  productInfo  " +
+
+        "    where  productInfo.productInfoType!='" + productInfoType.name() + "'  "
+
+        + "  and   stockOrderDetail.stockOrderId =" + optStockOrder.getId() ;
+
+        cont = baseService.selectSumByHSQL(productInfoTypeSql) ;
+
+        if (cont != null && cont.intValue() > 0) {
+
+            throw new SystemOptServiceException("采购订单明细中包含有不是[" + productInfoType.name() + "]产品,不能修改采购类型为" + productInfoType.name()) ;
+        }
+    }
+
     public StockOrder saveUpdate(StockOrder optStockOrder) throws SystemOptServiceException {
+
         try {
+
+            check(optStockOrder) ;
+
             StockOrder stockOrder = baseService.load(optStockOrder.getId(), StockOrder.class) ;
 
             optStockOrder.setStatus(Status.有效) ;
@@ -115,7 +138,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
             return optStockOrder ;
 
-        } catch (Exception e) {
+        } catch (ToolsUnitsException e) {
             throw new SystemOptServiceException(e) ;
         }
 

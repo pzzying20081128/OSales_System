@@ -2,7 +2,12 @@ var stock_order_detail_grid_column = {
 	record : [{
 		name : 'productInfo.name',
 		mapping : 'productInfo'
-	}, {
+	},
+	{
+		name : 'productInfo.productInfoType',
+		mapping : 'productInfo'
+	},
+		{
 		name : "productInfo.baseUnitBoxUnit",
 		mapping : 'productInfo'
 
@@ -89,7 +94,25 @@ var stock_order_detail_grid_column = {
 				return value.name;
 
 		}
-	}, {
+	},
+	{
+		header : '产品类型',
+		width : 200,
+		dataIndex : 'productInfo.productInfoType',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else if (value.productInfoType == null || typeof ( value.productInfoType ) == 'undefined')
+				return null
+			else
+				return value.productInfoType;
+
+		}
+	},
+		
+			{
 		header : '产品单位',
 		width : 200,
 		dataIndex : 'productInfo.baseUnitBoxUnit',

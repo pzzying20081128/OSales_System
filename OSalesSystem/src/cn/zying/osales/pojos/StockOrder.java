@@ -17,6 +17,7 @@ import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
@@ -41,6 +42,9 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "采购类型", desc = { "普通产品:普通产品", "组合产品:组合产品" })
     private ProductInfoType stockProductType ;
+    
+    @Transient
+    private List<ProductInfoType> stockProductTypes;
 
     //	// 合同
     //	@ManyToOne(fetch = FetchType.LAZY)
@@ -110,6 +114,14 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
 
     public void setStockProductType(ProductInfoType stockProductType) {
         this.stockProductType = stockProductType ;
+    }
+
+    public List<ProductInfoType> getStockProductTypes() {
+        return stockProductTypes ;
+    }
+
+    public void setStockProductTypes(List<ProductInfoType> stockProductTypes) {
+        this.stockProductTypes = stockProductTypes ;
     }
 
 }

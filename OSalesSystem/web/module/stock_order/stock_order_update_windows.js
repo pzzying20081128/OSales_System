@@ -3,24 +3,10 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 
 	var selection_rows = grid.getSelectionModel().getSelections();
-	
-	if(!stockOpptCheck(selection_rows, "编辑","有效"))return ;
 
-//	if (selection_rows == null) {
-//		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
-//		return false;
-//	}
-//
-//	if (selection_rows.length != 1) {
-//		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
-//		return false;
-//	}
-//	
-//	if ( selection_rows[0].data.status !='有效') {
-//		showErrorMsg('提示信息', '本条信息的状态是['+selection_rows[0].data.status+']不能编辑'  );
-//		return false;
-//	}
-	
+	if (!stockOpptCheck(selection_rows, "编辑", "有效"))
+		return;
+
 	var selectId = selection_rows[0].id;
 
 	providerInfo = createERPcombo({
@@ -60,6 +46,17 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 		params : {
 			"searchBean.id" : selection_rows[0].data.stockManId
 		}
+	});
+
+	var stockType = createLocalCombo({
+		id : 'stockorder.stockType',
+		name : 'stockorder.stockType',
+		fieldLabel : ' 订单类型',
+		storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
+		defaultValue : null,
+		allowBlank : false
+		,
+		// disabled:true
 	});
 
 	var stock_order_params = {
@@ -132,7 +129,10 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 		}, {
 			name : 'stockorder.status',
 			mapping : 'status'
-		},]),
+		}, {
+			name : "stockorder.stockProductType",
+			mapping : "stockProductType"
+		}]),
 		// 字段
 		field : [{// 第一排
 			layout : 'column',
@@ -168,14 +168,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [createLocalCombo({
-					id : 'stockorder.stockType',
-					name : 'stockorder.stockType',
-					fieldLabel : ' 订单类型',
-					storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
-					defaultValue : null,
-					allowBlank : false
-				})]
+				items : [stockType]
 			}, {
 				columnWidth : .33,
 				layout : 'form',
@@ -184,22 +177,21 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [{
-					id : 'stockorder.orderDate',
-					name : 'stockorder.orderDate',
-					fieldLabel : ' 订单日期',
-					xtype : 'datefield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					format : 'Y-m-d',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
+				items : [
 
-						}
-					}
-				}]
-			},]
+				createLocalCombo({
+					id : 'stockorder.stockProductType',
+					name : 'stockorder.stockProductType',
+					fieldLabel : ' 采购类型',
+					storeData : [['普通产品', "普通产品"], ['组合产品', '组合产品']],
+					defaultValue : null,
+					allowBlank : false
+					,
+
+				})
+
+				]
+			}]
 		},
 		// ////////////////////////////////////////////////////////
 		{// 第二排
@@ -244,7 +236,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					name : 'stockorder.taxSumMoneyMoneyShow',
 					fieldLabel : ' 含税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -265,7 +257,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					name : 'stockorder.noTaxSumMoneyMoneyShow',
 					fieldLabel : ' 没税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -315,7 +307,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					name : 'stockorder.orderCount',
 					fieldLabel : ' 订购数量',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -337,7 +329,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					name : 'stockorder.stockManId1',
 					fieldLabel : ' 合同',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -346,7 +338,32 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}// 1-2end
-			]
+			, {
+
+				columnWidth : .33,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 180
+				},
+				items : [{
+					id : 'stockorder.orderDate',
+					name : 'stockorder.orderDate',
+					fieldLabel : ' 订单日期',
+					xtype : 'datefield',
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					format : 'Y-m-d',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+
+						}
+					}
+				}]
+
+			}]
 		}, {
 			layout : 'column',
 			baseCls : 'x-plain',
@@ -372,22 +389,28 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}]
+			}
+
+			]
 		}
 
 		]
 
 	}
 
-	var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params);
+	this.openWin = function(params) {
 
-	// stock_order_create_window.loadform(selection_rows[0].data);
+		var detailParams = params.detailParams;
+		var stock_order_update_window = new stock_order_save_update_form_panel_windows(stock_order_params, {
+			detailParams : detailParams
+		});
 
-	stock_order_create_window.load({
-		url : './simple_StockOrder_get.do?uuid=' + selectId,
-		success : function(result) {
-			json = result.result;
-		}
-	});
+		stock_order_update_window.load({
+			url : './simple_StockOrder_get.do?uuid=' + selectId,
+			success : function(result) {
+				json = result.result;
+			}
+		});
+	}
 
 }

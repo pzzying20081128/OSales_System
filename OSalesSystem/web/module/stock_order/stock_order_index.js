@@ -13,13 +13,20 @@ function create_stock_order_window(moduleId, moduleName) {
 				url : "./simple_StockOrder_initStockOrder.do",
 				// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 				success : function(result) {
+					// init order 都到订单编号
 					order = result.result.result;
-					stock_order_create_windows(moduleId, moduleName, {
+					logger("创建采购订单");
+					var stock_order_create_win = new stock_order_create_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						order : order,
-						detailParams : detailParams
+						order : order
+					});
+					stock_order_create_win.openWin({
+						detailParams : {
+							stockdetail : stockdetail
+						}
 					});
 				}
+
 			});
 		}
 	});
@@ -32,9 +39,14 @@ function create_stock_order_window(moduleId, moduleName) {
 		disabled : true,
 		// keyBinding : createEditKey(),
 		handler : function(bt) {
-			stock_order_update_windows(moduleId, moduleName, {
+			var stock_order_update_win = new stock_order_update_windows(moduleId, moduleName, {
 				grid : mainGridModule
+			});
 
+			stock_order_update_win.openWin({
+				detailParams : {
+					stockdetail : stockdetail
+				}
 			});
 		}
 	});
@@ -69,6 +81,7 @@ function create_stock_order_window(moduleId, moduleName) {
 	});
 
 	var mainGridModule = new mainGridWindow({
+		isPrint : true,
 		moduleId : moduleId,
 		// list grid
 		url : "./list_StockOrder_list.do",
@@ -99,7 +112,6 @@ function create_stock_order_window(moduleId, moduleName) {
 			// 行被选择
 			select : function(rowDataId, data) {
 				stockSelect(data, checkButton, stockdetailGrid);
-				// //////////////////////////////////////////
 				stockdetailGrid.load({
 					params : {
 						'searchBean.stockOrderId' : rowDataId
@@ -116,25 +128,10 @@ function create_stock_order_window(moduleId, moduleName) {
 	var mainGrid = mainGridModule.getGrid();
 
 	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName, {
-
-		orderGrid : mainGrid
-
+		mainOrderGrid : mainGrid
 	});
 
 	stockdetailGrid = stockdetail.getGrid();
-
-	var detailParams = {
-		detailGrid : stockdetailGrid,
-		orderGrid : mainGrid,
-		moduleId : moduleId + "_stock_detail",
-		moduleName : moduleName + "明细"
-	}
-
-	mainGrid.addSetButton({
-		addSet : {
-			grids : [mainGrid, stockdetailGrid]
-		}
-	});
 
 	var layout = new Ext.Panel({
 		layout : 'border',
@@ -143,27 +140,20 @@ function create_stock_order_window(moduleId, moduleName) {
 		minHeight : 100,
 		maxHeight : 500,
 		items : [new Ext.Panel({
-			id : "111",
 			layout : 'fit',
 			region : 'north',
 			margins : '0 0 0 0',
 			split : true,
 			height : 300,
 			items : mainGrid
-			// items : sales_order_store_out_panel_print
 		})
 
 		, new Ext.Panel({
-			id : "222",
 			layout : 'fit',
 			region : 'center',
 			margins : '0 0 0 0',
-
-			// height : "atuo",
 			title : '明细',
 			items : stockdetailGrid
-
-			// items : sales_order_store_out_panel_print
 		})
 
 		]

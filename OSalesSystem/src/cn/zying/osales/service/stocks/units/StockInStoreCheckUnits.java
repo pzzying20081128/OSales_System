@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.StockInStore ;
+import cn.zying.osales.pojos.StockStoreReceive ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -19,16 +21,41 @@ public class StockInStoreCheckUnits extends ABCommonsService {
     @Qualifier("StockStoreReceiveCreateUnits")
     private StockStoreReceiveCreateUnits stockStoreReceiveCreateUnits ;
 
-    public void check(Integer id, Integer checkManId) throws SystemOptServiceException {
+    @Autowired
+    @Qualifier("StockStoreReceiveCheckUnits")
+    private StockStoreReceiveCheckUnits stockStoreReceiveCheckUnits ;
 
-        StockInStore stockInStore = baseService.load(id, StockInStore.class) ;
+    @Autowired
+    @Qualifier("StockStoreReceiveSearchUnits")
+    private StockStoreReceiveSearchUnits stockStoreReceiveSearchUnits ;
+
+    public void cancelCheckDel(StockInStore stockInStore, Integer checkManId) throws SystemOptServiceException {
+
+        if (stockInStore == null) return ;
+
+        StockStoreReceive stockStoreReceive = stockStoreReceiveSearchUnits.searchByStockInStoreId(stockInStore.getId()) ;
+
+        stockStoreReceiveCheckUnits.cancelCheckDel(stockStoreReceive, checkManId) ;
+
+        if (stockInStore.getStockType().equals(StockType.直营采购订单)) {
+            baseService.remove(stockInStore) ;
+        } else if (stockInStore.getStockType().equals(StockType.采购订单)) {
+            if (stockInStore.getStatus().equals(Status.已审核)) {
+                throw new SystemOptServiceException("此采购进货单[" + stockInStore.getNumber() + "]已被审核") ;
+            } else {
+                baseService.remove(stockInStore) ;
+            }
+        }
+    }
+
+    public void check(StockInStore stockInStore, Integer checkManId) throws SystemOptServiceException {
 
         switch (stockInStore.getStatus()) {
         case 已审核:
-
+            cancalCheck(stockInStore, checkManId) ;
             break ;
         case 有效:
-            check(stockInStore, checkManId) ;
+            checking(stockInStore, checkManId) ;
             break ;
 
         default:
@@ -36,13 +63,38 @@ public class StockInStoreCheckUnits extends ABCommonsService {
         }
     }
 
-    private void check(StockInStore stockInStore, Integer checkManId) throws SystemOptServiceException {
+    private void cancalCheck(StockInStore stockInStore, Integer checkManId) throws SystemOptServiceException {
+        if (stockInStore.getStockType().equals(StockType.直营采购订单)) {
+            throw new SystemOptServiceException("此单是" + StockType.直营采购订单.name() + "不能取消审核") ;
+        } else {
+            StockStoreReceive stockStoreReceive = stockStoreReceiveSearchUnits.searchByStockInStoreId(stockInStore.getId()) ;
+            stockStoreReceiveCheckUnits.cancelCheckDel(stockStoreReceive, checkManId) ;
+            stockInStore.setCheckMan(null) ;
+            stockInStore.setStatus(Status.有效) ;
+            stockInStore.setCheckDate(null) ;
+            baseService.update(stockInStore) ;
+
+        }
+
+    }
+
+    public void check(Integer id, Integer checkManId) throws SystemOptServiceException {
+
+        StockInStore stockInStore = baseService.load(id, StockInStore.class) ;
+
+        check(stockInStore, checkManId) ;
+    }
+
+    private void checking(StockInStore stockInStore, Integer checkManId) throws SystemOptServiceException {
         stockInStore.setStatus(Status.已审核) ;
         SysStaffUser checkMan = baseService.load(checkManId, SysStaffUser.class) ;
         stockInStore.setCheckMan(checkMan) ;
         stockInStore.setCheckDate(DateToolsUilts.getnowDate()) ;
         baseService.update(stockInStore) ;
-        stockStoreReceiveCreateUnits.createStockInStore(OptType.check, stockInStore.getStockType(), stockInStore) ;
+        if (stockInStore.getStockOrder().getStockType().equals(StockType.直营采购订单)) {
+            StockStoreReceive stockStoreReceive = stockStoreReceiveCreateUnits.createStockInStore(stockInStore) ;
+            stockStoreReceiveCheckUnits.check(stockStoreReceive, checkManId) ;
+        }
 
     }
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zy.apps.tools.units.ToolsUnitsException ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.StockInStoreDetail ;
@@ -55,7 +56,7 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
             return stockInStoreDetail ;
 
-        } catch (Exception e) {
+        } catch (ToolsUnitsException e) {
             throw new SystemOptServiceException(e) ;
         }
 

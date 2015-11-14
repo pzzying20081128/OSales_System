@@ -1,4 +1,17 @@
-function stock_order_save_update_form_panel_windows(params, detailParams) {
+function stock_order_save_update_form_panel_windows(params, attachesParams) {
+
+	// detailParams : {
+	// stockdetail:stockdetail
+	// //create_stock_order_detail_window
+	// }
+
+	// attachesParams:{
+	// detailParams : {
+	// stockdetail : stockdetail
+	// }
+	// }
+
+	var detailParams = attachesParams.detailParams;
 
 	this.loadform = function(data) {
 		form_panel.getForm().loadRecord(data);
@@ -7,9 +20,6 @@ function stock_order_save_update_form_panel_windows(params, detailParams) {
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
 		frame : true,
-		// bodyStyle : 'padding:5px 5px 0',
-		// height : 300,
-		// autoHeight : true,
 		items : params.field,
 		reader : params.reader,
 		buttons : [{
@@ -27,25 +37,7 @@ function stock_order_save_update_form_panel_windows(params, detailParams) {
 								params.grid.insertRow(json[params.pojo]);
 								params.grid.getSelectionModel().selectFirstRow();
 								window.close();
-								// showMsgYN({
-								// msg : "是否要同时增加订单明细",
-								// yes : function(YN) {
-								//										   
-								// window.close();
-								// stock_order_detail_create_windows(detailParams.moduleId,
-								// detailParams.moduleName, {
-								// grid : detailParams.detailGrid,
-								// orderGrid: detailParams.orderGrid,
-								// stockOrder:json[params.pojo]
-								// });
-								// },
-								// no : function() {
-								//									
-								// // form_panel.reset();
-								// window.close();
-								// }
-								// });
-
+								detailParams.stockdetail.openCreateWin();
 							} else {
 								params.grid.updateRow(json[params.pojo]);
 								window.close();

@@ -21,7 +21,7 @@ function create_stock_store_reveive_window(moduleId, moduleName) {
 		// id : moduleId + '_search',
 		xtype : "tbbutton",
 		text : "查询",
-//		key : "search",
+		key : "search",
 		disabled : false,
 //		check : "show",
 		// keyBinding : createSearchKey(),

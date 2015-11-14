@@ -10,18 +10,18 @@
 <script type="text/javascript" src="./ext3/ext-basex-debug.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./ext3/boxselect/superboxselect.css" />
 <script type="text/javascript" src="./ext3/boxselect/SuperBoxSelect.js"></script>
-
-<script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
-<script type="text/javascript" src="./module/module.js"></script>
-
-
-
-
-
-
-
+<script type="text/javascript" src="./ext3/iframe/uxvismode.js"></script>
+<script type="text/javascript" src="./ext3/iframe/multidom.js"></script>
+<script type="text/javascript" src="./ext3/iframe/mif.js"></script>
+<script type="text/javascript" src="./ext3/iframe/mifmsg.js"></script>
 
 <script type="text/javascript">
+
+   function logger(msg){
+	   if(true)
+	   console.log(msg);
+   }
+
 	function  stockOpptCheck(selection_rows , opt,action){
 		if (selection_rows == null) {
 			showErrorMsg('提示信息', '请选择要['+opt+']的数据记录');
@@ -111,7 +111,7 @@
 
 <style type="text/css">
 .upload-icon { //
-	width: 100px background:   url('./ext3/fileupload/css/image_add.png')
+	width: 100px background:    url('./ext3/fileupload/css/image_add.png')
 		no-repeat 0 0 !important;
 }
 
@@ -216,9 +216,9 @@
 
 .my-disabled {
 	color: black;
-	cursor: default;
-	//background-color:#99FFFF; 
-	background:     none repeat scroll 0% 0% ;
+	cursor: default; //
+	background-color: #99FFFF;
+	background: none repeat scroll 0% 0%;
 }
 
 .my-disabled .x-form-trigger-over {
@@ -251,7 +251,7 @@
 
 #img { //
 	z-index: -1; //
-	filter: alpha(opacity =         85);
+	filter: alpha(opacity =           85);
 	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
 	//
 	position: absolute;
@@ -267,7 +267,7 @@
 
 .imgTop { //
 	z-index: -1; //
-	filter: alpha(opacity =         85);
+	filter: alpha(opacity =           85);
 	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
 	//
 	position: absolute;
@@ -288,7 +288,7 @@
 	left: 0;
 	-moz-opacity: 0.5;
 	opacity: .30;
-	filter: alpha(opacity =       50);
+	filter: alpha(opacity =         50);
 	background-color: #fffffff;
 	width: 100%;
 	height: 100%;
@@ -338,6 +338,13 @@
 
 
 
+<script type="text/javascript" src="./ext3/privates/LodopFuncs.js"></script>
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+	<embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop32.exe"></embed>
+</object>
+
+<script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
+<script type="text/javascript" src="./module/module.js"></script>
 
 </head>
 <body onload=" init('${systemUser.id}','${systemUser.name}', '${systemUser.account}', '')">

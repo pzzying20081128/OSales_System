@@ -128,10 +128,7 @@ public class StockDetailCommBean extends DetailCommBean {
     @Column(name = "store_position_id", insertable = false, updatable = false)
     private Integer storePositionId ;
 
-    // 生产日期
-    @Column(name = "produce_date")
-    @Temporal(TemporalType.DATE)
-    private Date produceDate ;
+
 
     //  // 有保质期？
     //  @Column(name = "is_protect_time")
@@ -364,13 +361,7 @@ public class StockDetailCommBean extends DetailCommBean {
         this.storeBox = storeBox ;
     }
 
-    public Date getProduceDate() {
-        return produceDate ;
-    }
-
-    public void setProduceDate(Date produceDate) {
-        this.produceDate = produceDate ;
-    }
+ 
 
     public Integer getProtectTime() {
         return protectTime ;

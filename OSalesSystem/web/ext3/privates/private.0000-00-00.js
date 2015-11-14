@@ -10,7 +10,7 @@ Ext.apply(Ext.form.VTypes, {
 	chinese : function(val, field) {
 		var reg = /^[\u4e00-\u9fa5]+$/i;
 		if (!reg.test(val))
-			return false;
+			return false; 
 		return true
 	},
 	chineseText : "请输入中文",
@@ -39,7 +39,7 @@ Ext.apply(Ext.form.VTypes, {
 			if (/^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i.test(val))
 				return true;
 			return false
-		} catch (e) {  
+		} catch (e) {
 			return false
 		}
 	},
@@ -545,6 +545,34 @@ function IndexPanel(userId, userName, loginUser, regGUest, properties) {
 	createWin();
 	win.show()
 };
+Ext.override(Ext.grid.GridView, {
+	getColumnStyle : function(colIndex, isHeader) {
+		var colModel = this.cm, colConfig = colModel.config, style = isHeader ? "" : colConfig[colIndex].css || "", align = colConfig[colIndex].align;
+		if (Ext.isChrome)
+			style += String.format("width: {0};", parseInt(this.getColumnWidth(colIndex)) - 2 + "px");
+		else
+			style += String.format("width: {0};", this.getColumnWidth(colIndex));
+		if (colModel.isHidden(colIndex))
+			style += "display: none; ";
+		if (align)
+			style += String.format("text-align: {0};", align);
+		return style
+	}
+});
+Ext.grid.ColumnModel.override({
+	getTotalWidth : function(includeHidden) {
+		var off = 0;
+		if (Ext.isChrome)
+			off = 2;
+		if (!this.totalWidth) {
+			this.totalWidth = 0;
+			for (var i = 0, len = this.config.length; i < len; i++)
+				if (includeHidden || !this.isHidden(i))
+					this.totalWidth += this.getColumnWidth(i) + off
+		}
+		return this.totalWidth
+	}
+});
 Ext.data.ERPStore = Ext.extend(Ext.data.Store, {
 	remoteSort : true,
 	listeners : {
@@ -566,6 +594,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	inits : false,
 	savecol : false,
 	checkboxColumn : null,
+	detailGrid : null,
 	rowdblclickKey : null,
 	powerMap : null,
 	isAdmin : false,
@@ -596,15 +625,17 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	openAllButton : function(isOpen) {
 		var _map_ = this.getPowerMap();
 		var tbar = this.getTopToolbar();
-		var items = tbar.items.items;
-		for (var i = 0; i < items.length; i++) {
-			var opt = items[i];
-			if (typeof opt.key == "undefined")
-				continue;
-			if (isOpen == true)
-				opt.enable();
-			else
-				opt.disable()
+		if (typeof tbar != "undefined" && typeof tbar.items != "undefined" && typeof tbar.items.items != "undefined") {
+			var items = tbar.items.items;
+			for (var i = 0; i < items.length; i++) {
+				var opt = items[i];
+				if (typeof opt.key == "undefined")
+					continue;
+				if (isOpen == true)
+					opt.enable();
+				else
+					opt.disable()
+			}
 		}
 	},
 	openButton : function(params) {
@@ -1068,6 +1099,413 @@ Ext.grid.ERPRowNumberer = Ext.extend(Ext.grid.RowNumberer, {
 			return rowIndex + 1
 	}
 });
+var printPageConfig = {
+	"page_220_140" : {
+		"page" : {
+			"width" : "200mm",
+			"height" : "140mm"
+		},
+		"head" : {
+			"width" : "205mm",
+			"height" : "24mm",
+			"top" : "2mm",
+			"left" : "5mm"
+		},
+		"body" : {
+			"width" : "205mm",
+			"height" : "75mm",
+			"top" : "27mm",
+			"left" : "5mm"
+		},
+		"bottom" : {
+			"width" : "205mm",
+			"height" : "28mm",
+			"top" : "107mm",
+			"left" : "5mm"
+		}
+	}
+};
+function print_panel_win(url, printParams, gird) {
+	var page = 1;
+	print_panel_wins(url, page, printParams, gird)
+}
+function print_panel_wins(url, printPage, printParams, gird) {
+	url = "./" + url + "\x26uuid\x3d" + Math.random();
+	var printPageConfig_ = printPageConfig.page_220_140;
+	var prints = createPrinterList();
+	var printPageCount = new Array;
+	printPageCount[0] = {
+		id : -1,
+		name : "自动全部打印"
+	};
+	for (var i = 0; i < printPage; i++)
+		printPageCount[i + 1] = {
+			id : i + 1,
+			name : "第" + printPage + "-" + ( i + 1 ) + "部分"
+		};
+	var toolbar = new Ext.Toolbar({
+		width : "100%",
+		bottons : [{
+			xtype : "button",
+			width : 50,
+			text : "打印预览"
+		}]
+	});
+	toolbar.add("-\x3e", {
+		xtype : "label",
+		text : "请选择打印机:",
+		width : 200
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.JsonStore({
+			fields : ["id", "name"],
+			data : prints.print
+		}),
+		mode : "local",
+		width : 250,
+		id : "select_print",
+		displayField : "name",
+		valueField : "name",
+		triggerAction : "all",
+		value : prints.defaultPrint
+	}), {
+		xtype : "tbspacer",
+		width : 20
+	}, {
+		xtype : "label",
+		text : "打印部分",
+		width : 200
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.JsonStore({
+			fields : ["id", "name"],
+			data : printPageCount
+		}),
+		mode : "local",
+		width : 100,
+		id : "select_print_page",
+		displayField : "name",
+		valueField : "id",
+		triggerAction : "all",
+		value : -1
+	}), {
+		xtype : "tbspacer",
+		width : 20
+	}, new Ext.Toolbar.Button({
+		text : "打印",
+		handler : function(item) {
+			var selectPrintPage = Ext.getCmp("select_print_page").getValue();
+			if (selectPrintPage === -1)
+				startPrint(3, {
+					url : url,
+					page : printPage,
+					title : "ERP"
+				}, gird, printParams);
+			else
+				staretPrintPages(3, {
+					url : url,
+					page : printPage,
+					title : "ERP",
+					printPage : selectPrintPage
+				})
+		}
+	}), {
+		xtype : "tbspacer",
+		width : 20
+	}, new Ext.Toolbar.Button({
+		text : "打印预览",
+		handler : function(item) {
+			var selectPrintPage = Ext.getCmp("select_print_page").getValue();
+			if (selectPrintPage === -1)
+				showErrorMsg("错误", "打印预览不能选择全部");
+			else
+				staretPrintPages(2, {
+					url : url,
+					page : printPage,
+					title : "ERP",
+					printPage : selectPrintPage
+				})
+		}
+	}), {
+		xtype : "tbspacer",
+		width : 20
+	});
+	var printPanel = new Ext.Panel({
+		autoScroll : false,
+		autoWidth : true,
+		height : 420,
+		region : "center",
+		defaults : {
+			xtype : "panel",
+			bodyStyle : "border-right:solid 1px #cccccc",
+			height : "100%"
+		},
+		items : [{
+			xtype : "iframepanel",
+			id : "iframepanel",
+			loadMask : {
+				msg : "打印模板加载中..."
+			},
+			deferredRender : false,
+			width : "100%",
+			height : 450,
+			frameConfig : {
+				name : "chatperadminForm",
+				id : "printIfame"
+			},
+			border : false,
+			frame : false,
+			defaultSrc : url + "\x26toPage\x3d1"
+		}]
+	});
+	var modal_win = new Ext.ERPDefaultsWindow({
+		id : "print_panel",
+		closable : true,
+		width : 900,
+		autoHeight : true,
+		plain : true,
+		resizable : false,
+		layout : "fit",
+		closeAction : "close",
+		draggable : true,
+		closable : true,
+		constrain : true,
+		autoDestroy : true,
+		items : [printPanel, toolbar]
+	});
+	modal_win.showWin();
+	return modal_win
+}
+function startPrint(action, params, gird, printParams) {
+	var page = params.page;
+	var selectPrint = Ext.getCmp("select_print").getValue();
+	if (selectPrint == null | selectPrint === "") {
+		showErrorMsg("错误提示", "请选择打印机");
+		return
+	}
+	var printPage = 1;
+	var nextPrintPage = 2;
+	var windows_ = new printWindows({
+		page : page,
+		printPage : printPage,
+		nextPrintPage : nextPrintPage,
+		url : params.url,
+		title : params.title,
+		selectPrint : selectPrint,
+		backcall : function(params_) {
+			if (printAction(action, params.title + "_" + printPage, windows_.panel, params_)) {
+				windows_.closeWin();
+				var x = params_.printPage;
+				if (params_.page === x) {
+					updatePrintCount(gird, printParams);
+					return
+				}
+				startomePrint(action, params_, gird, printParams)
+			} else {
+				showMsg("信息", "打印失败");
+				windows_.closeWin()
+			}
+		}
+	})
+}
+function staretPrintPages(action, params) {
+	var selectPrint = Ext.getCmp("select_print").getValue();
+	if (selectPrint == null | selectPrint === "") {
+		showErrorMsg("错误提示", "请选择打印机");
+		return
+	}
+	var windows_ = new printWindows({
+		page : params.page,
+		printPage : params.printPage,
+		nextPrintPage : params.printPage + 1,
+		url : params.url,
+		title : params.title,
+		selectPrint : selectPrint,
+		backcall : function(params_) {
+			if (printAction(action, params.title + "_" + params.printPage, windows_.panel, params_)) {
+				showMsg("信息", "打印完成");
+				windows_.closeWin()
+			} else
+				windows_.closeWin()
+		}
+	})
+}
+function updatePrintCount(gird, printParams) {
+}
+function startomePrint(action, params, gird, printParams) {
+	var page = params.page;
+	var printPage = params.nextPrintPage;
+	var nextPrintPage = printPage + 1;
+	var windows_ = new printWindows({
+		page : page,
+		printPage : printPage,
+		title : params.title,
+		nextPrintPage : nextPrintPage,
+		url : params.url,
+		selectPrint : params.selectPrint,
+		backcall : function(params_) {
+			if (printAction(action, params_.title + "_" + params_.printPage, windows_.panel, params_)) {
+				windows_.closeWin();
+				var x = params_.printPage;
+				if (page == x) {
+					windows_.closeWin();
+					updatePrintCount(gird, printParams);
+					return
+				} else
+					startomePrint(action, params_)
+			} else {
+				showMsg("信息", "打印失败");
+				windows_.closeWin()
+			}
+		}
+	})
+}
+function printWindows(params) {
+	this.closeWin = function() {
+		this.windows.close()
+	};
+	this.shownWin = function() {
+		this.windows.show()
+	};
+	this.panel = new Ext.ux.ManagedIFramePanel({
+		xtype : "iframepanel",
+		loadMask : {
+			msg : "数据加载中... ..."
+		},
+		deferredRender : false,
+		width : "100%",
+		height : 400,
+		frameConfig : {
+			name : "printIfame",
+			id : "printIfame"
+		},
+		border : false,
+		frame : false,
+		defaultSrc : params.url + "\x26toPage\x3d" + params.printPage + "\x26page\x3d" + params.page + "\x26selectPrint\x3d" + params.selectPrint,
+		listeners : {
+			"documentloaded" : function() {
+				params.backcall(params)
+			}
+		}
+	});
+	this.windows = new Ext.ERPDefaultsWindow({
+		title : params.title,
+		closable : true,
+		width : 900,
+		autoHeight : 400,
+		plain : true,
+		resizable : false,
+		layout : "fit",
+		closeAction : "close",
+		draggable : true,
+		closable : true,
+		constrain : true,
+		autoDestroy : true,
+		items : [this.panel]
+	});
+	this.windows.show()
+}
+var printPageConfig = {
+	"page_220_140" : {
+		"page" : {
+			"width" : "200mm",
+			"height" : "140mm"
+		},
+		"head" : {
+			"width" : "205mm",
+			"height" : "24mm",
+			"top" : "2mm",
+			"left" : "5mm"
+		},
+		"body" : {
+			"width" : "205mm",
+			"height" : "75mm",
+			"top" : "27mm",
+			"left" : "5mm"
+		},
+		"bottom" : {
+			"width" : "205mm",
+			"height" : "28mm",
+			"top" : "107mm",
+			"left" : "5mm"
+		}
+	}
+};
+function createPrinterList() {
+	var arrTemp = new Array;
+	var LODOP = getLodop(document.getElementById("LODOP_OB"), document.getElementById("LODOP_EM"));
+	var iPrinterCount = LODOP.GET_PRINTER_COUNT();
+	for (var i = 0; i < iPrinterCount; i++)
+		arrTemp[i] = {
+			id : i,
+			name : LODOP.GET_PRINTER_NAME(i)
+		};
+	var defaultPrint = LODOP.GET_PRINTER_NAME(-1);
+	return {
+		print : arrTemp,
+		defaultPrint : defaultPrint
+	}
+}
+function prn_preview(doc, head, tables, bottom, printPageConfig, action, type, title, params) {
+	var LODOP1 = CreateOneFormPage(doc, head, tables, bottom, printPageConfig, title);
+	if (typeof action == "undefined" || action === 0)
+		if (type == 3) {
+			LODOP1.SET_PRINTER_INDEXA(params.selectPrint);
+			return LODOP1.PRINT()
+		} else
+			LODOP1.PREVIEW();
+	else
+		LODOP1.PRINT_DESIGN()
+}
+var height_ = 0;
+var prtHtml = "";
+function CreateOneFormPage(doc, head, tables, bottom, printPageConfig, title) {
+	var LODOP = getLodop(document.getElementById("LODOP_OB"), document.getElementById("LODOP_EM"));
+	LODOP.PRINT_INIT(title);
+	var strStyle = "\x3cstyle\x3e table,td,th {border-width: 1px;border-style: solid;border-collapse: collapse}\x3c/style\x3e";
+	LODOP.SET_PRINT_PAGESIZE(1, printPageConfig.page.width, printPageConfig.page.height, "xxxx");
+	LODOP.ADD_PRINT_TABLE(printPageConfig.body.top, printPageConfig.body.left, printPageConfig.body.width, printPageConfig.body.height, strStyle + tables);
+	LODOP.SET_PRINT_STYLEA(0, "Vorient", 3);
+	LODOP.ADD_PRINT_HTM(printPageConfig.head.top, printPageConfig.head.left, printPageConfig.head.width, printPageConfig.head.height, head);
+	LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+	LODOP.SET_PRINT_STYLEA(0, "LinkedItem", 1);
+	LODOP.ADD_PRINT_HTM(printPageConfig.bottom.top, printPageConfig.bottom.left, printPageConfig.bottom.width, printPageConfig.bottom.height, bottom);
+	LODOP.SET_PRINT_STYLEA(0, "Alignment", 2);
+	LODOP.SET_PRINT_STYLEA(0, "ItemType", 1);
+	LODOP.SET_PRINT_STYLEA(0, "Horient", 3);
+	return LODOP
+}
+function printAction(type, title, panel, params_) {
+	var ifm = panel.getFrameWindow();
+	var doc = panel.getFrameDocument();
+	var head = doc.getElementById("head").innerHTML;
+	var tables = doc.getElementById("tables").innerHTML;
+	var bottom = doc.getElementById("bottom").innerHTML;
+	var printPageConfig_ = printPageConfig.page_220_140;
+	if (typeof ifm.printPageSet != "undefined" && typeof ifm.printPageSet() == "object")
+		printPageConfig_ = ifm.printPageSet();
+	else
+		printPageConfig_ = printPageConfig.page_220_140;
+	return prn_preview(doc, head, tables, bottom, printPageConfig_, 0, type, title, params_)
+}
+function printSeeAction(action, title) {
+	var ifm;
+	var doc;
+	if (document.all) {
+		ifm = document.frames["printIfame"];
+		doc = ifm.document
+	} else {
+		ifm = document.getElementById("printIfame");
+		doc = ifm.contentDocument
+	}
+	var head = doc.getElementById("head").innerHTML;
+	var tables = doc.getElementById("tables").innerHTML;
+	var bottom = doc.getElementById("bottom").innerHTML;
+	var printPageConfig_ = printPageConfig.page_220_140;
+	if (typeof ifm.contentWindow.printPageSet != "undefined" && typeof ifm.contentWindow.printPageSet() == "object")
+		printPageConfig_ = ifm.contentWindow.printPageSet();
+	else
+		printPageConfig_ = printPageConfig.page_220_140;
+	prn_preview(doc, head, tables, bottom, printPageConfig_, 0, action, title)
+};
 var timeout = 1E4 * 8E3;
 var erp_grid_panel_limit = 40;
 var NoAllowBlankStyle = "background:#fff1a4;";
@@ -1075,6 +1513,7 @@ var AllowBlankStyle = "background:#ffffff;";
 var showBlankStyle = "background:#99FFCC;";
 var NoAllowBlankColor = "#fff1a4";
 var AllowBlankColor = "#ffffff";
+var showBlankColor = "#99FFCC";
 function updateUserPasswdWindows() {
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
@@ -2284,6 +2723,7 @@ function createLocalCombo(params) {
 }
 function mainGridWindow(properties) {
 	var detailGrid = null;
+	var isPrint = typeof properties.isPrint == "undefined" ? false : true;
 	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid
 	};
@@ -2334,14 +2774,31 @@ function mainGridWindow(properties) {
 	});
 	grid.initPanel(properties.init);
 	var tbar = grid.getTopToolbar();
-	var items = tbar.items.items;
-	for (var i = 0; i < items.length; i++)
-		items[i].disable();
-	grid.addSetButton({
-		addSet : {
-			grids : detailGrid == null ? [grid] : [grid, detailGrid]
+	if (isPrint)
+		if (typeof tbar != "undefined" && typeof tbar.items != "undefined" && typeof tbar.items.items != "undefined") {
+			tbar.addButton(new Ext.Toolbar.Button({
+				xtype : "tbbutton",
+				text : "打印",
+				key : "print",
+				handler : function() {
+					var selection_rows = grid.getSelectionModel().getSelections();
+					if (selection_rows.length != 1) {
+						showMsg("提示信息", "请选择要打印的一行数据！");
+						return false
+					}
+					var moduleName = moduleId;
+					var id = selection_rows[0].id;
+					var url = "http://www.163.com";
+					print_panel_win(url, {
+						id : id,
+						modue : moduleId + "_detail"
+					}, grid)
+				}
+			}));
+			var items = tbar.items.items;
+			for (var i = 0; i < items.length; i++)
+				items[i].disable()
 		}
-	});
 	this.getGrid = getGrid_;
 	function getGrid_() {
 		return grid

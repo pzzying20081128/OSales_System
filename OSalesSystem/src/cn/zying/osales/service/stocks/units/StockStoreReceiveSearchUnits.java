@@ -19,6 +19,11 @@ import cn.zying.osales.units.search.bean.StockStoreReceiveSearchBean ;
 @Component("StockStoreReceiveSearchUnits")
 public class StockStoreReceiveSearchUnits extends ABCommonsService {
 
+    public StockStoreReceive searchByStockInStoreId(Integer stockInStoreId) throws SystemOptServiceException {
+                String sql ="select  stockStoreReceive    from  StockStoreReceive  as  stockStoreReceive   where stockStoreReceive.stockInStoreId = "+stockInStoreId;
+                return baseService.findSinglenessByHSQL(sql);
+    }
+
     public SelectPage<StockStoreReceive> search(OptType optType, StockStoreReceiveSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         SelectPage<StockStoreReceive> selectPage = new SelectPage<StockStoreReceive>() ;
 

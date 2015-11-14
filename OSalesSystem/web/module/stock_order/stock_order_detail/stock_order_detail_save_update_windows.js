@@ -1,5 +1,18 @@
-function stock_order_detail_save_update_form_panel_windows(params, detailParams) {
-	orderGrid = detailParams.orderGrid;
+
+/**
+ * 
+ * @param {}
+ *            params
+ * @param {}
+ *            detailParams{ orderGrid : orderGrid, stockOrder : stockOrder }
+ */
+
+function stock_order_detail_save_update_form_panel_windows(params, attachesParams) {
+
+	var orderGrid = attachesParams.orderGrid;
+	
+	logger(" stock_order_detail_save_update_form_panel_windows   orderGrid "+orderGrid);
+	
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
 		frame : true,

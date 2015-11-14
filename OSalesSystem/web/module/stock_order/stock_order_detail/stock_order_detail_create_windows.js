@@ -1,10 +1,10 @@
 function stock_order_detail_create_windows(moduleId, moduleName, params) {
 
-	detailGrid = params.grid;
+	var detailGrid = params.grid;
 
-	stockOrder = params.stockOrder;
+	var stockOrder = params.stockOrder;
 
-	orderGrid = params.orderGrid;
+	var orderGrid = params.orderGrid;
 
 	function computeCountMoney() {
 		if (productInfo.getValue() == null || productInfo.getValue() == "请输入查询值")
@@ -51,7 +51,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 
 	// var productInfo_e;
 
-	productInfo = createERPcombo({
+	var productInfo = createERPcombo({
 		id : 'stockorderdetail.productInfoId',
 		name : 'stockorderdetail.productInfoId',
 		fieldLabel : ' 产品',
@@ -64,8 +64,8 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		allowBlank : false,
 		forceSelection : false,
 
-		select : function(results) { //combo, record, index
-			
+		select : function(results) { // combo, record, index
+
 			productInfoSelect = results.record.json;
 			ERPAjaxRequest({
 				url : "./simple_ProductInfo_selectStockPrice.do",
@@ -103,14 +103,14 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 
 					if (productInfo_e.isBox) {
 						orderCount.setReadOnly(true);
-						orderCount.getEl().setStyle("background", AllowBlankColor);
+						orderCount.getEl().setStyle("background", showBlankColor);
 						orderBox.setReadOnly(false);
 						orderBox.getEl().setStyle("background", NoAllowBlankColor);
 					} else {
 						orderCount.setReadOnly(false);
 						orderCount.getEl().setStyle("background", NoAllowBlankColor);
 						orderBox.setReadOnly(true);
-						orderBox.getEl().setStyle("background", AllowBlankColor);
+						orderBox.getEl().setStyle("background", showBlankColor);
 					}
 
 					// ///////////////////////////////////////////////////////////////
@@ -120,11 +120,11 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	ProductInfobarCode = new Ext.form.ERPShowTextField({
+	var ProductInfobarCode = new Ext.form.ERPShowTextField({
 
 		fieldLabel : ' 条形码',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
+//		style : AllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -134,11 +134,11 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 
 	});
 
-	maxStockPrice = new Ext.form.ERPShowTextField({
+	var maxStockPrice = new Ext.form.ERPShowTextField({
 
 		fieldLabel : '最高采购价',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
+		style : showBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -147,11 +147,10 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	baseUnitBoxUnit = new Ext.form.ERPShowTextField({
+	var baseUnitBoxUnit = new Ext.form.ERPShowTextField({
 
 		fieldLabel : '单位',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -160,7 +159,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	storeInfoId = createERPcombo({
+	var storeInfoId = createERPcombo({
 		id : 'stockorderdetail.storeInfoId',
 		name : 'stockorderdetail.storeInfoId',
 		fieldLabel : '入库仓库',
@@ -183,7 +182,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	storePositionId = createERPcombo({
+	var storePositionId = createERPcombo({
 		id : 'stockorderdetail.storePositionId',
 		name : 'stockorderdetail.storePositionId',
 		fieldLabel : '入库库位',
@@ -197,7 +196,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	taxPriceMoneyShow = new Ext.form.TextField({
+	var taxPriceMoneyShow = new Ext.form.TextField({
 		id : 'stockorderdetail.taxPriceMoneyShow',
 		name : 'stockorderdetail.taxPriceMoneyShow',
 		fieldLabel : '采购单价',
@@ -214,13 +213,11 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	noTaxPriceMoneyShow = new Ext.form.TextField({
+	var noTaxPriceMoneyShow = new Ext.form.ERPShowEditText({
 		id : 'stockorderdetail.noTaxPriceMoneyShow',
 		name : 'stockorderdetail.noTaxPriceMoneyShow',
 		fieldLabel : '末税采购单价',
-		xtype : 'textfield',
 		vtype : 'money',
-		style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		labelStyle : "font-size:11px",
 		allowBlank : false,
@@ -230,13 +227,13 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	taxRateTaxRateShow = new Ext.form.TextField({
+	var taxRateTaxRateShow = new Ext.form.TextField({
 		id : 'stockorderdetail.taxRateTaxRateShow',
 		name : 'stockorderdetail.taxRateTaxRateShow',
 		fieldLabel : '税率',
 		xtype : 'textfield',
 		vtype : 'money',
-		style : AllowBlankStyle,
+		style : showBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		readOnly : true,
@@ -247,7 +244,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	orderCount = new Ext.form.TextField(
+	var orderCount = new Ext.form.TextField(
 
 	{
 		id : 'stockorderdetail.orderCount',
@@ -266,7 +263,7 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 			}
 		}
 	});
-	orderBox = new Ext.form.TextField({
+	var orderBox = new Ext.form.TextField({
 		id : 'stockorderdetail.orderBox',
 		name : 'stockorderdetail.orderBox',
 		fieldLabel : '订购箱数',
@@ -284,12 +281,9 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	taxMoneyMoneyShow = new Ext.form.ERPShowTextField({
-		// id : 'stockorderdetail.taxPriceMoneyShow',
-		// name : 'stockorderdetail.taxPriceMoneyShow',
+	var taxMoneyMoneyShow = new Ext.form.ERPShowEditText({
 		fieldLabel : '采购金额',
 		xtype : 'ERPShowText',
-		style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -298,12 +292,9 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 			}
 		}
 	});
-	noTaxMoneyMoneyShow = new Ext.form.ERPShowTextField({
-		// id : 'stockorderdetail.taxPriceMoneyShow',
-		// name : 'stockorderdetail.taxPriceMoneyShow',
+	var noTaxMoneyMoneyShow = new Ext.form.ERPShowEditText({
 		fieldLabel : '未税金额',
 		xtype : 'ERPShowText',
-		style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -498,14 +489,14 @@ function stock_order_detail_create_windows(moduleId, moduleName, params) {
 					}
 				}]
 			}]
+		}]
+	}
 
-		}
-
-		]
+	{
+		var stock_order_detail_create_window = new stock_order_detail_save_update_form_panel_windows(stock_order_detail_params, {
+			orderGrid : orderGrid
+		});
 
 	}
 
-	var stock_order_detail_create_window = new stock_order_detail_save_update_form_panel_windows(stock_order_detail_params, {
-		orderGrid : orderGrid
-	});
 }

@@ -26,7 +26,7 @@ public class StockOrderDetailRemoveUnits extends ABCommonsService {
 
         StockOrder stockOrder = baseService.load(removeStockOrderDetail.getStockOrderId(), StockOrder.class) ;
 
-        stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, removeStockOrderDetail, OptSum.add) ;
+        stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, removeStockOrderDetail, OptSum.del) ;
 
         return removeStockOrderDetail ;
     }

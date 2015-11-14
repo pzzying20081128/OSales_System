@@ -5,7 +5,7 @@ function createModule(node, userId, params) {
 
 	];
 //	alert(moduleId.substring(0,5));
-	if(moduleId.substring(0,5)=='base_'){
+	if(moduleId.substring(0,5)=='base_' || moduleId=='sys_opt_history' ){
 		
 	}else{
 		    loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_index.js");

@@ -5,7 +5,7 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 	var form_panel = new Ext.form.ERPFormPanel({
 		// height : 400,
 		// autoHeight : false,
-//		labelWidth : 60,
+// labelWidth : 60,
 		items : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
@@ -39,13 +39,13 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 180
+					width : 188
 				},
-				items : [createLocalCombo({
-					id : 'searchBean.stockType',
-					name : 'searchBean.stockType',
+				items : [createERPlocalBoxSelect({
+					id : 'searchBean.stockTypes',
+					name : 'searchBean.stockTypes',
 					fieldLabel : ' 订单类型',
-					storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
+					localdata : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
 					defaultValue : null,
 					allowBlank : true
 				})]
@@ -55,23 +55,19 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 			 defaultType : 'textfield',
 			 baseCls : 'x-plain',
 			 defaults : {
-			 width : 180
+			 width : 188
 			 },
-			 items : [{
-			
-					id : 'searchBean.stockManId1',
-					name : 'searchBean.stockManId1',
-					fieldLabel : ' 合同',
-					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : true,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				
-			 }]
+			 items : [
+			 createERPlocalBoxSelect({
+					id : 'searchBean.stockProductTypes',
+					name : 'searchBean.stockProductTypes',
+					fieldLabel : ' 采购类型',
+					defaultValue : null,
+					localdata :[['普通产品', "普通产品"], ['组合产品', '组合产品']],
+					defaultValue : null,
+					allowBlank : true
+				})
+			 ]
 			}]
 		},
 		// ////////////////////////////////////////////////////////
@@ -85,11 +81,11 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 455
+					width : 462
 				},
-				items : [createERPcombo({
-					id : 'searchBean.providerInfoId',
-					name : 'searchBean.providerInfoId',
+				items : [createERPBoxSelect({
+					id : 'searchBean.providerInfoIds',
+					name : 'searchBean.providerInfoIds',
 					fieldLabel : ' 供应商',
 					url : "./ProviderInfo_combo.do?searchBean.status=有效",
 					allowBlank : true,
@@ -115,15 +111,22 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [createERPcombo({
-					id : 'searchBean.stockManId',
-					name : 'searchBean.stockManId',
-					fieldLabel : ' 采购员',
-					url : "./SysStaff_combo.do?searchBean.status=全部",
+				items : [{
+					id : 'searchBean.stockManId1',
+					name : 'searchBean.stockManId1',
+					fieldLabel : ' 合同',
+					xtype : 'ERPShowText',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
 					allowBlank : true,
-					forceSelection : false,
-					width : 160
-				})]
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				
+			 
+				}
+				]
 			}]
 		}, {
 			layout : 'column',
@@ -140,7 +143,7 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 				items : [{
 					id : 'searchBean.startTime',
 					name : 'searchBean.startTime',
-					fieldLabel : ' 进货时间',
+					fieldLabel : ' 采购时间',
 					xtype : 'datefield',
 					format : 'Y-m-d',
 					// style : NoAllowBlankStyle,
@@ -178,7 +181,28 @@ function stock_order_search_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}]
+			}
+			,{
+				columnWidth : .34,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 180
+				},
+				items : [createERPcombo({
+					id : 'searchBean.stockManId',
+					name : 'searchBean.stockManId',
+					fieldLabel : ' 采购员',
+					url : "./SysStaff_combo.do?searchBean.status=全部",
+					allowBlank : true,
+					forceSelection : false,
+					width : 160
+				})]
+			
+			}
+			
+			]
 		},  {
 			layout : 'column',
 			baseCls : 'x-plain',

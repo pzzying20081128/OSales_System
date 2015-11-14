@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zy.apps.tools.units.ToolsUnitsException ;
 import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -22,6 +23,9 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
     private StockOrderSaveUpdateUnits stockOrderSaveUpdateUnits ;
 
     public StockOrderDetail saveUpdate(OptType optType, StockOrderDetail optStockOrderDetail) throws SystemOptServiceException {
+
+        check(optType, optStockOrderDetail) ;
+
         StockOrderDetail stockOrderDetail ;
         switch (optType) {
         case save:
@@ -35,6 +39,40 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         }
 
         return stockOrderDetail ;
+    }
+
+    private void check(OptType optType, StockOrderDetail optStockOrderDetail) throws SystemOptServiceException {
+        switch (optType) {
+        case save: {
+            String sql = "select  count(stockOrderDetail.id)   from  StockOrderDetail as  stockOrderDetail  where stockOrderDetail.productInfoId = " + optStockOrderDetail.getProductInfoId()
+
+            + "  and   stockOrderDetail.stockOrderId = " + optStockOrderDetail.getStockOrderId() ;
+            ;
+
+            Long count = baseService.selectSumByHSQL(sql) ;
+
+            if (count != null && count.intValue() > 0) {
+                throw new SystemOptServiceException("该订单已包含此产品") ;
+            }
+
+        }
+
+        case update: {
+            String sql = "select  count(stockOrderDetail.id)   from  StockOrderDetail as  stockOrderDetail  where stockOrderDetail.productInfoId = "
+
+            + optStockOrderDetail.getProductInfoId() + "  and  stockOrderDetail.id != " + optStockOrderDetail.getId()
+
+            + "  and   stockOrderDetail.stockOrderId = " + optStockOrderDetail.getStockOrderId() ;
+            ;
+
+            Long count = baseService.selectSumByHSQL(sql) ;
+
+            if (count != null && count.intValue() > 0) {
+                throw new SystemOptServiceException("该订单已包含此产品") ;
+            }
+        }
+
+        }
     }
 
     public StockOrderDetail save(StockOrderDetail optStockOrderDetail) throws SystemOptServiceException {
@@ -94,7 +132,7 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
             stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, stockOrderDetail, OptSum.add) ;
 
             return stockOrderDetail ;
-        } catch (Exception e) {
+        } catch (ToolsUnitsException e) {
             throw new SystemOptServiceException(e) ;
         }
 
