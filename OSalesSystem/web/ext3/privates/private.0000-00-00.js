@@ -10,7 +10,7 @@ Ext.apply(Ext.form.VTypes, {
 	chinese : function(val, field) {
 		var reg = /^[\u4e00-\u9fa5]+$/i;
 		if (!reg.test(val))
-			return false; 
+			return false;
 		return true
 	},
 	chineseText : "请输入中文",
@@ -795,6 +795,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	saveColModule : function() {
 		var colModel_ = this.colModel;
 		var moduleId = this.moduleId;
+		var moduleName = this.moduleName;
 		if (typeof moduleId == "undefined") {
 			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId !moduleId:TREEID");
 			return
@@ -835,7 +836,8 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		Ext.Ajax.request({
 			url : "./col_chonig_grid.do",
 			params : {
-				module_name : moduleId,
+				module_name : moduleName,
+				module_key : moduleId,
 				data_indexs : data_indexs,
 				col_names : col_names,
 				col_hiddens : col_hiddens,
@@ -908,6 +910,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	initPanel : function(prams) {
 		var moduleId = this.moduleId;
+//		alert("moduleId "+moduleId);
 		if (typeof moduleId == "undefined") {
 			showErrorMsg("系统错误", "ERPGridPanel  initPanel not find moduleId ! moduleId:TREEID");
 			return
@@ -2722,8 +2725,9 @@ function createLocalCombo(params) {
 	return comboBox
 }
 function mainGridWindow(properties) {
-	var detailGrid = null;
+	var detailGrid = typeof properties.detailGrid == "undefined" ? null : properties.detailGrid;
 	var isPrint = typeof properties.isPrint == "undefined" ? false : true;
+	var isAddSet = typeof properties.isAddSet == "undefined" ? false : true;
 	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid
 	};
@@ -2732,6 +2736,7 @@ function mainGridWindow(properties) {
 	};
 	var isBbar = typeof properties.isBbar == "undefined" ? true : properties.isBbar;
 	var moduleId = properties.moduleId;
+	var moduleName = properties.moduleName;
 	var store = new Ext.data.ERPStore({
 		proxy : new Ext.data.HttpProxy({
 			url : properties.url
@@ -2749,6 +2754,7 @@ function mainGridWindow(properties) {
 		cm : new Ext.grid.ColumnModel(properties.column),
 		store : store,
 		moduleId : moduleId,
+		moduleName : moduleName,
 		bbar : isBbar == true ? new Ext.PagingToolbar({
 			store : store,
 			pageSize : erp_grid_panel_limit,

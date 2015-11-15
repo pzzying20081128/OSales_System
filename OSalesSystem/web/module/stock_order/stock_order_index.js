@@ -82,7 +82,9 @@ function create_stock_order_window(moduleId, moduleName) {
 
 	var mainGridModule = new mainGridWindow({
 		isPrint : true,
+//		isAddSet:true,
 		moduleId : moduleId,
+		moduleName:moduleName,
 		// list grid
 		url : "./list_StockOrder_list.do",
 		// grid_column.record
@@ -127,11 +129,24 @@ function create_stock_order_window(moduleId, moduleName) {
 
 	var mainGrid = mainGridModule.getGrid();
 
-	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName, {
+	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName+"明细", {
 		mainOrderGrid : mainGrid
 	});
+	
+	
 
 	stockdetailGrid = stockdetail.getGrid();
+	
+	mainGridModule.setDetailGrid(stockdetailGrid);
+	
+	 {
+		mainGrid.addSetButton({
+			addSet : {
+				grids : [mainGrid, stockdetailGrid]
+			}
+		});
+	}
+	
 
 	var layout = new Ext.Panel({
 		layout : 'border',

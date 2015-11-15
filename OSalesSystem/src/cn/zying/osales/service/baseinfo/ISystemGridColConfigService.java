@@ -15,7 +15,7 @@ public interface ISystemGridColConfigService {
      * 
      * @throws OptServiceException
      */
-    public void saveUserGridConfig(String moduleTREEID, String data_indexs, String col_names, String col_hiddens, String col_widths, String col_indexs, Integer optUser) throws SystemOptServiceException ;
+    public void saveUserGridConfigs(String moduleName, String module_key, String data_indexs, String col_names, String col_hiddens, String col_widths, String col_indexs, Integer optUser) throws SystemOptServiceException ;
 
     public List<UserGridConfigs> find(String module_name, int user_id) throws SystemOptServiceException ;
 

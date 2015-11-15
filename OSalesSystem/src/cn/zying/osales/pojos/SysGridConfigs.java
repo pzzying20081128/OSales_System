@@ -20,7 +20,11 @@ public class SysGridConfigs {
     private Integer id ;
 
     @Column(name = "module_name")
+//    @FieldDesc(name="")
     private String moduleName ;
+    
+    @Column(name = "module_key")
+    private String moduleKey ;
 
     @Column(name = "column_data_index")
     @FieldDesc(name = "数据索引")
@@ -38,9 +42,7 @@ public class SysGridConfigs {
     @FieldDesc(name = "排序")
     private Integer colIndex ;
 
-    @Column(name = "print_width")
-    @FieldDesc(name = "打印宽度")
-    private Integer printWidth ;
+   
 
     @Column(name = "is_print")
     @FieldDesc(name = "是否打印")
@@ -69,6 +71,8 @@ public class SysGridConfigs {
     //
     //    @Transient
     //    private int excelAlign ;
+    
+    
 
     public Integer getId() {
         return id ;
@@ -110,14 +114,7 @@ public class SysGridConfigs {
         this.colName = colName ;
     }
 
-    public Integer getPrintWidth() {
-        return printWidth ;
-    }
-
-    public void setPrintWidth(Integer printWidth) {
-        this.printWidth = printWidth ;
-    }
-
+  
     public Integer getIsPrint() {
         return isPrint ;
     }
@@ -148,6 +145,14 @@ public class SysGridConfigs {
 
     public void setIsExcelExPorts(Integer isExcelExPorts) {
         this.isExcelExPorts = isExcelExPorts ;
+    }
+
+    public String getModuleKey() {
+        return moduleKey ;
+    }
+
+    public void setModuleKey(String moduleKey) {
+        this.moduleKey = moduleKey ;
     }
 
 }

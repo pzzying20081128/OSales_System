@@ -2,6 +2,7 @@ package cn.zying.osales.test ;
 import cn.zy.apps.tools.dev.javascript.BuildJSModule ;
 import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
+import cn.zying.osales.pojos.SysPrintTemplate ;
 
 
 
@@ -18,9 +19,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="produce_combined_product_detail";
+        String moduleNmae="sys_print_template";
         
-        Class<?> clazz = ProduceComBinedProductDetail.class;
+        Class<?> clazz = SysPrintTemplate.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

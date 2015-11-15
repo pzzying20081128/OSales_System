@@ -129,6 +129,8 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
     }
 
     private String module_name ;
+    
+    private String module_key ;
 
     private String data_indexs ;
 
@@ -148,7 +150,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
 
         Integer user_actor = this.getOSalsesLoginUserId() ;
         try {
-            systemGridColConfigService.saveUserGridConfig(module_name, data_indexs, col_names, col_hiddens, col_widths, col_indexs, user_actor) ;
+            systemGridColConfigService.saveUserGridConfigs(module_name,module_key, data_indexs, col_names, col_hiddens, col_widths, col_indexs, user_actor) ;
         } catch (Exception e) {
             this.msg = handError(e) ;
             this.success = false ;
@@ -247,6 +249,14 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
 
     public void setUserGridConfigs(List<UserGridConfigs> userGridConfigs) {
         this.userGridConfigs = userGridConfigs ;
+    }
+
+    public String getModule_key() {
+        return module_key ;
+    }
+
+    public void setModule_key(String module_key) {
+        this.module_key = module_key ;
     }
 
 }

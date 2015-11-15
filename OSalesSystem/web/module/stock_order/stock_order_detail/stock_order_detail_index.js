@@ -75,7 +75,8 @@ function create_stock_order_detail_window(moduleId_, moduleName_, initParams) {
 	});
 
 	var mainGridModule = new mainGridWindow({
-		moduleId : this.moduleId,
+		moduleId : moduleId,
+		moduleName:moduleName,
 		// list grid
 		url : "./list_StockOrderDetail_list.do",
 		// grid_column.record

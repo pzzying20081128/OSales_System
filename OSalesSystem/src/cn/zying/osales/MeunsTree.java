@@ -19,6 +19,8 @@ public class MeunsTree {
     private String p0[] = { "sys_info", "系统信息", "false", "font_weight", "0", "0", "[]" } ;
 
     private String p0001[] = { "sys_opt_history", "操作日志", "true", "", "sys_info", "0", "[{search:1,label:'查询'}]" } ;
+    
+    private String p0002[] = { "sys_print_template", "打印/导出设置", "true", "", "sys_info", "0", "[{search:1,label:'查询'}]" } ;
 
     private String p1[] = { "base_info", "基础信息", "false", "font_weight", "0", "0", "[]" } ;
 
@@ -142,7 +144,7 @@ public class MeunsTree {
     //    private String p504[] = { "WARRANTY_USERS", "延保用户", "true", "", "REPORT_MANAGEMENT", "0", "[{search:1,label:'查询'},{export:1,label:'导出'}]" } ;
 
     //    private String[][] treeData = { p1, p2,p3, p100, p106,p101, p102, p103,p104, p105,p107, p200, p201, p202, p203, p204,p207 ,p208,p209,p210,p211,p212, p205,p214, p206,p213,p215,p500,p501,p502,p503,p504} ;
-    private String[][] treeData = { p0, p0001, p1, p1001, p1002, p1003, p1004, p1005, p1006, p1007, p2, p2001, p2002, p6, p6001, p7, p7001 } ;
+    private String[][] treeData = { p0, p0001,p0002, p1, p1001, p1002, p1003, p1004, p1005, p1006, p1007, p2, p2001, p2002, p6, p6001, p7, p7001 } ;
 
     private String[][] initTreeData() {
         return treeData ;

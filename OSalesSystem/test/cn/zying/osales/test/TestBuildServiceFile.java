@@ -4,6 +4,7 @@ import cn.zy.apps.tools.dev.service.BuildServiceFile ;
 import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
 import cn.zying.osales.pojos.ProduceComBinedProduct ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
+import cn.zying.osales.pojos.SysPrintTemplate ;
 
 public class TestBuildServiceFile {
 
@@ -14,9 +15,9 @@ public class TestBuildServiceFile {
     public static void main(String[] args) throws Exception {
         
         
-        String module= "produce";
+        String module= "bases";
         
-        Class<?> clazz = ProduceComBinedProductDetail.class;
+        Class<?> clazz = SysPrintTemplate.class;
         
         String className=clazz.getSimpleName();
 
