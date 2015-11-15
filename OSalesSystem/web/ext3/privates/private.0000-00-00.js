@@ -594,7 +594,6 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	inits : false,
 	savecol : false,
 	checkboxColumn : null,
-	detailGrid : null,
 	rowdblclickKey : null,
 	powerMap : null,
 	isAdmin : false,
@@ -910,7 +909,6 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	initPanel : function(prams) {
 		var moduleId = this.moduleId;
-//		alert("moduleId "+moduleId);
 		if (typeof moduleId == "undefined") {
 			showErrorMsg("系统错误", "ERPGridPanel  initPanel not find moduleId ! moduleId:TREEID");
 			return
@@ -2738,6 +2736,12 @@ function mainGridWindow(properties) {
 	var moduleId = properties.moduleId;
 	var moduleName = properties.moduleName;
 	var store = new Ext.data.ERPStore({
+		paramNames : {
+			start : "start",
+			limit : "limit",
+			sort : "commSearchBean.sort",
+			dir : "commSearchBean.dir"
+		},
 		proxy : new Ext.data.HttpProxy({
 			url : properties.url
 		}),

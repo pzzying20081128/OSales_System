@@ -26,6 +26,9 @@ public class SysPrintTemplateAction extends OSalesSystemABAction<SysGridConfigs>
 
     private SysGridConfigs sysgridconfigs ;
 
+    //    sort:colIndex
+    //    dir:ASC
+
     //
     //    private StoreInfoSearchBean searchBean ;
 
@@ -64,7 +67,7 @@ public class SysPrintTemplateAction extends OSalesSystemABAction<SysGridConfigs>
 
     public String list() throws Exception {
         try {
-            SelectPage<SysGridConfigs> selectPage = service.search(moduleKey) ;
+            SelectPage<SysGridConfigs> selectPage = service.search(moduleKey, commSearchBean) ;
             writeObjectService.intToPrpertiesUnits(selectPage) ;
             this.setSelectPage(selectPage) ;
         } catch (Exception e) {

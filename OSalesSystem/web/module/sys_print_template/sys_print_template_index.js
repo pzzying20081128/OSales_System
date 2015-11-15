@@ -9,8 +9,13 @@ function create_sys_print_template_window(moduleId, moduleName) {
 		handler : function() {
 			var moduleKey = 模块.getValue();
 			mainGrid.load({
+				sortInfo : {
+					sort : "colIndex",
+					dir : "asc"
+				},
 				params : {
 					moduleKey : moduleKey
+					,
 				}
 			});
 		}

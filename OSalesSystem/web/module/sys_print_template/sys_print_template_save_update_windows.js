@@ -24,6 +24,7 @@ function sys_print_template_save_update_form_panel_windows(params) {
 								form_panel.reset();
 							} else {
 								params.grid.updateRow(json[params.pojo]);
+								params.grid.reload();
 								window.close();
 							}
 

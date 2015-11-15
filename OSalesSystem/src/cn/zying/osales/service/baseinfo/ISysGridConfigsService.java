@@ -2,6 +2,7 @@ package cn.zying.osales.service.baseinfo ;
 
 import java.util.List ;
 
+import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.SysGridConfigs ;
@@ -15,7 +16,7 @@ public interface ISysGridConfigsService {
 
     public List<SysGridConfigs> search(String name, int... startSize) throws SystemOptServiceException ;
 
-    public SelectPage<SysGridConfigs> search(String moduleKey) throws SystemOptServiceException ;
+    public SelectPage<SysGridConfigs> search(String moduleKey,CommSearchBean commSearchBean) throws SystemOptServiceException ;
 
     public SysGridConfigs saveUpdate(OptType optype, SysGridConfigs sysGridConfigs) throws SystemOptServiceException ;
 

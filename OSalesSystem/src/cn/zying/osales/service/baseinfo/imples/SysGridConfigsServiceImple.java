@@ -5,6 +5,7 @@ import java.util.Map ;
 
 import org.springframework.stereotype.Component ;
 
+import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties ;
@@ -91,9 +92,12 @@ public class SysGridConfigsServiceImple extends ABCommonsService implements ISys
     }
 
     @Override
-    public SelectPage<SysGridConfigs> search(String moduleKey) throws SystemOptServiceException {
+    public SelectPage<SysGridConfigs> search(String moduleKey, CommSearchBean commSearchBean) throws SystemOptServiceException {
 
-        String sql = "select  sysGridConfigs  from  SysGridConfigs as sysGridConfigs  where sysGridConfigs.moduleKey like (:moduleKey) " ;
+        String sql = "select  sysGridConfigs  from  SysGridConfigs as sysGridConfigs  where sysGridConfigs.moduleKey like (:moduleKey)   " +
+
+        "   order by case when  sysGridConfigs."+commSearchBean.getSort()+"  is  NULL   then 0 else 1 end desc,   sysGridConfigs."+commSearchBean.getSort() +"   "+commSearchBean.getDir() ;
+
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
         if (ToolsUnits.isNOtNulll(name)) value.put("moduleKey", "%" + moduleKey + "%") ;
         else
