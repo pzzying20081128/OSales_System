@@ -55,6 +55,22 @@
 		<aop:pointcut id="service_service" expression="execution(* cn.zying.osales.service..*.*(..))" />
 		<aop:advisor advice-ref="defult_advice" pointcut-ref="service_service" />
 	</aop:config>
+	
+	
+	
+	
+	
+	<aop:config>
+		<aop:pointcut id="service_store_service" expression="execution(* cn.zying.osales.storage..*.*(..))" />
+		<aop:advisor advice-ref="store_advice" pointcut-ref="service_store_service" />
+	</aop:config>
+	
+	<tx:advice id="store_advice" transaction-manager="defult_JPA_TransactionManager">
+		<tx:attributes>
+			  <tx:method name="*"           propagation="REQUIRED" isolation="SERIALIZABLE" />
+		</tx:attributes>
+	</tx:advice>
+	
 	<!--
 		<aop:aspectj-autoproxy proxy-target-class="true" /> 
 		 -->

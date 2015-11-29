@@ -42,7 +42,7 @@
 	}
 	
 	function  stockSelect(data,checkButton ,detailGrid){
-		status = data.status;
+		var status = data.status;
 		checkButton.enable();
 		if (status == '已审核') {
 			checkButton.setText("取消审核");

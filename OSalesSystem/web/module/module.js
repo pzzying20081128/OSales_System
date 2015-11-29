@@ -5,7 +5,7 @@ function createModule(node, userId, params) {
 
 	];
 //	alert(moduleId.substring(0,5));
-	if(moduleId.substring(0,5)=='base_' || moduleId.substring(0,4)=='sys_' ||moduleId=='sys_opt_history' ){
+	if(moduleId.substring(0,5)=='base_' || moduleId.substring(0,4)=='sys_' ||moduleId=='sys_opt_history' || moduleId =='store_product_info_stock' ){
 		
 	}else{
 		    loadjs.push("./module/" + moduleId + "/"+moduleId+"_detail/"+moduleId+"_detail_index.js");
@@ -34,10 +34,16 @@ function createModule(node, userId, params) {
 		    break;
 		}
 
-//		case "product_classification_management" : {
-//			// alert("dddd 1");
-//			break;
-//		}
+		case "store_product_info_stock" : {
+			 loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_index.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_create_windows.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_save_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_search_action_properties.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_search_windows.js");
+			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_update_windows.js");	
+			break;
+		}
 //
 //		case "course_management" : {
 //			loadjs.push("./ext3/fileupload/FileUploadField.js");

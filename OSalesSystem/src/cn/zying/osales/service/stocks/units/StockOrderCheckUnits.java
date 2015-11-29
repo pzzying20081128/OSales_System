@@ -1,5 +1,7 @@
 package cn.zying.osales.service.stocks.units ;
 
+import java.util.List ;
+
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
@@ -74,8 +76,8 @@ public class StockOrderCheckUnits extends ABCommonsService {
         switch (productInfoType) {
         case 普通产品: {
 
-            StockInStore stockInStore = stockInStoreSearchUnits.searchByStockOrderId(stockOrder.getId()) ;
-            if (stockInStore != null) stockInStoreCheckUnits.cancelCheckDel(stockInStore, checkManId) ;
+            List<StockInStore> stockInStore = stockInStoreSearchUnits.searchByStockOrderId(stockOrder.getId()) ;
+            if (stockInStore != null ) stockInStoreCheckUnits.cancelCheckDel(stockInStore, checkManId) ;
             stockOrder.setStatus(Status.有效) ;
             stockOrder.setCheckMan(null) ;
             stockOrder.setCheckDate(null) ;

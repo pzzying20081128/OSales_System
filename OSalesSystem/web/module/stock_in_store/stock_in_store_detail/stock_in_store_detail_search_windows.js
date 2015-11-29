@@ -1,48 +1,47 @@
 function stock_in_store_detail_search_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
+	var main_Grid = params.main_Grid;
 	var search_params = params.searchParams;
+
+	// main_Grid
+
+	var selection_rows = main_Grid.getSelectionModel().getSelections();
+
+	var stockInStoreId = selection_rows[0].id;
+
 	var form_panel = new Ext.form.ERPFormPanel({
 		height : 400,
 		// autoHeight : false,
 		labelWidth : 60,
-		items : [
+		items : [{
 
-		{ // 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
+			labelWidth : 80,
 			items : [{
-				columnWidth : .18,
+				// 1-1
+				columnWidth : 1,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
-				hideLabels : true,
-				items : [{
-					// 复选框
-					id : 'staffSearchBean.selectName',
-					xtype : "checkbox",
-					boxLabel : "员工姓名"
-				}]
-			}, {
-				columnWidth : .82,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				hideLabels : true,
 				defaults : {
-					width : 360
+					width : 380
 				},
-				items : [{
-					// 查询框
-					id : 'staffSearchBean.name',
-					listeners : {
-						"change" : function(field) {
-						}
-					}
-				}]
+				items : [createERPBoxSelect({
+					id : 'searchBean.productInfoIds',
+					name : 'searchBean.productInfoIds',
+					fieldLabel : ' 采购产品',
+					url : "./ProductInfo_detailscombo.do?selectype=productInfo",
+					params : {
+						'searchBean.status' : '有效'
+					},
+					allowBlank : true,
+					forceSelection : false
+				})]
 			}]
-		}// end
-		],
+
+		}],
 		buttons : [{
 			text : '提交',
 			listeners : {
@@ -62,6 +61,7 @@ function stock_in_store_detail_search_windows(moduleId, moduleName, params) {
 						}
 
 						Ext.apply(submitValues1, search_params.params());
+						submitValues1["searchBean.stockInStoreId"] = stockInStoreId;
 						grid.load({
 							params : submitValues1,
 							success : function() {

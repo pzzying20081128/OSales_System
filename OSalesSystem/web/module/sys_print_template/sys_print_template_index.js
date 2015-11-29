@@ -26,7 +26,6 @@ function create_sys_print_template_window(moduleId, moduleName) {
 		width : 350,
 		// id : 'stockorder.providerInfoId',
 		// name : 'stockorder.providerInfoId',
-		label : ' 供应商',
 		url : "./ModuleName_combo.do",
 		allowBlank : true,
 		forceSelection : false
@@ -56,7 +55,7 @@ function create_sys_print_template_window(moduleId, moduleName) {
 			}, {
 				// id : moduleId + '_search',
 				xtype : "tbbutton",
-				text : "模板设置",
+				text : "打印模板设置",
 				key : "search",
 				// keyBinding : createSearchKey(),
 				handler : function() {

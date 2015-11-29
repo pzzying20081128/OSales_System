@@ -58,4 +58,12 @@ public class PrpertiesAutoWriteObjectService extends SimpleAutoWritePrpertiesObj
         return id.equals(parentsId) ;
     }
 
+    public PropertiesAutoWriteObject getDemoAutoWriteObject() {
+        return demoAutoWriteObject ;
+    }
+
+    public void setDemoAutoWriteObject(PropertiesAutoWriteObject demoAutoWriteObject) {
+        this.demoAutoWriteObject = demoAutoWriteObject ;
+    }
+
 }

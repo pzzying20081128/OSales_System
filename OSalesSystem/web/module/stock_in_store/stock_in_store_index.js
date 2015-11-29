@@ -1,6 +1,6 @@
 function create_stock_in_store_window(moduleId, moduleName) {
 
-	var checkButton = new  Ext.Toolbar.Button({
+	var checkButton = new Ext.Toolbar.Button({
 		// id : moduleId + '_check',
 		xtype : "tbbutton",
 		text : "审核",
@@ -8,10 +8,9 @@ function create_stock_in_store_window(moduleId, moduleName) {
 		key : "check",
 		// keyBinding : createSearchKey(),
 		handler : function() {
-			var searchWindex = stock_in_store_check_windows(moduleId, moduleName, {
+	    var searchWindex = stock_in_store_check_windows(moduleId, moduleName, {
 				grid : mainGridModule,
 				detailGrid : detail_grid
-
 			});
 		}
 	});
@@ -48,7 +47,6 @@ function create_stock_in_store_window(moduleId, moduleName) {
 				handler : function(bt) {
 					stock_in_store_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
 					});
 				}
 			}, {
@@ -59,16 +57,16 @@ function create_stock_in_store_window(moduleId, moduleName) {
 				key : "search",
 				// keyBinding : createSearchKey(),
 				handler : function() {
+					detail_grid.openAllButton(false);
 					var searchWindex = stock_in_store_search_windows(moduleId, moduleName, {
-						grid : mainGridModule
-						,
-
+						grid : mainGridModule,
+						detail_grid : detail_grid,
+						searchParams : stock_in_store_search_params
 					});
 				}
-			}, checkButton
-
+			},
+			checkButton
 			]
-
 		},
 		init : {
 			// 行被选择
@@ -139,7 +137,7 @@ function create_stock_in_store_window(moduleId, moduleName) {
 		title : moduleName,
 		items : [layout],// 里面所包含的组件
 		// 用于权限
-		 grids:[mainGrid],
+		grids : [mainGrid],
 		moduleId : moduleId,
 		listeners : {}
 	});

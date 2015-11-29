@@ -92,9 +92,9 @@ function stock_store_reveive_search_windows(moduleId, moduleName, params) {
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 570
+					width : 578
 				},
-				items : [createERPcombo({
+				items : [createERPBoxSelect({
 					id : 'searchBean.providerInfoIds',
 					name : 'searchBean.providerInfoIds',
 					fieldLabel : ' 供应商',
@@ -113,12 +113,12 @@ function stock_store_reveive_search_windows(moduleId, moduleName, params) {
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 570
+					width : 578
 				},
-				items : [createERPcombo({
+				items : [createERPBoxSelect({
 					id : 'searchBean.productInfoIds',
 					name : 'searchBean.productInfoIds',
-					fieldLabel : ' 产品',
+					fieldLabel : ' 采购产品',
 					url : "./ProductInfo_detailscombo.do?selectype=productInfo",
 					params : {
 						'searchBean.status' : '有效'

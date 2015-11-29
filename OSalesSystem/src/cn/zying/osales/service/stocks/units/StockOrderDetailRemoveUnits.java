@@ -10,6 +10,7 @@ import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
+import cn.zying.osales.storage.IInStoreProductInfoStockService.StoreOptType ;
 
 @Component("StockOrderDetailRemoveUnits")
 public class StockOrderDetailRemoveUnits extends ABCommonsService {
@@ -22,7 +23,10 @@ public class StockOrderDetailRemoveUnits extends ABCommonsService {
 
         Integer id = optStockOrderDetail.getId() ;
         StockOrderDetail removeStockOrderDetail = baseService.get(id, StockOrderDetail.class) ;
+
         baseService.remove(removeStockOrderDetail) ;
+
+        storeProductInfoStockService.inStore(StoreOptType.Del, removeStockOrderDetail) ;
 
         StockOrder stockOrder = baseService.load(removeStockOrderDetail.getStockOrderId(), StockOrder.class) ;
 

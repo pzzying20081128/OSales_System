@@ -41,14 +41,18 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
     public StockInStoreDetail update(StockInStoreDetail optStockInStoreDetail) throws SystemOptServiceException {
 
-        switchObject(optStockInStoreDetail) ;
-
-        StockInStoreDetail stockInStoreDetail = baseService.get(optStockInStoreDetail.getId(), StockInStoreDetail.class) ;
+      
 
         try {
-            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney"
+//            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney"
+//
+//            , "noTaxPrice", "orderBox", "orderCount", "productInfo", "taxMoney", "taxPrice", "taxRate", "text") ;
+            
+            StockInStoreDetail stockInStoreDetail = baseService.get(optStockInStoreDetail.getId(), StockInStoreDetail.class) ;
+            
+            switchObjects(stockInStoreDetail , optStockInStoreDetail) ;
 
-            , "noTaxPrice", "orderBox", "orderCount", "productInfo", "taxMoney", "taxPrice", "taxRate", "text") ;
+            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney" ,  "orderBox", "orderCount", "productInfo", "taxMoney",  "text") ;
 
             baseService.update(stockInStoreDetail) ;
 
@@ -62,9 +66,13 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
     }
 
-    private void switchObject(StockInStoreDetail stockInStoreDetail) {
+    private void switchObjects( StockInStoreDetail stockInStoreDetailOld  , StockInStoreDetail stockInStoreDetail) {
+        
+        int x = stockInStoreDetail.getId();
+        
+        StockInStoreDetail stockInStoreDetail_ = stockInStoreDetailOld;
 
-        Integer productInfoId = stockInStoreDetail.getProductInfoId() ;
+        Integer productInfoId = stockInStoreDetail_.getProductInfoId() ;
 
         ProductInfo productInfo = baseService.load(productInfoId, ProductInfo.class) ;
 
@@ -82,9 +90,9 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
         stockInStoreDetail.setStorePosition(storePosition) ;
 
-        stockInStoreDetail.setNoTaxMoney(stockInStoreDetail.getNoTaxPrice() * stockInStoreDetail.getOrderCount()) ;
+        stockInStoreDetail.setNoTaxMoney(stockInStoreDetail_.getNoTaxPrice() * stockInStoreDetail.getOrderCount()) ;
 
-        stockInStoreDetail.setTaxMoney(stockInStoreDetail.getTaxPrice() * stockInStoreDetail.getOrderCount()) ;
+        stockInStoreDetail.setTaxMoney(stockInStoreDetail_.getTaxPrice() * stockInStoreDetail.getOrderCount()) ;
 
     }
 

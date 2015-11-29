@@ -2726,6 +2726,8 @@ function mainGridWindow(properties) {
 	var detailGrid = typeof properties.detailGrid == "undefined" ? null : properties.detailGrid;
 	var isPrint = typeof properties.isPrint == "undefined" ? false : true;
 	var isAddSet = typeof properties.isAddSet == "undefined" ? false : true;
+	var reader_root = typeof properties.reader_root == "undefined" ? "selectPage.result" : properties.reader_root;
+	var reader_totalProperty = typeof properties.reader_totalProperty == "undefined" ? "selectPage.count" : properties.reader_totalProperty;
 	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid
 	};
@@ -2746,8 +2748,8 @@ function mainGridWindow(properties) {
 			url : properties.url
 		}),
 		reader : new Ext.data.JsonReader({
-			totalProperty : "selectPage.count",
-			root : "selectPage.result"
+			totalProperty : reader_totalProperty,
+			root : reader_root
 		}, new Ext.data.Record.create(properties.record))
 	});
 	var grid = new Ext.grid.ERPGridPanel({

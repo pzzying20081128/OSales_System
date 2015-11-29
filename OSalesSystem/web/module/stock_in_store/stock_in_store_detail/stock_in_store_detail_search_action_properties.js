@@ -17,8 +17,8 @@ var stock_in_store_detail_search_params = {
 	params : function() {
 		var params = {
 			optType : "search",
-			'staffSearchBean.selectName' : Ext.getCmp('staffSearchBean.selectName').getValue(),
-			'staffSearchBean.name' : Ext.getCmp('staffSearchBean.name').getValue()
+//			'staffSearchBean.selectName' : Ext.getCmp('staffSearchBean.selectName').getValue(),
+//			'staffSearchBean.name' : Ext.getCmp('staffSearchBean.name').getValue()
 		}
 		return params;
 	}

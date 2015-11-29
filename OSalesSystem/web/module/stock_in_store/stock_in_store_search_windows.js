@@ -2,46 +2,197 @@ function stock_in_store_search_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 	var search_params = params.searchParams;
+	var detail_grid = params.detail_grid;
 	var form_panel = new Ext.form.ERPFormPanel({
 		height : 400,
 		// autoHeight : false,
 		labelWidth : 60,
-		items : [
-
-		{ // 第一排
+		items : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{
-				columnWidth : .18,
+			labelWidth : 80,
+			items : [{// 1-1
+				columnWidth : 0.5,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
-				hideLabels : true,
-				items : [{
-					// 复选框
-					id : 'staffSearchBean.selectName',
-					xtype : "checkbox",
-					boxLabel : "员工姓名"
-				}]
-			}, {
-				columnWidth : .82,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				hideLabels : true,
 				defaults : {
-					width : 360
+					width : 200
 				},
 				items : [{
-					// 查询框
-					id : 'staffSearchBean.name',
+					id : 'searchBean.stockOrderNumber',
+					name : 'searchBean.stockOrderNumber',
+					fieldLabel : ' 采购订单号',
+					xtype : 'textfield',
+					blankText : '不能为空！',
+					allowBlank : true,
 					listeners : {
-						"change" : function(field) {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			} // 1-1 end
+			, {// 1-1
+				columnWidth : 0.5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
+				},
+				items : [{
+					id : 'searchBean.stockInStoreNumber',
+					name : 'searchBean.stockInStoreNumber',
+					fieldLabel : ' 采购入库单号',
+					xtype : 'textfield',
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
 						}
 					}
 				}]
 			}]
-		}// end
+		}, {// 第一排
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 80,
+			items : [{// 1-1
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 505
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.providerInfoIds',
+					name : 'searchBean.providerInfoIds',
+					fieldLabel : ' 供应商',
+					url : "./ProviderInfo_combo.do?searchBean.status=有效",
+					allowBlank : true,
+					forceSelection : false
+				})]
+			}]
+		}, {
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 80,
+			items : [{
+				// 1-1
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 505
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.productInfoIds',
+					name : 'searchBean.productInfoIds',
+					fieldLabel : ' 采购产品',
+					url : "./ProductInfo_detailscombo.do?selectype=productInfo",
+					params : {
+						'searchBean.status' : '有效'
+					},
+					allowBlank : true,
+					forceSelection : false
+				})]
+			}]
+		}, {
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 80,
+			items : [{
+				// 1-1
+				columnWidth : 0.5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 205
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.recordManIds',
+					name : 'searchBean.recordManIds',
+					fieldLabel : ' 录入人',
+					url : "./SysStaff_combo.do?searchBean.status=全部",
+					allowBlank : true,
+					forceSelection : false
+				})
+
+				]
+			}, {
+				columnWidth : 0.5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 208
+				},
+				items : [createERPlocalBoxSelect({
+					id : 'searchBean.statuses',
+					name : 'searchBean.statuses',
+					fieldLabel : ' 状态', // 无效, 删除, 有效, 全部, 初始化, 已审核, 等待其他审核
+					localdata : [['删除', "删除"], ['有效', '有效'], ['已审核', '已审核']],
+					defaultValue : null,
+					allowBlank : true
+				})]
+			}]
+		}, {// 第一排
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 80,
+			items : [{// 1-1
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 496
+				},
+				items : [{
+					id : 'searchBean.text',
+					name : 'searchBean.text',
+					fieldLabel : '  备注',
+					xtype : 'textfield',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}]
+		}, {// 第一排
+			layout : 'column',
+			baseCls : 'x-plain',
+			labelWidth : 80,
+			items : [{// 1-1
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 496
+				},
+				items : [{
+					id : 'searchBean.remarks',
+					name : 'searchBean.remarks',
+					fieldLabel : ' 说明',
+					xtype : 'textfield',
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}]
+		}
+
 		],
 		buttons : [{
 			text : '提交',
@@ -65,6 +216,7 @@ function stock_in_store_search_windows(moduleId, moduleName, params) {
 						grid.load({
 							params : submitValues1,
 							success : function() {
+								detail_grid.removeAll();
 								window.close();
 							}
 						});
@@ -89,7 +241,7 @@ function stock_in_store_search_windows(moduleId, moduleName, params) {
 	var window = new Ext.ERPDefaultsWindow({
 		title : "查询",
 		closable : true,
-		width : 500,
+		width : 620,
 		// height : 400,
 		// autoHeight : false,
 

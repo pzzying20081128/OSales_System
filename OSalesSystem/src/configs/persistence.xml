@@ -4,6 +4,7 @@
 		<persistence:provider>org.hibernate.ejb.HibernatePersistence</persistence:provider>
 		<!-- 指标库 SQL 定义 <persistence:mapping-file>orms/ormx_base_data.xml</persistence:mapping-file> -->
 		<persistence:mapping-file>configs/orm/ormx_sys_user.xml</persistence:mapping-file>
+		<persistence:mapping-file>configs/orm/ormx_stock_order.xml</persistence:mapping-file>
 
 		<persistence:properties>
 			<persistence:property name="hibernate.ejb.cfgfile" value="configs/hibernates.cfg.xml" />

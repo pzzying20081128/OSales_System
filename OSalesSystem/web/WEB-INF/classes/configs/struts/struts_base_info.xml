@@ -3,36 +3,27 @@
 <struts>
 	<package name="base_info" namespace="/" extends="struts-ajax">
 
-	    <!-- 
-	    
-	    		<action name="simple_*_*" class="{1}Action" method="{2}">
+
+		<action name="listStockDetail" class="StoreProductInfoStockAction" method="listDetail">
 			<result type="json">
 				<param name="ignoreHierarchy">false</param>
 				<param name="excludeNullProperties">false</param>
 				<param name="includeProperties">
 					success,msg,
-					result,
-					result.\w+,
-					result.\w+.\w+
+					selectDetailPage,
+					selectDetailPage.\w+,
+					selectDetailPage.result\[\d+\]\.\w+,
+					selectDetailPage.result\[\d+\]\.\w+.(\w+.)+\w+,
+					selectDetailPage.result\[\d+\]\.\w+.result\[\d+\]\.\w+,
+					selectDetailPage.result\[\d+\]\.\w+.result\[\d+\]\.\w+.(\w+.)+\w+
 				</param>
 			</result>
 		</action>
 
-		<action name="list_*_*" class="{1}Action" method="{2}">
-			<result type="json">
-				<param name="ignoreHierarchy">false</param>
-				<param name="excludeNullProperties">false</param>
-				<param name="includeProperties">
-				    success,msg,
-					selectPage,
-					selectPage.\w+,
-					selectPage.result\[\d+\]\.\w+,
-					selectPage.result\[\d+\]\.\w+.\w+,
-					selectPage.result\[\d+\]\.\w+.result\[\d+\]\.\w+,
-				</param>
-			</result>
-		</action>
-	     -->
+
+		<!-- <action name="simple_*_*" class="{1}Action" method="{2}"> <result type="json"> <param name="ignoreHierarchy">false</param> <param name="excludeNullProperties">false</param> <param name="includeProperties"> success,msg, result, 
+			result.\w+, result.\w+.\w+ </param> </result> </action> <action name="list_*_*" class="{1}Action" method="{2}"> <result type="json"> <param name="ignoreHierarchy">false</param> <param name="excludeNullProperties">false</param> <param 
+			name="includeProperties"> success,msg, selectPage, selectPage.\w+, selectPage.result\[\d+\]\.\w+, selectPage.result\[\d+\]\.\w+.\w+, selectPage.result\[\d+\]\.\w+.result\[\d+\]\.\w+, </param> </result> </action> -->
 
 
 	</package>

@@ -59,7 +59,23 @@ var stock_store_reveive_grid_column = {
 	}, {
 		name : 'status',
 		mapping : 'status'
-	},],
+	},
+	 {
+		name : 'stockInStore.stockOrder.number',
+		mapping : 'stockInStore.stockOrder'
+		
+	}, 
+	 {
+		name : 'stockInStore.stockOrder.stockType',
+		mapping : 'stockInStore.stockOrder'
+		
+	}, 
+	 {
+		name : 'stockInStore.stockOrder.stockProductType',
+		mapping : 'stockInStore.stockOrder'
+		
+	}, 
+	],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	column : [new Ext.grid.ERPRowNumberer(), {
@@ -75,7 +91,52 @@ var stock_store_reveive_grid_column = {
 				return value;
 
 		}
-	}, {
+	},
+	{
+		header : '采购单',
+		width : 200,
+		dataIndex : 'stockInStore.stockOrder.number',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value.number;
+
+		}
+	},
+	{
+		header : '订单类型',
+		width : 200,
+		dataIndex : 'stockInStore.stockOrder.stockType',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value.stockType;
+
+		}
+	},
+		{
+		header : '采购类型',
+		width : 200,
+		dataIndex : 'stockInStore.stockOrder.stockProductType',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value.stockProductType;
+
+		}
+	},
+		
+		
+			{
 		header : '供应商',
 		width : 200,
 		dataIndex : 'providerInfo.name',

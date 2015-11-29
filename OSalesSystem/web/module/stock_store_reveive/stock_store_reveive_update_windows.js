@@ -111,7 +111,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.stockInStore.number',
 					fieldLabel : ' 采购入库单号',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -133,7 +133,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.number',
 					fieldLabel : ' 采购进货单号',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -159,7 +159,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.providerInfo.name',
 					fieldLabel : ' 供应商',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -187,7 +187,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.orderCount',
 					fieldLabel : ' 订购数量',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -208,7 +208,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.taxSumMoneyMoneyShow',
 					fieldLabel : ' 含税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -238,7 +238,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.noTaxSumMoneyMoneyShow',
 					fieldLabel : ' 没税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -259,7 +259,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.status',
 					fieldLabel : ' 状态',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -285,7 +285,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.text',
 					fieldLabel : '  备注',
 					xtype : 'textfield',
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {
@@ -311,7 +311,7 @@ function stock_store_reveive_update_windows(moduleId, moduleName, params) {
 					name : 'stockstorereceive.remarks',
 					fieldLabel : ' 说明',
 					xtype : 'textfield',
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
 					listeners : {

@@ -105,7 +105,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.stockOrder.number',
 					fieldLabel : ' 采购订单号',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -127,7 +127,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.number',
 					fieldLabel : ' 采购入库单号',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -153,7 +153,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.providerInfo.name',
 					fieldLabel : ' 供应商',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -181,7 +181,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.orderCount',
 					fieldLabel : ' 订购数量',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -202,7 +202,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.taxSumMoneyMoneyShow',
 					fieldLabel : ' 含税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -232,7 +232,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.noTaxSumMoneyMoneyShow',
 					fieldLabel : ' 没税总金额',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -253,7 +253,7 @@ function stock_in_store_update_windows(moduleId, moduleName, params) {
 					name : 'stockinstore.status',
 					fieldLabel : ' 状态',
 					xtype : 'ERPShowText',
-					style : AllowBlankStyle,
+					//style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {

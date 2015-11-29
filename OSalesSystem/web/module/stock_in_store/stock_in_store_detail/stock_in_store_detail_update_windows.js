@@ -19,95 +19,109 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 	}
 	var selectId = selection_rows[0].id;
 
-	productInfo = createERPcombo({
-		id : 'stockInstoredetail.productInfoId',
-		name : 'stockInstoredetail.productInfoId',
-		fieldLabel : '入库产品',
-		url : "./ProductInfo_detailscombo.do?selectype=productInfo",
-		params : {
-			'searchBean.status' : '有效'
-		},
+	productInfo = new Ext.form.ERPShowTextField({
+		id : 'stockinstoredetail.stockOrder.productInfoName',
+		// name : 'stockinstoredetail.productInfo',
+		fieldLabel : '采购产品',
+		xtype : 'ERPShowText',
+		// style : NoAllowBlankStyle,
+		blankText : '不能为空！',
 		allowBlank : false,
-		forceSelection : false,
-
-		select : function(combo, record, index) {
-			orderCount.setValue(null);
-			orderBox.setValue(null);
-			taxMoneyMoneyShow.setValue(null);
-			noTaxMoneyMoneyShow.setValue(null);
-			productInfoSelect = record.json;
-			ERPAjaxRequest({
-				url : "./simple_ProductInfo_selectStockPrice.do",
-				params : {
-					'providerInfoId' : mainData.data.providerInfoId,
-					'uuid' : productInfoSelect.id
-				},
-				// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-				success : function(result) {
-					productInfo_e = result.result.result;
-					productInfo.productInfo = productInfo_e;
-					storeInfoId.load({
-						params : {
-							'searchBean.id' : productInfo_e.storeInfoId
-						},
-						success : function() {
-							storeInfoId.setValue(productInfo_e.storeInfoId);
-							storePositionId.load({
-								params : {
-									'searchBean.storeInfoId' : productInfo_e.storeInfoId
-								},
-								success : function() {
-									storePositionId.setValue(productInfo_e.storePositionId);
-								}
-							});
-						}
-					})
-					// /////////////////////////////////////////////////////////////////
-					ProductInfobarCode.setValue(productInfo_e.barCode);
-					maxStockPrice.setValue(productInfo_e.maxStockPriceMoneyShow);
-					baseUnitBoxUnit.setValue(productInfo_e.baseUnitBoxUnit);
-					taxPriceMoneyShow.setValue(productInfo_e.stockPriceMoneyShow);
-					noTaxPriceMoneyShow.setValue(productInfo_e.stockNoTaxPriceMoneyShow);
-					taxRateTaxRateShow.setValue(productInfo_e.stockTaxRateTaxRateShow);
-					orderCount.productInfo = productInfo;
-					orderBox.productInfo = productInfo;
-					if (productInfo_e.isBox) {
-						orderCount.setReadOnly(true);
-						orderCount.getEl().setStyle("background", AllowBlankColor);
-						orderBox.setReadOnly(false);
-						orderBox.getEl().setStyle("background", NoAllowBlankColor);
-					} else {
-						orderCount.setReadOnly(false);
-						orderCount.getEl().setStyle("background", NoAllowBlankColor);
-						orderBox.setReadOnly(true);
-						orderBox.getEl().setStyle("background", AllowBlankColor);
-					}
-
-					// ///////////////////////////////////////////////////////////////
-				}
-			});
-
+		listeners : {
+			'specialkey' : function(field, e) {
+			}
 		}
 	});
 
-	productInfo.load({
-		params : {
-			'searchBean.id' : selection_rows[0].data.productInfoId
-		},
-		success : function(data) {
-			var productInfo_ = data[0].json;
-			productInfo.productInfo = productInfo_;
-			ProductInfobarCode.setValue(productInfo_.barCode);
-			maxStockPrice.setValue(productInfo_.maxStockPriceMoneyShow);
-			baseUnitBoxUnit.setValue(productInfo_.baseUnitBoxUnit);
-		}
-	});
+	// productInfo = createERPcombo({
+	// id : 'stockInstoredetail.productInfoId',
+	// name : 'stockInstoredetail.productInfoId',
+	// fieldLabel : '入库产品',
+	// url : "./ProductInfo_detailscombo.do?selectype=productInfo",
+	// params : {
+	// 'searchBean.status' : '有效'
+	// },
+	// allowBlank : false,
+	// forceSelection : false,
+	//
+	// select : function(combo, record, index) {
+	// orderCount.setValue(null);
+	// orderBox.setValue(null);
+	// taxMoneyMoneyShow.setValue(null);
+	// noTaxMoneyMoneyShow.setValue(null);
+	// productInfoSelect = record.json;
+	// ERPAjaxRequest({
+	// url : "./simple_ProductInfo_selectStockPrice.do",
+	// params : {
+	// 'providerInfoId' : mainData.data.providerInfoId,
+	// 'uuid' : productInfoSelect.id
+	// },
+	// // async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+	// success : function(result) {
+	// productInfo_e = result.result.result;
+	// productInfo.productInfo = productInfo_e;
+	// storeInfoId.load({
+	// params : {
+	// 'searchBean.id' : productInfo_e.storeInfoId
+	// },
+	// success : function() {
+	// storeInfoId.setValue(productInfo_e.storeInfoId);
+	// storePositionId.load({
+	// params : {
+	// 'searchBean.storeInfoId' : productInfo_e.storeInfoId
+	// },
+	// success : function() {
+	// storePositionId.setValue(productInfo_e.storePositionId);
+	// }
+	// });
+	// }
+	// })
+	// // /////////////////////////////////////////////////////////////////
+	// ProductInfobarCode.setValue(productInfo_e.barCode);
+	// maxStockPrice.setValue(productInfo_e.maxStockPriceMoneyShow);
+	// baseUnitBoxUnit.setValue(productInfo_e.baseUnitBoxUnit);
+	// taxPriceMoneyShow.setValue(productInfo_e.stockPriceMoneyShow);
+	// noTaxPriceMoneyShow.setValue(productInfo_e.stockNoTaxPriceMoneyShow);
+	// taxRateTaxRateShow.setValue(productInfo_e.stockTaxRateTaxRateShow);
+	// orderCount.productInfo = productInfo;
+	// orderBox.productInfo = productInfo;
+	// if (productInfo_e.isBox) {
+	// orderCount.setReadOnly(true);
+	// orderCount.getEl().setStyle("background", AllowBlankColor);
+	// orderBox.setReadOnly(false);
+	// orderBox.getEl().setStyle("background", NoAllowBlankColor);
+	// } else {
+	// orderCount.setReadOnly(false);
+	// orderCount.getEl().setStyle("background", NoAllowBlankColor);
+	// orderBox.setReadOnly(true);
+	// orderBox.getEl().setStyle("background", AllowBlankColor);
+	// }
+	//
+	// // ///////////////////////////////////////////////////////////////
+	// }
+	// });
+	//
+	// }
+	// });
+	//
+	// productInfo.load({
+	// params : {
+	// 'searchBean.id' : selection_rows[0].data.productInfoId
+	// },
+	// success : function(data) {
+	// var productInfo_ = data[0].json;
+	// productInfo.productInfo = productInfo_;
+	// ProductInfobarCode.setValue(productInfo_.barCode);
+	// maxStockPrice.setValue(productInfo_.maxStockPriceMoneyShow);
+	// baseUnitBoxUnit.setValue(productInfo_.baseUnitBoxUnit);
+	// }
+	// });
 
 	ProductInfobarCode = new Ext.form.ERPShowTextField({
-
+		name : "ProductInfobarCode",
 		fieldLabel : ' 条形码',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
+		// style : showBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -118,10 +132,10 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 	});
 
 	maxStockPrice = new Ext.form.ERPShowTextField({
-
+		name : "maxStockPriceMoneyShow",
 		fieldLabel : '最高采购价',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
+		// style : AllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -131,10 +145,10 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 	});
 
 	baseUnitBoxUnit = new Ext.form.ERPShowTextField({
-
+		name : "ProductInfobaseUnitBoxUnit",
 		fieldLabel : '单位',
 		xtype : 'ERPShowText',
-		style : AllowBlankStyle,
+		style : showBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -195,13 +209,13 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	taxPriceMoneyShow = new Ext.form.TextField({
+	taxPriceMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'stockInstoredetail.taxPriceMoneyShow',
 		name : 'stockInstoredetail.taxPriceMoneyShow',
 		fieldLabel : '采购单价',
-		xtype : 'textfield',
+		xtype : 'ERPShowText',
 		vtype : 'money',
-		style : NoAllowBlankStyle,
+		// style : NoAllowBlankStyle,
 		enableKeyEvents : true,
 		blankText : '不能为空！',
 		allowBlank : false,
@@ -212,13 +226,13 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	noTaxPriceMoneyShow = new Ext.form.TextField({
+	noTaxPriceMoneyShow = new Ext.form.ERPShowTextField({
 		id : 'stockInstoredetail.noTaxPriceMoneyShow',
 		name : 'stockInstoredetail.noTaxPriceMoneyShow',
 		fieldLabel : '末税采购单价',
-		xtype : 'textfield',
+		xtype : 'ERPShowText',
 		vtype : 'money',
-		style : NoAllowBlankStyle,
+		// style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		labelStyle : "font-size:11px",
 		allowBlank : false,
@@ -228,17 +242,16 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		}
 	});
 
-	taxRateTaxRateShow = new Ext.form.TextField({
+	taxRateTaxRateShow = new Ext.form.ERPShowTextField({
 		id : 'stockInstoredetail.taxRateTaxRateShow',
 		name : 'stockInstoredetail.taxRateTaxRateShow',
 		fieldLabel : '税率',
-		xtype : 'textfield',
+		xtype : 'ERPShowText',
 		vtype : 'money',
-		style : AllowBlankStyle,
+		// style : AllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
-		readOnly : true,
-		editable : false,
+
 		listeners : {
 			'specialkey' : function(field, e) {
 			}
@@ -287,7 +300,7 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		name : 'stockInstoredetail.taxMoneyMoneyShow',
 		fieldLabel : '采购金额',
 		xtype : 'ERPShowText',
-		style : NoAllowBlankStyle,
+		// style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -301,7 +314,7 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		name : 'stockInstoredetail.noTaxMoneyMoneyShow',
 		fieldLabel : '未税金额',
 		xtype : 'ERPShowText',
-		style : NoAllowBlankStyle,
+		// style : NoAllowBlankStyle,
 		blankText : '不能为空！',
 		allowBlank : false,
 		listeners : {
@@ -363,37 +376,47 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 		}, {
 			name : 'stockInstoredetail.storePositionId',
 			mapping : 'storePositionId'
+		}, {
+			name : "ProductInfobarCode",
+			mapping : 'stockOrderDetail.productInfo.barCode'
+		}, {
+			name : "maxStockPriceMoneyShow",
+			mapping : 'stockOrderDetail.productInfo.maxStockPriceMoneyShow'
+		}, {
+			name : "ProductInfobaseUnitBoxUnit",
+			mapping : 'stockOrderDetail.productInfo.baseUnitBoxUnit'
 		}
 
 		]),
 		// 字段
-		field : [{// 第一排
-			layout : 'column',
-			baseCls : 'x-plain',
-			labelWidth : 70,
-			items : [{// 1-1
-				columnWidth : 1,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 412
-				},
-				items : [{
-					id : 'stockinstoredetail.stockOrder.productInfoName',
-					// name : 'stockinstoredetail.productInfo',
-					fieldLabel : '采购产品',
-					xtype : 'ERPShowText',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
-			}]
-		},
+		field : [
+		// {// 第一排
+		// layout : 'column',
+		// baseCls : 'x-plain',
+		// labelWidth : 70,
+		// items : [{// 1-1
+		// columnWidth : 1,
+		// layout : 'form',
+		// defaultType : 'textfield',
+		// baseCls : 'x-plain',
+		// defaults : {
+		// width : 412
+		// },
+		// items : [{
+		// id : 'stockinstoredetail.stockOrder.productInfoName',
+		// // name : 'stockinstoredetail.productInfo',
+		// fieldLabel : '采购产品',
+		// xtype : 'ERPShowText',
+		// // style : NoAllowBlankStyle,
+		// blankText : '不能为空！',
+		// allowBlank : false,
+		// listeners : {
+		// 'specialkey' : function(field, e) {
+		// }
+		// }
+		// }]
+		// }]
+		// },
 
 		{
 			layout : 'column',
@@ -607,13 +630,20 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 			var orderCount_;
 			if (productInfo_.isBox) {
 				box = orderBox.getValue();
-				orderCount_ = productInfo.productInfo.boxCount * box;
-				orderCount.setValue(orderCount_);
+				
+				if (box == null || box == "") {
+					orderCount.setValue(null);
+				} else {
+					orderCount_ = productInfo.productInfo.boxCount * box;
+					orderCount.setValue(orderCount_);
+				}
 			} else {
 				orderCount_ = orderCount.getValue();
 				if (orderCount_ != null && orderCount_ != "") {
 					boxCount = switchBoxCount(orderCount_, productInfo_);
 					orderBox.setValue(boxCount);
+				} else {
+					orderBox.setValue(null);
 				}
 
 			}
@@ -637,6 +667,10 @@ function stock_in_store_detail_update_windows(moduleId, moduleName, params) {
 				taxMoneyMoneyShow.setValue(retention_accuracy(boxMoney));
 
 				noTaxMoneyMoneyShow.setValue(retention_accuracy(noboxMoney));
+			}else{
+					taxMoneyMoneyShow.setValue(null);
+
+				noTaxMoneyMoneyShow.setValue(null);
 			}
 
 		}

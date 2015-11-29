@@ -1,5 +1,7 @@
 package cn.zying.osales.service.stocks.units ;
 
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
@@ -15,13 +17,13 @@ import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
+import cn.zying.osales.storage.IInStoreProductInfoStockService ;
+import cn.zying.osales.storage.IInStoreProductInfoStockService.StoreOptType ;
 
 @Component("StockOrderSaveUpdateUnits")
 public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
     public void updateSumMoney(StockOrder stockOrder, StockOrderDetail stockOrderDetail, OptSum optSum) throws SystemOptServiceException {
-
-        //        StockOrder stockOrder = baseService.load(stockOrder_.getId(), StockOrder.class) ;
 
         Integer orderCount = stockOrder.getOrderCount() == null ? 0 : stockOrder.getOrderCount() ;
 
@@ -69,7 +71,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
         case update:
         case save:
-            return saveUpdate(optStockOrder) ;
+            return save_Update(optType, optStockOrder) ;
 
         default:
             throw new SystemOptServiceException("[操作类型错误]") ;
@@ -118,7 +120,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
         }
     }
 
-    public StockOrder saveUpdate(StockOrder optStockOrder) throws SystemOptServiceException {
+    public StockOrder save_Update(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
         try {
 
@@ -126,15 +128,15 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
             StockOrder stockOrder = baseService.load(optStockOrder.getId(), StockOrder.class) ;
 
-            optStockOrder.setStatus(Status.有效) ;
+            stockOrder.setStatus(Status.有效) ;
 
-            optStockOrder.setRecordDate(DateToolsUilts.getnowDate()) ;
+            stockOrder.setRecordDate(DateToolsUilts.getnowDate()) ;
 
             initOrder(optStockOrder) ;
 
-            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "number", "stockType", "providerInfo", "stockMan", "stockDate") ;
+            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "number", "stockType", "providerInfo", "stockMan", "stockDate","stockProductType","remarks","text","recordMan") ;
 
-            baseService.update(optStockOrder) ;
+            baseService.update(stockOrder) ;
 
             return optStockOrder ;
 

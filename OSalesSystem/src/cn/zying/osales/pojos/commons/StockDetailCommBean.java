@@ -1,6 +1,7 @@
 package cn.zying.osales.pojos.commons ;
 
 import java.util.Date ;
+import java.util.List ;
 
 import javax.persistence.Column ;
 import javax.persistence.FetchType ;
@@ -27,6 +28,10 @@ public class StockDetailCommBean extends DetailCommBean {
 
     @Column(name = "product_info_id", insertable = false, updatable = false)
     private Integer productInfoId ;
+
+    //stockInStoreId
+    @Transient
+    private List<Integer> productInfoIds ;
 
     // 含税单价
     @Column(name = "tax_price")
@@ -127,8 +132,6 @@ public class StockDetailCommBean extends DetailCommBean {
 
     @Column(name = "store_position_id", insertable = false, updatable = false)
     private Integer storePositionId ;
-
-
 
     //  // 有保质期？
     //  @Column(name = "is_protect_time")
@@ -361,14 +364,20 @@ public class StockDetailCommBean extends DetailCommBean {
         this.storeBox = storeBox ;
     }
 
- 
-
     public Integer getProtectTime() {
         return protectTime ;
     }
 
     public void setProtectTime(Integer protectTime) {
         this.protectTime = protectTime ;
+    }
+
+    public List<Integer> getProductInfoIds() {
+        return productInfoIds ;
+    }
+
+    public void setProductInfoIds(List<Integer> productInfoIds) {
+        this.productInfoIds = productInfoIds ;
     }
 
 }

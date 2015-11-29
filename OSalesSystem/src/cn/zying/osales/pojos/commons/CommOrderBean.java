@@ -1,6 +1,7 @@
 package cn.zying.osales.pojos.commons ;
 
 import java.util.Date ;
+import java.util.List ;
 
 import javax.persistence.Column ;
 import javax.persistence.FetchType ;
@@ -50,6 +51,9 @@ public class CommOrderBean extends CommBean {
     @Column(name = "record_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "录入人")
     private Integer recordManId ;
+    
+    @Transient
+    private List<Integer> recordManIds;
 
     @Column(name = "record_date")
     @Temporal(TemporalType.DATE)
@@ -175,6 +179,14 @@ public class CommOrderBean extends CommBean {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime ;
+    }
+
+    public List<Integer> getRecordManIds() {
+        return recordManIds ;
+    }
+
+    public void setRecordManIds(List<Integer> recordManIds) {
+        this.recordManIds = recordManIds ;
     }
 
 }

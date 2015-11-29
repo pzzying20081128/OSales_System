@@ -79,7 +79,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
         }
         
         if(searchBean.getStockProductTypes() !=null  &&  searchBean.getStockProductTypes().size() >0     ){
-            sqlWhere = sqlWhere + "  and  stockOrder.stockType  in (:getStockProductTypes)" ;
+            sqlWhere = sqlWhere + "  and  stockOrder.stockProductType  in (:getStockProductTypes)" ;
             value.put("getStockProductTypes", searchBean.getStockProductTypes());
         }
         
@@ -94,7 +94,7 @@ public class StockOrderSearchUnits extends ABCommonsService {
         }
         
         if(searchBean.getProviderInfoIds()!=null  &&  searchBean.getProviderInfoIds().size() >0     ){
-            sqlWhere = sqlWhere + "  and  stockOrder.stockType  in (:getProviderInfoIds)" ;
+            sqlWhere = sqlWhere + "  and  stockOrder.providerInfoId  in (:getProviderInfoIds)" ;
             value.put("getProviderInfoIds", searchBean.getProviderInfoIds());
         }
         

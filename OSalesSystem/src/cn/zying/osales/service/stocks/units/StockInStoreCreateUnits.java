@@ -128,6 +128,8 @@ public class StockInStoreCreateUnits extends ABCommonsService {
                 stockInStoreDetail.setStorePosition(stockOrderDetail.getStorePosition()) ;
 
                 ToolsUnits.copyBeanProperties(stockInStoreDetail, stockOrderDetail, "noTaxMoney", "taxMoney", "noTaxPrice", "taxPrice", "orderBox", "orderCount", "taxRate") ;
+                
+                stockInStoreDetail.setOrderSum(stockInStoreDetail.getOrderCount());
 
             }
             baseService.save(stockInStore) ;

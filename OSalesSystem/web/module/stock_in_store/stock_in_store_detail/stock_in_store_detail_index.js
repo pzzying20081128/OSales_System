@@ -43,10 +43,12 @@ function create_stock_in_store_detail_window(moduleId, moduleName, params) {
 			// },
 
 			{
-				id : moduleId + '_edit',
+				// id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				// keyBinding : createEditKey(),
+				disabled : true,
+				key : "edit",
 				handler : function(bt) {
 					select_rows = selectMainGrid("选择一条要编辑的详情");
 					if (select_rows == null)
@@ -58,10 +60,12 @@ function create_stock_in_store_detail_window(moduleId, moduleName, params) {
 					});
 				}
 			}, {
-				id : moduleId + '_delete',
+				// id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
 				// keyBinding : createDeleteKey(),
+				disabled : true,
+				key : "delete",
 				handler : function(bt) {
 					stock_in_store_detail_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
@@ -69,13 +73,16 @@ function create_stock_in_store_detail_window(moduleId, moduleName, params) {
 					});
 				}
 			}, {
-				id : moduleId + '_search',
+				// id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
 				// keyBinding : createSearchKey(),
+				disabled : true,
+				key : "search",
 				handler : function() {
 					var searchWindex = stock_in_store_detail_search_windows(moduleId, moduleName, {
 						grid : mainGridModule,
+						main_Grid:main_Grid,
 						searchParams : stock_in_store_detail_search_params
 					});
 				}

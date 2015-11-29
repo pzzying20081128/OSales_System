@@ -34,6 +34,10 @@ public class StockInStoreDetail extends StockDetailCommBean {
 
     @Column(name = "stock_order_detail_Id", insertable = false, updatable = false)
     private Integer stockOrderDetailId ;
+    
+    // 要接受单总数
+    @Column(name = "order_sum")
+    private Integer orderSum ;
 
     public StockInStore getStockInStore() {
         return stockInStore ;
@@ -65,6 +69,14 @@ public class StockInStoreDetail extends StockDetailCommBean {
 
     public void setStockOrderDetailId(Integer stockOrderDetailId) {
         this.stockOrderDetailId = stockOrderDetailId ;
+    }
+
+    public Integer getOrderSum() {
+        return orderSum ;
+    }
+
+    public void setOrderSum(Integer orderSum) {
+        this.orderSum = orderSum ;
     }
 
     //    // 订购订单的数量 主要用于比较在采购进货入库中修改的 数量不能大于 该数量

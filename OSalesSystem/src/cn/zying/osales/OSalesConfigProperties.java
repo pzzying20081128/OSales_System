@@ -2,6 +2,7 @@ package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
 
+   
     public enum OptSum {
         add, del
     }
@@ -56,6 +57,10 @@ public interface OSalesConfigProperties {
     public static int isDefault_0 = 0 ;
 
     public static int isDefault_all = -1 ;
+    
+    public static long  default_long_null = 0 ;
+    
+    public static int  default_int_null = 0 ;
 
     /////////////////// error///////////////////////////////////
     String USER_PASSWORD_ERROR = "用户名或密码错误" ;

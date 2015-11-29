@@ -109,13 +109,29 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
         List<Integer> providerInfoIds = ToolsUnits.filterNULL(searchBean.getProviderInfoIds()) ;
         if (providerInfoIds != null && providerInfoIds.size() > 0) {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.providerInfoId  in (:providerInfoIds)" ;
-            value.put("providerInfoIds", searchBean.getProviderInfoIds()) ;
+            value.put("providerInfoIds", providerInfoIds) ;
+        }
+        
+        List<Integer> productInfoIds = ToolsUnits.filterNULL(searchBean.getProductInfoIds()) ;
+        if (productInfoIds != null && productInfoIds.size() > 0) {
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.providerInfoId  in (:productInfoIds)" ;
+            value.put("productInfoIds", productInfoIds) ;
         }
 
         List<StockType> stockType = ToolsUnits.filterNULL(searchBean.getStockTypes()) ;
         if (stockType != null && stockType.size() > 0) {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.stockType in ( :stockTypes )" ;
             value.put("stockTypes", searchBean.getStockTypes()) ;
+        }
+        
+        if(searchBean.getStartTime() !=null){
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.createTime >= :getStartTime" ;
+            value.put("getStartTime", searchBean.getStartTime()) ;
+        }
+        
+        if(searchBean.getEndTime() !=null){
+            sqlWhere = sqlWhere + "   and  stockStoreReceive.createTime <= :getEndTime" ;
+            value.put("getEndTime", searchBean.getEndTime()) ;
         }
 
         return sqlWhere ;
