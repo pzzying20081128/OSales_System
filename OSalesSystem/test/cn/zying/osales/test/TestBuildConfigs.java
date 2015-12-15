@@ -4,6 +4,8 @@ import cn.zy.apps.tools.dev.javascript.IBuildJSModule ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
 import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.pojos.StockReturnDetail ;
+import cn.zying.osales.pojos.StockReturnStoreOut ;
+import cn.zying.osales.pojos.StockReturnStoreOutDetail ;
 import cn.zying.osales.pojos.StoreProductInfoDetail ;
 import cn.zying.osales.pojos.StoreProductInfoStock ;
 import cn.zying.osales.pojos.SysPrintTemplate ;
@@ -23,9 +25,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_return_detail";
+        String moduleNmae="stock_return_store_out_detail";
         
-        Class<?> clazz = StockReturnDetail.class;
+        Class<?> clazz = StockReturnStoreOut.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

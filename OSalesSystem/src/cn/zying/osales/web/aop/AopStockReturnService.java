@@ -50,4 +50,10 @@ public class AopStockReturnService implements IAopStockReturnService {
 
     }
 
+    @Override
+    public void check(Integer stockReturnId, int optUser) throws SystemOptServiceException {
+        iStockReturnService.check(stockReturnId, optUser);
+        
+    }
+
 }

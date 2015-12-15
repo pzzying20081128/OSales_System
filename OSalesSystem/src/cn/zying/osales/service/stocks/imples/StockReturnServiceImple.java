@@ -13,6 +13,7 @@ import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockReturnService ;
+import cn.zying.osales.service.stocks.units.StockReturnCheckUnits ;
 import cn.zying.osales.service.stocks.units.StockReturnRemoveUnits ;
 import cn.zying.osales.service.stocks.units.StockReturnSaveUpdateUnits ;
 import cn.zying.osales.service.stocks.units.StockReturnSearchUnits ;
@@ -25,6 +26,10 @@ public class StockReturnServiceImple extends ABCommonsService implements IStockR
     @Autowired
     @Qualifier("StockReturnSearchUnits")
     private StockReturnSearchUnits iStockReturnSearchUnits ;
+    
+    @Autowired
+    @Qualifier("StockReturnCheckUnits")
+    private StockReturnCheckUnits iStockReturnCheckUnits ;
 
     //@Resource(name=" StockReturnSaveUpdateUnits")
     @Autowired
@@ -62,6 +67,12 @@ public class StockReturnServiceImple extends ABCommonsService implements IStockR
     public StockReturn get(Integer id) throws SystemOptServiceException {
 
         return baseService.get(id, StockReturn.class) ;
+    }
+
+    @Override
+    public void check(Integer stockReturnId, int optUser) throws SystemOptServiceException {
+        iStockReturnCheckUnits.check(stockReturnId, optUser);
+        
     }
 
 }

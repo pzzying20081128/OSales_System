@@ -7,9 +7,46 @@ function create_stock_return_window(moduleId, moduleName) {
 		key : "check",
 		// keyBinding : createSearchKey(),
 		handler : function() {
-			base_combined_product_check_windows(moduleId, moduleName, {
-				grid : mainGridModule
+
+			var selection_rows = mainGrid.getSelectionModel().getSelections();
+
+			if (selection_rows.length == 0) {
+				showErrorMsg('提示信息', '请选择要审核的数据');
+				return false;
+			}
+
+			if (selection_rows.length > 1) {
+				showErrorMsg('提示信息', '只能选择一条数据进行审核');
+				return false;
+			}
+
+			if (selection_rows[0].data.status == "删除") {
+				showErrorMsg('提示信息', '本条信息的状态是[' + selection_rows[0].data.status + ']不能' + opt);
+				return false;
+			}
+
+			var selectId = selection_rows[0].id;
+			showMsgYN({
+				msg : "是否要审核该条订单",
+				yes : function(YN) {
+					ERPAjaxRequest({
+						url : "./simple_StockReturn_check.do",
+						params : {
+							"stockreturn.id" : selection_rows[0].id
+						},
+						success : function(response, options) {
+							mainGrid.reload({
+								success : function() {
+									detailGrid.removeAll();
+									detailGrid.openAllButton(false);
+								}
+
+							});
+						}
+					});
+				}
 			});
+
 		}
 
 	});
@@ -80,10 +117,10 @@ function create_stock_return_window(moduleId, moduleName) {
 					var searchWindex = stock_return_search_windows(moduleId, moduleName, {
 						grid : mainGridModule,
 						searchParams : stock_return_search_params,
-						detailGrid:detailGrid
+						detailGrid : detailGrid
 					});
 				}
-			}]
+			}, checkButton]
 
 		},
 		init : {

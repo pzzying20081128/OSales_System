@@ -11,6 +11,7 @@ public interface OSalesConfigProperties {
     //采购订单代号 CGSO
 
     //采购退货单代号 CGTH
+    // 采购退货出库单CGTHCK
 
     //采购入库单CGRK 
 
@@ -20,7 +21,7 @@ public interface OSalesConfigProperties {
 
     // 单据简称
     public enum OrderSimpleName {
-        KSSC, CGSR, CGRK, CGSO, CGTH
+        KSSC, CGSR, CGRK, CGSO, CGTH,CGTHCK
     }
 
     public enum StockType {

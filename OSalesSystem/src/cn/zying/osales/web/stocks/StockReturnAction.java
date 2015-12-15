@@ -46,7 +46,7 @@ public class StockReturnAction extends OSalesSystemABAction<StockReturn> {
     public String save() throws Exception {
         try {
             stockreturn.setRecordManId(getOSalsesLoginUserId()) ;
-            this.result = service.saveUpdate(OptType.save, stockreturn, getOSalsesLoginUserId()) ;
+            this.result = service.saveUpdate(optType, stockreturn, getOSalsesLoginUserId()) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -56,26 +56,16 @@ public class StockReturnAction extends OSalesSystemABAction<StockReturn> {
     }
 
     public String check() throws Exception {
-        //        try {
-        //            service.check(stockorder.getId(), getOSalsesLoginUserId()) ;
-        //        } catch (Exception e) {
-        //            this.success = false ;
-        //            this.msg = handError(e) ;
-        //        }
+                try {
+                    service.check(stockreturn.getId(), getOSalsesLoginUserId()) ;
+                } catch (Exception e) {
+                    this.success = false ;
+                    this.msg = handError(e) ;
+                }
         return SUCCESS ;
     }
 
-    public String update() throws Exception {
-        //        try {
-        //            stockorder.setRecordManId(getOSalsesLoginUserId()) ;
-        //            this.result = service.saveUpdate(OptType.update, stockorder, getOSalsesLoginUserId()) ;
-        //            writeObjectService.intToPrpertiesUnits(result) ;
-        //        } catch (Exception e) {
-        //            this.success = false ;
-        //            this.msg = handError(e) ;
-        //        }
-        return SUCCESS ;
-    }
+   
 
     public String get() throws Exception {
         try {

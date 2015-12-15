@@ -23,5 +23,7 @@ public interface InfaceStockReturnService {
     public StockReturn remove(OptType optType, StockReturn optStockReturn) throws SystemOptServiceException ;
 
     public StockReturn get(Integer id) throws SystemOptServiceException ;
+    
+    public void check(Integer stockReturnId, int optUser)throws SystemOptServiceException ;
 
 }
