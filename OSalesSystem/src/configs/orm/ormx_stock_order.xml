@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm:entity-mappings version="2.0" xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd ">
+	<!-- 查询采购单 的入库情况 -->
+	<orm:named-native-query name="searchCkeckedProductInfoSum" result-set-mapping="searchCkeckedProductInfoSumResult">
+		<orm:query>
+
+			SELECT
+			stock_order_detail_view.`product_info_id` AS product_info_id ,
+			stock_order_detail_view.product_order_sum AS product_order_sum,
+
+			CASE
+			WHEN
+			stock_in_store_detail_view.product_instore_sum IS NULL THEN 0
+			WHEN
+			stock_in_store_detail_view.product_instore_sum IS NOT NULL THEN stock_in_store_detail_view.product_instore_sum
+			END AS product_instore_sum,
+			stock_order_detail_view.`no_tax_price`,
+			stock_order_detail_view.`tax_price`,
+			stock_order_detail_view.`protect_time`,
+			stock_order_detail_view.`store_id`
+			,
+			stock_order_detail_view.`store_position_id`,
+			stock_order_detail_view.`taxRate`,
+			stock_order_detail_view.stock_order_detail_id AS stock_order_detail_id
+			FROM
+			(
+			SELECT
+			stock_order_detail.`product_info_id` ,
+			SUM(stock_order_detail.`count`) AS product_order_sum,
+			stock_order_detail.`id` AS stock_order_detail_id,
+			stock_order_detail.`no_tax_price`,
+			stock_order_detail.`tax_price`,
+			stock_order_detail.`protect_time`,
+			stock_order_detail.`store_id` ,
+			stock_order_detail.`store_position_id`,
+			stock_order_detail.`taxRate`
+			FROM
+			`stock_order_detail` AS stock_order_detail
+			WHERE
+			stock_order_detail.`stock_order_id` = :stock_order_id
+			GROUP BY
+			stock_order_detail.`product_info_id`
+			) AS stock_order_detail_view
+			LEFT JOIN
+			(
+			SELECT
+			stock_in_store_detail.`product_info_id`,
+			SUM(stock_in_store_detail.`count`) AS product_instore_sum
+			FROM
+			`stock_in_store_detail` AS
+			stock_in_store_detail
+			INNER JOIN
+			`stock_in_store` AS stock_in_store
+			ON(
+			stock_in_store.`id` =
+			stock_in_store_detail.`stock_in_store_id`
+			)
+			WHERE
+			stock_in_store.`stock_order_id` =:stock_order_id
+			AND
+			stock_in_store.`status` ='已审核'
+			GROUP BY
+			stock_in_store_detail.`product_info_id`
+			)AS stock_in_store_detail_view
+			ON(
+			stock_in_store_detail_view.product_info_id = stock_order_detail_view.product_info_id
+			)
+		</orm:query>
+	</orm:named-native-query>
+
+	<orm:sql-result-set-mapping name="searchCkeckedProductInfoSumResult">
+		<orm:column-result name="product_info_id" />
+		<orm:column-result name="product_order_sum" />
+		<orm:column-result name="product_instore_sum" />
+		<orm:column-result name="no_tax_price" />
+		<orm:column-result name="tax_price" />
+		<orm:column-result name="protect_time" />
+		<orm:column-result name="store_id" />
+		<orm:column-result name="store_position_id" />
+		<orm:column-result name="taxRate" />
+		<orm:column-result name="stock_order_detail_id" />
+	</orm:sql-result-set-mapping>
+
+
+
+
+</orm:entity-mappings>
