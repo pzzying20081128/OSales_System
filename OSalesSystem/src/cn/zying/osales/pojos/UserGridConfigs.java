@@ -22,7 +22,7 @@ public class UserGridConfigs {
 
     @Column(name = "module_name")
     private String moduleName ;
-    
+
     @Column(name = "module_key")
     private String moduleKey ;
 
@@ -61,8 +61,6 @@ public class UserGridConfigs {
     public void setId(Integer id) {
         this.id = id ;
     }
-
-   
 
     public String getColDataIndex() {
         return colDataIndex ;
@@ -135,8 +133,6 @@ public class UserGridConfigs {
     public void setSystemUserId(Integer systemUserId) {
         this.systemUserId = systemUserId ;
     }
-
-  
 
     public String getModuleKey() {
         return moduleKey ;

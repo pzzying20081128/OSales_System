@@ -33,6 +33,9 @@ public abstract class CommBean implements java.io.Serializable {
     //查询
     private List<Status> statuses ;
 
+    @Transient
+    private String _dc ;
+
     public Status getStatus() {
         return status ;
     }
@@ -55,6 +58,14 @@ public abstract class CommBean implements java.io.Serializable {
 
     public void setStatuses(List<Status> statuses) {
         this.statuses = statuses ;
+    }
+
+    public String get_dc() {
+        return _dc ;
+    }
+
+    public void set_dc(String _dc) {
+        this._dc = _dc ;
     }
 
 }

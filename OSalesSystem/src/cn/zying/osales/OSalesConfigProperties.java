@@ -2,12 +2,15 @@ package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
 
-   
+    //    退货类型
+
     public enum OptSum {
         add, del
     }
 
     //采购订单代号 CGSO
+
+    //采购退货单代号 CGTH
 
     //采购入库单CGRK 
 
@@ -17,11 +20,11 @@ public interface OSalesConfigProperties {
 
     // 单据简称
     public enum OrderSimpleName {
-        KSSC, CGSR, CGRK, CGSO
+        KSSC, CGSR, CGRK, CGSO, CGTH
     }
 
     public enum StockType {
-        采购订单, 直营采购订单
+        采购订单, 直营采购订单, 采购退货单, 直营采购退货单
     }
 
     public enum ProductInfoType {
@@ -37,7 +40,7 @@ public interface OSalesConfigProperties {
     }
 
     public enum ReturnType {
-        不确定, 开票前退货, 开票后退货, 全部
+        不确定, 开票前退货, 开票后退货
 
     }
 
@@ -57,10 +60,10 @@ public interface OSalesConfigProperties {
     public static int isDefault_0 = 0 ;
 
     public static int isDefault_all = -1 ;
-    
-    public static long  default_long_null = 0 ;
-    
-    public static int  default_int_null = 0 ;
+
+    public static long default_long_null = 0 ;
+
+    public static int default_int_null = 0 ;
 
     /////////////////// error///////////////////////////////////
     String USER_PASSWORD_ERROR = "用户名或密码错误" ;

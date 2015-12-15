@@ -5,12 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
-import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.SysGridConfigs ;
 import cn.zying.osales.service.baseinfo.ISysGridConfigsService ;
-import cn.zying.osales.units.search.bean.StoreInfoSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
-import cn.zying.osales.web.aop.IAopStoreInfoService ;
 
 @Component("SysPrintTemplateAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)

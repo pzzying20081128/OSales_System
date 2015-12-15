@@ -3,8 +3,6 @@ package cn.zying.osales.service.stocks.units ;
 import java.util.ArrayList ;
 import java.util.List ;
 
-import org.springframework.beans.factory.annotation.Autowired ;
-import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
@@ -12,10 +10,8 @@ import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.ToolsUnitsException ;
 import cn.zy.apps.tools.units.moneys.BuildMoneyFactory ;
 import cn.zy.apps.tools.units.moneys.IBuildMoneyFactory ;
-import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.OrderSimpleName ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
-import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.ProduceComBinedProduct ;
 import cn.zying.osales.pojos.ProductInfo ;
 import cn.zying.osales.pojos.ProviderInfo ;
@@ -32,8 +28,6 @@ import cn.zying.osales.units.BuildProductInfoUnit ;
 public class StockInStoreCreateUnits extends ABCommonsService {
 
     private static IBuildMoneyFactory buildMoneyFactory = BuildMoneyFactory.getBuildMoney() ;
-
-
 
     public StockInStore createStockInStore(ProduceComBinedProduct produceComBinedProduct) throws SystemOptServiceException {
 
@@ -56,10 +50,10 @@ public class StockInStoreCreateUnits extends ABCommonsService {
         stockInStore.setStockType(produceComBinedProduct.getStockOrder().getStockType()) ;
         List<StockInStoreDetail> stockInStoreDetails = new ArrayList<StockInStoreDetail>() ;
         stockInStore.setStockInStoreDetails(stockInStoreDetails) ;
-        
+
         StockInStoreDetail stockInStoreDetail = new StockInStoreDetail() ;
         stockInStoreDetails.add(stockInStoreDetail) ;
-        stockInStoreDetail.setOrderCount(produceComBinedProduct.getProduceCount());
+        stockInStoreDetail.setOrderCount(produceComBinedProduct.getProduceCount()) ;
         stockInStoreDetail.setNoTaxPrice(produceComBinedProduct.getStockOrderDetail().getNoTaxPrice()) ;
         stockInStoreDetail.setTaxPrice(produceComBinedProduct.getStockOrderDetail().getTaxPrice()) ;
         stockInStoreDetail.setTaxRate(produceComBinedProduct.getStockOrderDetail().getTaxRate()) ;
@@ -70,13 +64,13 @@ public class StockInStoreCreateUnits extends ABCommonsService {
         stockInStoreDetail.setOrderBox(BuildProductInfoUnit.createBoxCount(stockInStoreDetail.getOrderCount(), produceComBinedProduct.getProductInfo())) ;
         //        stockInStoreDetail.setProtectTime(protectTime);
         stockInStoreDetail.setStockInStore(stockInStore) ;
-        stockInStoreDetail.setStoreInfo(produceComBinedProduct.getStoreInfo());
-        stockInStoreDetail.setStorePosition(produceComBinedProduct.getStorePosition());
+        stockInStoreDetail.setStoreInfo(produceComBinedProduct.getStoreInfo()) ;
+        stockInStoreDetail.setStorePosition(produceComBinedProduct.getStorePosition()) ;
         stockInStoreDetail.setStockOrderDetail(produceComBinedProduct.getStockOrderDetail()) ;
-        
+
         //////////////////////////////////////////////////////////////////////////////////////////////////
-        stockInStore.setNoTaxSumMoney(stockInStoreDetail.getNoTaxMoney());
-        stockInStore.setTaxSumMoney(stockInStoreDetail.getTaxMoney());
+        stockInStore.setNoTaxSumMoney(stockInStoreDetail.getNoTaxMoney()) ;
+        stockInStore.setTaxSumMoney(stockInStoreDetail.getTaxMoney()) ;
         baseService.save(stockInStore) ;
         return stockInStore ;
     }
@@ -128,8 +122,8 @@ public class StockInStoreCreateUnits extends ABCommonsService {
                 stockInStoreDetail.setStorePosition(stockOrderDetail.getStorePosition()) ;
 
                 ToolsUnits.copyBeanProperties(stockInStoreDetail, stockOrderDetail, "noTaxMoney", "taxMoney", "noTaxPrice", "taxPrice", "orderBox", "orderCount", "taxRate") ;
-                
-                stockInStoreDetail.setOrderSum(stockInStoreDetail.getOrderCount());
+
+                stockInStoreDetail.setOrderSum(stockInStoreDetail.getOrderCount()) ;
 
             }
             baseService.save(stockInStore) ;
@@ -140,22 +134,22 @@ public class StockInStoreCreateUnits extends ABCommonsService {
             throw new SystemOptServiceException(e) ;
         }
 
-//        try {
-//
-//            StockInStore stockInStore = createStockInStore(stockOrder) ;
-//
-//            if (stockType.equals(StockType.直营采购订单)) {
-//                stockInStore.setCheckDate(DateToolsUilts.getnowDate()) ;
-//                stockInStore.setCheckMan(stockOrder.getCheckMan()) ;
-//                stockInStore.setStatus(Status.已审核) ;
-//                baseService.update(stockInStore) ;
-//
-//                stockStoreReceiveCreateUnits.createStockInStore(optType, stockType, stockInStore) ;
-//            }
-//
-//        } catch (Exception e) {
-//            throw new SystemOptServiceException(e) ;
-//        }
+        //        try {
+        //
+        //            StockInStore stockInStore = createStockInStore(stockOrder) ;
+        //
+        //            if (stockType.equals(StockType.直营采购订单)) {
+        //                stockInStore.setCheckDate(DateToolsUilts.getnowDate()) ;
+        //                stockInStore.setCheckMan(stockOrder.getCheckMan()) ;
+        //                stockInStore.setStatus(Status.已审核) ;
+        //                baseService.update(stockInStore) ;
+        //
+        //                stockStoreReceiveCreateUnits.createStockInStore(optType, stockType, stockInStore) ;
+        //            }
+        //
+        //        } catch (Exception e) {
+        //            throw new SystemOptServiceException(e) ;
+        //        }
     }
 
 }

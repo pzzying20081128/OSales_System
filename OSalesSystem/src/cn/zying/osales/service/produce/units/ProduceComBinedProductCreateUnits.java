@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
-import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.OrderSimpleName ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
-import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.CombinedProduct ;
 import cn.zying.osales.pojos.CombinedProductDetails ;
 import cn.zying.osales.pojos.ProduceComBinedProduct ;
@@ -48,7 +46,7 @@ public class ProduceComBinedProductCreateUnits extends ABCommonsService {
             produceComBinedProduct.setStoreInfoId(stockInStoreDetail.getStoreInfoId()) ;
             produceComBinedProduct.setStorePosition(stockInStoreDetail.getStorePosition()) ;
             produceComBinedProduct.setStorePositionId(stockInStoreDetail.getStorePositionId()) ;
-            produceComBinedProduct.setStockOrderDetail(stockInStoreDetail);
+            produceComBinedProduct.setStockOrderDetail(stockInStoreDetail) ;
 
             List<ProduceComBinedProductDetail> produceComBinationProducInfoDetails = new ArrayList<ProduceComBinedProductDetail>() ;
 

@@ -52,7 +52,7 @@ public class AopStockOrderService implements IAopStockOrderService {
 
     @Override
     public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder, int optUserId) throws SystemOptServiceException {
-        optStockOrder.setRecordManId(optUserId);
+        optStockOrder.setRecordManId(optUserId) ;
         return this.saveUpdate(optType, optStockOrder) ;
 
     }

@@ -6,14 +6,11 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.ProduceComBinedProduct ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
 import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.ProduceComBinedProductDetailSearchBean ;
-import cn.zying.osales.units.search.bean.ProduceComBinedProductSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopProduceComBinedProductDetailService ;
-import cn.zying.osales.web.aop.IAopProduceComBinedProductService ;
 
 @Component("ProduceComBinedProductDetailAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
@@ -96,7 +93,5 @@ public class ProduceComBinedProductDetailAction extends OSalesSystemABAction<Pro
     public void setSearchBean(ProduceComBinedProductDetailSearchBean searchBean) {
         this.searchBean = searchBean ;
     }
-
-  
 
 }

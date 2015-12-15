@@ -26,7 +26,7 @@ public class StockInStoreSearchUnits extends ABCommonsService {
      * @throws SystemOptServiceException
      */
     public List<StockInStore> searchByStockOrderId(Integer stockOrderId) throws SystemOptServiceException {
-        String sql = "select stockInStore   from StockInStore as  stockInStore   where stockInStore.stockOrderId  = " + stockOrderId  ;
+        String sql = "select stockInStore   from StockInStore as  stockInStore   where stockInStore.stockOrderId  = " + stockOrderId ;
         return baseService.findByHSQL(sql) ;
     }
 
@@ -59,7 +59,7 @@ public class StockInStoreSearchUnits extends ABCommonsService {
         String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
 
         String sql_ = sql + sqlWhere ;
-         Loggerfactory.print(sql_);
+        Loggerfactory.print(sql_) ;
         List<StockInStore> result = baseService.findByHSQL(sql_, value, startLimit) ;
 
         return result ;

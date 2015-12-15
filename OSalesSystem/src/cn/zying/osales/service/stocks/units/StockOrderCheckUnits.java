@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zy.apps.tools.units.DateToolsUilts ;
-import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
@@ -77,7 +76,7 @@ public class StockOrderCheckUnits extends ABCommonsService {
         case 普通产品: {
 
             List<StockInStore> stockInStore = stockInStoreSearchUnits.searchByStockOrderId(stockOrder.getId()) ;
-            if (stockInStore != null ) stockInStoreCheckUnits.cancelCheckDel(stockInStore, checkManId) ;
+            if (stockInStore != null) stockInStoreCheckUnits.cancelCheckDel(stockInStore, checkManId) ;
             stockOrder.setStatus(Status.有效) ;
             stockOrder.setCheckMan(null) ;
             stockOrder.setCheckDate(null) ;

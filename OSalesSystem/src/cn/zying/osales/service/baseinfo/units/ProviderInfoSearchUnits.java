@@ -10,7 +10,6 @@ import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.PaymentMethod ;
-import cn.zying.osales.OSalesConfigProperties.ReturnType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.service.ABCommonsService ;
@@ -128,9 +127,9 @@ public class ProviderInfoSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "  and    providerInfo.paymentMethod  like '%" + searchBean.getPaymentMethod() + "%' " ;
         }
 
-        if (searchBean.getReturnType() != null && !searchBean.getReturnType().equals(ReturnType.全部)) {
-            sqlWhere = sqlWhere + "  and    providerInfo.returnType  like '%" + searchBean.getReturnType() + "%' " ;
-        }
+        //        if (searchBean.getReturnType() != null && !searchBean.getReturnType().equals(ReturnType.全部)) {
+        //            sqlWhere = sqlWhere + "  and    providerInfo.returnType  like '%" + searchBean.getReturnType() + "%' " ;
+        //        }
 
         if (searchBean.getSettleTime() != null) {
             sqlWhere = sqlWhere + "  and    providerInfo.settleTime = " + searchBean.getSettleTime() ;

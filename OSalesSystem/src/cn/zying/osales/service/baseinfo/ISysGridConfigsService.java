@@ -16,7 +16,7 @@ public interface ISysGridConfigsService {
 
     public List<SysGridConfigs> search(String name, int... startSize) throws SystemOptServiceException ;
 
-    public SelectPage<SysGridConfigs> search(String moduleKey,CommSearchBean commSearchBean) throws SystemOptServiceException ;
+    public SelectPage<SysGridConfigs> search(String moduleKey, CommSearchBean commSearchBean) throws SystemOptServiceException ;
 
     public SysGridConfigs saveUpdate(OptType optype, SysGridConfigs sysGridConfigs) throws SystemOptServiceException ;
 

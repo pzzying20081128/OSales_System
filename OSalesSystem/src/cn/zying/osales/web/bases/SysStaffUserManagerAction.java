@@ -129,7 +129,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
     }
 
     private String module_name ;
-    
+
     private String module_key ;
 
     private String data_indexs ;
@@ -150,7 +150,7 @@ public class SysStaffUserManagerAction extends OSalesSystemABAction<SysStaffUser
 
         Integer user_actor = this.getOSalsesLoginUserId() ;
         try {
-            systemGridColConfigService.saveUserGridConfigs(module_name,module_key, data_indexs, col_names, col_hiddens, col_widths, col_indexs, user_actor) ;
+            systemGridColConfigService.saveUserGridConfigs(module_name, module_key, data_indexs, col_names, col_hiddens, col_widths, col_indexs, user_actor) ;
         } catch (Exception e) {
             this.msg = handError(e) ;
             this.success = false ;

@@ -1,10 +1,7 @@
 package cn.zying.osales.pojos ;
 
 import javax.persistence.Column ;
-
-import javax.persistence.Basic ;
 import javax.persistence.Entity ;
-import javax.persistence.FetchType ;
 import javax.persistence.GeneratedValue ;
 import javax.persistence.GenerationType ;
 import javax.persistence.Id ;
@@ -26,7 +23,7 @@ public class SysPrintTemplate {
 
     @Lob
     @Column(name = "template")
-//    @Basic(fetch=FetchType.LAZY)
+    //    @Basic(fetch=FetchType.LAZY)
     private String template ;
 
     @Transient
@@ -53,41 +50,41 @@ public class SysPrintTemplate {
     @Column(name = "head_heigth")
     private Integer headHeigth ;
 
-//    @Column(name = "body_top")
-//    private Integer bodyTop ;
-//
-//    @Column(name = "body_left")
-//    private Integer bodyLeft ;
-//
-//    @Column(name = "body_width")
-//    private Integer bodyWidth ;
-//
-//    @Column(name = "body_heigth")
-//    private Integer bodyHeigth ;
-//
-//    @Column(name = "bottom_top")
-//    private Integer bottomTop ;
-//
-//    @Column(name = "bottom_left")
-//    private Integer bottomLeft ;
-//
-//    @Column(name = "bottom_width")
-//    private Integer bottomWidth ;
-//
-//    @Column(name = "bottom_heigth")
-//    private Integer bottomHeigth ;
+    //    @Column(name = "body_top")
+    //    private Integer bodyTop ;
+    //
+    //    @Column(name = "body_left")
+    //    private Integer bodyLeft ;
+    //
+    //    @Column(name = "body_width")
+    //    private Integer bodyWidth ;
+    //
+    //    @Column(name = "body_heigth")
+    //    private Integer bodyHeigth ;
+    //
+    //    @Column(name = "bottom_top")
+    //    private Integer bottomTop ;
+    //
+    //    @Column(name = "bottom_left")
+    //    private Integer bottomLeft ;
+    //
+    //    @Column(name = "bottom_width")
+    //    private Integer bottomWidth ;
+    //
+    //    @Column(name = "bottom_heigth")
+    //    private Integer bottomHeigth ;
 
-//    /**
-//     * 每一页 打印行数
-//     */
-//    @Column(name = "each_page_print_row")
-//    private Integer eachPagePrintRow ;
+    //    /**
+    //     * 每一页 打印行数
+    //     */
+    //    @Column(name = "each_page_print_row")
+    //    private Integer eachPagePrintRow ;
 
     /**
-//     * 每一页 打印xu号
-//     */
-//    @Column(name = "each_page_print_xhao")
-//    private Integer printXhao = SystemPopertiesConfigs.is_print_row_n ;
+    //     * 每一页 打印xu号
+    //     */
+    //    @Column(name = "each_page_print_xhao")
+    //    private Integer printXhao = SystemPopertiesConfigs.is_print_row_n ;
 
     public Integer getId() {
         return id ;
@@ -177,84 +174,84 @@ public class SysPrintTemplate {
         this.headHeigth = headHeigth ;
     }
 
-//    public Integer getBodyTop() {
-//        return bodyTop ;
-//    }
-//
-//    public void setBodyTop(Integer bodyTop) {
-//        this.bodyTop = bodyTop ;
-//    }
-//
-//    public Integer getBodyLeft() {
-//        return bodyLeft ;
-//    }
-//
-//    public void setBodyLeft(Integer bodyLeft) {
-//        this.bodyLeft = bodyLeft ;
-//    }
-//
-//    public Integer getBodyWidth() {
-//        return bodyWidth ;
-//    }
-//
-//    public void setBodyWidth(Integer bodyWidth) {
-//        this.bodyWidth = bodyWidth ;
-//    }
-//
-//    public Integer getBodyHeigth() {
-//        return bodyHeigth ;
-//    }
-//
-//    public void setBodyHeigth(Integer bodyHeigth) {
-//        this.bodyHeigth = bodyHeigth ;
-//    }
-//
-//    public Integer getBottomTop() {
-//        return bottomTop ;
-//    }
-//
-//    public void setBottomTop(Integer bottomTop) {
-//        this.bottomTop = bottomTop ;
-//    }
-//
-//    public Integer getBottomLeft() {
-//        return bottomLeft ;
-//    }
-//
-//    public void setBottomLeft(Integer bottomLeft) {
-//        this.bottomLeft = bottomLeft ;
-//    }
-//
-//    public Integer getBottomWidth() {
-//        return bottomWidth ;
-//    }
-//
-//    public void setBottomWidth(Integer bottomWidth) {
-//        this.bottomWidth = bottomWidth ;
-//    }
-//
-//    public Integer getBottomHeigth() {
-//        return bottomHeigth ;
-//    }
-//
-//    public void setBottomHeigth(Integer bottomHeigth) {
-//        this.bottomHeigth = bottomHeigth ;
-//    }
-//
-//    public Integer getEachPagePrintRow() {
-//        return eachPagePrintRow ;
-//    }
-//
-//    public void setEachPagePrintRow(Integer eachPagePrintRow) {
-//        this.eachPagePrintRow = eachPagePrintRow ;
-//    }
-//
-//    public Integer getPrintXhao() {
-//        return printXhao ;
-//    }
-//
-//    public void setPrintXhao(Integer printXhao) {
-//        this.printXhao = printXhao ;
-//    }
+    //    public Integer getBodyTop() {
+    //        return bodyTop ;
+    //    }
+    //
+    //    public void setBodyTop(Integer bodyTop) {
+    //        this.bodyTop = bodyTop ;
+    //    }
+    //
+    //    public Integer getBodyLeft() {
+    //        return bodyLeft ;
+    //    }
+    //
+    //    public void setBodyLeft(Integer bodyLeft) {
+    //        this.bodyLeft = bodyLeft ;
+    //    }
+    //
+    //    public Integer getBodyWidth() {
+    //        return bodyWidth ;
+    //    }
+    //
+    //    public void setBodyWidth(Integer bodyWidth) {
+    //        this.bodyWidth = bodyWidth ;
+    //    }
+    //
+    //    public Integer getBodyHeigth() {
+    //        return bodyHeigth ;
+    //    }
+    //
+    //    public void setBodyHeigth(Integer bodyHeigth) {
+    //        this.bodyHeigth = bodyHeigth ;
+    //    }
+    //
+    //    public Integer getBottomTop() {
+    //        return bottomTop ;
+    //    }
+    //
+    //    public void setBottomTop(Integer bottomTop) {
+    //        this.bottomTop = bottomTop ;
+    //    }
+    //
+    //    public Integer getBottomLeft() {
+    //        return bottomLeft ;
+    //    }
+    //
+    //    public void setBottomLeft(Integer bottomLeft) {
+    //        this.bottomLeft = bottomLeft ;
+    //    }
+    //
+    //    public Integer getBottomWidth() {
+    //        return bottomWidth ;
+    //    }
+    //
+    //    public void setBottomWidth(Integer bottomWidth) {
+    //        this.bottomWidth = bottomWidth ;
+    //    }
+    //
+    //    public Integer getBottomHeigth() {
+    //        return bottomHeigth ;
+    //    }
+    //
+    //    public void setBottomHeigth(Integer bottomHeigth) {
+    //        this.bottomHeigth = bottomHeigth ;
+    //    }
+    //
+    //    public Integer getEachPagePrintRow() {
+    //        return eachPagePrintRow ;
+    //    }
+    //
+    //    public void setEachPagePrintRow(Integer eachPagePrintRow) {
+    //        this.eachPagePrintRow = eachPagePrintRow ;
+    //    }
+    //
+    //    public Integer getPrintXhao() {
+    //        return printXhao ;
+    //    }
+    //
+    //    public void setPrintXhao(Integer printXhao) {
+    //        this.printXhao = printXhao ;
+    //    }
 
 }

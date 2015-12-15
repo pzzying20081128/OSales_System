@@ -66,9 +66,9 @@ public class StockInStoreDetailSearchUnits extends ABCommonsService {
 
     private String createWhere(Map<String, Object> value, StockInStoreDetailSearchBean searchBean, CommSearchBean commSearchBean) {
         String sqlWhere = "  where  stockInStoreDetail.stockInStoreId = " + searchBean.getStockInStoreId() ;
-        if( searchBean.getProductInfoIds() !=null &&  searchBean.getProductInfoIds().size() >0 ){
-            sqlWhere =sqlWhere+"   and   stockInStoreDetail.productInfoId in(:productInfoId)  ";
-            value.put("productInfoId", searchBean.getProductInfoIds());
+        if (searchBean.getProductInfoIds() != null && searchBean.getProductInfoIds().size() > 0) {
+            sqlWhere = sqlWhere + "   and   stockInStoreDetail.productInfoId in(:productInfoId)  " ;
+            value.put("productInfoId", searchBean.getProductInfoIds()) ;
         }
         return sqlWhere ;
     }

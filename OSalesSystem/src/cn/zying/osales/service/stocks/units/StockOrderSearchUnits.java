@@ -66,46 +66,46 @@ public class StockOrderSearchUnits extends ABCommonsService {
     }
 
     private String createWhere(Map<String, Object> value, StockOrderSearchBean searchBean, CommSearchBean commSearchBean) {
-        String sqlWhere = " where    stockOrder.status  !='" + Status.初始化 + "'  ";
+        String sqlWhere = " where    stockOrder.status  !='" + Status.初始化 + "'  " ;
         if (searchBean.getStatus() == null || searchBean.getStatus().equals(Status.全部)) {
             sqlWhere = sqlWhere + "  and  stockOrder.status  !='" + Status.有效 + "'  " ;
         } else {
             sqlWhere = sqlWhere + "  and  stockOrder.status  ='" + searchBean.getStatus() + "'  " ;
         }
-        
-        if(searchBean.getStockTypes()  !=null  &&   searchBean.getStockTypes().size() >0     ){
+
+        if (searchBean.getStockTypes() != null && searchBean.getStockTypes().size() > 0) {
             sqlWhere = sqlWhere + "  and  stockOrder.stockType  in (:stockType)" ;
-            value.put("stockType", searchBean.getStockTypes());
+            value.put("stockType", searchBean.getStockTypes()) ;
         }
-        
-        if(searchBean.getStockProductTypes() !=null  &&  searchBean.getStockProductTypes().size() >0     ){
+
+        if (searchBean.getStockProductTypes() != null && searchBean.getStockProductTypes().size() > 0) {
             sqlWhere = sqlWhere + "  and  stockOrder.stockProductType  in (:getStockProductTypes)" ;
-            value.put("getStockProductTypes", searchBean.getStockProductTypes());
+            value.put("getStockProductTypes", searchBean.getStockProductTypes()) ;
         }
-        
-        if( ToolsUnits.isNOtNulll(searchBean.getNumber())){
+
+        if (ToolsUnits.isNOtNulll(searchBean.getNumber())) {
             sqlWhere = sqlWhere + "  and  stockOrder.number  like  (%:number%)" ;
-            value.put("number", searchBean.getNumber());
+            value.put("number", searchBean.getNumber()) ;
         }
-        
-        if( ToolsUnits.isNOtNulll(searchBean.getText())){
+
+        if (ToolsUnits.isNOtNulll(searchBean.getText())) {
             sqlWhere = sqlWhere + "  and  stockOrder.text  like  (%:getText%)" ;
-            value.put("getText", searchBean.getText());
+            value.put("getText", searchBean.getText()) ;
         }
-        
-        if(searchBean.getProviderInfoIds()!=null  &&  searchBean.getProviderInfoIds().size() >0     ){
+
+        if (searchBean.getProviderInfoIds() != null && searchBean.getProviderInfoIds().size() > 0) {
             sqlWhere = sqlWhere + "  and  stockOrder.providerInfoId  in (:getProviderInfoIds)" ;
-            value.put("getProviderInfoIds", searchBean.getProviderInfoIds());
+            value.put("getProviderInfoIds", searchBean.getProviderInfoIds()) ;
         }
-        
-        if( searchBean.getStartTime()!=null ){
+
+        if (searchBean.getStartTime() != null) {
             sqlWhere = sqlWhere + "  and  stockOrder.orderDate  >=  (:getStartTime)" ;
-            value.put("getStartTime", searchBean.getStartTime());
+            value.put("getStartTime", searchBean.getStartTime()) ;
         }
-        
-        if( searchBean.getEndTime()!=null ){
+
+        if (searchBean.getEndTime() != null) {
             sqlWhere = sqlWhere + "  and  stockOrder.orderDate  <=  (:getEndTime)" ;
-            value.put("getEndTime", searchBean.getEndTime());
+            value.put("getEndTime", searchBean.getEndTime()) ;
         }
 
         return sqlWhere ;

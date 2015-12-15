@@ -61,7 +61,7 @@ public class SystemGridColConfigService extends ABCommonsService implements ISys
             ugh.setSystemUser(systemUser) ;
             baseService.save(ugh) ;
             SysGridConfigs sysGridConfig = SysGridConfigsServiceImple.init(ugh) ;
-            sysGridConfig.setColIndex(i);
+            sysGridConfig.setColIndex(i) ;
             sysGridConfigs.add(sysGridConfig) ;
         }
         sysGridConfigsService.addUpdate(module_key, sysGridConfigs) ;

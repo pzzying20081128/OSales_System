@@ -1,10 +1,10 @@
 function stock_order_detail_update_windows(moduleId, moduleName, params) {
 
-	var grid = params.grid.getGrid();
+	var detailGrid = params.grid.getGrid();
 
-	var orderGrid = params.orderGrid;
+	var mainGrid = params.mainGrid;
 
-	var selection_rows = grid.getSelectionModel().getSelections();
+	var selection_rows = detailGrid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
 		showErrorMsg('提示信息', '请选择要编辑的数据记录！！');
@@ -15,7 +15,7 @@ function stock_order_detail_update_windows(moduleId, moduleName, params) {
 		showErrorMsg('提示信息', '编辑只能选择一行数据记录！！');
 		return false;
 	}
-	
+
 	var selectId = selection_rows[0].id;
 	// /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -312,7 +312,8 @@ function stock_order_detail_update_windows(moduleId, moduleName, params) {
 	var stock_order_detail_params = {
 		title : "编辑" + moduleName,
 		action : "update",
-		grid : grid,
+		grid : detailGrid,
+		mainGrid : mainGrid,
 		// 结果路径
 		pojo : "result",
 		// url

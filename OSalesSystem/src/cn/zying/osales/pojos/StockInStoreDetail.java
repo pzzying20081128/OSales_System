@@ -34,7 +34,7 @@ public class StockInStoreDetail extends StockDetailCommBean {
 
     @Column(name = "stock_order_detail_Id", insertable = false, updatable = false)
     private Integer stockOrderDetailId ;
-    
+
     // 要接受单总数
     @Column(name = "order_sum")
     private Integer orderSum ;

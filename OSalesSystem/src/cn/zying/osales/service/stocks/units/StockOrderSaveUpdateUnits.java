@@ -1,7 +1,5 @@
 package cn.zying.osales.service.stocks.units ;
 
-import org.springframework.beans.factory.annotation.Autowired ;
-import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
@@ -17,8 +15,6 @@ import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.storage.IInStoreProductInfoStockService ;
-import cn.zying.osales.storage.IInStoreProductInfoStockService.StoreOptType ;
 
 @Component("StockOrderSaveUpdateUnits")
 public class StockOrderSaveUpdateUnits extends ABCommonsService {
@@ -134,7 +130,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
             initOrder(optStockOrder) ;
 
-            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "number", "stockType", "providerInfo", "stockMan", "stockDate","stockProductType","remarks","text","recordMan") ;
+            ToolsUnits.copyBeanProperties(stockOrder, optStockOrder, "orderDate", "number", "stockType", "providerInfo", "stockMan", "stockDate", "stockProductType", "remarks", "text", "recordMan") ;
 
             baseService.update(stockOrder) ;
 

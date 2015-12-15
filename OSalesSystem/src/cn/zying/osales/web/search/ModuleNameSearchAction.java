@@ -2,7 +2,6 @@ package cn.zying.osales.web.search ;
 
 import java.util.ArrayList ;
 import java.util.List ;
-import java.util.Map ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
@@ -12,7 +11,6 @@ import cn.zy.apps.tools.web.SearchUserPowerAction ;
 import cn.zying.osales.pojos.SysGridConfigs ;
 import cn.zying.osales.service.baseinfo.ISysGridConfigsService ;
 import cn.zying.osales.units.search.bean.CombSearchBean ;
-
 
 @Component("ModuleNameSearchAction")
 @org.springframework.context.annotation.Scope(SearchUserPowerAction.Scope)

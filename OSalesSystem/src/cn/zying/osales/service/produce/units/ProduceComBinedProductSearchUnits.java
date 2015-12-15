@@ -38,7 +38,6 @@ public class ProduceComBinedProductSearchUnits extends ABCommonsService {
     }
 
     public List<ProduceComBinedProduct> list(OptType optType, ProduceComBinedProductSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-        
 
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
 

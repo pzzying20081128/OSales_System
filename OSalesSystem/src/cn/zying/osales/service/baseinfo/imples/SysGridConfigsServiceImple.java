@@ -96,7 +96,7 @@ public class SysGridConfigsServiceImple extends ABCommonsService implements ISys
 
         String sql = "select  sysGridConfigs  from  SysGridConfigs as sysGridConfigs  where sysGridConfigs.moduleKey like (:moduleKey)   " +
 
-        "   order by case when  sysGridConfigs."+commSearchBean.getSort()+"  is  NULL   then 0 else 1 end desc,   sysGridConfigs."+commSearchBean.getSort() +"   "+commSearchBean.getDir() ;
+        "   order by case when  sysGridConfigs." + commSearchBean.getSort() + "  is  NULL   then 0 else 1 end desc,   sysGridConfigs." + commSearchBean.getSort() + "   " + commSearchBean.getDir() ;
 
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
         if (ToolsUnits.isNOtNulll(name)) value.put("moduleKey", "%" + moduleKey + "%") ;

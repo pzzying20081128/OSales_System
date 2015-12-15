@@ -51,9 +51,9 @@ public class CommOrderBean extends CommBean {
     @Column(name = "record_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "录入人")
     private Integer recordManId ;
-    
+
     @Transient
-    private List<Integer> recordManIds;
+    private List<Integer> recordManIds ;
 
     @Column(name = "record_date")
     @Temporal(TemporalType.DATE)
@@ -71,12 +71,13 @@ public class CommOrderBean extends CommBean {
     @Column(name = "create_time")
     @Temporal(TemporalType.DATE)
     private Date createTime = DateToolsUilts.getnowDate() ;
-    
-    
+
     @Transient
-    private Date startTime;
+    private Date startTime ;
+
     @Transient
-    private Date endTime;
+    private Date endTime ;
+
     public String getRemarks() {
         return remarks ;
     }

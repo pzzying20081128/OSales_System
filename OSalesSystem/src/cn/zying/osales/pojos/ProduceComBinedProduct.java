@@ -94,11 +94,10 @@ public class ProduceComBinedProduct extends CommOrderBean implements java.io.Ser
     @Column(name = "stock_order_id", insertable = false, updatable = false)
     @FieldDesc(name = "采购单")
     private Integer stockOrderId ;
-    
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_order_detail_id")
-    @FieldDesc(name = "采购明细",isShow=false)
+    @FieldDesc(name = "采购明细", isShow = false)
     private StockOrderDetail stockOrderDetail ;
 
     @Column(name = "stock_order_detail_id", insertable = false, updatable = false)

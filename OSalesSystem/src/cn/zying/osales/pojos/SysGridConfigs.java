@@ -5,7 +5,6 @@ import javax.persistence.Entity ;
 import javax.persistence.GeneratedValue ;
 import javax.persistence.GenerationType ;
 import javax.persistence.Id ;
-import javax.persistence.Index ;
 import javax.persistence.Table ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
@@ -20,9 +19,9 @@ public class SysGridConfigs {
     private Integer id ;
 
     @Column(name = "module_name")
-//    @FieldDesc(name="")
+    //    @FieldDesc(name="")
     private String moduleName ;
-    
+
     @Column(name = "module_key")
     private String moduleKey ;
 
@@ -41,8 +40,6 @@ public class SysGridConfigs {
     @Column(name = "column_index")
     @FieldDesc(name = "排序")
     private Integer colIndex ;
-
-   
 
     @Column(name = "is_print")
     @FieldDesc(name = "是否打印")
@@ -71,8 +68,6 @@ public class SysGridConfigs {
     //
     //    @Transient
     //    private int excelAlign ;
-    
-    
 
     public Integer getId() {
         return id ;
@@ -114,7 +109,6 @@ public class SysGridConfigs {
         this.colName = colName ;
     }
 
-  
     public Integer getIsPrint() {
         return isPrint ;
     }

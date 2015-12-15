@@ -1,5 +1,5 @@
 WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
-defaultDestination=/media/truecrypt7/tools/wwwww/erp/apache-tomcat-7.0.62_dev/webapps/sales
+defaultDestination=/media/you/temp/erp-tomcat-7.0.62/webapps/sales
 defaultVariables=
 eclipse.preferences.version=1
 includeTeamPrivateFiles=false

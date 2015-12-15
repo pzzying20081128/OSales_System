@@ -27,21 +27,21 @@ public class ProduceComBinedProductDetail implements java.io.Serializable {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productInfo_id")
-    @FieldDesc(name="产品",mapping="productInfo.name")
+    @FieldDesc(name = "产品", mapping = "productInfo.name")
     private ProductInfo productInfo ;
 
     @Column(name = "productInfo_id", insertable = false, updatable = false)
-    @FieldDesc(name="产品")
+    @FieldDesc(name = "产品")
     private Integer productInfoId ;
 
     // 需要单位产品数量
     @Column(name = "unit_quantity")
-    @FieldDesc(name="单位产品数量")
+    @FieldDesc(name = "单位产品数量")
     private Integer needunitQuantity ;
 
     // 需要的产品数量
     @Column(name = "productInfo_quantity")
-    @FieldDesc(name="需要的产品数量")
+    @FieldDesc(name = "需要的产品数量")
     private Integer productInfoQuantity ;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,26 +54,26 @@ public class ProduceComBinedProductDetail implements java.io.Serializable {
     // 仓库
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
-    @FieldDesc(name="出库仓库",mapping="storeInfo.name")
+    @FieldDesc(name = "出库仓库", mapping = "storeInfo.name")
     private StoreInfo storeInfo ;
 
     @Column(name = "store_id", insertable = false, updatable = false)
-    @FieldDesc(name="出库仓库")
+    @FieldDesc(name = "出库仓库")
     private Integer storeInfoId ;
 
     // 存放区
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_position_id")
-    @FieldDesc(name="出库仓位" ,mapping="storePosition.name")
+    @FieldDesc(name = "出库仓位", mapping = "storePosition.name")
     private StorePosition storePosition ;
 
     @Column(name = "store_position_id", insertable = false, updatable = false)
-    @FieldDesc(name="出库仓位")
+    @FieldDesc(name = "出库仓位")
     private Integer storePositionId ;
 
     // 备注
     @Column(name = "text")
-    @FieldDesc(name=" 备注")
+    @FieldDesc(name = " 备注")
     private String text ;
 
     public Integer getId() {

@@ -1,6 +1,5 @@
 package cn.zying.osales.pojos.commons ;
 
-import java.util.Date ;
 import java.util.List ;
 
 import javax.persistence.Column ;
@@ -8,8 +7,6 @@ import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.MappedSuperclass ;
-import javax.persistence.Temporal ;
-import javax.persistence.TemporalType ;
 import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;

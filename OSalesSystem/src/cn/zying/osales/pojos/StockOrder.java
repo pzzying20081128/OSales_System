@@ -42,9 +42,9 @@ public class StockOrder extends StockCommBean implements java.io.Serializable {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "采购类型", desc = { "普通产品:普通产品", "组合产品:组合产品" })
     private ProductInfoType stockProductType ;
-    
+
     @Transient
-    private List<ProductInfoType> stockProductTypes;
+    private List<ProductInfoType> stockProductTypes ;
 
     //	// 合同
     //	@ManyToOne(fetch = FetchType.LAZY)

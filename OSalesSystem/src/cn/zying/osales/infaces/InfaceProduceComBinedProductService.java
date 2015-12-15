@@ -23,7 +23,7 @@ public interface InfaceProduceComBinedProductService {
     public ProduceComBinedProduct remove(OptType optType, ProduceComBinedProduct optProduceComBinedProduct) throws SystemOptServiceException ;
 
     public ProduceComBinedProduct get(Integer id) throws SystemOptServiceException ;
-    
-    public  void check(Integer uuid, Integer oSalsesLoginUserId) throws SystemOptServiceException ;
+
+    public void check(Integer uuid, Integer oSalsesLoginUserId) throws SystemOptServiceException ;
 
 }

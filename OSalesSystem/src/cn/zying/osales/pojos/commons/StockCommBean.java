@@ -27,7 +27,7 @@ public class StockCommBean extends CommOrderBean {
     @Column(name = "provider_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "供应商")
     private Integer providerInfoId ;
-    
+
     @Column(name = "tax_sum_money")
     @FieldDesc(name = "含税总金额", isShow = false)
     private Long taxSumMoney ;

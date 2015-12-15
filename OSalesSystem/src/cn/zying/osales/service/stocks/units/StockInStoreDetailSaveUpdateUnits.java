@@ -41,18 +41,16 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
     public StockInStoreDetail update(StockInStoreDetail optStockInStoreDetail) throws SystemOptServiceException {
 
-      
-
         try {
-//            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney"
-//
-//            , "noTaxPrice", "orderBox", "orderCount", "productInfo", "taxMoney", "taxPrice", "taxRate", "text") ;
-            
-            StockInStoreDetail stockInStoreDetail = baseService.get(optStockInStoreDetail.getId(), StockInStoreDetail.class) ;
-            
-            switchObjects(stockInStoreDetail , optStockInStoreDetail) ;
+            //            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney"
+            //
+            //            , "noTaxPrice", "orderBox", "orderCount", "productInfo", "taxMoney", "taxPrice", "taxRate", "text") ;
 
-            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney" ,  "orderBox", "orderCount", "productInfo", "taxMoney",  "text") ;
+            StockInStoreDetail stockInStoreDetail = baseService.get(optStockInStoreDetail.getId(), StockInStoreDetail.class) ;
+
+            switchObjects(stockInStoreDetail, optStockInStoreDetail) ;
+
+            ToolsUnits.copyBeanProperties(stockInStoreDetail, optStockInStoreDetail, "noTaxMoney", "orderBox", "orderCount", "productInfo", "taxMoney", "text") ;
 
             baseService.update(stockInStoreDetail) ;
 
@@ -66,11 +64,11 @@ public class StockInStoreDetailSaveUpdateUnits extends ABCommonsService {
 
     }
 
-    private void switchObjects( StockInStoreDetail stockInStoreDetailOld  , StockInStoreDetail stockInStoreDetail) {
-        
-        int x = stockInStoreDetail.getId();
-        
-        StockInStoreDetail stockInStoreDetail_ = stockInStoreDetailOld;
+    private void switchObjects(StockInStoreDetail stockInStoreDetailOld, StockInStoreDetail stockInStoreDetail) {
+
+        int x = stockInStoreDetail.getId() ;
+
+        StockInStoreDetail stockInStoreDetail_ = stockInStoreDetailOld ;
 
         Integer productInfoId = stockInStoreDetail_.getProductInfoId() ;
 

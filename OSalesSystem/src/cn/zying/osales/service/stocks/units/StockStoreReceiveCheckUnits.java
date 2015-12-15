@@ -14,7 +14,7 @@ import cn.zying.osales.service.SystemOptServiceException ;
 public class StockStoreReceiveCheckUnits extends ABCommonsService {
 
     public void cancelCheckDel(StockStoreReceive stockStoreReceive, Integer optUserId) throws SystemOptServiceException {
-        if(stockStoreReceive==null) return ;
+        if (stockStoreReceive == null) return ;
         if (stockStoreReceive.getStockType().equals(StockType.直营采购订单)) {
             baseService.remove(stockStoreReceive) ;
         } else if (stockStoreReceive.getStockType().equals(StockType.采购订单)) {

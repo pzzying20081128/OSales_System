@@ -20,8 +20,8 @@ import cn.zying.osales.units.search.bean.StockStoreReceiveSearchBean ;
 public class StockStoreReceiveSearchUnits extends ABCommonsService {
 
     public StockStoreReceive searchByStockInStoreId(Integer stockInStoreId) throws SystemOptServiceException {
-                String sql ="select  stockStoreReceive    from  StockStoreReceive  as  stockStoreReceive   where stockStoreReceive.stockInStoreId = "+stockInStoreId;
-                return baseService.findSinglenessByHSQL(sql);
+        String sql = "select  stockStoreReceive    from  StockStoreReceive  as  stockStoreReceive   where stockStoreReceive.stockInStoreId = " + stockInStoreId ;
+        return baseService.findSinglenessByHSQL(sql) ;
     }
 
     public SelectPage<StockStoreReceive> search(OptType optType, StockStoreReceiveSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
@@ -111,7 +111,7 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.providerInfoId  in (:providerInfoIds)" ;
             value.put("providerInfoIds", providerInfoIds) ;
         }
-        
+
         List<Integer> productInfoIds = ToolsUnits.filterNULL(searchBean.getProductInfoIds()) ;
         if (productInfoIds != null && productInfoIds.size() > 0) {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.providerInfoId  in (:productInfoIds)" ;
@@ -123,13 +123,13 @@ public class StockStoreReceiveSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.stockType in ( :stockTypes )" ;
             value.put("stockTypes", searchBean.getStockTypes()) ;
         }
-        
-        if(searchBean.getStartTime() !=null){
+
+        if (searchBean.getStartTime() != null) {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.createTime >= :getStartTime" ;
             value.put("getStartTime", searchBean.getStartTime()) ;
         }
-        
-        if(searchBean.getEndTime() !=null){
+
+        if (searchBean.getEndTime() != null) {
             sqlWhere = sqlWhere + "   and  stockStoreReceive.createTime <= :getEndTime" ;
             value.put("getEndTime", searchBean.getEndTime()) ;
         }

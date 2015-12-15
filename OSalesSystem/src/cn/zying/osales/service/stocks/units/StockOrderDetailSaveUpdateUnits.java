@@ -15,7 +15,6 @@ import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.storage.IInStoreProductInfoStockService ;
 import cn.zying.osales.storage.IInStoreProductInfoStockService.StoreOptType ;
 
 @Component("StockOrderDetailSaveUpdateUnits")
@@ -23,8 +22,6 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
     @Autowired
     @Qualifier("StockOrderSaveUpdateUnits")
     private StockOrderSaveUpdateUnits stockOrderSaveUpdateUnits ;
-    
-
 
     public StockOrderDetail saveUpdate(OptType optType, StockOrderDetail optStockOrderDetail) throws SystemOptServiceException {
 
@@ -87,7 +84,7 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         switchObject(optStockOrderDetail) ;
         baseService.save(optStockOrderDetail) ;
         stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, optStockOrderDetail, OptSum.add) ;
-        storeProductInfoStockService.inStore(StoreOptType.SaveAdd, optStockOrderDetail);
+        storeProductInfoStockService.inStore(StoreOptType.SaveAdd, optStockOrderDetail) ;
         return optStockOrderDetail ;
     }
 
@@ -122,8 +119,8 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
         switchObject(optStockOrderDetail) ;
 
         StockOrderDetail stockOrderDetail = baseService.get(optStockOrderDetail.getId(), StockOrderDetail.class) ;
-        
-        storeProductInfoStockService.inStore(StoreOptType.Del, stockOrderDetail);
+
+        storeProductInfoStockService.inStore(StoreOptType.Del, stockOrderDetail) ;
 
         StockOrder stockOrder = baseService.load(stockOrderDetail.getStockOrderId(), StockOrder.class) ;
 
@@ -137,8 +134,8 @@ public class StockOrderDetailSaveUpdateUnits extends ABCommonsService {
             baseService.update(stockOrderDetail) ;
 
             stockOrderSaveUpdateUnits.updateSumMoney(stockOrder, stockOrderDetail, OptSum.add) ;
-            
-            storeProductInfoStockService.inStore(StoreOptType.UpdateAdd, stockOrderDetail);
+
+            storeProductInfoStockService.inStore(StoreOptType.UpdateAdd, stockOrderDetail) ;
 
             return stockOrderDetail ;
         } catch (ToolsUnitsException e) {

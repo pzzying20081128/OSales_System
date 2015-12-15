@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
-import cn.zying.osales.OSalesConfigProperties ;
-import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -63,21 +61,21 @@ public class StockInStoreCheckUnits extends ABCommonsService {
                     else
                         number = number + "," + stockInStore.getNumber() ;
                 } else {
-//                    baseService.remove(stockInStore) ;
+                    //                    baseService.remove(stockInStore) ;
                 }
             }
         }
-        if(number!=null)throw new SystemOptServiceException("采购入库单["+number+"]已经审核");
-        else{
-            String del ="delete  from  StockInStore  as  stockInStore  where stockInStore in (:stockInStore) ";
-            
-            String del1 ="delete  from  StockInStoreDetail  as  stockInStoreDetail  where stockInStoreDetail.stockInStore in (:stockInStore) ";
-            
-            Map<String, Object> values = ToolsUnits.createSearchMap();
-            values.put("stockInStore", stockInStores);
-            baseService.executeByHSQL(del1,values);
-            baseService.executeByHSQL(del,values);
-            
+        if (number != null) throw new SystemOptServiceException("采购入库单[" + number + "]已经审核") ;
+        else {
+            String del = "delete  from  StockInStore  as  stockInStore  where stockInStore in (:stockInStore) " ;
+
+            String del1 = "delete  from  StockInStoreDetail  as  stockInStoreDetail  where stockInStoreDetail.stockInStore in (:stockInStore) " ;
+
+            Map<String, Object> values = ToolsUnits.createSearchMap() ;
+            values.put("stockInStore", stockInStores) ;
+            baseService.executeByHSQL(del1, values) ;
+            baseService.executeByHSQL(del, values) ;
+
         }
 
     }

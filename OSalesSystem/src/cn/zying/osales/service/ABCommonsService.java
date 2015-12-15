@@ -11,8 +11,8 @@ import cn.zying.osales.storage.IInStoreProductInfoStockService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 
 public abstract class ABCommonsService {
-    
-    protected  Logger  logger = Loggerfactory.instance("service");
+
+    protected Logger logger = Loggerfactory.instance("service") ;
 
     @Autowired
     @Qualifier(IABService.name)
@@ -21,17 +21,17 @@ public abstract class ABCommonsService {
     @Autowired
     @Qualifier("PrpertiesAutoWriteObjectService")
     protected PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService ;
-    
+
     @Autowired
     @Qualifier(IInStoreProductInfoStockService.name)
     protected IInStoreProductInfoStockService storeProductInfoStockService ;
-    
-    protected StoreInfo  loadStore(Integer id){
-         return   baseService.load(id, StoreInfo.class);
+
+    protected StoreInfo loadStore(Integer id) {
+        return baseService.load(id, StoreInfo.class) ;
     }
-    
-    protected StorePosition  loadStorePosition(Integer id){
-        return   baseService.load(id, StorePosition.class);
-   }
+
+    protected StorePosition loadStorePosition(Integer id) {
+        return baseService.load(id, StorePosition.class) ;
+    }
 
 }

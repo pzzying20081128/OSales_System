@@ -66,7 +66,7 @@ public class ProduceComBinedProductDetailSearchUnits extends ABCommonsService {
     }
 
     private String createWhere(Map<String, Object> value, ProduceComBinedProductDetailSearchBean searchBean, CommSearchBean commSearchBean) {
-        String sqlWhere = " where produceComBinedProductDetail.produceProducInfoId = "+searchBean.getProduceProducInfoId() ;
+        String sqlWhere = " where produceComBinedProductDetail.produceProducInfoId = " + searchBean.getProduceProducInfoId() ;
         return sqlWhere ;
     }
 

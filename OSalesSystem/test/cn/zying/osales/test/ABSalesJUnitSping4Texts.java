@@ -9,8 +9,7 @@ import cn.zy.apps.tools.test.ABJUnitSping4Tests ;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { 
-        "classpath:configs/spring/transaction_config.xml"  ,
-        "classpath:configs/spring/history_config.xml"  
+        "classpath:configs/spring/transaction_config.xml"  
 })
 public abstract class ABSalesJUnitSping4Texts extends ABJUnitSping4Tests {
 

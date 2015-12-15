@@ -25,7 +25,7 @@ function create_stock_order_detail_window(moduleId_, moduleName_, initParams) {
 		stockOrder.id = selection_rows[0].id;
 		stock_order_detail_create_windows(this.moduleId, this.moduleName + "明细", {
 			grid : mainGridModule.getGrid(),
-			orderGrid :  orderGrid,
+			orderGrid : orderGrid,
 			stockOrder : stockOrder
 		});
 	};
@@ -55,7 +55,7 @@ function create_stock_order_detail_window(moduleId_, moduleName_, initParams) {
 		handler : function(bt) {
 			stock_order_detail_update_windows(moduleId, moduleName, {
 				grid : mainGridModule,
-				orderGrid : orderGrid
+				mainGrid:orderGrid
 			});
 		}
 	});
@@ -76,7 +76,7 @@ function create_stock_order_detail_window(moduleId_, moduleName_, initParams) {
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
-		moduleName:moduleName,
+		moduleName : moduleName,
 		// list grid
 		url : "./list_StockOrderDetail_list.do",
 		// grid_column.record

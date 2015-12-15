@@ -61,9 +61,9 @@ public class StockInStoreSaveUpdateUnits extends ABCommonsService {
     }
 
     private StockInStore save(StockInStore optStockInStore) throws SystemOptServiceException {
-         baseService.save(optStockInStore) ;
+        baseService.save(optStockInStore) ;
 
-         return optStockInStore;
+        return optStockInStore ;
     }
 
     public StockInStore update(StockInStore optStockInStore) throws SystemOptServiceException {
