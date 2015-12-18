@@ -14,41 +14,36 @@ function stock_return_store_out_create_windows(moduleId, moduleName, params) {
 			optType : "save"
 		},
 		// 字段
-		field : [
-		{// 第一排
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{
-			}, // 1-1 end
+			items : [{}, // 1-1 end
 			{
-			
+
 			}// 1-2end
 			, {
-			
+
 			}// 1-3 end
 			, {
-			
+
 			}// 1-3 end
 			]
-		},
-			{// 第二排
+		}, {// 第二排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{
-			}, // 1-1 end
+			items : [{}, // 1-1 end
 			{
-			
+
 			}// 1-2end
 			, {
-			
+
 			}// 1-3 end
-			,{
-			
+			, {
+
 			}// 1-3 end
 			]
-		}
-		]
-		
+		}]
+
 	}
 
 	var stock_return_store_out_create_window = new stock_return_store_out_save_update_form_panel_windows(stock_return_store_out_params);

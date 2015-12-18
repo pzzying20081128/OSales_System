@@ -1,15 +1,14 @@
 function stock_return_store_out_detail_save_update_form_panel_windows(params) {
-
+   var  mainMGrid = params.mainMGrid;
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 55,
 		frame : true,
-//		bodyStyle : 'padding:5px 5px 0',
-		height : 400,
-		autoHeight : false,
+		// bodyStyle : 'padding:5px 5px 0',
+		
 		items : params.field,
 		reader : params.reader,
 		buttons : [{
-			text : '提交',
+			text : '提交',    
 			listeners : {
 				'click' : function() {
 					form_panel.submit({
@@ -18,12 +17,14 @@ function stock_return_store_out_detail_save_update_form_panel_windows(params) {
 						submitEmptyText : false,
 						params : params.params,
 						success : function(result) {
-								json =result.result;
+							json = result.result;
 							if (params.action == "save") {
 								params.grid.insertRow(json[params.pojo]);
+								mainMGrid.updateRow(  json[params.pojo].stockReturnStoreOut);
 								form_panel.reset();
 							} else {
 								params.grid.updateRow(json[params.pojo]);
+								mainMGrid.updateRow( json[params.pojo].stockReturnStoreOut);
 								window.close();
 							}
 
@@ -44,8 +45,6 @@ function stock_return_store_out_detail_save_update_form_panel_windows(params) {
 		title : params.title,
 		closable : true,
 		width : 900,
-		height : 400,
-		autoHeight : false,
 		items : [form_panel]
 	});
 	window.showWin();

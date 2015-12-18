@@ -1,23 +1,11 @@
-function create_stock_return_store_out_detail_window(moduleId, moduleName) {
-
-	var checkButton = new Ext.Toolbar.Button({
-		// id : moduleId + '_search',
-		xtype : "tbbutton",
-		text : "审核",
-		key : "check",
-		// keyBinding : createSearchKey(),
-		handler : function() {
-			base_combined_product_check_windows(moduleId, moduleName, {
-				grid : mainGridModule
-			});
-		}
-
-	});
+function create_stock_return_store_out_detail_window(moduleId, moduleName,params) {
+	
+	var mainMGrid = params.mainGrid;
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
-		url : "ssssssssss",
+		url : "./list_StockReturnStoreOutDetail_list.do",
 		// grid_column.record
 		record : stock_return_store_out_detail_grid_column.record,
 		// grid_column.column
@@ -25,28 +13,16 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				// id : moduleId + '_add',
-				key : "add",
-				xtype : "tbbutton",
-				text : "增加",
-				// keyBinding : createCreateKey(),
-				handler : function(bt) {
-					stock_return_store_out_detail_create_windows(moduleId, moduleName, {
-						grid : mainGridModule
-						,
-
-					});
-				}
-			}, {
 				// id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",
 				// keyBinding : createEditKey(),
+				disabled : true,
 				handler : function(bt) {
 					stock_return_store_out_detail_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						searchParams : test_search_params
+						mainMGrid:mainMGrid
 					});
 				}
 			}, {
@@ -54,11 +30,11 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 				xtype : "tbbutton",
 				text : "删除",
 				key : "delete",
+				disabled : true,
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					stock_return_store_out_detail_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
 					});
 				}
 			}, {
@@ -66,6 +42,7 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 				xtype : "tbbutton",
 				text : "查询",
 				key : "search",
+				disabled : true,
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = stock_return_store_out_detail_search_windows(moduleId, moduleName, {
@@ -74,17 +51,10 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 					});
 				}
 			}]
-
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				stockSelect(data, checkButton, detailGrid);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
 
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
@@ -95,10 +65,8 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 	});
 
 	this.getDetailGridModule = function() {
-               return mainGridModule;
+		return mainGridModule;
 	}
-	
-	
 
 	function stock_return_store_out_detail_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;
@@ -119,9 +87,9 @@ function create_stock_return_store_out_detail_window(moduleId, moduleName) {
 			msg : "是否要删除该条信息",
 			yes : function(YN) {
 				ERPAjaxRequest({
-					url : "./simple_ProductBrand_remove.do",
+					url : "./simple_StockReturnStoreOutDetail_remove.do",
 					params : {
-						"productBrand.id" : selectId
+						"stockreturnstoreoutdetail.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {

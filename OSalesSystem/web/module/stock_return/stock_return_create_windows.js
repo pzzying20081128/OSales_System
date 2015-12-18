@@ -68,7 +68,7 @@ function stock_return_create_windows(moduleId, moduleName, params) {
 					id : 'stockreturn.stockProductType',
 					name : 'stockreturn.stockProductType',
 					fieldLabel : ' 产品类型',
-					storeData : [['普通产品', "普通产品"], ['组合产品', '组合产品']],
+					storeData : [['普通产品', "普通产品"]],
 					defaultValue : null,
 					allowBlank : false
 
