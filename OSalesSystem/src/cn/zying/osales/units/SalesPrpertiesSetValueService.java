@@ -47,10 +47,10 @@ public class SalesPrpertiesSetValueService extends PrpertiesSetValueService {
                 String fieldProductInfo = propertyDescriptor.getDisplayName() ;
 
                 ProductInfo productInfo = readFieldValue(fieldProductInfo, result) ;
-                System.out.println("============== >>>>>>>>>>>>   "+result.toString()) ;
-                System.out.println("============== >>>>>>>>>>>>   "+productInfo.toString()) ;
-                if( productInfo.getClass().toString().contains("_$$_jvst")){
-                    
+                System.out.println("============== >>>>>>>>>>>>   " + result.toString()) ;
+                System.out.println("============== >>>>>>>>>>>>   " + productInfo.toString()) ;
+                if (productInfo.getClass().toString().contains("_$$_jvst")) {
+
                 }
 
                 String orderCountFieldName = fieldName.substring(0, fieldName.length() - 7) ;

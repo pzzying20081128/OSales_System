@@ -88,7 +88,7 @@ public class StockReturnSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "   and  stockReturn.status  in(:status) " ;
             value.put("status", searchBean.getStatuses()) ;
         }
-        
+
         if (searchBean.getProductInfoIds() != null && searchBean.getProductInfoIds().size() > 0) {
             sqlWhere = sqlWhere + "   and  stockReturnDetails.productInfoId  in(:productInfoId) " ;
             value.put("productInfoId", searchBean.getProductInfoIds()) ;

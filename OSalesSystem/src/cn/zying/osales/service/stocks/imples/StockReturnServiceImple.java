@@ -26,7 +26,7 @@ public class StockReturnServiceImple extends ABCommonsService implements IStockR
     @Autowired
     @Qualifier("StockReturnSearchUnits")
     private StockReturnSearchUnits iStockReturnSearchUnits ;
-    
+
     @Autowired
     @Qualifier("StockReturnCheckUnits")
     private StockReturnCheckUnits iStockReturnCheckUnits ;
@@ -71,8 +71,8 @@ public class StockReturnServiceImple extends ABCommonsService implements IStockR
 
     @Override
     public void check(Integer stockReturnId, int optUser) throws SystemOptServiceException {
-        iStockReturnCheckUnits.check(stockReturnId, optUser);
-        
+        iStockReturnCheckUnits.check(stockReturnId, optUser) ;
+
     }
 
 }

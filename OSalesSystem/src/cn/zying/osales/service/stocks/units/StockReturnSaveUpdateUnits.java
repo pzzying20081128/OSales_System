@@ -10,8 +10,6 @@ import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProviderInfo ;
-import cn.zying.osales.pojos.StockOrder ;
-import cn.zying.osales.pojos.StockOrderDetail ;
 import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.pojos.StockReturnDetail ;
 import cn.zying.osales.pojos.SysStaffUser ;

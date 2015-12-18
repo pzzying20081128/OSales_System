@@ -21,7 +21,7 @@ public class PropertiesAutoWriteObject extends AutoWriteObject {
     private String regexPackage ;
 
     public PropertiesAutoWriteObject(String regexPackage) {
-        super() ;
+        super(true) ;
         this.regexPackage = regexPackage ;
     }
 

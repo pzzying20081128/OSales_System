@@ -56,16 +56,14 @@ public class StockReturnAction extends OSalesSystemABAction<StockReturn> {
     }
 
     public String check() throws Exception {
-                try {
-                    service.check(stockreturn.getId(), getOSalsesLoginUserId()) ;
-                } catch (Exception e) {
-                    this.success = false ;
-                    this.msg = handError(e) ;
-                }
+        try {
+            service.check(stockreturn.getId(), getOSalsesLoginUserId()) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
         return SUCCESS ;
     }
-
-   
 
     public String get() throws Exception {
         try {

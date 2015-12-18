@@ -12,7 +12,7 @@ import cn.zying.osales.service.SystemOptServiceException ;
 @Component("StockReturnStoreOutRemoveUnits")
 public class StockReturnStoreOutRemoveUnits extends ABCommonsService {
 
-    public void  del(StockReturn stockReturn) throws SystemOptServiceException {
+    public void del(StockReturn stockReturn) throws SystemOptServiceException {
         String sql = " select  stockReturnStoreOut  from StockReturnStoreOut as  stockReturnStoreOut  where stockReturnStoreOut.stockReturnId = " + stockReturn.getId() ;
         StockReturnStoreOut stockReturnStoreOut = baseService.findSinglenessByHSQL(sql) ;
         if (stockReturnStoreOut.getStatus().equals(Status.已审核)) {
@@ -31,6 +31,7 @@ public class StockReturnStoreOutRemoveUnits extends ABCommonsService {
 
         Integer id = optStockReturnStoreOut.getId() ;
         StockReturnStoreOut removeStockReturnStoreOut = baseService.get(id, StockReturnStoreOut.class) ;
+        removeStockReturnStoreOut.setStatus(Status.删除) ;
         baseService.update(removeStockReturnStoreOut) ;
         return removeStockReturnStoreOut ;
     }

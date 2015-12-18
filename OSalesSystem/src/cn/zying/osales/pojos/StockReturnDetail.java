@@ -43,6 +43,4 @@ public class StockReturnDetail extends StockDetailCommBean {
         this.stockReturnId = stockReturnId ;
     }
 
-
-
 }

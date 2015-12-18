@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
-import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
@@ -70,11 +69,10 @@ public class StockReturnDetailSaveUpdateUnits extends ABCommonsService {
     }
 
     private void setPropertis(StockReturnDetail optStockReturnDetail) {
-       if(optStockReturnDetail.getStockReturnId()!=null){
-           StockReturn stockReturn = baseService.load(optStockReturnDetail.getStockReturnId(), StockReturn.class) ;
-           optStockReturnDetail.setStockReturn(stockReturn) ;   
-       }
-        
+        if (optStockReturnDetail.getStockReturnId() != null) {
+            StockReturn stockReturn = baseService.load(optStockReturnDetail.getStockReturnId(), StockReturn.class) ;
+            optStockReturnDetail.setStockReturn(stockReturn) ;
+        }
 
         ProductInfo productInfo = baseService.load(optStockReturnDetail.getProductInfoId(), ProductInfo.class) ;
         optStockReturnDetail.setProductInfo(productInfo) ;

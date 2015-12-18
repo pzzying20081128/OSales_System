@@ -1,4 +1,4 @@
-package cn.zying.osales.pojos;
+package cn.zying.osales.pojos ;
 
 import java.util.Date ;
 import java.util.List ;
@@ -13,7 +13,9 @@ import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
+import javax.persistence.Transient ;
 
+import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.pojos.commons.StockCommBean ;
 
 // Generated 2013-6-20 10:53:13 by Hibernate Tools 3.4.0.CR1
@@ -25,97 +27,93 @@ import cn.zying.osales.pojos.commons.StockCommBean ;
 @Table(name = "stock_return_store_out")
 public class StockReturnStoreOut extends StockCommBean implements java.io.Serializable {
 
-	
+    // 采购员
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stock_man_id")
+    @FieldDesc(name = "采购员",mapping="stockMan.name" )
+    private SysStaffUser stockMan ;
 
-	
+    @Column(name = "stock_man_id", insertable = false, updatable = false)
+    @FieldDesc(name = "采购员",isShow=false)
+    private Integer stockManId ;
+    
+    @Transient
+    private List<Integer>stockManIds;
 
-	// 采购员
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stock_man_id")
-	private SysStaffUser stockMan;
-	@Column(name = "stock_man_id", insertable = false, updatable = false)
-	private Integer stockManId;
+    // /采购退货单
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stock_return_id")
+    @FieldDesc(name = "采购退货单号",mapping="stockReturn.number" )
+    private StockReturn stockReturn ;
 
-	
+    @Column(name = "stock_return_id", insertable = false, updatable = false)
+    @FieldDesc(name = "采购退货单",isShow=false)
+    private Integer stockReturnId ;
 
-	// /采购退货单
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stock_return_id")
-	private StockReturn stockReturn;
-	@Column(name = "stock_return_id", insertable = false, updatable = false)
-	private Integer stockReturnId;
+    // 退货日期
+    @Column(name = "store_out_date")
+    @Temporal(TemporalType.DATE)
+    @FieldDesc(name = "退货日期")
+    private Date outStoreDate ;
 
-	// 退货日期
-	@Column(name = "store_out_date")
-	@Temporal(TemporalType.DATE)
-	private Date outStoreDate;
-
-	
-	// /采购退货出库明细 list
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "stockReturnStoreOut")
-	private List<StockReturnStoreOutDetail> stockReturnStoreOutDetails;
-
+    // /采购退货出库明细 list
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "stockReturnStoreOut")
+    private List<StockReturnStoreOutDetail> stockReturnStoreOutDetails ;
 
     public SysStaffUser getStockMan() {
         return stockMan ;
     }
 
-
     public void setStockMan(SysStaffUser stockMan) {
         this.stockMan = stockMan ;
     }
-
 
     public Integer getStockManId() {
         return stockManId ;
     }
 
-
     public void setStockManId(Integer stockManId) {
         this.stockManId = stockManId ;
     }
-
 
     public StockReturn getStockReturn() {
         return stockReturn ;
     }
 
-
     public void setStockReturn(StockReturn stockReturn) {
         this.stockReturn = stockReturn ;
     }
-
 
     public Integer getStockReturnId() {
         return stockReturnId ;
     }
 
-
     public void setStockReturnId(Integer stockReturnId) {
         this.stockReturnId = stockReturnId ;
     }
-
 
     public Date getOutStoreDate() {
         return outStoreDate ;
     }
 
-
     public void setOutStoreDate(Date outStoreDate) {
         this.outStoreDate = outStoreDate ;
     }
-
 
     public List<StockReturnStoreOutDetail> getStockReturnStoreOutDetails() {
         return stockReturnStoreOutDetails ;
     }
 
-
     public void setStockReturnStoreOutDetails(List<StockReturnStoreOutDetail> stockReturnStoreOutDetails) {
         this.stockReturnStoreOutDetails = stockReturnStoreOutDetails ;
     }
 
-	
+    public List<Integer> getStockManIds() {
+        return stockManIds ;
+    }
 
+    public void setStockManIds(List<Integer> stockManIds) {
+        this.stockManIds = stockManIds ;
+    }
 
 }

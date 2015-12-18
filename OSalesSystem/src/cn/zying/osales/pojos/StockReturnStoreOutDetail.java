@@ -1,4 +1,4 @@
-package cn.zying.osales.pojos;
+package cn.zying.osales.pojos ;
 
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
@@ -17,54 +17,54 @@ import cn.zying.osales.pojos.commons.StockDetailCommBean ;
 @Table(name = "stock_return_store_out_detail")
 public class StockReturnStoreOutDetail extends StockDetailCommBean {
 
-	private static final long serialVersionUID = -7823574205120502318L;
+    private static final long serialVersionUID = -7823574205120502318L ;
 
-	
-	// 采购退货出库单
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stock_return_store_out_id")
-	private StockReturnStoreOut stockReturnStoreOut;
-	@Column(name = "stock_return_store_out_id", insertable = false, updatable = false)
-	private Integer stockReturnStoreOutId;
+    // 采购退货出库单
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stock_return_store_out_id")
+    private StockReturnStoreOut stockReturnStoreOut ;
 
-	// 采购退货单明细
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stock_Return_detail_id")
-	private StockReturnDetail stockReturnDetail;
-	@Column(name = "stock_Return_detail_id", insertable = false, updatable = false)
-	private Integer stockReturnDetailId;
+    @Column(name = "stock_return_store_out_id", insertable = false, updatable = false)
+    private Integer stockReturnStoreOutId ;
+
+    // 采购退货单明细
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stock_Return_detail_id")
+    private StockReturnDetail stockReturnDetail ;
+
+    @Column(name = "stock_Return_detail_id", insertable = false, updatable = false)
+    private Integer stockReturnDetailId ;
+
     public StockReturnStoreOut getStockReturnStoreOut() {
         return stockReturnStoreOut ;
     }
+
     public void setStockReturnStoreOut(StockReturnStoreOut stockReturnStoreOut) {
         this.stockReturnStoreOut = stockReturnStoreOut ;
     }
+
     public Integer getStockReturnStoreOutId() {
         return stockReturnStoreOutId ;
     }
+
     public void setStockReturnStoreOutId(Integer stockReturnStoreOutId) {
         this.stockReturnStoreOutId = stockReturnStoreOutId ;
     }
+
     public StockReturnDetail getStockReturnDetail() {
         return stockReturnDetail ;
     }
+
     public void setStockReturnDetail(StockReturnDetail stockReturnDetail) {
         this.stockReturnDetail = stockReturnDetail ;
     }
+
     public Integer getStockReturnDetailId() {
         return stockReturnDetailId ;
     }
+
     public void setStockReturnDetailId(Integer stockReturnDetailId) {
         this.stockReturnDetailId = stockReturnDetailId ;
     }
-
-	
-	
-
-	
-
-	
-
-	
 
 }

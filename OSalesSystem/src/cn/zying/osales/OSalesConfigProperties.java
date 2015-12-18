@@ -21,7 +21,7 @@ public interface OSalesConfigProperties {
 
     // 单据简称
     public enum OrderSimpleName {
-        KSSC, CGSR, CGRK, CGSO, CGTH,CGTHCK
+        KSSC, CGSR, CGRK, CGSO, CGTH, CGTHCK
     }
 
     public enum StockType {
