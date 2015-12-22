@@ -6,7 +6,6 @@ import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.OSalesConfigProperties.StockType ;
 import cn.zying.osales.pojos.StockReturnStoreOut ;
-import cn.zying.osales.pojos.StockStoreReceive ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -45,18 +44,15 @@ public class StockReturnStoreOutCheckUnits extends ABCommonsService {
     }
 
     private void cancelCheck(StockReturnStoreOut stockReturnStoreOut, Integer optUserId) throws SystemOptServiceException {
-        //        if (stockReturnStoreOut.getStockType().equals(StockType.直营采购订单)) {
-        //            throw new SystemOptServiceException("此单是" + StockType.直营采购订单.name() + "不能取消审核") ;
-        //        } else {
-        //            stockReturnStoreOut.setCheckMan(null) ;
-        //            stockReturnStoreOut.setStatus(Status.有效) ;
-        //            stockReturnStoreOut.setCheckDate(null) ;
-        //            baseService.update(stockReturnStoreOut) ;
-        //        }
-        stockReturnStoreOut.setCheckMan(null) ;
-        stockReturnStoreOut.setStatus(Status.有效) ;
-        stockReturnStoreOut.setCheckDate(null) ;
-        baseService.update(stockReturnStoreOut) ;
+                if (stockReturnStoreOut.getStockType().equals(StockType.直营采购退货单)) {
+                    throw new SystemOptServiceException("此单是" + StockType.直营采购退货单.name() + "不能取消审核") ;
+                } else {
+                    stockReturnStoreOut.setCheckMan(null) ;
+                    stockReturnStoreOut.setStatus(Status.有效) ;
+                    stockReturnStoreOut.setCheckDate(null) ;
+                    baseService.update(stockReturnStoreOut) ;
+                }
+        
 
     }
 

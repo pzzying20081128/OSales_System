@@ -12,6 +12,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils ;
 import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.pojos.CompanyInfo ;
 import cn.zying.osales.pojos.ProductBrand ;
 import cn.zying.osales.pojos.ProductCategory ;
 import cn.zying.osales.pojos.ProductInfo ;
@@ -20,10 +21,12 @@ import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.IProviderInfoService ;
+import cn.zying.osales.service.baseinfo.ICompanyInfoService ;
 import cn.zying.osales.service.baseinfo.IProductBrandService ;
 import cn.zying.osales.service.baseinfo.IProductInfoService ;
 import cn.zying.osales.service.baseinfo.ISystemUserService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
+import cn.zying.osales.units.search.bean.CompanyInfoSearchBean ;
 import cn.zying.osales.units.search.bean.ProductBrandSearchBean ;
 import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
 import cn.zying.osales.units.search.bean.ProductInfoSearchBean ;
@@ -88,7 +91,23 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         //		loadStoreProductInfoStock(springContext);
         //
         loadProviderInfo(springContext, prpertiesAutoWriteObjectService) ;
+        
+        loadCompanyInfo(springContext, prpertiesAutoWriteObjectService) ;
 
+    }
+
+    private void loadCompanyInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
+        ICompanyInfoService companyInfoService = (ICompanyInfoService) springContext.getBean(ICompanyInfoService.name) ;
+
+        CompanyInfoSearchBean searchBean = new CompanyInfoSearchBean() ;
+
+        searchBean.setStatus(Status.全部) ;
+
+        List<CompanyInfo> companyInfos = companyInfoService.searchList(OptType.search, searchBean, null) ;
+        for (CompanyInfo companyInfo : companyInfos) {
+            prpertiesAutoWriteObjectService.cacheObject(companyInfo.getId().toString(), companyInfo) ;
+        }
+        
     }
 
     private void loadProviderInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {

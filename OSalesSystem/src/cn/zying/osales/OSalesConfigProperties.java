@@ -1,6 +1,20 @@
 package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
+    public static enum BillType {
+      
+        采购进货单, 采购票前调整单, 采购退货单
+    }
+
+    // 采购单是否对过账
+    public enum StockBillIsReconciliation {
+        已对帐, 末对帐, 全部对帐
+    }
+
+    public enum ContractStatus {
+        未启用合同, 执行合同, 历史合同, 待定
+
+    }
 
     //    退货类型
 
@@ -18,10 +32,12 @@ public interface OSalesConfigProperties {
     //采购进货单 CGSR
 
     //快速生产 CGSR
+    
+    // 采购发票 SGFP
 
     // 单据简称
     public enum OrderSimpleName {
-        KSSC, CGSR, CGRK, CGSO, CGTH, CGTHCK
+        KSSC, CGSR, CGRK, CGSO, CGTH, CGTHCK,SGFP
     }
 
     public enum StockType {
