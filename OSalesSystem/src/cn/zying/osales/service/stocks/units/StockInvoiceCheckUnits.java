@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.OSalesConfigProperties.StockBillIsReconciliation ;
 import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
@@ -36,6 +37,7 @@ public class StockInvoiceCheckUnits extends ABCommonsService {
     private void checking(StockInvoice stockInvoice) throws SystemOptServiceException {
         SysStaffUser checkMan = baseService.load(stockInvoice.getCheckManId(), SysStaffUser.class) ;
         stockInvoice.setStatus(Status.已审核) ;
+        stockInvoice.setReconciliation(StockBillIsReconciliation.末对帐);
         stockInvoice.setCheckMan(checkMan) ;
         stockInvoice.setCheckedDate(DateToolsUilts.getnowDate()) ;
         baseService.update(stockInvoice) ;
@@ -44,6 +46,7 @@ public class StockInvoiceCheckUnits extends ABCommonsService {
     private void checkNo(StockInvoice stockInvoice) throws SystemOptServiceException {
  
         stockInvoice.setStatus(Status.有效) ;
+        stockInvoice.setReconciliation(null);
         stockInvoice.setCheckMan(null) ;
         stockInvoice.setCheckedDate(null) ;
         baseService.update(stockInvoice) ;

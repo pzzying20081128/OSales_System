@@ -1,4 +1,4 @@
-function create_stock_contract_detail_window(moduleId, moduleName) {
+function create_stock_invoice_reconcile_detail_window(moduleId, moduleName) {
 
 	var checkButton = new Ext.Toolbar.Button({
 		// id : moduleId + '_search',
@@ -17,11 +17,11 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
-		url : "ssssssssss",
+		url : "./list_StockInvoiceBillReconcileDetail_listReconcile.do",
 		// grid_column.record
-		record : stock_contract_detail_grid_column.record,
+		record : stock_invoice_reconcile_detail_grid_column.record,
 		// grid_column.column
-		column : stock_contract_detail_grid_column.column,
+		column : stock_invoice_reconcile_detail_grid_column.column,
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
@@ -31,7 +31,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				text : "增加",
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
-					stock_contract_detail_create_windows(moduleId, moduleName, {
+					stock_invoice_reconcile_detail_create_windows(moduleId, moduleName, {
 						grid : mainGridModule
 						,
 
@@ -44,7 +44,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				key : "edit",
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
-					stock_contract_detail_update_windows(moduleId, moduleName, {
+					stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
 						searchParams : test_search_params
 					});
@@ -56,7 +56,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				key : "delete",
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
-					stock_contract_detail_delete_windows(moduleId, moduleName, {
+					stock_invoice_reconcile_detail_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
 						,
 					});
@@ -68,9 +68,9 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				key : "search",
 				// keyBinding : createSearchKey(),
 				handler : function() {
-					var searchWindex = stock_contract_detail_search_windows(moduleId, moduleName, {
+					var searchWindex = stock_invoice_reconcile_detail_search_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						searchParams : stock_contract_detail_search_params
+						searchParams : stock_invoice_reconcile_detail_search_params
 					});
 				}
 			}]
@@ -100,7 +100,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 		return mainGridModule;
 	}
 
-	function stock_contract_detail_delete_windows(moduleId, moduleName, params) {
+	function stock_invoice_reconcile_detail_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;
 		var mainGrid = mainGridModule.getGrid();
 		var selection_rows = mainGrid.getSelectionModel().getSelections();

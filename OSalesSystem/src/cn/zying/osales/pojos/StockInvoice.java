@@ -144,6 +144,10 @@ public class StockInvoice extends CommBean {
     @Column(name = "reconciliation")
     @Enumerated(EnumType.STRING)
     private StockBillIsReconciliation reconciliation ;
+    
+    
+    @Transient
+    private List<StockBillIsReconciliation> reconciliations;
 
     // /对账余额
     @Column(name = "reconciliationSum")
@@ -376,6 +380,14 @@ public class StockInvoice extends CommBean {
 
     public void setProviderInfoIds(List<Integer> providerInfoIds) {
         this.providerInfoIds = providerInfoIds ;
+    }
+
+    public List<StockBillIsReconciliation> getReconciliations() {
+        return reconciliations ;
+    }
+
+    public void setReconciliations(List<StockBillIsReconciliation> reconciliations) {
+        this.reconciliations = reconciliations ;
     }
 
 }

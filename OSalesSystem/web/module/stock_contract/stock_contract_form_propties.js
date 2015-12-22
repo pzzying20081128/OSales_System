@@ -31,49 +31,49 @@
 
 	      	      // ----------------------------------------------------------------------//
 			  {
-//                columnWidth : .25,
-//				layout : 'form',
-//				defaultType : 'textfield',
-//				baseCls : 'x-plain',
-//				defaults : {
-//					width : 250
-//				},
-//				items : [{
-//					id : 'stockcontract.providerInfo',
-//					name : 'stockcontract.providerInfo',
-//					fieldLabel : ' 供应商',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
-//				}]
+// columnWidth : .25,
+// layout : 'form',
+// defaultType : 'textfield',
+// baseCls : 'x-plain',
+// defaults : {
+// width : 250
+// },
+// items : [{
+// id : 'stockcontract.providerInfo',
+// name : 'stockcontract.providerInfo',
+// fieldLabel : ' 供应商',
+// xtype : 'textfield',
+// style : NoAllowBlankStyle,
+// blankText : '不能为空！',
+// allowBlank : false,
+// listeners : {
+// 'specialkey' : function(field, e) {
+// }
+// }
+// }]
 			  },
             		 	      		 	      	      // ----------------------------------------------------------------------//
 			  {
-//                columnWidth : .25,
-//				layout : 'form',
-//				defaultType : 'textfield',
-//				baseCls : 'x-plain',
-//				defaults : {
-//					width : 250
-//				},
-//				items : [{
-//					id : 'stockcontract.stockMan',
-//					name : 'stockcontract.stockMan',
-//					fieldLabel : ' 采购员',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
-//				}]
+// columnWidth : .25,
+// layout : 'form',
+// defaultType : 'textfield',
+// baseCls : 'x-plain',
+// defaults : {
+// width : 250
+// },
+// items : [{
+// id : 'stockcontract.stockMan',
+// name : 'stockcontract.stockMan',
+// fieldLabel : ' 采购员',
+// xtype : 'textfield',
+// style : NoAllowBlankStyle,
+// blankText : '不能为空！',
+// allowBlank : false,
+// listeners : {
+// 'specialkey' : function(field, e) {
+// }
+// }
+// }]
 			  },
             		 	      		 	      	      // ----------------------------------------------------------------------//
 			  {
@@ -85,17 +85,17 @@
 					width : 250
 				},
 				items : [{
-//					id : 'stockcontract.companyGuest',
-//					name : 'stockcontract.companyGuest',
-//					fieldLabel : ' 公司名称',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
+// id : 'stockcontract.companyGuest',
+// name : 'stockcontract.companyGuest',
+// fieldLabel : ' 公司名称',
+// xtype : 'textfield',
+// style : NoAllowBlankStyle,
+// blankText : '不能为空！',
+// allowBlank : false,
+// listeners : {
+// 'specialkey' : function(field, e) {
+// }
+// }
 				}]
 			  },
             		 	      		 	      	      // ----------------------------------------------------------------------//
@@ -130,19 +130,19 @@
 				defaults : {
 					width : 250
 				},
-//				items : [{
-//					id : 'stockcontract.text',
-//					name : 'stockcontract.text',
-//					fieldLabel : ' 备注',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
-//				}]
+// items : [{
+// id : 'stockcontract.text',
+// name : 'stockcontract.text',
+// fieldLabel : ' 备注',
+// xtype : 'textfield',
+// style : NoAllowBlankStyle,
+// blankText : '不能为空！',
+// allowBlank : false,
+// listeners : {
+// 'specialkey' : function(field, e) {
+// }
+// }
+// }]
 			  },
             		 	      	      // ----------------------------------------------------------------------//
 			  {
@@ -153,19 +153,19 @@
 				defaults : {
 					width : 250
 				},
-//				items : [{
-//					id : 'stockcontract.signedDate',
-//					name : 'stockcontract.signedDate',
-//					fieldLabel : ' 签订日期',
-//					xtype : 'textfield',
-//					style : NoAllowBlankStyle,
-//					blankText : '不能为空！',
-//					allowBlank : false,
-//					listeners : {
-//						'specialkey' : function(field, e) {
-//						}
-//					}
-//				}]
+// items : [{
+// id : 'stockcontract.signedDate',
+// name : 'stockcontract.signedDate',
+// fieldLabel : ' 签订日期',
+// xtype : 'textfield',
+// style : NoAllowBlankStyle,
+// blankText : '不能为空！',
+// allowBlank : false,
+// listeners : {
+// 'specialkey' : function(field, e) {
+// }
+// }
+// }]
 			  },
             		 	      	      // ----------------------------------------------------------------------//
 			  {

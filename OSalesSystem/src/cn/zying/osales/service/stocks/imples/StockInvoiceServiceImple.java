@@ -13,6 +13,7 @@ import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockInvoiceService ;
+import cn.zying.osales.service.stocks.units.StockInvoiceBillReconcileSearchUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceCheckUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceRemoveUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceSaveUpdateUnits ;
@@ -39,6 +40,11 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
     @Autowired
     @Qualifier("StockInvoiceCheckUnits")
     private StockInvoiceCheckUnits iStockInvoiceCheckUnits ;
+    
+    @Autowired
+    @Qualifier("StockInvoiceBillReconcileSearchUnits")
+    private StockInvoiceBillReconcileSearchUnits iStockInvoiceBillReconcileSearchUnits ;
+    
 
     @Override
     public StockInvoice saveUpdate(OptType optType, StockInvoice optStockInvoice) throws SystemOptServiceException {
@@ -72,6 +78,11 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
     public StockInvoice check(StockInvoice stockinvoice) throws SystemOptServiceException {
  
         return iStockInvoiceCheckUnits.check(stockinvoice) ;
+    }
+
+    @Override
+    public SelectPage<StockInvoice> searchBillReconcile(OptType optType, StockInvoiceSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        return iStockInvoiceBillReconcileSearchUnits.search(optType, searchBean, commSearchBean, startLimit);
     }
 
 }
