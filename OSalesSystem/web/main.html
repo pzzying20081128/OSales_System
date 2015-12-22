@@ -46,14 +46,14 @@
 		checkButton.enable();
 		if (status == '已审核') {
 			checkButton.setText("取消审核");
-			detailGrid.openAllButton(false);
+			if(detailGrid!=null)detailGrid.openAllButton(false);
 		} else if (status == '有效') {
 			checkButton.setText("审核");
-			detailGrid.openAllButton(true);
+			if(detailGrid!=null)detailGrid.openAllButton(true);
 		} else {
 			checkButton.disable();
 			checkButton.setText("已删除");
-			detailGrid.openAllButton(false);
+			if(detailGrid!=null)detailGrid.openAllButton(false);
 		}
 	}
 	
