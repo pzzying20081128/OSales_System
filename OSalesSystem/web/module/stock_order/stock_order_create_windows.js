@@ -2,7 +2,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 
-	var initOrder = params.order;
+	// var initOrder = params.order;
 
 	var stockType = createLocalCombo({
 		id : 'stockorder.stockType',
@@ -23,8 +23,9 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 		// url
 		url : './simple_StockOrder_save.do',
 		params : {
-			optType : "save",
-			'stockorder.id' : initOrder.id
+			optType : "save"
+			,
+			// 'stockorder.id' : initOrder.id
 
 		},
 		// 字段
@@ -45,10 +46,10 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 					name : 'stockorder.number',
 					fieldLabel : ' 订单编号',
 					xtype : 'textfield',
-					style : NoAllowBlankStyle,
+					// style : NoAllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
-					value : initOrder.number,
+					allowBlank : true,
+					// value : initOrder.number,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -316,13 +317,13 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 	}
 
 	this.openWin = function(params) {
-//		detailParams : {
-//							stockdetail:stockdetail
-//							//create_stock_order_detail_window
-//						}
-		var detailParams = params.detailParams; 
-		var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params,{
-		detailParams:detailParams
+		// detailParams : {
+		// stockdetail:stockdetail
+		// //create_stock_order_detail_window
+		// }
+		var detailParams = params.detailParams;
+		var stock_order_create_window = new stock_order_save_update_form_panel_windows(stock_order_params, {
+			detailParams : detailParams
 		});
 		return stock_order_create_window;
 	}

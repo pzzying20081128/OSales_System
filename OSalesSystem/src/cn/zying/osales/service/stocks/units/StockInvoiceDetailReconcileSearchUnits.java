@@ -50,7 +50,7 @@ public class StockInvoiceDetailReconcileSearchUnits extends ABCommonsService {
 
     }
 
-    private String sql = "select  stockInvoiceDetail   from   StockInvoiceDetail as  stockInvoiceDetail   " ;
+    private String sql = "select  stockInvoiceDetail   from   StockInvoiceDetail as  stockInvoiceDetail  inner join fetch stockInvoiceDetail.stockInvoiceBillDetail   " ;
 
     private List<StockInvoiceDetail> list(String sqlWhere, Map<String, Object> value, int... startLimit) throws SystemOptServiceException {
         String sql_ = sql + sqlWhere ;
@@ -58,7 +58,7 @@ public class StockInvoiceDetailReconcileSearchUnits extends ABCommonsService {
         return result ;
     }
 
-    private String sqlsum = "select   count(stockInvoiceDetail.id) from   StockInvoiceDetail as  stockInvoiceDetail " ;
+    private String sqlsum = "select   count(stockInvoiceDetail.id) from   StockInvoiceDetail as  stockInvoiceDetail  inner join  stockInvoiceDetail.stockInvoiceBillDetail  " ;
 
     private Long sum(String sqlWhere, Map<String, Object> value) throws SystemOptServiceException {
         String sql_ = sqlsum + sqlWhere ;

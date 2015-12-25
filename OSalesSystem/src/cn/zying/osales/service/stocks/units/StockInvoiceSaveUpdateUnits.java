@@ -37,7 +37,7 @@ public class StockInvoiceSaveUpdateUnits extends ABCommonsService {
         }
         optStockInvoice.setReconciliationSum(optStockInvoice.getInvoiceSum());
         optStockInvoice.setKillSum(OSalesConfigProperties.default_long_null);
-        optStockInvoice.setNoKillSum(OSalesConfigProperties.default_long_null);
+        optStockInvoice.setNoKillSum(optStockInvoice.getInvoiceSum());
         baseService.save(optStockInvoice) ;
         return optStockInvoice ;
 

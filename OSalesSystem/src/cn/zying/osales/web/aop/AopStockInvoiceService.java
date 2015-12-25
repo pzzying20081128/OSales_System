@@ -57,8 +57,18 @@ public class AopStockInvoiceService implements IAopStockInvoiceService {
 
     @Override
     public SelectPage<StockInvoice> searchBillReconcile(OptType optType, StockInvoiceSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-        
+
         return iStockInvoiceService.searchBillReconcile(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public StockInvoice autoReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
+        return iStockInvoiceService.autoReconcile(stockinvoice) ;
+    }
+
+    @Override
+    public StockInvoice cancelReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
+        return iStockInvoiceService.cancelReconcile(stockinvoice) ;
     }
 
 }

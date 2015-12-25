@@ -9,6 +9,8 @@ public interface IAopStockInvoiceService  extends InfaceStockInvoiceService   {
     
             public String name="IAopStockInvoiceService";
 
+           
+
          
             
                 

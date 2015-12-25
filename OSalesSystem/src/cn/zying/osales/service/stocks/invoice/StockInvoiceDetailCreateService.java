@@ -7,18 +7,18 @@ import org.springframework.stereotype.Component ;
 import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.BillType ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.StockInvoiceDetail ;
+import cn.zying.osales.pojos.StockInvoiceBillDetail ;
 import cn.zying.osales.pojos.StockStoreReceive ;
 import cn.zying.osales.service.SystemOptServiceException ;
+import cn.zying.osales.service.stocks.units.StockInvoiceBillDetailSaveUpdateUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceDetailRemoveUnits ;
-import cn.zying.osales.service.stocks.units.StockInvoiceDetailSaveUpdateUnits ;
 
 @Component(IStockInvoiceDetailCreateService.name)
 public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreateService {
 
     @Autowired
-    @Qualifier("StockInvoiceDetailSaveUpdateUnits")
-    private StockInvoiceDetailSaveUpdateUnits stockInvoiceDetailSaveUpdateUnits ;
+    @Qualifier("StockInvoiceBillDetailSaveUpdateUnits")
+    private StockInvoiceBillDetailSaveUpdateUnits stockInvoiceBillDetailSaveUpdateUnits ;
 
     @Autowired
     @Qualifier("StockInvoiceDetailRemoveUnits")
@@ -38,7 +38,7 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
 
     private void createStockStoreReceive(StockStoreReceive stockStoreReceive) throws SystemOptServiceException {
 
-        StockInvoiceDetail optStockInvoiceDetail = new StockInvoiceDetail() ;
+        StockInvoiceBillDetail optStockInvoiceDetail = new StockInvoiceBillDetail() ;
 
         optStockInvoiceDetail.setBillDate(stockStoreReceive.getCreateTime()) ;
 
@@ -49,11 +49,11 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
         optStockInvoiceDetail.setBillType(BillType.采购进货单) ;
 
         optStockInvoiceDetail.setKillSum(OSalesConfigProperties.default_long_null) ;
-        optStockInvoiceDetail.setNoKillSum(OSalesConfigProperties.default_long_null) ;
-        optStockInvoiceDetail.setProviderId(stockStoreReceive.getProviderInfoId()) ;
+        optStockInvoiceDetail.setNoKillSum(optStockInvoiceDetail.getBillSum()) ;
+        optStockInvoiceDetail.setProviderInfoId(stockStoreReceive.getProviderInfoId()) ;
         optStockInvoiceDetail.setProviderInfo(stockStoreReceive.getProviderInfo()) ;
 
-        stockInvoiceDetailSaveUpdateUnits.saveUpdate(OptType.save, optStockInvoiceDetail) ;
+        stockInvoiceBillDetailSaveUpdateUnits.saveUpdate(OptType.save, optStockInvoiceDetail) ;
     }
 
     @Override

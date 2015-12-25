@@ -17,7 +17,7 @@ function createModule(node, userId, params) {
 		loadjs.push("./module/" + moduleId + "/" + moduleId + "_detail/" + moduleId + "_detail_update_windows.js");
 	}
 
-	// alert("|"+moduleId+"|");
+//	 alert("|"+moduleId+"|");
 	switch (moduleId) {
 		case "system_manager" : {
 			loadjs.push("./ext3/privates/power/user_power_opt.js");
@@ -42,6 +42,11 @@ function createModule(node, userId, params) {
 			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_search_action_properties.js");
 			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_search_windows.js");
 			loadjs.push("./module/" + moduleId + "/store_product_info_detail/store_product_info_detail_update_windows.js");
+			break;
+		}
+		case "stock_invoice_reconcile" : {
+			//alert("|"+moduleId+"|");
+			loadjs.push("./module/" + moduleId + "/stock_invoice_reconcile_handle_windows.js");
 			break;
 		}
 			//

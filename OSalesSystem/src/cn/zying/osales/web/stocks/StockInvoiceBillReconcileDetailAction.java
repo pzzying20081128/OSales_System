@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.StockInvoice ;
+import cn.zying.osales.pojos.StockInvoiceBillDetail ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
 import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.StockInvoiceDetailSearchBean ;
@@ -15,6 +16,11 @@ import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockInvoiceDetailService ;
 import cn.zying.osales.web.aop.IAopStockInvoiceService ;
 
+/**
+ * 发票对帐明细
+ * @author you
+ *
+ */
 @Component("StockInvoiceBillReconcileDetailAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
 public class StockInvoiceBillReconcileDetailAction extends OSalesSystemABAction<StockInvoiceDetail> {
@@ -44,6 +50,21 @@ public class StockInvoiceBillReconcileDetailAction extends OSalesSystemABAction<
 
         return SUCCESS ;
     }
+
+    public String get() throws Exception {
+        try {
+            StockInvoiceDetail stockInvoiceDetail = service.get(uuid) ;
+            writeObjectService.intToPrpertiesUnits(stockInvoiceDetail) ;
+            this.result = stockInvoiceDetail ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+
+        return SUCCESS ;
+    }
+    
+   
 
     public StockInvoiceDetail getStockinvoicedetail() {
         return stockinvoicedetail ;

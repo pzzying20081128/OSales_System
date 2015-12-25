@@ -29,24 +29,24 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
 
     private StockOrderSearchBean searchBean ;
 
-    public String initStockOrder() throws Exception {
-        try {
-            StockOrder stockorder = new StockOrder() ;
-            String orderNumber = baseService.genSerialNum(OrderSimpleName.CGSO.name()) ;
-            stockorder.setNumber(orderNumber) ;
-            this.result = service.saveUpdate(OptType.init, stockorder, getOSalsesLoginUserId()) ;
-
-        } catch (Exception e) {
-            this.success = false ;
-            this.msg = handError(e) ;
-        }
-        return SUCCESS ;
-    }
+//    public String initStockOrder() throws Exception {
+//        try {
+//            StockOrder stockorder = new StockOrder() ;
+//            String orderNumber = baseService.genSerialNum(OrderSimpleName.CGSO.name()) ;
+//            stockorder.setNumber(orderNumber) ;
+//            this.result = service.saveUpdate(OptType.init, stockorder, getOSalsesLoginUserId()) ;
+//
+//        } catch (Exception e) {
+//            this.success = false ;
+//            this.msg = handError(e) ;
+//        }
+//        return SUCCESS ;
+//    }
 
     public String save() throws Exception {
         try {
             stockorder.setRecordManId(getOSalsesLoginUserId()) ;
-            this.result = service.saveUpdate(OptType.save, stockorder, getOSalsesLoginUserId()) ;
+            this.result = service.saveUpdate(optType, stockorder, getOSalsesLoginUserId()) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.units.ToolsUnitsException ;
+import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.OptSum ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.ProductInfoType ;
@@ -62,40 +63,56 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
     public StockOrder saveUpdate(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
         switch (optType) {
-        case init:
-            return init(optStockOrder) ;
+
+        case save:
+
+            return save(optType, optStockOrder) ;
 
         case update:
-        case save:
-            return save_Update(optType, optStockOrder) ;
+
+            return update(optType, optStockOrder) ;
 
         default:
             throw new SystemOptServiceException("[操作类型错误]") ;
         }
     }
 
-    private StockOrder init(StockOrder optStockOrder) {
-        optStockOrder.setStatus(Status.初始化) ;
+    //    private StockOrder init(StockOrder optStockOrder) {
+    //        optStockOrder.setStatus(Status.初始化) ;
+    //
+    //        baseService.save(optStockOrder) ;
+    //
+    //        return optStockOrder ;
+    //    }
 
-        baseService.save(optStockOrder) ;
+    public void check(OptType optype, StockOrder optStockOrder) throws SystemOptServiceException {
 
-        return optStockOrder ;
-    }
+        if (optype.equals(OptType.update)) {
+            String sql = "   select  count(stockOrder.id)  from  StockOrder as stockOrder   where  stockOrder.number='"
 
-    public void check(StockOrder optStockOrder) throws SystemOptServiceException {
+            + optStockOrder.getNumber() + "'  "
 
-        String sql = "   select  count(stockOrder.id)  from  StockOrder as stockOrder   where  stockOrder.number='"
+            + "  and   stockOrder.id !=" + optStockOrder.getId() ;
 
-        + optStockOrder.getNumber() + "'  "
+            Long cont = baseService.selectSumByHSQL(sql) ;
 
-        + "  and   stockOrder.id !=" + optStockOrder.getId() ;
+            if (cont == null || cont.intValue() == 0) {
 
-        Long cont = baseService.selectSumByHSQL(sql) ;
-
-        if (cont == null || cont.intValue() == 0) {
-
+            } else {
+                throw new SystemOptServiceException("采购单号重复") ;
+            }
         } else {
-            throw new SystemOptServiceException("采购单号重复") ;
+            String sql = "   select  count(stockOrder.id)  from  StockOrder as stockOrder   where  stockOrder.number='"
+
+            + optStockOrder.getNumber() + "'  " ;
+
+            Long cont = baseService.selectSumByHSQL(sql) ;
+
+            if (cont == null || cont.intValue() == 0) {
+
+            } else {
+                throw new SystemOptServiceException("采购单号重复") ;
+            }
         }
 
         ProductInfoType productInfoType = optStockOrder.getStockProductType() ;
@@ -108,7 +125,7 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
 
         + "  and   stockOrderDetail.stockOrderId =" + optStockOrder.getId() ;
 
-        cont = baseService.selectSumByHSQL(productInfoTypeSql) ;
+        Long cont = baseService.selectSumByHSQL(productInfoTypeSql) ;
 
         if (cont != null && cont.intValue() > 0) {
 
@@ -116,17 +133,27 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
         }
     }
 
-    public StockOrder save_Update(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
+    public StockOrder save(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
+        check(optType, optStockOrder) ;
+        initOrder(optStockOrder) ;
+        optStockOrder.setStatus(Status.有效) ;
+
+        optStockOrder.setRecordDate(DateToolsUilts.getnowDate()) ;
+        
+        optStockOrder.setNumber(baseService.genSerialNum(OSalesConfigProperties.OrderSimpleName.CGDD.name()));
+        baseService.save(optStockOrder) ;
+        return optStockOrder ;
+    }
+
+    public StockOrder update(OptType optType, StockOrder optStockOrder) throws SystemOptServiceException {
 
         try {
 
-            check(optStockOrder) ;
+            check(optType, optStockOrder) ;
 
             StockOrder stockOrder = baseService.load(optStockOrder.getId(), StockOrder.class) ;
 
-            stockOrder.setStatus(Status.有效) ;
-
-            stockOrder.setRecordDate(DateToolsUilts.getnowDate()) ;
+            
 
             initOrder(optStockOrder) ;
 

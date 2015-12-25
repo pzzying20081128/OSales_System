@@ -1,18 +1,18 @@
 function create_stock_invoice_reconcile_detail_window(moduleId, moduleName) {
 
-	var checkButton = new Ext.Toolbar.Button({
-		// id : moduleId + '_search',
-		xtype : "tbbutton",
-		text : "审核",
-		key : "check",
-		// keyBinding : createSearchKey(),
-		handler : function() {
-			base_combined_product_check_windows(moduleId, moduleName, {
-				grid : mainGridModule
-			});
-		}
-
-	});
+	// var checkButton = new Ext.Toolbar.Button({
+	// // id : moduleId + '_search',
+	// xtype : "tbbutton",
+	// text : "审核",
+	// key : "check",
+	// // keyBinding : createSearchKey(),
+	// handler : function() {
+	// base_combined_product_check_windows(moduleId, moduleName, {
+	// grid : mainGridModule
+	// });
+	// }
+	//
+	// });
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
@@ -22,69 +22,70 @@ function create_stock_invoice_reconcile_detail_window(moduleId, moduleName) {
 		record : stock_invoice_reconcile_detail_grid_column.record,
 		// grid_column.column
 		column : stock_invoice_reconcile_detail_grid_column.column,
-		tbar : {
-			// plugins : new Ext.ux.ToolbarKeyMap(),
-			items : [{
-				// id : moduleId + '_add',
-				key : "add",
-				xtype : "tbbutton",
-				text : "增加",
-				// keyBinding : createCreateKey(),
-				handler : function(bt) {
-					stock_invoice_reconcile_detail_create_windows(moduleId, moduleName, {
-						grid : mainGridModule
-						,
-
-					});
-				}
-			}, {
-				// id : moduleId + '_edit',
-				xtype : "tbbutton",
-				text : "编辑",
-				key : "edit",
-				// keyBinding : createEditKey(),
-				handler : function(bt) {
-					stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : test_search_params
-					});
-				}
-			}, {
-				// id : moduleId + '_delete',
-				xtype : "tbbutton",
-				text : "删除",
-				key : "delete",
-				// keyBinding : createDeleteKey(),
-				handler : function(bt) {
-					stock_invoice_reconcile_detail_delete_windows(moduleId, moduleName, {
-						grid : mainGridModule
-						,
-					});
-				}
-			}, {
-				// id : moduleId + '_search',
-				xtype : "tbbutton",
-				text : "查询",
-				key : "search",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = stock_invoice_reconcile_detail_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : stock_invoice_reconcile_detail_search_params
-					});
-				}
-			}]
-
-		},
+		// tbar : {
+		// // plugins : new Ext.ux.ToolbarKeyMap(),
+		// items : [{
+		// // id : moduleId + '_add',
+		// key : "add",
+		// xtype : "tbbutton",
+		// text : "增加",
+		// // keyBinding : createCreateKey(),
+		// handler : function(bt) {
+		// stock_invoice_reconcile_detail_create_windows(moduleId, moduleName, {
+		// grid : mainGridModule
+		// ,
+		//
+		// });
+		// }
+		// }, {
+		// // id : moduleId + '_edit',
+		// xtype : "tbbutton",
+		// text : "编辑",
+		// key : "edit",
+		// // keyBinding : createEditKey(),
+		// handler : function(bt) {
+		// stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, {
+		// grid : mainGridModule,
+		// searchParams : test_search_params
+		// });
+		// }
+		// }, {
+		// // id : moduleId + '_delete',
+		// xtype : "tbbutton",
+		// text : "删除",
+		// key : "delete",
+		// // keyBinding : createDeleteKey(),
+		// handler : function(bt) {
+		// stock_invoice_reconcile_detail_delete_windows(moduleId, moduleName, {
+		// grid : mainGridModule
+		// ,
+		// });
+		// }
+		// }, {
+		// // id : moduleId + '_search',
+		// xtype : "tbbutton",
+		// text : "查询",
+		// key : "search",
+		// // keyBinding : createSearchKey(),
+		// handler : function() {
+		// var searchWindex =
+		// stock_invoice_reconcile_detail_search_windows(moduleId, moduleName, {
+		// grid : mainGridModule,
+		// searchParams : stock_invoice_reconcile_detail_search_params
+		// });
+		// }
+		// }]
+		//
+		// },
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				stockSelect(data, checkButton, detailGrid);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
+				// stockSelect(data, checkButton, detailGrid);
+				// detailGrid.load({
+				// params : {
+				// // 'searchBean.combinedProductId' : rowDataId
+				// }
+				// });
 
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:

@@ -15,6 +15,8 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockInvoiceService ;
 import cn.zying.osales.service.stocks.units.StockInvoiceBillReconcileSearchUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceCheckUnits ;
+import cn.zying.osales.service.stocks.units.StockInvoiceDetailAutoReconcileUnits ;
+import cn.zying.osales.service.stocks.units.StockInvoiceDetailCancelReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceRemoveUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceSaveUpdateUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceSearchUnits ;
@@ -40,11 +42,18 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
     @Autowired
     @Qualifier("StockInvoiceCheckUnits")
     private StockInvoiceCheckUnits iStockInvoiceCheckUnits ;
-    
+
     @Autowired
     @Qualifier("StockInvoiceBillReconcileSearchUnits")
     private StockInvoiceBillReconcileSearchUnits iStockInvoiceBillReconcileSearchUnits ;
-    
+
+    @Autowired
+    @Qualifier("StockInvoiceDetailAutoReconcileUnits")
+    private StockInvoiceDetailAutoReconcileUnits iStockInvoiceDetailAutoReconcileUnits ;
+
+    @Autowired
+    @Qualifier("StockInvoiceDetailCancelReconcileUnits")
+    private StockInvoiceDetailCancelReconcileUnits iStockInvoiceDetailCancelReconcileUnits ;
 
     @Override
     public StockInvoice saveUpdate(OptType optType, StockInvoice optStockInvoice) throws SystemOptServiceException {
@@ -76,13 +85,27 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
 
     @Override
     public StockInvoice check(StockInvoice stockinvoice) throws SystemOptServiceException {
- 
+
         return iStockInvoiceCheckUnits.check(stockinvoice) ;
     }
 
     @Override
     public SelectPage<StockInvoice> searchBillReconcile(OptType optType, StockInvoiceSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-        return iStockInvoiceBillReconcileSearchUnits.search(optType, searchBean, commSearchBean, startLimit);
+        return iStockInvoiceBillReconcileSearchUnits.search(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public StockInvoice autoReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
+        StockInvoice stockinvoice_ = baseService.get(StockInvoice.class, stockinvoice.getId()) ;
+        iStockInvoiceDetailAutoReconcileUnits.autoReconciles(stockinvoice_) ;
+        return stockinvoice_ ;
+    }
+
+    @Override
+    public StockInvoice cancelReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
+        StockInvoice stockinvoice_ = baseService.get(StockInvoice.class, stockinvoice.getId()) ;
+        iStockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockinvoice_) ;
+        return stockinvoice_ ;
     }
 
 }

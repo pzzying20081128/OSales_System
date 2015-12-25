@@ -37,7 +37,7 @@ function stock_order_save_update_form_panel_windows(params, attachesParams) {
 								params.grid.insertRow(json[params.pojo]);
 								params.grid.getSelectionModel().selectFirstRow();
 								window.close();
-								detailParams.stockdetail.openCreateWin();
+//								detailParams.stockdetail.openCreateWin();
 							} else {
 								params.grid.updateRow(json[params.pojo]);
 								window.close();

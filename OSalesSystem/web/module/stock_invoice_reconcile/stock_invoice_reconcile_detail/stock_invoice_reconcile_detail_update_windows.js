@@ -1,7 +1,7 @@
 function stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
+
 	var selection_rows = grid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
@@ -14,7 +14,6 @@ function stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, par
 		return false;
 	}
 	var selectId = selection_rows[0].id;
-	
 
 	var stock_invoice_reconcile_detail_params = {
 		title : "编辑" + moduleName,
@@ -22,12 +21,12 @@ function stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, par
 		grid : grid,
 		// 结果路径
 		pojo : "sss",
-		//url
+		// url
 		url : './saveUpdateMaterialManage.action',
 		params : {
 			optType : "update"
 		},
-	   reader : new Ext.data.JsonReader({
+		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
 			root : 'result',
 			totalProperty : 'totalProperty'
@@ -35,9 +34,8 @@ function stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, par
 			name : 'dept.name',
 			mapping : 'name'
 		}]),
-		//字段
-		field : [
-		{// 第一排
+		// 字段
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{// 1-1
@@ -106,17 +104,16 @@ function stock_invoice_reconcile_detail_update_windows(moduleId, moduleName, par
 			}// 1-3 end
 			]
 
-		}
-		]
-		
+		}]
+
 	}
 
 	var stock_invoice_reconcile_detail_create_window = new stock_invoice_reconcile_detail_save_update_form_panel_windows(stock_invoice_reconcile_detail_params);
-	
-		stock_invoice_reconcile_detail_create_window.load({
+
+	stock_invoice_reconcile_detail_create_window.load({
 		url : './getStaff.action?uuid=' + goodsId,
 		success : function(result) {
-		               json = result.result;
+			json = result.result;
 		}
 	});
 

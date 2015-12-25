@@ -26,10 +26,20 @@ public interface InfaceStockInvoiceService {
 
     public StockInvoice check(StockInvoice stockinvoice) throws SystemOptServiceException ;
     
-    
-    
     public SelectPage<StockInvoice> searchBillReconcile(OptType optType, StockInvoiceSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
     
+    /**
+     * 自动对帐
+     */
+    public   StockInvoice autoReconcile(StockInvoice stockinvoice) throws SystemOptServiceException ;
+    
+    /**
+     * 取消对帐
+     * @param stockinvoice
+     * @return
+     * @throws SystemOptServiceException
+     */
+    public   StockInvoice cancelReconcile(StockInvoice stockinvoice) throws SystemOptServiceException ;
     
     
 

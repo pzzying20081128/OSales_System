@@ -29,18 +29,26 @@ public class StockInvoiceBillReconcileAction extends OSalesSystemABAction<StockI
 
     private StockInvoiceSearchBean searchBean ;
 
-    //    public String save() throws Exception {
-    //        try {
-    //            BuildMoneyUnits.build(stockinvoice) ;
-    //            stockinvoice.setRecordManId(getOSalsesLoginUserId()) ;
-    //            this.result = service.saveUpdate(optType, stockinvoice) ;
-    //            writeObjectService.intToPrpertiesUnits(result) ;
-    //        } catch (Exception e) {
-    //            this.success = false ;
-    //            this.msg = handError(e) ;
-    //        }
-    //        return SUCCESS ;
-    //    }
+    public String autoReconcile() throws Exception {
+        try {
+            this.result = service.autoReconcile(stockinvoice) ;
+            writeObjectService.intToPrpertiesUnits(result) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+
+    public String cancelReconcile() throws Exception {
+        try {
+            this.result = service.cancelReconcile(stockinvoice) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
 
     //    public String check() throws Exception {
     //        try {

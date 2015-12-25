@@ -9,25 +9,36 @@ function create_stock_order_window(moduleId, moduleName) {
 		disabled : true,
 		// keyBinding : createCreateKey(),
 		handler : function(bt) {
-			ERPAjaxRequest({
-				url : "./simple_StockOrder_initStockOrder.do",
-				// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-				success : function(result) {
-					// init order 都到订单编号
-					order = result.result.result;
-					logger("创建采购订单");
-					var stock_order_create_win = new stock_order_create_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						order : order
-					});
-					stock_order_create_win.openWin({
-						detailParams : {
-							stockdetail : stockdetail
-						}
-					});
-				}
-
+			var stock_order_create_win = new stock_order_create_windows(moduleId, moduleName, {
+				grid : mainGridModule
 			});
+
+			stock_order_create_win.openWin({
+				detailParams : {
+					stockdetail : stockdetail
+				}
+			});
+
+			// ERPAjaxRequest({
+			// url : "./simple_StockOrder_initStockOrder.do",
+			// // async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+			// success : function(result) {
+			// // init order 都到订单编号
+			// order = result.result.result;
+			//				
+			// var stock_order_create_win = new
+			// stock_order_create_windows(moduleId, moduleName, {
+			// grid : mainGridModule,
+			// order : order
+			// });
+			// stock_order_create_win.openWin({
+			// detailParams : {
+			// stockdetail : stockdetail
+			// }
+			// });
+			// }
+			//
+			// });
 		}
 	});
 
@@ -82,9 +93,9 @@ function create_stock_order_window(moduleId, moduleName) {
 
 	var mainGridModule = new mainGridWindow({
 		isPrint : true,
-//		isAddSet:true,
+		// isAddSet:true,
 		moduleId : moduleId,
-		moduleName:moduleName,
+		moduleName : moduleName,
 		// list grid
 		url : "./list_StockOrder_list.do",
 		// grid_column.record
@@ -129,24 +140,21 @@ function create_stock_order_window(moduleId, moduleName) {
 
 	var mainGrid = mainGridModule.getGrid();
 
-	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName+"明细", {
+	var stockdetail = new create_stock_order_detail_window(moduleId + "_store_order_detail", moduleName + "明细", {
 		mainOrderGrid : mainGrid
 	});
-	
-	
 
 	stockdetailGrid = stockdetail.getGrid();
-	
+
 	mainGridModule.setDetailGrid(stockdetailGrid);
-	
-	 {
+
+	{
 		mainGrid.addSetButton({
 			addSet : {
 				grids : [mainGrid, stockdetailGrid]
 			}
 		});
 	}
-	
 
 	var layout = new Ext.Panel({
 		layout : 'border',
