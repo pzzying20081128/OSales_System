@@ -8,7 +8,12 @@ public interface OSalesConfigProperties {
 
     // 采购单是否对过账
     public enum StockBillIsReconciliation {
-        已对帐, 末对帐, 全部对帐, 删除,查询非全部对帐
+        已对帐, 末对帐, 全部对帐, 删除, 查询非全部对帐
+    }
+
+    // 采购付款 付款方式
+    public static enum StockPaymentType {
+        现金, 银行转账, 支票
     }
 
     public enum ContractStatus {
@@ -34,10 +39,12 @@ public interface OSalesConfigProperties {
     //快速生产 CGSR
 
     // 采购发票 SGFP
+    
+    //采购付款 CGFK
 
     // 单据简称
     public enum OrderSimpleName {
-        KSSC, CGSR, CGRK, CGSO, CGTH, CGTHCK, SGFP ,CGDD
+        KSSC, CGSR, CGRK, CGSO, CGTH, CGTHCK, SGFP, CGDD,CGFK
     }
 
     public enum StockType {

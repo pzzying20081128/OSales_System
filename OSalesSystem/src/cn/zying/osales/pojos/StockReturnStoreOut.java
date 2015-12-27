@@ -30,24 +30,24 @@ public class StockReturnStoreOut extends StockCommBean implements java.io.Serial
     // 采购员
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_man_id")
-    @FieldDesc(name = "采购员",mapping="stockMan.name" )
+    @FieldDesc(name = "采购员", mapping = "stockMan.name")
     private SysStaffUser stockMan ;
 
     @Column(name = "stock_man_id", insertable = false, updatable = false)
-    @FieldDesc(name = "采购员",isShow=false)
+    @FieldDesc(name = "采购员", isShow = false)
     private Integer stockManId ;
-    
+
     @Transient
-    private List<Integer>stockManIds;
+    private List<Integer> stockManIds ;
 
     // /采购退货单
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_return_id")
-    @FieldDesc(name = "采购退货单号",mapping="stockReturn.number" )
+    @FieldDesc(name = "采购退货单号", mapping = "stockReturn.number")
     private StockReturn stockReturn ;
 
     @Column(name = "stock_return_id", insertable = false, updatable = false)
-    @FieldDesc(name = "采购退货单",isShow=false)
+    @FieldDesc(name = "采购退货单", isShow = false)
     private Integer stockReturnId ;
 
     // 退货日期

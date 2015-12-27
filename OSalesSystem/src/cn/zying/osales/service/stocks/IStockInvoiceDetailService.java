@@ -1,21 +1,9 @@
- package  cn.zying.osales.service.stocks;
-
- 
- 
- import cn.zy.apps.tools.web.SelectPage ;
+package cn.zying.osales.service.stocks ;
 
 import cn.zying.osales.infaces.InfaceStockInvoiceDetailService ;
-import cn.zying.osales.pojos.StockInvoiceDetail ; 
 
+public interface IStockInvoiceDetailService extends InfaceStockInvoiceDetailService {
 
-public interface IStockInvoiceDetailService  extends InfaceStockInvoiceDetailService { 
-    
-            public String name="IStockInvoiceDetailService";
-            
-                
-        
-            
-            
-            
+    public String name = "IStockInvoiceDetailService" ;
 
 }

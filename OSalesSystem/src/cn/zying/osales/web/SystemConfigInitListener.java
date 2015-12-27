@@ -91,7 +91,7 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         //		loadStoreProductInfoStock(springContext);
         //
         loadProviderInfo(springContext, prpertiesAutoWriteObjectService) ;
-        
+
         loadCompanyInfo(springContext, prpertiesAutoWriteObjectService) ;
 
     }
@@ -107,7 +107,7 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         for (CompanyInfo companyInfo : companyInfos) {
             prpertiesAutoWriteObjectService.cacheObject(companyInfo.getId().toString(), companyInfo) ;
         }
-        
+
     }
 
     private void loadProviderInfo(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {

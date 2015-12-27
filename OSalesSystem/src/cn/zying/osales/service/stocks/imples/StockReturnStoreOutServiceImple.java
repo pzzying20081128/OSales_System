@@ -35,10 +35,10 @@ public class StockReturnStoreOutServiceImple extends ABCommonsService implements
     @Autowired
     @Qualifier("StockReturnStoreOutRemoveUnits")
     private StockReturnStoreOutRemoveUnits iStockReturnStoreOutRemoveUnits ;
-    
+
     @Autowired
     @Qualifier("StockReturnStoreOutCheckUnits")
-    private StockReturnStoreOutCheckUnits  iStockReturnStoreOutCheckUnits;
+    private StockReturnStoreOutCheckUnits iStockReturnStoreOutCheckUnits ;
 
     @Override
     public StockReturnStoreOut saveUpdate(OptType optType, StockReturnStoreOut optStockReturnStoreOut) throws SystemOptServiceException {
@@ -69,9 +69,9 @@ public class StockReturnStoreOutServiceImple extends ABCommonsService implements
     }
 
     @Override
-    public void check(  Integer id  , Integer oSalsesLoginUserId) throws SystemOptServiceException {
-        iStockReturnStoreOutCheckUnits.check(id, oSalsesLoginUserId);
-        
+    public void check(Integer id, Integer oSalsesLoginUserId) throws SystemOptServiceException {
+        iStockReturnStoreOutCheckUnits.check(id, oSalsesLoginUserId) ;
+
     }
 
 }

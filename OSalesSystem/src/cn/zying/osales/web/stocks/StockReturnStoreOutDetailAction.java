@@ -40,7 +40,7 @@ public class StockReturnStoreOutDetailAction extends OSalesSystemABAction<StockR
             BuildMoneyUnits.build(stockreturnstoreoutdetail) ;
             this.result = service.saveUpdate(optType, stockreturnstoreoutdetail) ;
             StockReturnStoreOut stockReturnStoreOut = stockReturnStoreOutService.get(this.result.getStockReturnStoreOutId()) ;
-            this.result.setStockReturnStoreOut(stockReturnStoreOut);
+            this.result.setStockReturnStoreOut(stockReturnStoreOut) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -48,7 +48,6 @@ public class StockReturnStoreOutDetailAction extends OSalesSystemABAction<StockR
         }
         return SUCCESS ;
     }
-
 
     public String get() throws Exception {
         try {
@@ -79,7 +78,7 @@ public class StockReturnStoreOutDetailAction extends OSalesSystemABAction<StockR
         try {
             this.result = service.remove(OptType.delete, stockreturnstoreoutdetail) ;
             StockReturnStoreOut stockReturnStoreOut = stockReturnStoreOutService.get(this.result.getStockReturnStoreOutId()) ;
-            this.result.setStockReturnStoreOut(stockReturnStoreOut);
+            this.result.setStockReturnStoreOut(stockReturnStoreOut) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -89,26 +88,20 @@ public class StockReturnStoreOutDetailAction extends OSalesSystemABAction<StockR
         return SUCCESS ;
     }
 
-
     public StockReturnStoreOutDetail getStockreturnstoreoutdetail() {
         return stockreturnstoreoutdetail ;
     }
-
 
     public void setStockreturnstoreoutdetail(StockReturnStoreOutDetail stockreturnstoreoutdetail) {
         this.stockreturnstoreoutdetail = stockreturnstoreoutdetail ;
     }
 
-
     public StockReturnStoreOutDetailSearchBean getSearchBean() {
         return searchBean ;
     }
 
-
     public void setSearchBean(StockReturnStoreOutDetailSearchBean searchBean) {
         this.searchBean = searchBean ;
     }
-
-    
 
 }

@@ -58,8 +58,8 @@ public class StockContract extends CommBean {
     // 采购员 **/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_man_id")
-    @FieldDesc(name = "采购员" , mapping = "stockMan.name")
-    private SysStaffUser  stockMan ;
+    @FieldDesc(name = "采购员", mapping = "stockMan.name")
+    private SysStaffUser stockMan ;
 
     @Column(name = "stock_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "采购员", isShow = false)
@@ -70,7 +70,7 @@ public class StockContract extends CommBean {
      **/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_info_id")
-    @FieldDesc(name = "公司名称" , mapping = "companyGuest.name")
+    @FieldDesc(name = "公司名称", mapping = "companyGuest.name")
     private CompanyInfo companyInfo ;
 
     @Column(name = "company_info_id", insertable = false, updatable = false)
@@ -81,12 +81,12 @@ public class StockContract extends CommBean {
      * // 合同类型
      **/
     @Column(name = "contract_status")
-    @FieldDesc(name="合同类型", desc = { "未启用合同:未启用合同", "执行合同:执行合同", "历史合同:历史合同", "待定:待定" })
+    @FieldDesc(name = "合同类型", desc = { "未启用合同:未启用合同", "执行合同:执行合同", "历史合同:历史合同", "待定:待定" })
     @Enumerated(EnumType.STRING)
     private ContractStatus contractStatus ;
 
     @Column(name = "text")
-    @FieldDesc(name = "备注" )
+    @FieldDesc(name = "备注")
     private String text ;
 
     /**
@@ -94,7 +94,7 @@ public class StockContract extends CommBean {
      **/
     @Column(name = "signed_date")
     @Temporal(TemporalType.DATE)
-    @FieldDesc(name = "签订日期" )
+    @FieldDesc(name = "签订日期")
     private Date signedDate ;
 
     public String getNum() {
@@ -145,8 +145,6 @@ public class StockContract extends CommBean {
         this.stockManId = stockManId ;
     }
 
-    
-
     public ContractStatus getContractStatus() {
         return contractStatus ;
     }
@@ -186,8 +184,5 @@ public class StockContract extends CommBean {
     public void setCompanyInfoId(Integer companyInfoId) {
         this.companyInfoId = companyInfoId ;
     }
-
-   
-
 
 }

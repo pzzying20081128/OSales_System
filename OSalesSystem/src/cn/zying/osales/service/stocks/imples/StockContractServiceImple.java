@@ -1,7 +1,6 @@
- package  cn.zying.osales.service.stocks.imples;
- 
+package cn.zying.osales.service.stocks.imples ;
 
-  import java.util.List ;
+import java.util.List ;
 
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
@@ -18,57 +17,50 @@ import cn.zying.osales.service.stocks.units.StockContractRemoveUnits ;
 import cn.zying.osales.service.stocks.units.StockContractSaveUpdateUnits ;
 import cn.zying.osales.service.stocks.units.StockContractSearchUnits ;
 import cn.zying.osales.units.search.bean.StockContractSearchBean ;
- 
 
 @Component(IStockContractService.name)
-public class StockContractServiceImple extends  ABCommonsService  implements IStockContractService {
+public class StockContractServiceImple extends ABCommonsService implements IStockContractService {
 
-            //@Resource(name="StockContractSearchUnits")
-			  @Autowired
-            @Qualifier("StockContractSearchUnits")        
-            private  StockContractSearchUnits  iStockContractSearchUnits;
-           
-           //@Resource(name=" StockContractSaveUpdateUnits")
-		     @Autowired
-            @Qualifier("StockContractSaveUpdateUnits")      
-           private StockContractSaveUpdateUnits  iStockContractSaveUpdateUnits;
-			
-		   
-		      @Autowired
+    //@Resource(name="StockContractSearchUnits")
+    @Autowired
+    @Qualifier("StockContractSearchUnits")
+    private StockContractSearchUnits iStockContractSearchUnits ;
+
+    //@Resource(name=" StockContractSaveUpdateUnits")
+    @Autowired
+    @Qualifier("StockContractSaveUpdateUnits")
+    private StockContractSaveUpdateUnits iStockContractSaveUpdateUnits ;
+
+    @Autowired
     @Qualifier("StockContractRemoveUnits")
     private StockContractRemoveUnits iStockContractRemoveUnits ;
-		   
-			@Override
-            public StockContract saveUpdate(OptType  optType ,   StockContract   optStockContract )throws SystemOptServiceException{
-        	     return 	 iStockContractSaveUpdateUnits.saveUpdate(optType, optStockContract);
-        		}
-            
-       	   @Override
-            public SelectPage<StockContract > search(OptType  optType ,    
-				   StockContractSearchBean  searchBean , CommSearchBean  commSearchBean ,int... startLimit)throws SystemOptServiceException{
-				    return  iStockContractSearchUnits.search(optType, searchBean,
-					commSearchBean ,startLimit );
-            }
-			
-			 @Override
-			public List<StockContract > searchList(OptType  optType ,    
-				           StockContractSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			  return  iStockContractSearchUnits.list(optType, searchBean,
-					commSearchBean ,startLimit );
-            
+
+    @Override
+    public StockContract saveUpdate(OptType optType, StockContract optStockContract) throws SystemOptServiceException {
+        return iStockContractSaveUpdateUnits.saveUpdate(optType, optStockContract) ;
     }
-            
-			@Override
-            public  StockContract   remove(OptType  optType ,   StockContract   optStockContract)throws SystemOptServiceException{
-			      return   iStockContractRemoveUnits.remove(optType, optStockContract);
-			  }
-			  
-			   @Override
-            public StockContract get(Integer id) throws SystemOptServiceException {
-                
-                return baseService.get(id, StockContract.class) ;
-            }
-            
-            
+
+    @Override
+    public SelectPage<StockContract> search(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        return iStockContractSearchUnits.search(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public List<StockContract> searchList(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStockContractSearchUnits.list(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    @Override
+    public StockContract remove(OptType optType, StockContract optStockContract) throws SystemOptServiceException {
+        return iStockContractRemoveUnits.remove(optType, optStockContract) ;
+    }
+
+    @Override
+    public StockContract get(Integer id) throws SystemOptServiceException {
+
+        return baseService.get(id, StockContract.class) ;
+    }
+
 }

@@ -19,54 +19,51 @@ public class CompanyInfo extends CommBean {
 
     private static final long serialVersionUID = 6856926347044776180L ;
 
-   
     @Column(name = "short_name")
-    @FieldDesc(name="简称")
+    @FieldDesc(name = "简称")
     private String shortName ;
 
     @Column(name = "name")
-    @FieldDesc(name="单位名字")
+    @FieldDesc(name = "单位名字")
     private String name ;
 
     @Column(name = "address")
-    @FieldDesc(name="单位地址")
+    @FieldDesc(name = "单位地址")
     private String address ;
 
     @Column(name = "contact_man")
     private String contactMan ;
 
     @Column(name = "phone")
-    @FieldDesc(name="联系电话")
+    @FieldDesc(name = "联系电话")
     private String phone ;
 
     @Column(name = "order_phone")
-    @FieldDesc(name="订货电话")
+    @FieldDesc(name = "订货电话")
     private String orderPhone ;
 
     @Column(name = "fax")
-    @FieldDesc(name="传真")
+    @FieldDesc(name = "传真")
     private String fax ;
 
     @Column(name = "web")
-    @FieldDesc(name="网页")
+    @FieldDesc(name = "网页")
     private String web ;
 
     @Column(name = "mail")
-    @FieldDesc(name="电子邮箱")
+    @FieldDesc(name = "电子邮箱")
     private String mail ;
-    
+
     @Column(name = "is_default")
-    @FieldDesc(name="默认" ,desc="0:否;1:是")
-    private Integer   isDefault ;
-
-
+    @FieldDesc(name = "默认", desc = "0:否;1:是")
+    private Integer isDefault ;
 
     @Column(name = "bank")
-    @FieldDesc(name="银行")
+    @FieldDesc(name = "银行")
     private String bank ;
 
     @Column(name = "bank_num")
-    @FieldDesc(name="银行帐号")
+    @FieldDesc(name = "银行帐号")
     private String bankNum ;
 
     public String getShortName() {
@@ -164,9 +161,5 @@ public class CompanyInfo extends CommBean {
     public void setIsDefault(Integer isDefault) {
         this.isDefault = isDefault ;
     }
-
-
-
-    
 
 }

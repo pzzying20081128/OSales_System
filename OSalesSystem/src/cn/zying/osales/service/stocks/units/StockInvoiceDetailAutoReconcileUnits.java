@@ -10,7 +10,6 @@ import cn.zying.osales.pojos.StockInvoiceBillDetail ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.units.search.bean.StockInvoiceBillDetailSearchBean ;
 
 /**
  * 发票自动对票
@@ -20,12 +19,22 @@ import cn.zying.osales.units.search.bean.StockInvoiceBillDetailSearchBean ;
 @Component("StockInvoiceDetailAutoReconcileUnits")
 public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
 
-    public StockInvoiceBillDetail autoReconcile(StockInvoice stockInvoice, StockInvoiceBillDetail stockInvoiceBillDetail) throws SystemOptServiceException {
-        if(stockInvoice.getReconciliationSum().longValue() ==0){
-            throw new SystemOptServiceException("该发票的对帐金额为零");
+    public StockInvoiceBillDetail handleReconcile(StockInvoice stockInvoice, StockInvoiceBillDetail stockInvoiceBillDetail) throws SystemOptServiceException {
+        if (stockInvoice.getReconciliationSum().longValue() == 0) {
+            throw new SystemOptServiceException("该发票的对帐金额为零") ;
         }
         long reconciliationSum = stockInvoice.getReconciliationSum() ;
-        reconciliationSum = wewe(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
+        reconciliationSum = handleReconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
+        baseService.update(stockInvoice) ;
+        return stockInvoiceBillDetail ;
+    }
+
+    public StockInvoiceBillDetail autoReconcile(StockInvoice stockInvoice, StockInvoiceBillDetail stockInvoiceBillDetail) throws SystemOptServiceException {
+        if (stockInvoice.getReconciliationSum().longValue() == 0) {
+            throw new SystemOptServiceException("该发票的对帐金额为零") ;
+        }
+        long reconciliationSum = stockInvoice.getReconciliationSum() ;
+        reconciliationSum = autoReconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
         baseService.update(stockInvoice) ;
         return stockInvoiceBillDetail ;
     }
@@ -38,18 +47,23 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
 
         for (StockInvoiceBillDetail stockInvoiceBillDetail : stockInvoiceBillDetailes) {
 
-            reconciliationSum = wewe(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
-            
+            reconciliationSum = autoReconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
+
             if (reconciliationSum == 0) break ;
         }
         baseService.update(stockInvoice) ;
     }
 
-    private long wewe(StockInvoice stockInvoice, long reconciliationSum, StockInvoiceBillDetail stockInvoiceBillDetail) {
+    private long handleReconcile(StockInvoice stockInvoice, long reconciliationSum, StockInvoiceBillDetail stockInvoiceBillDetail) {
 
-        long kill = (reconciliationSum >= stockInvoiceBillDetail.getBillSum()) ? stockInvoiceBillDetail.getBillSum() : reconciliationSum ;
+        long kill = stockInvoiceBillDetail.getStockInvoiceDetailKillSum() ;
 
-        reconciliationSum = reconciliationSum - kill ;
+        reconciliationSum = reconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail, kill) ;
+
+        return reconciliationSum ;
+    }
+
+    private long reconcile(StockInvoice stockInvoice, long reconciliationSum, StockInvoiceBillDetail stockInvoiceBillDetail, long kill) {
 
         StockInvoiceDetail stockInvoiceDetail = new StockInvoiceDetail() ;
 
@@ -78,7 +92,7 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
         ////////////////////////////////////////////////////////////////////////////////
         stockInvoice.setKillSum(stockInvoice.getKillSum() + stockInvoiceDetail.getKillSum()) ;
 
-        stockInvoice.setNoKillSum(stockInvoice.getReconciliationSum() - stockInvoice.getKillSum()) ;
+        stockInvoice.setNoKillSum(stockInvoice.getInvoiceSum() - stockInvoice.getKillSum()) ;
 
         stockInvoice.setReconciliationSum(stockInvoice.getNoKillSum()) ;
 
@@ -87,6 +101,16 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
         } else {
             stockInvoice.setReconciliation(StockBillIsReconciliation.全部对帐) ;
         }
+
+        reconciliationSum = reconciliationSum - kill ;
+        return reconciliationSum ;
+    }
+
+    private long autoReconcile(StockInvoice stockInvoice, long reconciliationSum, StockInvoiceBillDetail stockInvoiceBillDetail) {
+
+        long kill = (reconciliationSum >= stockInvoiceBillDetail.getNoKillSum()) ? stockInvoiceBillDetail.getNoKillSum() : reconciliationSum ;
+
+        reconciliationSum = reconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail, kill) ;
 
         return reconciliationSum ;
     }

@@ -52,11 +52,11 @@ public class PrpertiesAutoWriteObjectService extends SimpleAutoWritePrpertiesObj
     protected boolean isEqualsParents(Object child, Object parents) {
 
         Object id = readFieldValue(idfield, child) ;
-        if(id==null)return true;
+        if (id == null) return true ;
 
         Object parentsId = readFieldValue(idfield, parents) ;
-        if(parentsId==null)return true;
-        
+        if (parentsId == null) return true ;
+
         return id.equals(parentsId) ;
     }
 

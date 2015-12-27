@@ -6,15 +6,11 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.OSalesConfigProperties.OrderSimpleName ;
 import cn.zying.osales.pojos.StockInvoice ;
-import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.StockInvoiceSearchBean ;
-import cn.zying.osales.units.search.bean.StockOrderSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockInvoiceService ;
-import cn.zying.osales.web.aop.IAopStockOrderService ;
 
 @Component("StockInvoiceAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)

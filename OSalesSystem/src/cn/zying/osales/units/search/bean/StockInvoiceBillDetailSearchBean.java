@@ -1,10 +1,10 @@
-package cn.zying.osales.units.search.bean;
+package cn.zying.osales.units.search.bean ;
 
 import cn.zying.osales.pojos.StockInvoiceBillDetail ;
 
 public class StockInvoiceBillDetailSearchBean extends StockInvoiceBillDetail {
 
-    private Integer  stockInvoiceId;
+    private Integer stockInvoiceId ;
 
     public Integer getStockInvoiceId() {
         return stockInvoiceId ;
@@ -13,7 +13,5 @@ public class StockInvoiceBillDetailSearchBean extends StockInvoiceBillDetail {
     public void setStockInvoiceId(Integer stockInvoiceId) {
         this.stockInvoiceId = stockInvoiceId ;
     }
-    
-    
-    
+
 }

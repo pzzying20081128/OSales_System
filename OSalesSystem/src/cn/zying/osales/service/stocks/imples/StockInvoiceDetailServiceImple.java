@@ -98,6 +98,22 @@ public class StockInvoiceDetailServiceImple extends ABCommonsService implements 
 
     }
 
+    @Override
+    public StockInvoiceBillDetail handleReconcile(StockInvoiceBillDetail stockinvoicebilldetail) throws SystemOptServiceException {
+
+        StockInvoice stockInvoice = baseService.get(stockinvoicebilldetail.getStockInvoiceId(), StockInvoice.class) ;
+
+        StockInvoiceBillDetail stockInvoiceBillDetail = baseService.get(StockInvoiceBillDetail.class, stockinvoicebilldetail.getId()) ;
+
+        stockInvoiceBillDetail.setStockInvoiceDetailKillSum(stockinvoicebilldetail.getStockInvoiceDetailKillSum()) ;
+
+        stockInvoiceBillDetail = iStockInvoiceDetailAutoReconcileUnits.handleReconcile(stockInvoice, stockInvoiceBillDetail) ;
+
+        stockInvoiceBillDetail.setStockInvoice(stockInvoice) ;
+        return stockInvoiceBillDetail ;
+
+    }
+
     @Autowired
     @Qualifier("StockInvoiceDetailCancelReconcileUnits")
     private StockInvoiceDetailCancelReconcileUnits iStockInvoiceDetailCancelReconcileUnits ;
@@ -107,19 +123,19 @@ public class StockInvoiceDetailServiceImple extends ABCommonsService implements 
         StockInvoice stockInvoice = baseService.get(stockinvoicebilldetail.getStockInvoiceId(), StockInvoice.class) ;
 
         StockInvoiceDetail stockInvoiceDetail = baseService.load(stockinvoicebilldetail.getStockInvoiceDetailId(), StockInvoiceDetail.class) ;
-        
-        StockInvoiceBillDetail  stockinvoicebilldetail_ = iStockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockInvoice, stockInvoiceDetail) ;
-        
-        stockinvoicebilldetail_ =baseService.get(stockinvoicebilldetail.getId(), StockInvoiceBillDetail.class);
-        
+
+        StockInvoiceBillDetail stockinvoicebilldetail_ = iStockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockInvoice, stockInvoiceDetail) ;
+
+        stockinvoicebilldetail_ = baseService.get(stockinvoicebilldetail.getId(), StockInvoiceBillDetail.class) ;
+
         stockinvoicebilldetail_.setStockInvoice(stockInvoice) ;
-        
+
         return stockinvoicebilldetail_ ;
     }
 
     @Override
     public StockInvoiceBillDetail getStockInvoiceBillDetail(Integer stockInvoiceBillDetailId) throws SystemOptServiceException {
-       
+
         return baseService.get(stockInvoiceBillDetailId, StockInvoiceBillDetail.class) ;
     }
 

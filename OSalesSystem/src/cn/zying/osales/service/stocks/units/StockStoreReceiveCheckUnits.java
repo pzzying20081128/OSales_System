@@ -16,10 +16,10 @@ import cn.zying.osales.service.stocks.invoice.IStockInvoiceDetailCreateService ;
 
 @Component("StockStoreReceiveCheckUnits")
 public class StockStoreReceiveCheckUnits extends ABCommonsService {
-    
+
     @Autowired
     @Qualifier(IStockInvoiceDetailCreateService.name)
-    private IStockInvoiceDetailCreateService iStockInvoiceDetailCreateService;
+    private IStockInvoiceDetailCreateService iStockInvoiceDetailCreateService ;
 
     public void cancelCheckDel(StockStoreReceive stockStoreReceive, Integer optUserId) throws SystemOptServiceException {
         if (stockStoreReceive == null) return ;
@@ -38,11 +38,11 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
         switch (stockStoreReceive.getStatus()) {
         case 有效:
             checking(stockStoreReceive, optUserId) ;
-            iStockInvoiceDetailCreateService.createInvoiceDetail(BillType.采购进货单, stockStoreReceive);
+            iStockInvoiceDetailCreateService.createInvoiceDetail(BillType.采购进货单, stockStoreReceive) ;
             break ;
         case 已审核:
             cancelCheck(stockStoreReceive, optUserId) ;
-            iStockInvoiceDetailCreateService.removeInvoiceDetail(BillType.采购进货单, stockStoreReceive);
+            iStockInvoiceDetailCreateService.removeInvoiceDetail(BillType.采购进货单, stockStoreReceive) ;
             break ;
 
         default:
@@ -73,7 +73,6 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
         stockStoreReceive.setStatus(Status.已审核) ;
         stockStoreReceive.setCheckDate(DateToolsUilts.getnowDate()) ;
         baseService.update(stockStoreReceive) ;
-        
 
     }
 }

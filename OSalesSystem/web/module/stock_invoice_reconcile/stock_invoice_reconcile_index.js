@@ -43,7 +43,9 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					stock_invoice_reconcile_handle_windows(moduleId, "手工对帐", {
-						grid : mainGridModule
+						grid : mainGridModule,
+						reStockInvoice:reStockInvoice
+						
 					});
 				}
 			}, {
@@ -90,6 +92,8 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 			}
 		}
 	});
+	
+	
 
 	var mainGrid = mainGridModule.getGrid();
 
@@ -99,6 +103,15 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 	var detailGrid = detailModule.getDetailGridModule().getGrid();
 
 	mainGridModule.setDetailGrid(detailGrid);
+	
+	function reStockInvoice(stockInvoice){
+		mainGrid.updateRow(stockInvoice);
+			detailGrid.load({
+					params : {
+						'searchBean.stockInvoiceId' : stockInvoice.id
+					}
+				});
+	}
 
 	var layout = new Ext.Panel({
 		layout : 'border',
@@ -172,7 +185,11 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {
-						mainGrid.reload();
+						mainGrid.reload({
+						   success:function(){
+						   	detailGrid.removeAll();
+						   }
+						});
 					}
 				});
 			}

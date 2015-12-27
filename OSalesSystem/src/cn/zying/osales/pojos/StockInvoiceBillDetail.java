@@ -27,13 +27,13 @@ import cn.zying.osales.pojos.commons.DetailCommBean ;
 @Table(name = "stock_invoice_bill_detail")
 public class StockInvoiceBillDetail extends DetailCommBean {
 
-//    // 采购发票
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "stock_invoice_id")
-//    private StockInvoice stockInvoice ;
-//
-//    @Column(name = "stock_invoice_id", insertable = false, updatable = false)
-//    private Integer stockInvoiceId ;
+    //    // 采购发票
+    //    @ManyToOne(fetch = FetchType.LAZY)
+    //    @JoinColumn(name = "stock_invoice_id")
+    //    private StockInvoice stockInvoice ;
+    //
+    //    @Column(name = "stock_invoice_id", insertable = false, updatable = false)
+    //    private Integer stockInvoiceId ;
 
     /**
      * 
@@ -48,7 +48,7 @@ public class StockInvoiceBillDetail extends DetailCommBean {
 
     @Column(name = "provider_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "供应商", isShow = false)
-    private Integer providerInfoId; ;
+    private Integer providerInfoId ; ;
 
     // 单据类型
     @Column(name = "bill_type")
@@ -114,19 +114,31 @@ public class StockInvoiceBillDetail extends DetailCommBean {
     @Column(name = "bill_info")
     @FieldDesc(name = "单据信息")
     private String billInfo ;
-    
-    @Transient
-    private StockInvoiceDetail stockInvoiceDetail;
-    
-    @Transient
-    private Integer stockInvoiceDetailId;
-    
-    @Transient
-    private Integer  stockInvoiceId;
-    @Transient
-    private StockInvoice stockInvoice;
 
-    
+    @Transient
+    private StockInvoiceDetail stockInvoiceDetail ;
+
+    @Transient
+    private Integer stockInvoiceDetailId ;
+
+    @Transient
+    private Integer stockInvoiceId ;
+
+    @Transient
+    private StockInvoice stockInvoice ;
+
+    //单据对帐金额
+    @Transient
+    private Long stockInvoiceDetailKillSum ;
+
+    @Transient
+    @FieldDesc(name = "抵消金额", isShow = true)
+    private String stockInvoiceDetailKillSumMoneyShow ;
+
+    @Transient
+    @FieldDesc(name = "抵消金额", isShow = false)
+    private String stockInvoiceDetailKillSumMoneyHide ;
+
     public StockInvoice getStockInvoice() {
         return stockInvoice ;
     }
@@ -134,7 +146,8 @@ public class StockInvoiceBillDetail extends DetailCommBean {
     public void setStockInvoice(StockInvoice stockInvoice) {
         this.stockInvoice = stockInvoice ;
     }
-//
+
+    //
     public Integer getStockInvoiceId() {
         return stockInvoiceId ;
     }
@@ -150,8 +163,6 @@ public class StockInvoiceBillDetail extends DetailCommBean {
     public void setProviderInfo(ProviderInfo providerInfo) {
         this.providerInfo = providerInfo ;
     }
-
-   
 
     public BillType getBillType() {
         return billType ;
@@ -289,6 +300,28 @@ public class StockInvoiceBillDetail extends DetailCommBean {
         this.stockInvoiceDetailId = stockInvoiceDetailId ;
     }
 
-  
+    public Long getStockInvoiceDetailKillSum() {
+        return stockInvoiceDetailKillSum ;
+    }
+
+    public void setStockInvoiceDetailKillSum(Long stockInvoiceDetailKillSum) {
+        this.stockInvoiceDetailKillSum = stockInvoiceDetailKillSum ;
+    }
+
+    public String getStockInvoiceDetailKillSumMoneyShow() {
+        return stockInvoiceDetailKillSumMoneyShow ;
+    }
+
+    public void setStockInvoiceDetailKillSumMoneyShow(String stockInvoiceDetailKillSumMoneyShow) {
+        this.stockInvoiceDetailKillSumMoneyShow = stockInvoiceDetailKillSumMoneyShow ;
+    }
+
+    public String getStockInvoiceDetailKillSumMoneyHide() {
+        return stockInvoiceDetailKillSumMoneyHide ;
+    }
+
+    public void setStockInvoiceDetailKillSumMoneyHide(String stockInvoiceDetailKillSumMoneyHide) {
+        this.stockInvoiceDetailKillSumMoneyHide = stockInvoiceDetailKillSumMoneyHide ;
+    }
 
 }

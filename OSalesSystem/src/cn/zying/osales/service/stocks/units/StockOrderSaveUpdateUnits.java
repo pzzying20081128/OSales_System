@@ -139,8 +139,8 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
         optStockOrder.setStatus(Status.有效) ;
 
         optStockOrder.setRecordDate(DateToolsUilts.getnowDate()) ;
-        
-        optStockOrder.setNumber(baseService.genSerialNum(OSalesConfigProperties.OrderSimpleName.CGDD.name()));
+
+        optStockOrder.setNumber(baseService.genSerialNum(OSalesConfigProperties.OrderSimpleName.CGDD.name())) ;
         baseService.save(optStockOrder) ;
         return optStockOrder ;
     }
@@ -152,8 +152,6 @@ public class StockOrderSaveUpdateUnits extends ABCommonsService {
             check(optType, optStockOrder) ;
 
             StockOrder stockOrder = baseService.load(optStockOrder.getId(), StockOrder.class) ;
-
-            
 
             initOrder(optStockOrder) ;
 

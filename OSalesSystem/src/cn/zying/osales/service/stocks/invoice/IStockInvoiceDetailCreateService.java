@@ -1,4 +1,4 @@
-package cn.zying.osales.service.stocks.invoice;
+package cn.zying.osales.service.stocks.invoice ;
 
 import cn.zying.osales.OSalesConfigProperties.BillType ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -9,11 +9,11 @@ import cn.zying.osales.service.SystemOptServiceException ;
  *
  */
 public interface IStockInvoiceDetailCreateService {
-    
-    public String name ="IStockInvoiceDetailCreateService";
-    
-    public  <T>  void createInvoiceDetail(BillType billType , T bill )throws SystemOptServiceException;
-    
-    public  <T>  void removeInvoiceDetail(BillType billType , T bill )throws SystemOptServiceException;
+
+    public String name = "IStockInvoiceDetailCreateService" ;
+
+    public <T> void createInvoiceDetail(BillType billType, T bill) throws SystemOptServiceException ;
+
+    public <T> void removeInvoiceDetail(BillType billType, T bill) throws SystemOptServiceException ;
 
 }

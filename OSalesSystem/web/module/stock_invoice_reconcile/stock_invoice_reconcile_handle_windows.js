@@ -16,6 +16,8 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 
 	var selection_rows = grid.getSelectionModel().getSelections();
+	
+	var reStockInvoice =params.reStockInvoice;
 
 	if (selection_rows == null) {
 		showErrorMsg('提示信息', '请选择要删除的数据记录！！');
@@ -38,6 +40,9 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 		}, {
 			name : "billSumMoneyShow",
 			mapping : "billSumMoneyShow"
+		}, {
+			name : "noKillSumMoneyShow",
+			mapping : "noKillSumMoneyShow"
 		}, {
 			name : "stockInvoiceDetail.killSumMoneyShow",
 			mapping : "stockInvoiceDetail"
@@ -84,7 +89,20 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 
 			}
 		}, {
-			header : '已对对金额',
+			header : '剩余金额',
+			width : 200,
+			dataIndex : 'noKillSumMoneyShow',
+			sortable : true,
+			renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+				if (value == null || typeof ( value ) == 'undefined')
+					return null
+				else
+					return value;
+
+			}
+		}, {
+			header : '对帐金额',
 			width : 200,
 			dataIndex : 'stockInvoiceDetail.killSumMoneyShow',
 			sortable : true,
@@ -131,8 +149,15 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 				text : "手工对帐",
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
-					stock_invoice_reconcile_handle_windows(moduleId, "手工对帐", {
-						grid : mainGridModule
+					var reconciliationSumMoneyShow = mainGridModule.stockInvoice.reconciliationSumMoneyShow;
+					if (reconciliationSumMoneyShow == 0) {
+						showErrorMsg("错误", "改发票对账余额为零,已对帐完成");
+						return;
+					}
+					stock_invoice_reconcile_bill_handle_windows(moduleId, "手工对帐", {
+						grid : mainGridModule,
+						setStockInvoiceFormValue:setStockInvoiceFormValue
+
 					});
 				}
 			}, {
@@ -411,23 +436,8 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 			text : '提交',
 			listeners : {
 				'click' : function() {
-					form_panel.submit({
-						url : params.url,
-						waitMsg : '正在提交...',
-						submitEmptyText : false,
-						params : params.params,
-						success : function(result) {
-							json = result.result;
-							if (params.action == "save") {
-								params.grid.insertRow(json[params.pojo]);
-								form_panel.reset();
-							} else {
-								params.grid.updateRow(json[params.pojo]);
-								window.close();
-							}
-
-						}
-					});
+					reStockInvoice(mainGridModule.stockInvoice);
+					window.close();
 				}
 			}
 		}, {
@@ -453,6 +463,8 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 	stock_invoice_reconcile_handle_params_form.load({
 		url : './simple_StockInvoice_get.do?uuid=' + selectId,
 		success : function(result) {
+			var stockInvoice_ = result.result.result;
+			mainGridModule.stockInvoice = stockInvoice_;
 			mainGrid.load({
 				params : {
 					"searchBean.providerInfoId" : selection_rows[0].data.providerInfoId,
@@ -500,13 +512,19 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 						var stockinvoicebilldetail = result.result.result;
 						grid.updateRow(stockinvoicebilldetail);
 						var stockInvoice = stockinvoicebilldetail.stockInvoice;
-						killSumMoneyShow.setValue(stockInvoice.killSumMoneyShow);
-						noKillSumMoneyShow.setValue(stockInvoice.noKillSumMoneyShow);
-						reconciliationSumMoneyShow.setValue(stockInvoice.reconciliationSumMoneyShow);
+						
+						setStockInvoiceFormValue(stockInvoice);
 					}
 				});
 			}
 		});
+	}
+
+	function setStockInvoiceFormValue(stockInvoice) {
+		mainGridModule.stockInvoice = stockInvoice;
+		killSumMoneyShow.setValue(stockInvoice.killSumMoneyShow);
+		noKillSumMoneyShow.setValue(stockInvoice.noKillSumMoneyShow);
+		reconciliationSumMoneyShow.setValue(stockInvoice.reconciliationSumMoneyShow);
 	}
 
 	function stock_invoice_reconcile_handle_auto_windows(moduleId, moduleName, params) {
@@ -540,6 +558,7 @@ function stock_invoice_reconcile_handle_windows(moduleId, moduleName, params) {
 						var stockinvoicebilldetail = result.result.result;
 						grid.updateRow(stockinvoicebilldetail);
 						var stockInvoice = stockinvoicebilldetail.stockInvoice;
+						mainGridModule.stockInvoice = stockInvoice;
 						killSumMoneyShow.setValue(stockInvoice.killSumMoneyShow);
 						noKillSumMoneyShow.setValue(stockInvoice.noKillSumMoneyShow);
 						reconciliationSumMoneyShow.setValue(stockInvoice.reconciliationSumMoneyShow);

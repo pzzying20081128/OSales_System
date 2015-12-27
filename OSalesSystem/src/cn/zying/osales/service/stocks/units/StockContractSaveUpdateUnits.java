@@ -30,14 +30,14 @@ public class StockContractSaveUpdateUnits extends ABCommonsService {
 
     public StockContract save(StockContract optStockContract) throws SystemOptServiceException {
         setProperties(optStockContract) ;
-        optStockContract.setStatus(Status.有效);
-        baseService.save(optStockContract);
+        optStockContract.setStatus(Status.有效) ;
+        baseService.save(optStockContract) ;
         return optStockContract ;
     }
 
     public StockContract update(StockContract optStockContract) throws SystemOptServiceException {
         setProperties(optStockContract) ;
-        
+
         StockContract stockContract = baseService.get(optStockContract.getId(), StockContract.class) ;
 
         ToolsUnits.copyBeanProperties(optStockContract, stockContract, "providerInfo", "providerInfoId", "stockMan", "stockManId", "companyInfo", "companyInfoId", "contractStatus", "text", "signedDate") ;

@@ -7,6 +7,8 @@ import cn.zying.osales.pojos.StockContract ;
 import cn.zying.osales.pojos.StockContractDetail ;
 import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
+import cn.zying.osales.pojos.StockPayment ;
+import cn.zying.osales.pojos.StockPaymentDetail ;
 import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.pojos.StockReturnDetail ;
 import cn.zying.osales.pojos.StockReturnStoreOut ;
@@ -30,9 +32,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_invoice_reconcile_detail";
+        String moduleNmae="stock_payment";
         
-        Class<?> clazz = StockInvoiceDetail.class;
+        Class<?> clazz = StockPayment.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

@@ -68,9 +68,9 @@ public class CommOrderBean extends CommBean {
     @FieldDesc(name = "单号")
     private String number ;
 
-    @Column(name = "create_time")
-    @Temporal(TemporalType.DATE)
-    private Date createTime = DateToolsUilts.getnowDate() ;
+//    @Column(name = "create_time")
+//    @Temporal(TemporalType.DATE)
+//    private Date createTime = DateToolsUilts.getnowDate() ;
 
     @Transient
     private Date startTime ;
@@ -158,13 +158,13 @@ public class CommOrderBean extends CommBean {
         this.number = number ;
     }
 
-    public Date getCreateTime() {
-        return createTime ;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime ;
-    }
+//    public Date getCreateTime() {
+//        return createTime ;
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime ;
+//    }
 
     public Date getStartTime() {
         return startTime ;

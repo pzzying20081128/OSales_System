@@ -73,4 +73,9 @@ public class AopStockInvoiceDetailService implements IAopStockInvoiceDetailServi
         return iStockInvoiceDetailService.getStockInvoiceBillDetail(stockInvoiceBillDetailId) ;
     }
 
+    @Override
+    public StockInvoiceBillDetail handleReconcile(StockInvoiceBillDetail stockinvoicebilldetail) throws SystemOptServiceException {
+        return iStockInvoiceDetailService.handleReconcile(stockinvoicebilldetail) ;
+    }
+
 }

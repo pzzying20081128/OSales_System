@@ -1,17 +1,9 @@
- package  cn.zying.osales.service.stocks;
+package cn.zying.osales.service.stocks ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStockContractService ;
+import cn.zying.osales.infaces.InfaceStockContractService ;
 
-public interface IStockContractService  extends InfaceStockContractService { 
-    
-            public String name="IStockContractService";
-            
-                
-        
-            
-            
-            
+public interface IStockContractService extends InfaceStockContractService {
+
+    public String name = "IStockContractService" ;
 
 }

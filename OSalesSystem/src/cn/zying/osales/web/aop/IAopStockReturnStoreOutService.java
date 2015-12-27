@@ -6,6 +6,4 @@ public interface IAopStockReturnStoreOutService extends InfaceStockReturnStoreOu
 
     public String name = "IAopStockReturnStoreOutService" ;
 
-
-
 }

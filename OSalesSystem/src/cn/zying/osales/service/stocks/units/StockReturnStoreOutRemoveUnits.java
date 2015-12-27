@@ -14,10 +14,9 @@ import cn.zying.osales.service.SystemOptServiceException ;
 public class StockReturnStoreOutRemoveUnits extends ABCommonsService {
 
     public void del(StockReturn stockReturn) throws SystemOptServiceException {
-        String sql = " select  stockReturnStoreOut  from StockReturnStoreOut as  stockReturnStoreOut  where stockReturnStoreOut.stockReturnId = " 
-                             + stockReturn.getId() ;
+        String sql = " select  stockReturnStoreOut  from StockReturnStoreOut as  stockReturnStoreOut  where stockReturnStoreOut.stockReturnId = " + stockReturn.getId() ;
         StockReturnStoreOut stockReturnStoreOut = baseService.findSinglenessByHSQL(sql) ;
-        if (stockReturnStoreOut.getStockType().equals(StockType.直营采购订单) &&  stockReturnStoreOut.getStatus().equals(Status.已审核)) {
+        if (stockReturnStoreOut.getStockType().equals(StockType.直营采购订单) && stockReturnStoreOut.getStatus().equals(Status.已审核)) {
             throw new SystemOptServiceException("该出库单[" + stockReturnStoreOut.getNumber() + "]已经审核,不能取消审核") ;
         }
         String sql1 = "delete  StockReturnStoreOutDetail as stockReturnStoreOutDetail  where  stockReturnStoreOutDetail.stockReturnStoreOutId =  " + stockReturnStoreOut.getId() ;

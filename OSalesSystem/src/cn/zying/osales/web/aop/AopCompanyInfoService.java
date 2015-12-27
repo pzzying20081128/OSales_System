@@ -14,8 +14,6 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.baseinfo.ICompanyInfoService ;
 import cn.zying.osales.units.search.bean.CompanyInfoSearchBean ;
 
-
-
 @Component(IAopCompanyInfoService.name)
 public class AopCompanyInfoService implements IAopCompanyInfoService {
 
@@ -23,40 +21,33 @@ public class AopCompanyInfoService implements IAopCompanyInfoService {
     @Qualifier(ICompanyInfoService.name)
     private ICompanyInfoService iCompanyInfoService ;
 
-     public CompanyInfo  saveUpdate(OptType  optType ,   CompanyInfo   optCompanyInfo )throws SystemOptServiceException{
-    
-         return  iCompanyInfoService.saveUpdate(  optType ,    optCompanyInfo );
-     
-     }
-            
-          
-     public SelectPage<CompanyInfo > search(OptType  optType ,    
-                           CompanyInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-    
-     return  iCompanyInfoService.search(  optType ,    
-                                                                          searchBean,  commSearchBean ,startLimit );
-                    
+    public CompanyInfo saveUpdate(OptType optType, CompanyInfo optCompanyInfo) throws SystemOptServiceException {
+
+        return iCompanyInfoService.saveUpdate(optType, optCompanyInfo) ;
+
     }
-    
-    public List<CompanyInfo > searchList(OptType  optType ,    
-                           CompanyInfoSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-             return  iCompanyInfoService.searchList(  optType ,    
-                                                                          searchBean,  commSearchBean ,startLimit );
-            
+
+    public SelectPage<CompanyInfo> search(OptType optType, CompanyInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iCompanyInfoService.search(optType, searchBean, commSearchBean, startLimit) ;
+
     }
-            
-    public  CompanyInfo    remove(OptType  optType ,  CompanyInfo   optCompanyInfo)throws SystemOptServiceException{
-            
-               return  iCompanyInfoService.remove(  optType ,   optCompanyInfo);
-            
+
+    public List<CompanyInfo> searchList(OptType optType, CompanyInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iCompanyInfoService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+
     }
-            
-            
-           public  CompanyInfo get(Integer id)throws SystemOptServiceException
-           {
-                   return  iCompanyInfoService.get( id);
-           
-           }
+
+    public CompanyInfo remove(OptType optType, CompanyInfo optCompanyInfo) throws SystemOptServiceException {
+
+        return iCompanyInfoService.remove(optType, optCompanyInfo) ;
+
+    }
+
+    public CompanyInfo get(Integer id) throws SystemOptServiceException {
+        return iCompanyInfoService.get(id) ;
+
+    }
 
 }

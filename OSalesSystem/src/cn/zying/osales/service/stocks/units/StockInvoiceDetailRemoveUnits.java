@@ -11,14 +11,14 @@ import cn.zying.osales.service.SystemOptServiceException ;
 public class StockInvoiceDetailRemoveUnits extends ABCommonsService {
 
     public <T> void removeBill(BillType billTYpe, T bill) throws SystemOptServiceException {
-        
+
         switch (billTYpe) {
         case 采购进货单: {
             CommOrderBean commOrderBean = (CommOrderBean) bill ;
             String number = commOrderBean.getNumber() ;
-            String del = "delete StockInvoiceBillDetail as stockInvoiceBillDetail where stockInvoiceBillDetail.billType='" 
-            
-                    + BillType.采购进货单 + "'  " +
+            String del = "delete StockInvoiceBillDetail as stockInvoiceBillDetail where stockInvoiceBillDetail.billType='"
+
+            + BillType.采购进货单 + "'  " +
 
             " and  stockInvoiceBillDetail.billNum ='" + number + "'  " ;
 

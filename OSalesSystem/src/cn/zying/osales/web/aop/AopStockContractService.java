@@ -14,8 +14,6 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockContractService ;
 import cn.zying.osales.units.search.bean.StockContractSearchBean ;
 
-
-
 @Component(IAopStockContractService.name)
 public class AopStockContractService implements IAopStockContractService {
 
@@ -23,40 +21,33 @@ public class AopStockContractService implements IAopStockContractService {
     @Qualifier(IStockContractService.name)
     private IStockContractService iStockContractService ;
 
-     public StockContract  saveUpdate(OptType  optType ,   StockContract   optStockContract )throws SystemOptServiceException{
-	
-	     return  iStockContractService.saveUpdate(  optType ,    optStockContract );
-	 
-	 }
-            
-       	  
-     public SelectPage<StockContract > search(OptType  optType ,    
-				           StockContractSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-	
-	 return  iStockContractService.search(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-					
-	}
-	
-	public List<StockContract > searchList(OptType  optType ,    
-				           StockContractSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
-             
-			 return  iStockContractService.searchList(  optType ,    
-				                                                          searchBean,  commSearchBean ,startLimit );
-            
+    public StockContract saveUpdate(OptType optType, StockContract optStockContract) throws SystemOptServiceException {
+
+        return iStockContractService.saveUpdate(optType, optStockContract) ;
+
     }
-            
-    public  StockContract    remove(OptType  optType ,  StockContract   optStockContract)throws SystemOptServiceException{
-			
-			   return  iStockContractService.remove(  optType ,   optStockContract);
-			
-	}
-            
-            
-           public  StockContract get(Integer id)throws SystemOptServiceException
-		   {
-		           return  iStockContractService.get( id);
-		   
-		   }
+
+    public SelectPage<StockContract> search(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStockContractService.search(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public List<StockContract> searchList(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+
+        return iStockContractService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+
+    }
+
+    public StockContract remove(OptType optType, StockContract optStockContract) throws SystemOptServiceException {
+
+        return iStockContractService.remove(optType, optStockContract) ;
+
+    }
+
+    public StockContract get(Integer id) throws SystemOptServiceException {
+        return iStockContractService.get(id) ;
+
+    }
 
 }

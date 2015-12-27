@@ -19,12 +19,11 @@ public class OSToolsUnits {
     public static Long toLong(Object value) {
         return value == null ? null : ((BigInteger) value).longValue() ;
     }
-    
-    
-    public static boolean  listIsNull(List<?> lists){
-        if(lists ==null  || lists.size() ==0)return true;
+
+    public static boolean listIsNull(List<?> lists) {
+        if (lists == null || lists.size() == 0) return true ;
         else
-            return false;
+            return false ;
     }
 
 }

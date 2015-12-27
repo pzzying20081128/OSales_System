@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.OSalesConfigProperties.OrderSimpleName ;
 import cn.zying.osales.pojos.StockOrder ;
 import cn.zying.osales.units.search.bean.StockOrderSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
@@ -29,19 +28,19 @@ public class StockOrderAction extends OSalesSystemABAction<StockOrder> {
 
     private StockOrderSearchBean searchBean ;
 
-//    public String initStockOrder() throws Exception {
-//        try {
-//            StockOrder stockorder = new StockOrder() ;
-//            String orderNumber = baseService.genSerialNum(OrderSimpleName.CGSO.name()) ;
-//            stockorder.setNumber(orderNumber) ;
-//            this.result = service.saveUpdate(OptType.init, stockorder, getOSalsesLoginUserId()) ;
-//
-//        } catch (Exception e) {
-//            this.success = false ;
-//            this.msg = handError(e) ;
-//        }
-//        return SUCCESS ;
-//    }
+    //    public String initStockOrder() throws Exception {
+    //        try {
+    //            StockOrder stockorder = new StockOrder() ;
+    //            String orderNumber = baseService.genSerialNum(OrderSimpleName.CGSO.name()) ;
+    //            stockorder.setNumber(orderNumber) ;
+    //            this.result = service.saveUpdate(OptType.init, stockorder, getOSalsesLoginUserId()) ;
+    //
+    //        } catch (Exception e) {
+    //            this.success = false ;
+    //            this.msg = handError(e) ;
+    //        }
+    //        return SUCCESS ;
+    //    }
 
     public String save() throws Exception {
         try {

@@ -1,22 +1,9 @@
- package  cn.zying.osales.web.aop;
+package cn.zying.osales.web.aop ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStockInvoiceService ;
-import cn.zying.osales.pojos.StockInvoice ;
+import cn.zying.osales.infaces.InfaceStockInvoiceService ;
 
-public interface IAopStockInvoiceService  extends InfaceStockInvoiceService   {
-    
-            public String name="IAopStockInvoiceService";
+public interface IAopStockInvoiceService extends InfaceStockInvoiceService {
 
-           
-
-         
-            
-                
-         
-            
-       
-            
+    public String name = "IAopStockInvoiceService" ;
 
 }

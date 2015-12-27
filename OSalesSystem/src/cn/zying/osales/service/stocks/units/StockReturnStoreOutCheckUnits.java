@@ -26,10 +26,10 @@ public class StockReturnStoreOutCheckUnits extends ABCommonsService {
     //        }
     //    }
 
-    public void check( Integer  stockReturnStoreOutId, Integer optUserId) throws SystemOptServiceException {
-        
-        StockReturnStoreOut  stockReturnStoreOut   =  baseService.load(stockReturnStoreOutId, StockReturnStoreOut.class);
-        
+    public void check(Integer stockReturnStoreOutId, Integer optUserId) throws SystemOptServiceException {
+
+        StockReturnStoreOut stockReturnStoreOut = baseService.load(stockReturnStoreOutId, StockReturnStoreOut.class) ;
+
         switch (stockReturnStoreOut.getStatus()) {
         case 有效:
             checking(stockReturnStoreOut, optUserId) ;
@@ -44,22 +44,21 @@ public class StockReturnStoreOutCheckUnits extends ABCommonsService {
     }
 
     private void cancelCheck(StockReturnStoreOut stockReturnStoreOut, Integer optUserId) throws SystemOptServiceException {
-                if (stockReturnStoreOut.getStockType().equals(StockType.直营采购退货单)) {
-                    throw new SystemOptServiceException("此单是" + StockType.直营采购退货单.name() + "不能取消审核") ;
-                } else {
-                    stockReturnStoreOut.setCheckMan(null) ;
-                    stockReturnStoreOut.setStatus(Status.有效) ;
-                    stockReturnStoreOut.setCheckDate(null) ;
-                    baseService.update(stockReturnStoreOut) ;
-                }
-        
+        if (stockReturnStoreOut.getStockType().equals(StockType.直营采购退货单)) {
+            throw new SystemOptServiceException("此单是" + StockType.直营采购退货单.name() + "不能取消审核") ;
+        } else {
+            stockReturnStoreOut.setCheckMan(null) ;
+            stockReturnStoreOut.setStatus(Status.有效) ;
+            stockReturnStoreOut.setCheckDate(null) ;
+            baseService.update(stockReturnStoreOut) ;
+        }
 
     }
 
-//    public void check(Integer id, Integer optUserId) throws SystemOptServiceException {
-//        StockStoreReceive stockStoreReceive = baseService.get(id, StockStoreReceive.class) ;
-//        check(stockStoreReceive, optUserId) ;
-//    }
+    //    public void check(Integer id, Integer optUserId) throws SystemOptServiceException {
+    //        StockStoreReceive stockStoreReceive = baseService.get(id, StockStoreReceive.class) ;
+    //        check(stockStoreReceive, optUserId) ;
+    //    }
 
     private void checking(StockReturnStoreOut stockReturnStoreOut, Integer optUserId) throws SystemOptServiceException {
         SysStaffUser checkMan = baseService.load(optUserId, SysStaffUser.class) ;

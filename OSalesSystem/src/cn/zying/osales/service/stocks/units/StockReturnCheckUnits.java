@@ -23,10 +23,10 @@ public class StockReturnCheckUnits extends ABCommonsService {
     @Autowired
     @Qualifier("StockReturnStoreOutRemoveUnits")
     private StockReturnStoreOutRemoveUnits stockReturnStoreOutRemoveUnits ;
-    
+
     @Autowired
     @Qualifier("StockReturnStoreOutCheckUnits")
-    private StockReturnStoreOutCheckUnits  iStockReturnStoreOutCheckUnits;
+    private StockReturnStoreOutCheckUnits iStockReturnStoreOutCheckUnits ;
 
     public void check(Integer stockReturnId, int optUser) throws SystemOptServiceException {
         StockReturn stockReturn = baseService.load(stockReturnId, StockReturn.class) ;
@@ -51,11 +51,11 @@ public class StockReturnCheckUnits extends ABCommonsService {
         stockReturn.setCheckMan(sysStaffUser) ;
         stockReturn.setStatus(Status.已审核) ;
         baseService.update(stockReturn) ;
-        StockReturnStoreOut  stockReturnStoreOut  = stockReturnStoreOutSaveUpdateUnits.create(stockReturn) ;
-        if(stockReturn.getStockType().equals(StockType.直营采购退货单)){
-            iStockReturnStoreOutCheckUnits.check(stockReturnStoreOut.getId(), stockReturn.getCheckManId());        
+        StockReturnStoreOut stockReturnStoreOut = stockReturnStoreOutSaveUpdateUnits.create(stockReturn) ;
+        if (stockReturn.getStockType().equals(StockType.直营采购退货单)) {
+            iStockReturnStoreOutCheckUnits.check(stockReturnStoreOut.getId(), stockReturn.getCheckManId()) ;
         }
-    
+
     }
 
     private void noCheck(StockReturn stockReturn) throws SystemOptServiceException {

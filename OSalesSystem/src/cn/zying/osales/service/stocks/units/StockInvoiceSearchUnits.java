@@ -38,7 +38,7 @@ public class StockInvoiceSearchUnits extends ABCommonsService {
     }
 
     public List<StockInvoice> list(OptType optType, StockInvoiceSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-        
+
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
 
         String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
@@ -109,7 +109,7 @@ public class StockInvoiceSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "  and    stockInvoice.paymentDate <= :paymentDateEnd" ;
             value.put("paymentDateEnd", searchBean.getPaymentEndTime()) ;
         }
-        
+
         if (ToolsUnits.isNOtNulll(searchBean.getText())) {
             sqlWhere = sqlWhere + "  and    stockInvoice.text  like  :text " ;
             value.put("text", "%" + searchBean.getText() + "%") ;

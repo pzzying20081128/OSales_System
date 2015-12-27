@@ -35,9 +35,9 @@ public class StockInvoiceSaveUpdateUnits extends ABCommonsService {
         if (!ToolsUnits.isNOtNulll(optStockInvoice.getNum())) {
             optStockInvoice.setNum(baseService.genSerialNum(OSalesConfigProperties.OrderSimpleName.SGFP.name())) ;
         }
-        optStockInvoice.setReconciliationSum(optStockInvoice.getInvoiceSum());
-        optStockInvoice.setKillSum(OSalesConfigProperties.default_long_null);
-        optStockInvoice.setNoKillSum(optStockInvoice.getInvoiceSum());
+        optStockInvoice.setReconciliationSum(optStockInvoice.getInvoiceSum()) ;
+        optStockInvoice.setKillSum(OSalesConfigProperties.default_long_null) ;
+        optStockInvoice.setNoKillSum(optStockInvoice.getInvoiceSum()) ;
         baseService.save(optStockInvoice) ;
         return optStockInvoice ;
 
@@ -49,7 +49,7 @@ public class StockInvoiceSaveUpdateUnits extends ABCommonsService {
         ToolsUnits.copyBeanProperties(stockInvoice, optStockInvoice, "num", "invoiceNum", "providerInfo", "providerInfoId",
 
         "invoiceDate", "paymentDate", "invoiceSum", "text") ;
-        stockInvoice.setReconciliationSum(stockInvoice.getInvoiceSum());
+        stockInvoice.setReconciliationSum(stockInvoice.getInvoiceSum()) ;
 
         baseService.save(stockInvoice) ;
         return stockInvoice ;

@@ -63,7 +63,7 @@ public class StockReturnStoreOutSearchUnits extends ABCommonsService {
 
             sql_ = sql_ + sqlWhere ;
 
-        }else{
+        } else {
             sql_ = sql_ + sqlWhere ;
         }
 
@@ -85,10 +85,9 @@ public class StockReturnStoreOutSearchUnits extends ABCommonsService {
 
             sql_ = sql_ + sqlWhere ;
 
-        }else{
+        } else {
             sql_ = sql_ + sqlWhere ;
         }
-
 
         Long sum = baseService.findSinglenessByHSQL(sql_, value) ;
         return sum ;
@@ -100,10 +99,10 @@ public class StockReturnStoreOutSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + " and   stockReturnStoreOut.status in (:status) " ;
             value.put("status", searchBean.getStatuses()) ;
         } else {
-            if(searchBean.getStatus()!=null){
-                sqlWhere = sqlWhere + " and   stockReturnStoreOut.status ='" + (searchBean.getStatus() != null ? searchBean.getStatus().name() : Status.有效.name()) + "'" ;     
+            if (searchBean.getStatus() != null) {
+                sqlWhere = sqlWhere + " and   stockReturnStoreOut.status ='" + (searchBean.getStatus() != null ? searchBean.getStatus().name() : Status.有效.name()) + "'" ;
             }
-           
+
         }
         if (ToolsUnits.isNOtNulll(searchBean.getNumber())) {
             sqlWhere = sqlWhere + " and   stockReturnStoreOut.number like (:number) " ;

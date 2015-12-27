@@ -73,7 +73,7 @@ public class StockReturnStoreOutSaveUpdateUnits extends ABCommonsService {
         stockReturnStoreOut.setStatus(OSalesConfigProperties.Status.有效) ;
         stockReturnStoreOut.setStockMan(stockReturn.getStockMan()) ;
         stockReturnStoreOut.setStockReturn(stockReturn) ;
-        stockReturnStoreOut.setStockType(stockReturn.getStockType());
+        stockReturnStoreOut.setStockType(stockReturn.getStockType()) ;
 
         stockReturnStoreOut.setRecordMan(stockReturn.getRecordMan()) ;
         stockReturnStoreOut.setRemarks(stockReturn.getRemarks()) ;

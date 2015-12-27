@@ -1,4 +1,4 @@
-package cn.zying.osales.infaces;
+package cn.zying.osales.infaces ;
 
 import java.util.List ;
 
@@ -10,24 +10,18 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.search.bean.StockContractSearchBean ;
 
 public interface InfaceStockContractService {
-    
-    
-       /**
-             *  增加或更新
-             */
-            public StockContract   saveUpdate(OptType  optType ,   StockContract   optStockContract )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<StockContract > search(OptType  optType ,    
-				           StockContractSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<StockContract > searchList(OptType  optType ,    
-				           StockContractSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  StockContract    remove(OptType  optType ,  StockContract   optStockContract)throws SystemOptServiceException;
-            
-            
-           public  StockContract get(Integer id)throws SystemOptServiceException;
 
+    /**
+          *  增加或更新
+          */
+    public StockContract saveUpdate(OptType optType, StockContract optStockContract) throws SystemOptServiceException ;
+
+    public SelectPage<StockContract> search(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public List<StockContract> searchList(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+
+    public StockContract remove(OptType optType, StockContract optStockContract) throws SystemOptServiceException ;
+
+    public StockContract get(Integer id) throws SystemOptServiceException ;
 
 }

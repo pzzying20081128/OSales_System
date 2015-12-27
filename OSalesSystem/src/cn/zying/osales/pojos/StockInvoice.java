@@ -50,10 +50,10 @@ public class StockInvoice extends CommBean {
     @Column(name = "provider_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "供应商", isShow = false)
     private Integer providerInfoId ;
-    
+
     @Transient
-    private List<Integer> providerInfoIds;
- 
+    private List<Integer> providerInfoIds ;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "stockInvoice")
     private List<StockInvoiceDetail> stockInvoiceDetails ;
 
@@ -144,10 +144,9 @@ public class StockInvoice extends CommBean {
     @Column(name = "reconciliation")
     @Enumerated(EnumType.STRING)
     private StockBillIsReconciliation reconciliation ;
-    
-    
+
     @Transient
-    private List<StockBillIsReconciliation> reconciliations;
+    private List<StockBillIsReconciliation> reconciliations ;
 
     // /对账余额
     @Column(name = "reconciliationSum")
@@ -161,8 +160,6 @@ public class StockInvoice extends CommBean {
     @Transient
     @FieldDesc(name = "对账余额", isShow = false)
     private String reconciliationSumMoneyHide ;
-
-   
 
     public String getInvoiceNum() {
         return invoiceNum ;
@@ -179,8 +176,6 @@ public class StockInvoice extends CommBean {
     public void setProviderInfo(ProviderInfo providerInfo) {
         this.providerInfo = providerInfo ;
     }
-
-   
 
     public List<StockInvoiceDetail> getStockInvoiceDetails() {
         return stockInvoiceDetails ;

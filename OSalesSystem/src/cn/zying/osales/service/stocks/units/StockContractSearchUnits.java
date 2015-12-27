@@ -37,7 +37,6 @@ public class StockContractSearchUnits extends ABCommonsService {
     }
 
     public List<StockContract> list(OptType optType, StockContractSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
-      
 
         Map<String, Object> value = ToolsUnits.createSearchMap() ;
 

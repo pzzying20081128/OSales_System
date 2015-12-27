@@ -30,7 +30,7 @@ public class StockContractAction extends OSalesSystemABAction<StockContract> {
 
     public String saveUpdate() throws Exception {
         try {
-//            stockcontract.setRecordManId(getOSalsesLoginUserId()) ;
+            //            stockcontract.setRecordManId(getOSalsesLoginUserId()) ;
             this.result = service.saveUpdate(OptType.save, stockcontract) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class StockContractAction extends OSalesSystemABAction<StockContract> {
 
     public String check() throws Exception {
         try {
-//            service.check(stockcontract.getId(), getOSalsesLoginUserId()) ;
+            //            service.check(stockcontract.getId(), getOSalsesLoginUserId()) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -52,7 +52,7 @@ public class StockContractAction extends OSalesSystemABAction<StockContract> {
 
     public String update() throws Exception {
         try {
-//            stockorder.setRecordManId(getOSalsesLoginUserId()) ;
+            //            stockorder.setRecordManId(getOSalsesLoginUserId()) ;
             this.result = service.saveUpdate(OptType.update, stockcontract) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
@@ -115,5 +115,4 @@ public class StockContractAction extends OSalesSystemABAction<StockContract> {
         this.searchBean = searchBean ;
     }
 
-   
 }

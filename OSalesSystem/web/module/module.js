@@ -47,6 +47,8 @@ function createModule(node, userId, params) {
 		case "stock_invoice_reconcile" : {
 			//alert("|"+moduleId+"|");
 			loadjs.push("./module/" + moduleId + "/stock_invoice_reconcile_handle_windows.js");
+			loadjs.push("./module/" + moduleId + "/handle/stock_invoice_reconcile_bill_handle_windows.js");
+			
 			break;
 		}
 			//

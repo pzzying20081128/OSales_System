@@ -1,4 +1,4 @@
-package  cn.zying.osales.service.baseinfo.units ;
+package cn.zying.osales.service.baseinfo.units ;
 
 import java.util.List ;
 import java.util.Map ;
@@ -15,21 +15,19 @@ import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.units.OSToolsUnits ;
 import cn.zying.osales.units.search.bean.CompanyInfoSearchBean ;
 
-
 @Component("CompanyInfoSearchUnits")
 public class CompanyInfoSearchUnits extends ABCommonsService {
 
-    public SelectPage<CompanyInfo> search(OptType optType,
-		                            CompanyInfoSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+    public SelectPage<CompanyInfo> search(OptType optType, CompanyInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         SelectPage<CompanyInfo> selectPage = new SelectPage<CompanyInfo>() ;
 
-		Map<String, Object> value=ToolsUnits.createSearchMap();
-			
-		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
-				
-        List<CompanyInfo> result = list(sqlWhere,value,startLimit) ;
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
 
-        Long sum = sum(sqlWhere,value) ;
+        String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
+
+        List<CompanyInfo> result = list(sqlWhere, value, startLimit) ;
+
+        Long sum = sum(sqlWhere, value) ;
 
         selectPage.setCount(sum) ;
 
@@ -38,50 +36,47 @@ public class CompanyInfoSearchUnits extends ABCommonsService {
         return selectPage ;
 
     }
-	
-	
-	    public List<CompanyInfo> list(OptType optType,
-		                            CompanyInfoSearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
-       
 
-		Map<String, Object> value=ToolsUnits.createSearchMap();
-			
-		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
-				
-        List<CompanyInfo> result = list(sqlWhere,value,startLimit) ;
+    public List<CompanyInfo> list(OptType optType, CompanyInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
 
-     
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+
+        String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
+
+        List<CompanyInfo> result = list(sqlWhere, value, startLimit) ;
 
         return result ;
 
     }
-	
 
-	 private  String sql ="select companyInfo   from  CompanyInfo  as  companyInfo  ";   
-    private   List<CompanyInfo> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
-   String sql_ =sql+ sqlWhere ;
-        List<CompanyInfo>  result = baseService.findByHSQL(sql_, value, startLimit);
-        return result;
+    private String sql = "select companyInfo   from  CompanyInfo  as  companyInfo  " ;
+
+    private List<CompanyInfo> list(String sqlWhere, Map<String, Object> value, int... startLimit) throws SystemOptServiceException {
+        String sql_ = sql + sqlWhere ;
+        List<CompanyInfo> result = baseService.findByHSQL(sql_, value, startLimit) ;
+        return result ;
     }
- private  String sqlsum ="select    count(companyInfo.id)  from  CompanyInfo  as  companyInfo  ";   
-    private Long sum(String sqlWhere ,Map<String, Object> value) throws SystemOptServiceException {
- String sql_ =sqlsum+ sqlWhere ;
-        Long  sum = baseService.findSinglenessByHSQL(sql_, value);
-        return sum;
+
+    private String sqlsum = "select    count(companyInfo.id)  from  CompanyInfo  as  companyInfo  " ;
+
+    private Long sum(String sqlWhere, Map<String, Object> value) throws SystemOptServiceException {
+        String sql_ = sqlsum + sqlWhere ;
+        Long sum = baseService.findSinglenessByHSQL(sql_, value) ;
+        return sum ;
     }
-	
-	 private String createWhere(Map<String, Object> value,CompanyInfoSearchBean searchBean ,CommSearchBean commSearchBean){
-        String sqlWhere=" where  1=1 ";
-        if(! OSToolsUnits.listIsNull(searchBean.getStatuses())){
-            sqlWhere = sqlWhere+" and  companyInfo.status in (:statuses) ";
-            value.put("statuses", searchBean.getStatuses());
+
+    private String createWhere(Map<String, Object> value, CompanyInfoSearchBean searchBean, CommSearchBean commSearchBean) {
+        String sqlWhere = " where  1=1 " ;
+        if (!OSToolsUnits.listIsNull(searchBean.getStatuses())) {
+            sqlWhere = sqlWhere + " and  companyInfo.status in (:statuses) " ;
+            value.put("statuses", searchBean.getStatuses()) ;
         }
-        
-        if(searchBean.getStatus() !=null ){
-            sqlWhere = sqlWhere+" and  companyInfo.status = (:status) ";
-            value.put("status", searchBean.getStatus());
+
+        if (searchBean.getStatus() != null) {
+            sqlWhere = sqlWhere + " and  companyInfo.status = (:status) " ;
+            value.put("status", searchBean.getStatus()) ;
         }
-        return sqlWhere;
+        return sqlWhere ;
     }
 
 }

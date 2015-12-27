@@ -23,7 +23,7 @@ public interface InfaceStockReturnStoreOutService {
     public StockReturnStoreOut remove(OptType optType, StockReturnStoreOut optStockReturnStoreOut) throws SystemOptServiceException ;
 
     public StockReturnStoreOut get(Integer id) throws SystemOptServiceException ;
-    
-    public  void check(Integer id, Integer oSalsesLoginUserId) throws SystemOptServiceException ;
+
+    public void check(Integer id, Integer oSalsesLoginUserId) throws SystemOptServiceException ;
 
 }
