@@ -70,15 +70,15 @@ public class StockInvoiceBillSearchAllReconcileSearchUnits extends ABCommonsServ
 
         stockInvoiceDetails_.addAll(stockInvoiceBillDetails) ;
 
-        Collections.sort(stockInvoiceBillDetails, new Comparator<StockInvoiceBillDetail>() {
-
-            @Override
-            public int compare(StockInvoiceBillDetail o1, StockInvoiceBillDetail o2) {
-
-                return o1.getBillDate().compareTo(o2.getBillDate()) ;
-            }
-
-        }) ;
+//        Collections.sort(stockInvoiceBillDetails, new Comparator<StockInvoiceBillDetail>() {
+//
+//            @Override
+//            public int compare(StockInvoiceBillDetail o1, StockInvoiceBillDetail o2) {
+//
+//                return o1.getBillDate().compareTo(o2.getBillDate()) ;
+//            }
+//
+//        }) ;
 
         SelectPage<StockInvoiceBillDetail> result = new SelectPage<StockInvoiceBillDetail>() ;
         result.setCount((long) stockInvoiceDetails_.size()) ;

@@ -13,11 +13,18 @@ import cn.zying.osales.infaces.InfaceStockPaymentService ;
 import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockPaymentService ;
+import cn.zying.osales.units.search.bean.StockPaymentDetailSearchBean ;
 import cn.zying.osales.units.search.bean.StockPaymentSearchBean ;
 
 public interface IAopStockPaymentService extends InfaceStockPaymentService {
 
     public String name = "IAopStockPaymentService" ;
+
+
+
+
+
+    
 
    
 }

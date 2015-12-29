@@ -14,6 +14,7 @@ import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockInvoiceService ;
 import cn.zying.osales.service.stocks.units.StockInvoiceBillReconcileSearchUnits ;
+import cn.zying.osales.service.stocks.units.StockInvoiceCheckAllReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceCheckUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceDetailAutoReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockInvoiceDetailCancelReconcileUnits ;
@@ -54,6 +55,10 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
     @Autowired
     @Qualifier("StockInvoiceDetailCancelReconcileUnits")
     private StockInvoiceDetailCancelReconcileUnits iStockInvoiceDetailCancelReconcileUnits ;
+    
+    @Autowired
+    @Qualifier("StockInvoiceCheckAllReconcileUnits")
+    private StockInvoiceCheckAllReconcileUnits iStockInvoiceCheckAllReconcileUnits ;
 
     @Override
     public StockInvoice saveUpdate(OptType optType, StockInvoice optStockInvoice) throws SystemOptServiceException {
@@ -106,6 +111,12 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
         StockInvoice stockinvoice_ = baseService.get(StockInvoice.class, stockinvoice.getId()) ;
         iStockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockinvoice_) ;
         return stockinvoice_ ;
+    }
+
+    @Override
+    public void checkAllReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
+        iStockInvoiceCheckAllReconcileUnits.checkAllReconcile(stockinvoice);
+        
     }
 
 }

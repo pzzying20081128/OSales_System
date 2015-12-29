@@ -32,9 +32,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_payment";
+        String moduleNmae="stock_payment_reconcile_detail";
         
-        Class<?> clazz = StockPayment.class;
+        Class<?> clazz = StockPaymentDetail.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

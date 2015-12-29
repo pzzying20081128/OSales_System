@@ -6,6 +6,7 @@ import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.OSalesConfigProperties.StockBillIsReconciliation ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.SysStaffUser ;
@@ -14,6 +15,9 @@ import cn.zying.osales.service.SystemOptServiceException ;
 
 @Component("StockPaymentSaveUpdateUnits")
 public class StockPaymentSaveUpdateUnits extends ABCommonsService {
+    
+    
+   
 
     public StockPayment saveUpdate(OptType optType, StockPayment optStockPayment) throws SystemOptServiceException {
 
@@ -34,6 +38,7 @@ public class StockPaymentSaveUpdateUnits extends ABCommonsService {
             optStockPayment.setNum(baseService.genSerialNum(OSalesConfigProperties.OrderSimpleName.CGFK.name())) ;
         }
         optStockPayment.setStatus(Status.有效) ;
+        optStockPayment.setReconciliation(StockBillIsReconciliation.末对帐);
         setProperties(optStockPayment) ;
 
         baseService.save(optStockPayment) ;

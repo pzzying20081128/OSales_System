@@ -33,6 +33,7 @@ public class StockPaymentCheckUnits extends ABCommonsService {
         stockpayment.setCheckMan(sysStaffUser) ;
         stockpayment.setCheckedDate(DateToolsUilts.getnowDate()) ;
         stockpayment.setStatus(Status.已审核) ;
+        
         baseService.update(stockpayment) ;
 
     }

@@ -29,6 +29,9 @@ public class StockPaymentAction extends OSalesSystemABAction<StockPayment> {
     private StockPayment stockpayment ;
 
     private StockPaymentSearchBean searchBean ;
+    
+    
+  
 
     public String save() throws Exception {
         try {

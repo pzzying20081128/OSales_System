@@ -27,6 +27,11 @@ public class StockInvoiceBillReconcileAction extends OSalesSystemABAction<StockI
 
     private StockInvoiceSearchBean searchBean ;
 
+    /**
+     * 自动全部对帐
+     * @return
+     * @throws Exception
+     */
     public String autoReconcile() throws Exception {
         try {
             this.result = service.autoReconcile(stockinvoice) ;
@@ -41,6 +46,7 @@ public class StockInvoiceBillReconcileAction extends OSalesSystemABAction<StockI
     public String cancelReconcile() throws Exception {
         try {
             this.result = service.cancelReconcile(stockinvoice) ;
+            writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;
@@ -48,16 +54,21 @@ public class StockInvoiceBillReconcileAction extends OSalesSystemABAction<StockI
         return SUCCESS ;
     }
 
-    //    public String check() throws Exception {
-    //        try {
-    //            stockinvoice.setCheckManId(getOSalsesLoginUserId()) ;
-    //            service.check(stockinvoice) ;
-    //        } catch (Exception e) {
-    //            this.success = false ;
-    //            this.msg = handError(e) ;
-    //        }
-    //        return SUCCESS ;
-    //    }
+    /**
+     * 审核是否都完全对帐
+     * @return
+     * @throws Exception
+     */
+    public String checkAllReconcile() throws Exception {
+        try {
+            stockinvoice.setCheckManId(getOSalsesLoginUserId()) ;
+            service.checkAllReconcile(stockinvoice) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
 
     //    public String update() throws Exception {
     //        try {

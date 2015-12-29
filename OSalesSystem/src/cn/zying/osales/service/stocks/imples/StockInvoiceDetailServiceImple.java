@@ -124,7 +124,7 @@ public class StockInvoiceDetailServiceImple extends ABCommonsService implements 
 
         StockInvoiceDetail stockInvoiceDetail = baseService.load(stockinvoicebilldetail.getStockInvoiceDetailId(), StockInvoiceDetail.class) ;
 
-        StockInvoiceBillDetail stockinvoicebilldetail_ = iStockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockInvoice, stockInvoiceDetail) ;
+        StockInvoiceBillDetail stockinvoicebilldetail_ = iStockInvoiceDetailCancelReconcileUnits.cancelReconcile(stockInvoice, stockInvoiceDetail) ;
 
         stockinvoicebilldetail_ = baseService.get(stockinvoicebilldetail.getId(), StockInvoiceBillDetail.class) ;
 

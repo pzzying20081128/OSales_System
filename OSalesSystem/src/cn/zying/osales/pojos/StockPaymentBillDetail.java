@@ -84,6 +84,31 @@ public class StockPaymentBillDetail extends DetailCommBean {
 
     @Transient
     private String noKillSumMoneyHide ;
+    
+    @Transient
+    private Integer stockPaymentId;
+    @Transient
+    private StockPayment stockPayment;
+    @Transient
+    private StockPaymentDetail stockPaymentDetail;
+    
+    @Transient
+    private Integer stockPaymentDetailId;
+    
+    
+    //单据对帐金额
+    @Transient
+    private Long stockPaymentDetailKillSum ;
+
+    @Transient
+    @FieldDesc(name = "抵消金额", isShow = true)
+    private String stockPaymentDetailKillSumMoneyShow ;
+
+    @Transient
+    @FieldDesc(name = "抵消金额", isShow = false)
+    private String stockPaymentDetailKillSumMoneyHide ;
+    
+    
 
     public BillType getBillType() {
         return billType ;
@@ -203,6 +228,62 @@ public class StockPaymentBillDetail extends DetailCommBean {
 
     public void setNoKillSumMoneyHide(String noKillSumMoneyHide) {
         this.noKillSumMoneyHide = noKillSumMoneyHide ;
+    }
+
+    public Integer getStockPaymentId() {
+        return stockPaymentId ;
+    }
+
+    public void setStockPaymentId(Integer stockPaymentId) {
+        this.stockPaymentId = stockPaymentId ;
+    }
+
+    public StockPayment getStockPayment() {
+        return stockPayment ;
+    }
+
+    public void setStockPayment(StockPayment stockPayment) {
+        this.stockPayment = stockPayment ;
+    }
+
+    public StockPaymentDetail getStockPaymentDetail() {
+        return stockPaymentDetail ;
+    }
+
+    public void setStockPaymentDetail(StockPaymentDetail stockPaymentDetail) {
+        this.stockPaymentDetail = stockPaymentDetail ;
+    }
+
+    public Long getStockPaymentDetailKillSum() {
+        return stockPaymentDetailKillSum ;
+    }
+
+    public void setStockPaymentDetailKillSum(Long stockPaymentDetailKillSum) {
+        this.stockPaymentDetailKillSum = stockPaymentDetailKillSum ;
+    }
+
+    public String getStockPaymentDetailKillSumMoneyShow() {
+        return stockPaymentDetailKillSumMoneyShow ;
+    }
+
+    public void setStockPaymentDetailKillSumMoneyShow(String stockPaymentDetailKillSumMoneyShow) {
+        this.stockPaymentDetailKillSumMoneyShow = stockPaymentDetailKillSumMoneyShow ;
+    }
+
+    public String getStockPaymentDetailKillSumMoneyHide() {
+        return stockPaymentDetailKillSumMoneyHide ;
+    }
+
+    public void setStockPaymentDetailKillSumMoneyHide(String stockPaymentDetailKillSumMoneyHide) {
+        this.stockPaymentDetailKillSumMoneyHide = stockPaymentDetailKillSumMoneyHide ;
+    }
+
+    public Integer getStockPaymentDetailId() {
+        return stockPaymentDetailId ;
+    }
+
+    public void setStockPaymentDetailId(Integer stockPaymentDetailId) {
+        this.stockPaymentDetailId = stockPaymentDetailId ;
     }
 
 }

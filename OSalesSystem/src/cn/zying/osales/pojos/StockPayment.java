@@ -20,6 +20,7 @@ import javax.persistence.TemporalType ;
 import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zying.osales.OSalesConfigProperties.StockBillIsReconciliation ;
 import cn.zying.osales.OSalesConfigProperties.StockPaymentType ;
 import cn.zying.osales.pojos.commons.CommBean ;
 
@@ -175,6 +176,14 @@ public class StockPayment extends CommBean {
     @Column(name = "record_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "录入人", isShow = false)
     private Integer recordManId ;
+    
+    // /对账状态
+    @Column(name = "reconciliation")
+    @Enumerated(EnumType.STRING)
+    private StockBillIsReconciliation reconciliation ;
+    
+    @Transient
+    private List<StockBillIsReconciliation> reconciliationes;
 
     public String getNum() {
         return num ;
@@ -430,6 +439,22 @@ public class StockPayment extends CommBean {
 
     public void setIsPrePayments(List<Integer> isPrePayments) {
         this.isPrePayments = isPrePayments ;
+    }
+
+    public StockBillIsReconciliation getReconciliation() {
+        return reconciliation ;
+    }
+
+    public void setReconciliation(StockBillIsReconciliation reconciliation) {
+        this.reconciliation = reconciliation ;
+    }
+
+    public List<StockBillIsReconciliation> getReconciliationes() {
+        return reconciliationes ;
+    }
+
+    public void setReconciliationes(List<StockBillIsReconciliation> reconciliationes) {
+        this.reconciliationes = reconciliationes ;
     }
 
 }

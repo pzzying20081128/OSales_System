@@ -11,6 +11,11 @@ import javax.persistence.Transient ;
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.pojos.commons.DetailCommBean ;
 
+/**
+ * 对帐明细
+ * @author you
+ *
+ */
 @Entity
 @Table(name = "stock_payment_detail")
 public class StockPaymentDetail extends DetailCommBean {

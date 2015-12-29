@@ -40,7 +40,7 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
 
         StockInvoiceBillDetail optStockInvoiceDetail = new StockInvoiceBillDetail() ;
 
-        optStockInvoiceDetail.setBillDate(stockStoreReceive.getCreateTime()) ;
+//        optStockInvoiceDetail.setBillDate(stockStoreReceive.gets) ;
 
         optStockInvoiceDetail.setBillNum(stockStoreReceive.getNumber()) ;
 

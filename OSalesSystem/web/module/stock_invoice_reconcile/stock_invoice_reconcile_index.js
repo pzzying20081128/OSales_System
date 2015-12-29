@@ -24,42 +24,46 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 		column : stock_invoice_reconcile_grid_column.column,
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
-			items : [{
-				// id : moduleId + '_add',
-				key : "autoReconciliation",
-				xtype : "tbbutton",
-				text : "自动对帐",
-				// keyBinding : createCreateKey(),
-				handler : function(bt) {
-					stock_invoice_reconcile_auto_windows(moduleId, "手工对帐", {
-						grid : mainGridModule
-					});
-				}
-			}, {
+			items : [
+//				{
+//				// id : moduleId + '_add',
+//				key : "autoReconciliation",
+//				xtype : "tbbutton",
+//				text : "自动对帐",
+//				// keyBinding : createCreateKey(),
+//				handler : function(bt) {
+//					stock_invoice_reconcile_auto_windows(moduleId, "手工对帐", {
+//						grid : mainGridModule
+//					});
+//				}
+//			}, 
+				{
 				// id : moduleId + '_add',
 				key : "manualReconciliation",
 				xtype : "tbbutton",
-				text : "手工对帐",
+				text : "对帐",
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
-					stock_invoice_reconcile_handle_windows(moduleId, "手工对帐", {
+					stock_invoice_reconcile_handle_windows(moduleId, "对帐", {
 						grid : mainGridModule,
 						reStockInvoice:reStockInvoice
 						
 					});
 				}
-			}, {
-				// id : moduleId + '_edit',
-				xtype : "tbbutton",
-				text : "取消对帐",
-				key : "cancelReconciliation",
-				// keyBinding : createEditKey(),
-				handler : function(bt) {
-					stock_invoice_reconcile_cancel_windows(moduleId, moduleName, {
-						grid : mainGridModule
-					});
-				}
-			}, {
+			},
+//			{
+//				// id : moduleId + '_edit',
+//				xtype : "tbbutton",
+//				text : "取消对帐",
+//				key : "cancelReconciliation",
+//				// keyBinding : createEditKey(),
+//				handler : function(bt) {
+//					stock_invoice_reconcile_cancel_windows(moduleId, moduleName, {
+//						grid : mainGridModule
+//					});
+//				}
+//			},
+			{
 				// id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
@@ -161,78 +165,78 @@ function create_stock_invoice_reconcile_window(moduleId, moduleName) {
 		}
 	});
 
-	function stock_invoice_reconcile_cancel_windows(moduleId, moduleName, params) {
-		var mainGridModule = params.grid;
-		var mainGrid = mainGridModule.getGrid();
-		var selection_rows = mainGrid.getSelectionModel().getSelections();
-		if (selection_rows == null) {
-			showErrorMsg('提示信息', '请选择要取消对帐的采购发票');
-			return false;
-		}
+//	function stock_invoice_reconcile_cancel_windows(moduleId, moduleName, params) {
+//		var mainGridModule = params.grid;
+//		var mainGrid = mainGridModule.getGrid();
+//		var selection_rows = mainGrid.getSelectionModel().getSelections();
+//		if (selection_rows == null) {
+//			showErrorMsg('提示信息', '请选择要取消对帐的采购发票');
+//			return false;
+//		}
+//
+//		if (selection_rows.length != 1) {
+//			showErrorMsg('提示信息', '只能选择一张采购发票,取消对帐');
+//			return false;
+//		}
+//		var selectId = selection_rows[0].id;
+//		showMsgYN({
+//			msg : "是否要取消对帐",
+//			yes : function(YN) {
+//				ERPAjaxRequest({
+//					url : "./simple_StockInvoiceBillReconcile_cancelReconcile.do",
+//					params : {
+//						"stockinvoice.id" : selectId
+//					},
+//					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+//					success : function(response, options) {
+//						mainGrid.reload({
+//						   success:function(){
+//						   	detailGrid.removeAll();
+//						   }
+//						});
+//					}
+//				});
+//			}
+//		});
+//
+//	}
 
-		if (selection_rows.length != 1) {
-			showErrorMsg('提示信息', '只能选择一张采购发票,取消对帐');
-			return false;
-		}
-		var selectId = selection_rows[0].id;
-		showMsgYN({
-			msg : "是否要取消对帐",
-			yes : function(YN) {
-				ERPAjaxRequest({
-					url : "./simple_StockInvoiceBillReconcile_cancelReconcile.do",
-					params : {
-						"stockinvoice.id" : selectId
-					},
-					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-					success : function(response, options) {
-						mainGrid.reload({
-						   success:function(){
-						   	detailGrid.removeAll();
-						   }
-						});
-					}
-				});
-			}
-		});
-
-	}
-
-	function stock_invoice_reconcile_auto_windows(moduleId, moduleName, params) {
-		var mainGridModule = params.grid;
-		var mainGrid = mainGridModule.getGrid();
-		var selection_rows = mainGrid.getSelectionModel().getSelections();
-
-		if (selection_rows == null) {
-			showErrorMsg('提示信息', '请选择要自动对帐的采购发票');
-			return false;
-		}
-
-		if (selection_rows.length != 1) {
-			showErrorMsg('提示信息', '只能选择一张采购发票');
-			return false;
-		}
-		var selectId = selection_rows[0].id;
-		showMsgYN({
-			msg : "是否要自动对帐",
-			yes : function(YN) {
-				ERPAjaxRequest({
-					url : "./simple_StockInvoiceBillReconcile_autoReconcile.do",
-					params : {
-						"stockinvoice.id" : selectId
-					},
-					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-					success : function(response, options) {
-						mainGrid.reload({
-							success : function() {
-								detailGrid.removeAll();
-							}
-						});
-					}
-				});
-			}
-		});
-
-	}
+//	function stock_invoice_reconcile_auto_windows(moduleId, moduleName, params) {
+//		var mainGridModule = params.grid;
+//		var mainGrid = mainGridModule.getGrid();
+//		var selection_rows = mainGrid.getSelectionModel().getSelections();
+//
+//		if (selection_rows == null) {
+//			showErrorMsg('提示信息', '请选择要自动对帐的采购发票');
+//			return false;
+//		}
+//
+//		if (selection_rows.length != 1) {
+//			showErrorMsg('提示信息', '只能选择一张采购发票');
+//			return false;
+//		}
+//		var selectId = selection_rows[0].id;
+//		showMsgYN({
+//			msg : "是否要自动对帐",
+//			yes : function(YN) {
+//				ERPAjaxRequest({
+//					url : "./simple_StockInvoiceBillReconcile_autoReconcile.do",
+//					params : {
+//						"stockinvoice.id" : selectId
+//					},
+//					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+//					success : function(response, options) {
+//						mainGrid.reload({
+//							success : function() {
+//								detailGrid.removeAll();
+//							}
+//						});
+//					}
+//				});
+//			}
+//		});
+//
+//	}
 
 	function stock_invoice_reconcile_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;

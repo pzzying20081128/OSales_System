@@ -51,6 +51,15 @@ function createModule(node, userId, params) {
 			
 			break;
 		}
+		
+			case "stock_payment_reconcile" : {
+			//alert("|"+moduleId+"|");
+			loadjs.push("./module/" + moduleId + "/stock_payment_reconcile_handle_windows.js");
+			break;
+		}
+		
+		
+		
 			//
 			// case "course_management" : {
 			// loadjs.push("./ext3/fileupload/FileUploadField.js");

@@ -41,4 +41,11 @@ public interface InfaceStockInvoiceService {
      */
     public StockInvoice cancelReconcile(StockInvoice stockinvoice) throws SystemOptServiceException ;
 
+    /**
+     * 检查是否全部对帐,如果全部对帐生成付款对帐
+     * @param stockinvoice
+     * @throws SystemOptServiceException
+     */
+    public void checkAllReconcile(StockInvoice stockinvoice) throws SystemOptServiceException ;
+
 }
