@@ -2,13 +2,11 @@ package cn.zying.osales.service.stocks.units ;
 
 import java.util.List ;
 
-import org.hibernate.dialect.lock.OptimisticEntityLockException ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zying.osales.OSalesConfigProperties.StockBillIsReconciliation ;
-import cn.zying.osales.pojos.StockInvoice ;
-import cn.zying.osales.pojos.StockInvoiceBillDetail ;
-import cn.zying.osales.pojos.StockInvoiceDetail ;
 import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentBillDetail ;
 import cn.zying.osales.pojos.StockPaymentDetail ;
@@ -32,10 +30,29 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
         baseService.update(stockPayment) ;
 
     }
+    
+    @Autowired
+    @Qualifier("StockPaymentCancelReconcileUnits")
+    private StockPaymentCancelReconcileUnits iStockPaymentCancelReconcileUnits ; ;
 
-    //    private StockPayment load(StockPayment stockPayment) throws SystemOptServiceException {
-    //        return baseService.get(stockPayment.getId(), StockPayment.class) ;
-    //    }
+    public StockPaymentBillDetail handleReconcile(Integer stockPaymentId, StockPaymentBillDetail stockPaymentBillDetail_) {
+       
+        StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
+
+        StockPaymentBillDetail stockPaymentBillDetail = baseService.get(StockPaymentBillDetail.class, stockPaymentBillDetail_.getId()) ;
+
+        long reconciliationSum = stockPayment.getReconciliationSum() ;
+
+        long kill = stockPaymentBillDetail_.getStockPaymentDetailKillSum() ;
+
+        reconciliationSum = reconcile(stockPayment, reconciliationSum, stockPaymentBillDetail, kill) ;
+        update(stockPayment) ;
+        
+        stockPaymentBillDetail.setStockPayment(stockPayment) ;
+        
+        return stockPaymentBillDetail ;
+
+    }
 
     private long auto_Reconcile(StockPayment stockPayment, long reconciliationSum, StockPaymentBillDetail stockPaymentBillDetail) {
 
@@ -46,7 +63,7 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
         return reconciliationSum ;
     }
 
-    public StockPaymentBillDetail manualReconcile(Integer  stockPaymentId, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
+    public StockPaymentBillDetail manualReconcile(Integer stockPaymentId, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
 
         StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
 
@@ -68,7 +85,7 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
         long reconciliationSum = stockPayment.getReconciliationSum() ;
         reconciliationSum = auto_Reconcile(stockPayment, reconciliationSum, stockPaymentBillDetail) ;
         update(stockPayment) ;
-        stockPaymentBillDetail.setStockPayment(stockPayment);
+        stockPaymentBillDetail.setStockPayment(stockPayment) ;
         return stockPaymentBillDetail ;
     }
 
@@ -83,8 +100,13 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
     }
 
     public StockPayment autoAllReconcile(Integer stockPaymentId) throws SystemOptServiceException {
+        
+    
+        iStockPaymentCancelReconcileUnits.cancelAllReconcile(stockPaymentId);
+        
+       
         StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
-
+        
         long reconciliationSum = stockPayment.getReconciliationSum() ;
 
         List<StockPaymentBillDetail> stockPaymentBillDetails = search(stockPayment) ;

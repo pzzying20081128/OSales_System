@@ -72,13 +72,28 @@ function create_stock_invoice_window(moduleId, moduleName) {
 						searchParams : stock_invoice_search_params
 					});
 				}
-			}, checkButton]
+			},
+
+			{
+				// id : moduleId + '_add',
+				key : "reconciliation",
+				xtype : "tbbutton",
+				text : "对帐",
+				// keyBinding : createCreateKey(),
+				handler : function(bt) {
+					stock_invoice_reconcile_handle_windows(moduleId, "对帐", {
+						grid : mainGridModule
+					});
+				}
+			},
+
+			checkButton]
 
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				 stockSelect(data, checkButton, null);
+				stockSelect(data, checkButton, null);
 				// detailGrid.load({
 				// params : {
 				// // 'searchBean.combinedProductId' : rowDataId

@@ -7,6 +7,7 @@ function create_stock_payment_window(moduleId, moduleName) {
 		key : "check",
 		// keyBinding : createSearchKey(),
 		handler : function() {
+
 			stock_payment_check_windows(moduleId, moduleName, {
 				grid : mainGridModule
 			});
@@ -33,7 +34,6 @@ function create_stock_payment_window(moduleId, moduleName) {
 				handler : function(bt) {
 					stock_payment_create_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
 
 					});
 				}
@@ -45,8 +45,8 @@ function create_stock_payment_window(moduleId, moduleName) {
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					stock_payment_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-				
+						grid : mainGridModule
+
 					});
 				}
 			}, {
@@ -58,7 +58,7 @@ function create_stock_payment_window(moduleId, moduleName) {
 				handler : function(bt) {
 					stock_payment_delete_windows(moduleId, moduleName, {
 						grid : mainGridModule
-						,
+
 					});
 				}
 			}, {
@@ -73,19 +73,32 @@ function create_stock_payment_window(moduleId, moduleName) {
 						searchParams : stock_payment_search_params
 					});
 				}
-			},checkButton]
+			}, {
+				// id : moduleId + '_search',
+				xtype : "tbbutton",
+				text : "对帐",
+				key : "reconcile",
+				// keyBinding : createSearchKey(),
+				handler : function() {
+					stock_payment_reconcile_handle_windows(moduleId, "对帐", {
+						grid : mainGridModule
+
+					});
+				}
+			},
+
+			checkButton]
 
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
 				stockSelect(data, checkButton, null);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
-
+				// detailGrid.load({
+				// params : {
+				// // 'searchBean.combinedProductId' : rowDataId
+				// }
+				// });
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -105,14 +118,14 @@ function create_stock_payment_window(moduleId, moduleName) {
 		listeners : {}
 	});
 	window.showWin();
-	
+
 	mainGrid.load({
-	     params:{
-	     	"searchBean.status":"有效"
-	     }
+		params : {
+			"searchBean.status" : "有效"
+		}
 	});
-	
-	function stock_payment_check_windows(moduleId, moduleName, params){
+
+	function stock_payment_check_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;
 		var mainGrid = mainGridModule.getGrid();
 		var selection_rows = mainGrid.getSelectionModel().getSelections();
@@ -126,6 +139,12 @@ function create_stock_payment_window(moduleId, moduleName) {
 			showErrorMsg('提示信息', '只能选择一行审核的付款单');
 			return false;
 		}
+
+		if (selection_rows[0].data.reconciliation != "全部对帐") {
+			showErrorMsg('提示信息', '付款单没有对帐完成,不能审核');
+			return false;
+		}
+
 		var selectId = selection_rows[0].id;
 		showMsgYN({
 			msg : "是否要审核该付款单",

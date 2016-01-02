@@ -63,14 +63,16 @@ public class MeunsTree {
     private String p7001[] = { "produce_combined_product", "组合产品生产", "true", "", "produce_manage", "0", "[{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
     private String p8[] = { "fund_management", "资金管理", "false", "font_weight", "0", "0", "[]" } ;
+    
+    private String p8000[] = { "stock_adjust_bill", "采购调整单", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
     private String p8001[] = { "stock_invoice", "采购发票", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
-    private String p8002[] = { "stock_invoice_reconcile", "采购发票对帐", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
+//    private String p8002[] = { "stock_invoice_reconcile", "采购发票对帐", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
     private String p8003[] = { "stock_payment", "采购付款", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
-    private String p8004[] = { "stock_payment_reconcile", "采购付款对帐", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
+//    private String p8004[] = { "stock_payment_reconcile", "采购付款对帐", "true", "", "fund_management", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'},{search:1,label:'查询'},{check:1,label:'审核'}]" } ;
 
     
     
@@ -173,7 +175,7 @@ public class MeunsTree {
 
     p1006, p1007, p1008, p2, p2000, p2001, p2002, p2003, p6, p6000, p6001, p6002, p7, p7001,
 
-    p8, p8001, p8002, p8003,p8004 } ;
+    p8, p8000,p8001 , p8003 } ;
 
     private String[][] initTreeData() {
         return treeData ;

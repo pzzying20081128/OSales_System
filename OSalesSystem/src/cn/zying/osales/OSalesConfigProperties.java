@@ -1,15 +1,20 @@
 package cn.zying.osales ;
 
 public interface OSalesConfigProperties {
+    
+    
+    public static enum AdjustType{
+        不定 ,票前,票后 
+    }
     public static enum BillType {
 
         采购进货单, 采购票前调整单, 采购退货单 ,采购付款
     }
 
     
-    // 采购单是否对过账
+    // 采购单是否对过账 付款已对帐
     public enum StockBillIsReconciliation {
-        已对帐, 末对帐, 全部对帐, 删除, 查询非全部对帐,付款已对帐
+        已对帐, 末对帐, 全部对帐, 删除, 查询非全部对帐
     }
 
     // 采购付款 付款方式

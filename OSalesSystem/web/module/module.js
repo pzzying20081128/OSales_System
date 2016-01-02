@@ -5,7 +5,11 @@ function createModule(node, userId, params) {
 
 	];
 	// alert(moduleId.substring(0,5));
-	if (moduleId.substring(0, 5) == 'base_' || moduleId.substring(0, 4) == 'sys_' || moduleId == 'sys_opt_history' || moduleId == 'store_product_info_stock' || moduleId == 'stock_invoice') {
+	if (moduleId.substring(0, 5) == 'base_' || moduleId.substring(0, 4) == 'sys_' || moduleId == 'sys_opt_history'
+
+	|| moduleId == 'store_product_info_stock' || moduleId == 'stock_invoice' || moduleId == 'stock_adjust_bill'
+
+	) {
 
 	} else {
 		loadjs.push("./module/" + moduleId + "/" + moduleId + "_detail/" + moduleId + "_detail_index.js");
@@ -17,7 +21,7 @@ function createModule(node, userId, params) {
 		loadjs.push("./module/" + moduleId + "/" + moduleId + "_detail/" + moduleId + "_detail_update_windows.js");
 	}
 
-//	 alert("|"+moduleId+"|");
+	// alert("|"+moduleId+"|");
 	switch (moduleId) {
 		case "system_manager" : {
 			loadjs.push("./ext3/privates/power/user_power_opt.js");
@@ -45,21 +49,52 @@ function createModule(node, userId, params) {
 			break;
 		}
 		case "stock_invoice_reconcile" : {
-			//alert("|"+moduleId+"|");
+			// alert("|"+moduleId+"|");
 			loadjs.push("./module/" + moduleId + "/stock_invoice_reconcile_handle_windows.js");
 			loadjs.push("./module/" + moduleId + "/handle/stock_invoice_reconcile_bill_handle_windows.js");
-			
+
 			break;
 		}
-		
-			case "stock_payment_reconcile" : {
-			//alert("|"+moduleId+"|");
+
+		case "stock_invoice" : {
+			// alert("|"+moduleId+"|");
+			loadjs.push("./module/" + moduleId + "/stock_invoice_reconcile_handle_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_invoice_reconcile_bill_handle_windows.js");
+
+			break;
+		}
+
+		case "stock_payment_reconcile" : {
+			// alert("|"+moduleId+"|");
 			loadjs.push("./module/" + moduleId + "/stock_payment_reconcile_handle_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_payment_reconcile_bill_handle_windows.js");
+
 			break;
 		}
-		
-		
-		
+			// stock_payment_reconcile
+		case "stock_payment" : {
+			// alert("|"+moduleId+"|");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_index.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_action_properties.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_create_windows.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_save_update_windows.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_search_action_properties.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_search_windows.js");
+			// loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/"
+			// + moduleId + "_reconcile_update_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/stock_payment_reconcile_handle_windows.js");
+			loadjs.push("./module/" + moduleId + "/stock_payment_reconcile/stock_payment_reconcile_bill_handle_windows.js");
+
+			break;
+
+		}
+
 			//
 			// case "course_management" : {
 			// loadjs.push("./ext3/fileupload/FileUploadField.js");

@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
-import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentDetail ;
 import cn.zying.osales.units.search.bean.StockPaymentDetailSearchBean ;
-import cn.zying.osales.units.search.bean.StockPaymentSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockPaymentService ;
 

@@ -86,6 +86,9 @@ var stock_payment_grid_column = {
 	}, {
 		name : "paymentType",
 		mapping : "paymentType"
+	}, {
+		name : "reconciliation",
+		mapping : "reconciliation"
 	}],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
@@ -265,6 +268,32 @@ var stock_payment_grid_column = {
 
 		}
 	}, {
+		header : '对账状态',
+		width : 200,
+		dataIndex : 'reconciliation',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+	}, {
+		header : '状态',
+		width : 200,
+		dataIndex : 'status',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+	},{
 		header : '审核人',
 		width : 200,
 		dataIndex : 'checkMan.name',
@@ -292,20 +321,7 @@ var stock_payment_grid_column = {
 				return value;
 
 		}
-	}, {
-		header : '状态',
-		width : 200,
-		dataIndex : 'status',
-		sortable : true,
-		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-
-			if (value == null || typeof ( value ) == 'undefined')
-				return null
-			else
-				return value;
-
-		}
-	},
+	}
 
 	]
 };

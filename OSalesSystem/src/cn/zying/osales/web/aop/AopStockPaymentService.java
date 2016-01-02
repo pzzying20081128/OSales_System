@@ -83,7 +83,7 @@ public class AopStockPaymentService implements IAopStockPaymentService {
     }
 
     @Override
-    public StockPaymentBillDetail autoReconcile(Integer stockpaymentId ,Integer stockPaymentBillDetailId) throws SystemOptServiceException {
+    public StockPaymentBillDetail autoReconcile(Integer stockpaymentId, Integer stockPaymentBillDetailId) throws SystemOptServiceException {
 
         return iStockPaymentService.autoReconcile(stockpaymentId, stockPaymentBillDetailId) ;
     }
@@ -100,15 +100,21 @@ public class AopStockPaymentService implements IAopStockPaymentService {
     }
 
     @Override
-    public StockPaymentBillDetail cancelReconcile(Integer  stockpaymentId ,StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
-        // TODO Auto-generated method stub
+    public StockPaymentBillDetail cancelReconcile(Integer stockpaymentId, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
+      
         return iStockPaymentService.cancelReconcile(stockpaymentId, stockPaymentBillDetail) ;
     }
 
     @Override
     public StockPaymentBillDetail getStockPaymentBillDetail(Integer id) throws SystemOptServiceException {
-       
+
         return iStockPaymentService.getStockPaymentBillDetail(id) ;
+    }
+
+    @Override
+    public StockPaymentBillDetail handleReconcile(StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
+
+        return iStockPaymentService.handleReconcile(stockPaymentBillDetail) ;
     }
 
 }

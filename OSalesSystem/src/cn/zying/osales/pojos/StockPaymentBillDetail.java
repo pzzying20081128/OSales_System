@@ -109,6 +109,12 @@ public class StockPaymentBillDetail extends DetailCommBean {
     private String stockPaymentDetailKillSumMoneyHide ;
     
     
+    
+    
+    
+    
+    
+    
 
     public BillType getBillType() {
         return billType ;

@@ -117,6 +117,14 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 		}]
 	};
 	// //////////////////////////////////////////////////////////////////////////////////
+	
+	function setFormValue(stockPayment) {
+		mainGridModule.payment = stockPayment;
+		killSumMoneyShow.setValue(stockPayment.killSumMoneyShow);
+		noKillSumMoneyShow.setValue(stockPayment.noKillSumMoneyShow);
+		reconciliationSumMoneyShow.setValue(stockPayment.reconciliationSumMoneyShow);
+	}
+
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var mainGridModule = new mainGridWindow({
@@ -176,7 +184,7 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 					}
 					stock_payment_reconcile_bill_handle_windows(moduleId, "手工对帐", {
 						grid : mainGridModule,
-						setStockInvoiceFormValue : setStockInvoiceFormValue
+						setFormValue : setFormValue
 
 					});
 				}
@@ -453,34 +461,34 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 			listeners : {
 				'click' : function() {
 
-					ERPAjaxRequest({
-						url : "./simple_StockInvoiceBillReconcile_checkAllReconcile.do",
-						params : {
-							"stockinvoice.id" : mainGridModule.payment.id
-						},
-						// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-						success : function(result) {
-							// checkAllReconcile
-							reStockInvoice(mainGridModule.payment);
+//					ERPAjaxRequest({
+//						url : "./simple_StockInvoiceBillReconcile_checkAllReconcile.do",
+//						params : {
+//							"stockinvoice.id" : mainGridModule.payment.id
+//						},
+//						// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+//						success : function(result) {
+//							// checkAllReconcile
+//							reStockInvoice(mainGridModule.payment);
 							window.close();
-						}
-					});
+//						}
+//					});
 				}
 			}
 		}, {
 			text : '关闭',
 			listeners : {
 				'click' : function() {
-					ERPAjaxRequest({
-						url : "./simple_StockInvoiceBillReconcile_checkAllReconcile.do",
-						params : {
-							"stockinvoice.id" : mainGridModule.payment.id
-						},
-						// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-						success : function(result) {
+//					ERPAjaxRequest({
+//						url : "./simple_StockInvoiceBillReconcile_checkAllReconcile.do",
+//						params : {
+//							"stockinvoice.id" : mainGridModule.payment.id
+//						},
+//						// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+//						success : function(result) {
 							window.close();
-						}
-					});
+//						}
+//					});
 
 				}
 			}
@@ -558,10 +566,7 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 						var stockpaymentbilldetail = result.result.result;
 						grid.updateRow(stockpaymentbilldetail);
 						var stockPayment = stockpaymentbilldetail.stockPayment;
-						setFromValue(stockPayment);
-//						killSumMoneyShow.setValue(payment.killSumMoneyShow);
-//						noKillSumMoneyShow.setValue(payment.noKillSumMoneyShow);
-//						reconciliationSumMoneyShow.setValue(payment.reconciliationSumMoneyShow);
+						setFormValue(stockPayment);
 
 					}
 				});
@@ -581,15 +586,11 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(result) {
-						var payment = result.result.result;
+						var stockPayment = result.result.result;
 
 						mainGrid.reload({
 							success : function() {
-								setFromValue(stockPayment);
-//								mainGridModule.payment = payment;
-//								killSumMoneyShow.setValue(payment.killSumMoneyShow);
-//								noKillSumMoneyShow.setValue(payment.noKillSumMoneyShow);
-//								reconciliationSumMoneyShow.setValue(payment.reconciliationSumMoneyShow);
+								setFormValue(stockPayment);
 							}
 						});
 					}
@@ -613,14 +614,10 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(result) {
-						var payment = result.result.result;
+						var stockPayment = result.result.result;
 						mainGrid.reload({
 							success : function() {
-								setFromValue(stockPayment);
-//								mainGridModule.payment = payment;
-//								killSumMoneyShow.setValue(payment.killSumMoneyShow);
-//								noKillSumMoneyShow.setValue(payment.noKillSumMoneyShow);
-//								reconciliationSumMoneyShow.setValue(payment.reconciliationSumMoneyShow);
+								setFormValue(stockPayment);
 							}
 						});
 					}
@@ -661,22 +658,13 @@ function stock_payment_reconcile_handle_windows(moduleId, moduleName, params) {
 						var stockpaymentbilldetail = result.result.result;
 						grid.updateRow(stockpaymentbilldetail);
 						var stockPayment = stockpaymentbilldetail.stockPayment;
-						setFromValue(stockPayment);
-						// killSumMoneyShow.setValue(stockPayment.killSumMoneyShow);
-						// noKillSumMoneyShow.setValue(stockPayment.noKillSumMoneyShow);
-						// reconciliationSumMoneyShow.setValue(stockPayment.reconciliationSumMoneyShow);
+						setFormValue(stockPayment);
 					}
 				});
 			}
 		});
 	}
 
-	function setFromValue(stockPayment) {
-		mainGridModule.payment = stockPayment;
-		killSumMoneyShow.setValue(stockPayment.killSumMoneyShow);
-		noKillSumMoneyShow.setValue(stockPayment.noKillSumMoneyShow);
-		reconciliationSumMoneyShow.setValue(stockPayment.reconciliationSumMoneyShow);
-	}
-
+	
 	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -59,45 +59,52 @@ public interface InfaceStockPaymentService {
     public SelectPage<StockPaymentBillDetail> searchAllReconcileBillDetail(OptType optType, StockPaymentBillDetailSearchBean searchBean,
 
     CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
-    
+
     /**
      * 自动全部对帐
      * @param stockpayment
      * @return
      * @throws SystemOptServiceException
      */
-    public  StockPayment autoAllReconcile(StockPayment stockpayment) throws SystemOptServiceException ;
-    
+    public StockPayment autoAllReconcile(StockPayment stockpayment) throws SystemOptServiceException ;
+
     /**
      * 单据全部对帐
      * @param stockpayment
      * @return
      * @throws SystemOptServiceException
      */
-    public  StockPaymentBillDetail autoReconcile(Integer stockpaymentId ,Integer stockPaymentBillDetailId  ) throws SystemOptServiceException ;
-    
+    public StockPaymentBillDetail autoReconcile(Integer stockpaymentId, Integer stockPaymentBillDetailId) throws SystemOptServiceException ;
+
     /**
      * 手动对帐
      * @param stockpayment
      * @return
      * @throws SystemOptServiceException
      */
-    public  StockPaymentBillDetail manualReconcile(StockPayment stockpayment ,StockPaymentBillDetail stockPaymentBillDetail  ) throws SystemOptServiceException ;
-    
-    /**
-     * 自动全部取消对帐
-     * @param stockpayment
-     * @return
-     */
-    public StockPayment cancelAllReconcile(StockPayment stockpayment)  throws SystemOptServiceException ;
-    
-    /**
-     * 自动全部取消对帐
-     * @param stockpayment
-     * @return
-     */
-    public  StockPaymentBillDetail cancelReconcile(Integer  stockpaymentId ,StockPaymentBillDetail stockPaymentBillDetail  )  throws SystemOptServiceException ;
+    public StockPaymentBillDetail manualReconcile(StockPayment stockpayment, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException ;
 
-    
-    public StockPaymentBillDetail getStockPaymentBillDetail(Integer  id)throws SystemOptServiceException ;
+    /**
+     * 自动全部取消对帐
+     * @param stockpayment
+     * @return
+     */
+    public StockPayment cancelAllReconcile(StockPayment stockpayment) throws SystemOptServiceException ;
+
+    /**
+     * 自动全部取消对帐
+     * @param stockpayment
+     * @return
+     */
+    public StockPaymentBillDetail cancelReconcile(Integer stockpaymentId, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException ;
+
+    /**
+     * 手动对帐
+     * @param stockPaymentBillDetail
+     * @return
+     * @throws SystemOptServiceException
+     */
+    public StockPaymentBillDetail handleReconcile(StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException ;
+
+    public StockPaymentBillDetail getStockPaymentBillDetail(Integer id) throws SystemOptServiceException ;
 }

@@ -9,19 +9,18 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentBillDetail ;
 import cn.zying.osales.pojos.StockPaymentDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.IStockPaymentService ;
-import cn.zying.osales.service.stocks.units.StockPaymentCancelReconcileUnits ;
-import cn.zying.osales.service.stocks.units.StockPaymentHandleReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentBillDetailSearchUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentBillReconcileSearchUnits ;
+import cn.zying.osales.service.stocks.units.StockPaymentCancelReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentCheckUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentDetailSearchUnits ;
+import cn.zying.osales.service.stocks.units.StockPaymentHandleReconcileUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentRemoveUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentSaveUpdateUnits ;
 import cn.zying.osales.service.stocks.units.StockPaymentSearchUnits ;
@@ -166,6 +165,12 @@ public class StockPaymentServiceImple extends ABCommonsService implements IStock
     public StockPaymentBillDetail getStockPaymentBillDetail(Integer id) throws SystemOptServiceException {
 
         return baseService.get(id, StockPaymentBillDetail.class) ;
+    }
+
+    @Override
+    public StockPaymentBillDetail handleReconcile(StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
+        // TODO Auto-generated method stub
+        return stockPaymentHandleReconcileUnits.handleReconcile(stockPaymentBillDetail.getStockPaymentId(), stockPaymentBillDetail) ;
     }
 
 }

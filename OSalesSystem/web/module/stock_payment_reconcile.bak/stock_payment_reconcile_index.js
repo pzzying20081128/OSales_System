@@ -33,7 +33,7 @@ function create_stock_payment_reconcile_window(moduleId, moduleName) {
 				handler : function(bt) {
 					stock_payment_reconcile_handle_windows(moduleId, "对帐", {
 						grid : mainGridModule,
-						// reStockInvoice : reStockInvoice
+//						 reStockInvoice : reStockInvoice
 
 					});
 				}

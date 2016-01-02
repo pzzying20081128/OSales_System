@@ -13,7 +13,6 @@ import javax.persistence.TemporalType ;
 import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
-import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.pojos.SysStaffUser ;
 
 @MappedSuperclass

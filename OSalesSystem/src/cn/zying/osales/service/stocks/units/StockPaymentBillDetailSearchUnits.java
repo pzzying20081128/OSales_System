@@ -1,8 +1,6 @@
 package cn.zying.osales.service.stocks.units ;
 
 import java.util.ArrayList ;
-import java.util.Collections ;
-import java.util.Comparator ;
 import java.util.List ;
 
 import org.springframework.stereotype.Component ;
@@ -10,16 +8,11 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.pojos.StockInvoiceBillDetail ;
-import cn.zying.osales.pojos.StockInvoiceDetail ;
-import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentBillDetail ;
 import cn.zying.osales.pojos.StockPaymentDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.units.search.bean.StockInvoiceBillDetailSearchBean ;
 import cn.zying.osales.units.search.bean.StockPaymentBillDetailSearchBean ;
-import cn.zying.osales.units.search.bean.StockPaymentDetailSearchBean ;
 
 /**
  * 查询所有的能对帐的单据包含已对帐的单据

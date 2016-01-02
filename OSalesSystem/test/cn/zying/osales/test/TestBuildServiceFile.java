@@ -5,6 +5,7 @@ import cn.zy.apps.tools.dev.service.IBuildServiceFile ;
 import cn.zying.osales.pojos.CompanyInfo ;
 import cn.zying.osales.pojos.ProduceComBinedProduct ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
+import cn.zying.osales.pojos.StockAdjustBill ;
 import cn.zying.osales.pojos.StockContract ;
 import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
@@ -27,7 +28,7 @@ public class TestBuildServiceFile {
         
         String module= "stocks";
         
-        Class<?> clazz = StockPayment.class;
+        Class<?> clazz = StockAdjustBill.class;
         
         String className=clazz.getSimpleName();
 

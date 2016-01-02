@@ -7,10 +7,8 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentBillDetail ;
-import cn.zying.osales.pojos.StockPaymentDetail ;
+import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.StockPaymentBillDetailSearchBean ;
-import cn.zying.osales.units.search.bean.StockPaymentDetailSearchBean ;
-import cn.zying.osales.units.search.bean.StockPaymentSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockPaymentService ;
 
@@ -77,6 +75,23 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
             StockPaymentBillDetail stockPaymentBillDetail_ = service.getStockPaymentBillDetail(stockPaymentBillDetail.getId());
             stockPaymentBillDetail_.setStockPayment(stockPaymentBillDetail.getStockPayment());
             this.result = stockPaymentBillDetail_ ;
+            writeObjectService.intToPrpertiesUnits(result) ;
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+        return SUCCESS ;
+    }
+    
+    /**
+     * 手工对帐
+     * @return
+     * @throws Exception
+     */
+    public String handleReconcile() throws Exception {
+        try {
+            BuildMoneyUnits.build(stockpaymentbilldetail) ;
+            this.result = service.handleReconcile(stockpaymentbilldetail) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;

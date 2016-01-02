@@ -9,8 +9,8 @@ var stock_invoice_grid_column = {
 		name : 'providerInfo.name',
 		mapping : 'providerInfo'
 	}, {
-		name : 'providerId',
-		mapping : 'providerId'
+		name : 'providerInfoId',
+		mapping : 'providerInfoId'
 	}, {
 		name : 'invoiceDate',
 		mapping : 'invoiceDate'
@@ -74,7 +74,10 @@ var stock_invoice_grid_column = {
 	}, {
 		name : 'status',
 		mapping : 'status'
-	},],
+	}, {
+		name : 'reconciliation',
+		mapping : 'reconciliation'
+	}],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	column : [new Ext.grid.ERPRowNumberer(), {
@@ -253,6 +256,21 @@ var stock_invoice_grid_column = {
 
 		}
 	}, {
+
+		header : '对帐状态',
+		width : 200,
+		dataIndex : 'reconciliation',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+
+	}, {
 		header : '状态',
 		width : 200,
 		dataIndex : 'status',
@@ -265,8 +283,7 @@ var stock_invoice_grid_column = {
 				return value;
 
 		}
-	},
-
+	}
 	]
 };
 // //////////////////////////////////////////////////////////////////////////////////
