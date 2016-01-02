@@ -9,7 +9,7 @@ function stock_order_update_windows(moduleId, moduleName, params) {
 
 	var selectId = selection_rows[0].id;
 
-	providerInfo = createERPcombo({
+	var providerInfo = createERPcombo({
 		id : 'stockorder.providerInfoId',
 		name : 'stockorder.providerInfoId',
 		fieldLabel : ' 供应商',

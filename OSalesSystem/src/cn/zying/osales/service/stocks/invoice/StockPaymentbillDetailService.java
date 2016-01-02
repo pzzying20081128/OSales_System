@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component ;
 import cn.zying.osales.OSalesConfigProperties ;
 import cn.zying.osales.OSalesConfigProperties.BillType ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.pojos.StockAdjustBill ;
 import cn.zying.osales.pojos.StockInvoice ;
+import cn.zying.osales.pojos.StockInvoiceBillDetail ;
+import cn.zying.osales.pojos.StockPayment ;
 import cn.zying.osales.pojos.StockPaymentBillDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -27,10 +30,33 @@ public class StockPaymentbillDetailService extends ABCommonsService implements I
             createStockInvoice(billType, (StockInvoice) bill) ;
             break ;
 
+        case 采购票后调整单:
+            createStockAdjustBill(billType, (StockAdjustBill) bill) ;
+            break ;
+
         default:
             break ;
         }
 
+    }
+
+    private void createStockAdjustBill(BillType billType, StockAdjustBill stockAdjustBill) throws SystemOptServiceException {
+
+        StockPaymentBillDetail stockPaymentBillDetail = new StockPaymentBillDetail() ;
+
+        //        optStockInvoiceDetail.setBillDate(stockStoreReceive.gets) ;
+
+        stockPaymentBillDetail.setBillNum(stockAdjustBill.getAdjustNum()) ;
+
+        stockPaymentBillDetail.setPaymentSum(stockAdjustBill.getAdjustSum()) ;
+
+        stockPaymentBillDetail.setBillType(billType) ;
+
+        stockPaymentBillDetail.setKillSum(OSalesConfigProperties.default_long_null) ;
+        stockPaymentBillDetail.setNoKillSum(stockPaymentBillDetail.getPaymentSum()) ;
+        stockPaymentBillDetail.setProviderInfoId(stockAdjustBill.getProviderInfoId()) ;
+        stockPaymentBillDetail.setProviderInfo(stockAdjustBill.getProviderInfo()) ;
+        stockPaymentBillDetailSaveUpdateUnits.saveUpdate(OptType.save, stockPaymentBillDetail) ;
     }
 
     private void createStockInvoice(BillType billType, StockInvoice stockInvoice) throws SystemOptServiceException {
@@ -59,6 +85,9 @@ public class StockPaymentbillDetailService extends ABCommonsService implements I
         switch (billType) {
         case 采购付款:
             bullNum = ((StockInvoice) bill).getNum() ;
+            break ;
+        case 采购票后调整单:
+            bullNum = ((StockAdjustBill) bill).getAdjustNum() ;
             break ;
 
         default:

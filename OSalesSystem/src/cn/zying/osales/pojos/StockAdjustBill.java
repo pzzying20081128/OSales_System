@@ -27,9 +27,9 @@ import cn.zying.osales.pojos.commons.CommBean ;
 @Table(name = "stock_adjust_bill")
 public class StockAdjustBill extends CommBean {
 
-    //	// 采购合同编号
-    //	@Column(name = "stock_num")
-    //	private String adjustNum;
+    	// 采购调整单号
+    	@Column(name = "adjust_num")
+    	private String adjustNum;
 
     // 供应商名称
     @ManyToOne(fetch = FetchType.LAZY)
@@ -236,6 +236,14 @@ public class StockAdjustBill extends CommBean {
 
     public void setRecordManId(Integer recordManId) {
         this.recordManId = recordManId ;
+    }
+
+    public String getAdjustNum() {
+        return adjustNum ;
+    }
+
+    public void setAdjustNum(String adjustNum) {
+        this.adjustNum = adjustNum ;
     }
 
 }

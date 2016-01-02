@@ -16,8 +16,7 @@ var  stock_adjust_bill_search_params = {
 	params : function() {
 		var params = {
 			optType : "search",
-			'staffSearchBean.selectName' : Ext.getCmp('staffSearchBean.selectName').getValue(),
-			'staffSearchBean.name' : Ext.getCmp('staffSearchBean.name').getValue()
+			
 		}
 		return params;
 	}

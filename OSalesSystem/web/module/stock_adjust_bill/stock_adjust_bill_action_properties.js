@@ -44,10 +44,30 @@ var stock_adjust_bill_grid_column = {
 	}, {
 		name : 'status',
 		mapping : 'status'
-	},],
+	}, {
+		name : 'adjustNum',
+		mapping : 'adjustNum'
+	},
+
+	],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	column : [new Ext.grid.ERPRowNumberer(), {
+
+		header : '调整单号',
+		width : 200,
+		dataIndex : 'adjustNum',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+
+	}, {
 		header : '供应商',
 		width : 200,
 		dataIndex : 'providerInfo.name',
@@ -101,7 +121,7 @@ var stock_adjust_bill_grid_column = {
 				return value;
 
 		}
-	},  {
+	}, {
 		header : '调整金额',
 		width : 200,
 		dataIndex : 'adjustSumMoneyShow',
@@ -127,22 +147,26 @@ var stock_adjust_bill_grid_column = {
 				return value;
 
 		}
-	}, {
-		header : '采购员',
-		width : 200,
-		dataIndex : 'checkMan.name',
-		sortable : true,
-		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+	}, 
 
-			if (value == null || typeof ( value ) == 'undefined')
-				return null
-			else if (value.name == null || typeof ( value.name ) == 'undefined')
-				return null
-			else
-				return value.name;
-
-		}
-	}, {
+	// {
+	// header : '采购员',
+	// width : 200,
+	// dataIndex : 'checkMan.name',
+	// sortable : true,
+	// renderer : function(value, cellmeta, record, rowIndex, columnIndex,
+	// store) {
+	//
+	// if (value == null || typeof ( value ) == 'undefined')
+	// return null
+	// else if (value.name == null || typeof ( value.name ) == 'undefined')
+	// return null
+	// else
+	// return value.name;
+	//
+	//		}
+	//	}, 
+		{
 		header : '录入人',
 		width : 200,
 		dataIndex : 'stockMan.name',

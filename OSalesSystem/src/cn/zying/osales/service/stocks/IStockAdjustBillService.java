@@ -2,7 +2,10 @@
 
  
  
- import cn.zying.osales.infaces.InfaceStockAdjustBillService ;
+ import java.util.List ;
+
+import cn.zying.osales.infaces.InfaceStockAdjustBillService ;
+import cn.zying.osales.service.SystemOptServiceException ;
 
 public interface IStockAdjustBillService  extends InfaceStockAdjustBillService { 
     
@@ -11,7 +14,7 @@ public interface IStockAdjustBillService  extends InfaceStockAdjustBillService {
                 
         
             
-            
+            public List<String>searchAdjustSubject(String adjustSubject , int... startLimit)throws SystemOptServiceException;
             
 
 }

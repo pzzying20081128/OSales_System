@@ -48,7 +48,7 @@ public class StockAdjustBillAction extends OSalesSystemABAction<StockAdjustBill>
     public String check() throws Exception {
         try {
             stockadjustbill.setCheckManId(getOSalsesLoginUserId()) ;
-//            service.check(stockadjustbill) ;
+            service.check(stockadjustbill) ;
         } catch (Exception e) {
             this.success = false ;
             this.msg = handError(e) ;

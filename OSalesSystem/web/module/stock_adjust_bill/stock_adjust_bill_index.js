@@ -7,7 +7,7 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 		key : "check",
 		// keyBinding : createSearchKey(),
 		handler : function() {
-			base_combined_product_check_windows(moduleId, moduleName, {
+			base_stock_adjust_check_windows(moduleId, moduleName, {
 				grid : mainGridModule
 			});
 		}
@@ -17,7 +17,7 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
-		url : "ssssssssss",
+		url : "./list_StockAdjustBill_list.do",
 		// grid_column.record
 		record : stock_adjust_bill_grid_column.record,
 		// grid_column.column
@@ -45,8 +45,7 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					stock_adjust_bill_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : test_search_params
+						grid : mainGridModule
 					});
 				}
 			}, {
@@ -72,19 +71,13 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 						searchParams : stock_adjust_bill_search_params
 					});
 				}
-			}]
+			}, checkButton]
 
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				stockSelect(data, checkButton, detailGrid);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
-
+				stockSelect(data, checkButton, null);
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -105,6 +98,44 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 	});
 	window.showWin();
 
+	mainGrid.load({
+		params : {
+			"searchBean.status" : "有效"
+		}
+	});
+
+	function base_stock_adjust_check_windows(moduleId, moduleName, params) {
+		var mainGridModule = params.grid;
+		var mainGrid = mainGridModule.getGrid();
+		var selection_rows = mainGrid.getSelectionModel().getSelections();
+
+		if (selection_rows == null) {
+			showErrorMsg('提示信息', '请选择要'+checkButton.getText()+'的数据');
+			return false;
+		}
+
+		if (selection_rows.length != 1) {
+			showErrorMsg('提示信息', '只能选择一行数据记录');
+			return false;
+		}
+		var selectId = selection_rows[0].id;
+		showMsgYN({
+			msg : "是否要"+checkButton.getText()+"该条信息",
+			yes : function(YN) {
+				ERPAjaxRequest({
+					url : './simple_StockAdjustBill_check.do',
+					params : {
+						"stockadjustbill.id" : selectId
+					},
+					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+					success : function(response, options) {
+						mainGrid.reload();
+					}
+				});
+			}
+		});
+	}
+
 	function stock_adjust_bill_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;
 		var mainGrid = mainGridModule.getGrid();
@@ -124,9 +155,9 @@ function create_stock_adjust_bill_window(moduleId, moduleName) {
 			msg : "是否要删除该条信息",
 			yes : function(YN) {
 				ERPAjaxRequest({
-					url : "./simple_ProductBrand_remove.do",
+					url : './simple_StockAdjustBill_remove.do',
 					params : {
-						"productBrand.id" : selectId
+						"stockadjustbill.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {

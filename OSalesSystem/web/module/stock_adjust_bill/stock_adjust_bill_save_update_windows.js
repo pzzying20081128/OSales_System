@@ -4,8 +4,7 @@ function stock_adjust_bill_save_update_form_panel_windows(params) {
 		labelWidth : 55,
 		frame : true,
 //		bodyStyle : 'padding:5px 5px 0',
-		height : 400,
-		autoHeight : false,
+		
 		items : params.field,
 		reader : params.reader,
 		buttons : [{
@@ -44,8 +43,7 @@ function stock_adjust_bill_save_update_form_panel_windows(params) {
 		title : params.title,
 		closable : true,
 		width : 900,
-		height : 400,
-		autoHeight : false,
+	
 		items : [form_panel]
 	});
 	window.showWin();
