@@ -1,6 +1,8 @@
 function createModule(node, userId, params) {
 	var moduleId = node.id;
 	var moduleName = node.text;
+	if (moduleId == "stock_report")
+		return;
 	var loadjs = ["./module/" + moduleId + "/" + moduleId + "_index.js", "./module/" + moduleId + "/" + moduleId + "_action_properties.js", "./module/" + moduleId + "/" + moduleId + "_create_windows.js", "./module/" + moduleId + "/" + moduleId + "_save_update_windows.js", "./module/" + moduleId + "/" + moduleId + "_search_action_properties.js", "./module/" + moduleId + "/" + moduleId + "_search_windows.js", "./module/" + moduleId + "/" + moduleId + "_update_windows.js"
 
 	];
@@ -8,6 +10,8 @@ function createModule(node, userId, params) {
 	if (moduleId.substring(0, 5) == 'base_' || moduleId.substring(0, 4) == 'sys_' || moduleId == 'sys_opt_history'
 
 	|| moduleId == 'store_product_info_stock' || moduleId == 'stock_invoice' || moduleId == 'stock_adjust_bill'
+
+	|| moduleId == "stock_in_out_detail_report"
 
 	) {
 

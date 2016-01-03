@@ -13,6 +13,7 @@ import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 import cn.zying.osales.service.stocks.invoice.IStockInvoiceDetailCreateService ;
+import cn.zying.osales.service.stocks.summary.IStockSummaryService ;
 
 @Component("StockStoreReceiveCheckUnits")
 public class StockStoreReceiveCheckUnits extends ABCommonsService {
@@ -20,6 +21,12 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
     @Autowired
     @Qualifier(IStockInvoiceDetailCreateService.name)
     private IStockInvoiceDetailCreateService iStockInvoiceDetailCreateService ;
+    
+    @Autowired
+    @Qualifier(IStockSummaryService.name)
+    private IStockSummaryService iStockSummaryService ;
+    
+    
 
     public void cancelCheckDel(StockStoreReceive stockStoreReceive, Integer optUserId) throws SystemOptServiceException {
         if (stockStoreReceive == null) return ;
@@ -39,10 +46,12 @@ public class StockStoreReceiveCheckUnits extends ABCommonsService {
         case 有效:
             checking(stockStoreReceive, optUserId) ;
             iStockInvoiceDetailCreateService.createInvoiceDetail(BillType.采购进货单, stockStoreReceive) ;
+            iStockSummaryService.summary(BillType.采购进货单 , stockStoreReceive);
             break ;
         case 已审核:
             cancelCheck(stockStoreReceive, optUserId) ;
             iStockInvoiceDetailCreateService.removeInvoiceDetail(BillType.采购进货单, stockStoreReceive) ;
+            iStockSummaryService.removeSummary(BillType.采购进货单, stockStoreReceive);
             break ;
 
         default:

@@ -6,9 +6,14 @@ public interface OSalesConfigProperties {
         不定, 票前, 票后
     }
 
+    /**
+     * 采购票前调整单  采购票后调整单
+     * @author you
+     *
+     */
     public static enum BillType {
 
-        采购进货单, 采购票前调整单, 采购退货单, 采购付款, 采购票后调整单
+        采购进货单, 采购退货单, 采购付款 , 采购退货出库单,采购调整单
     }
 
     // 采购单是否对过账 付款已对帐

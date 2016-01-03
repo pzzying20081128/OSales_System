@@ -7,13 +7,10 @@ import org.springframework.stereotype.Component ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.pojos.StockAdjustBill ;
-import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.units.BuildMoneyUnits ;
 import cn.zying.osales.units.search.bean.StockAdjustBillSearchBean ;
-import cn.zying.osales.units.search.bean.StockInvoiceSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockAdjustBillService ;
-import cn.zying.osales.web.aop.IAopStockInvoiceService ;
 
 @Component("StockAdjustBillAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)

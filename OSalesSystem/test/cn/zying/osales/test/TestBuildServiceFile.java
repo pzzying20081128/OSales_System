@@ -14,6 +14,7 @@ import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.pojos.StockReturnDetail ;
 import cn.zying.osales.pojos.StockReturnStoreOut ;
 import cn.zying.osales.pojos.StockReturnStoreOutDetail ;
+import cn.zying.osales.pojos.StockSummaryBill ;
 import cn.zying.osales.pojos.StoreProductInfoStock ;
 import cn.zying.osales.pojos.SysPrintTemplate ;
 
@@ -28,7 +29,7 @@ public class TestBuildServiceFile {
         
         String module= "stocks";
         
-        Class<?> clazz = StockAdjustBill.class;
+        Class<?> clazz = StockSummaryBill.class;
         
         String className=clazz.getSimpleName();
 

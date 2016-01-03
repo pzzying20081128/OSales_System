@@ -14,6 +14,7 @@ import cn.zying.osales.pojos.StockReturn ;
 import cn.zying.osales.pojos.StockReturnDetail ;
 import cn.zying.osales.pojos.StockReturnStoreOut ;
 import cn.zying.osales.pojos.StockReturnStoreOutDetail ;
+import cn.zying.osales.pojos.StockSummaryBill ;
 import cn.zying.osales.pojos.StoreProductInfoDetail ;
 import cn.zying.osales.pojos.StoreProductInfoStock ;
 import cn.zying.osales.pojos.SysPrintTemplate ;
@@ -33,9 +34,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_adjust_bill";
+        String moduleNmae="stock_in_out_detail_report";
         
-        Class<?> clazz = StockAdjustBill.class;
+        Class<?> clazz = StockSummaryBill.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

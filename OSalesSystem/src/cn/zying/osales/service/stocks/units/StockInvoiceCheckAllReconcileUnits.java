@@ -9,14 +9,14 @@ import cn.zying.osales.OSalesConfigProperties.StockBillIsReconciliation ;
 import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.service.stocks.invoice.IStockPaymentbillDetailService ;
+import cn.zying.osales.service.stocks.invoice.IStockPaymentbillCreateService ;
 
 @Component("StockInvoiceCheckAllReconcileUnits")
 public class StockInvoiceCheckAllReconcileUnits extends ABCommonsService {
 
     @Autowired
-    @Qualifier(IStockPaymentbillDetailService.name)
-    private IStockPaymentbillDetailService stockPaymentbillDetailService ;
+    @Qualifier(IStockPaymentbillCreateService.name)
+    private IStockPaymentbillCreateService stockPaymentbillDetailService ;
 
     public void checkAllReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
 

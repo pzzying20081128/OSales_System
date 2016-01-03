@@ -31,7 +31,7 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
         case 采购进货单:
             createStockStoreReceive(billType , (StockStoreReceive) bill) ;
             break ;
-        case 采购票前调整单:
+        case 采购调整单:
             createStockAdjustBill(billType , (StockAdjustBill) bill) ;
             break ;
 

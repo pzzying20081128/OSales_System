@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat ;
 import java.util.Date ;
 import java.util.List ;
 
+import javax.persistence.EntityManager ;
+
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.jpa.ERPBaseService ;
@@ -36,6 +38,12 @@ public class ABServiceImples extends ERPBaseService implements IABService {
         }
         String num = prefix + "-" + timeDay + "-" + sb ;
         return num ;
+    }
+
+    @Override
+    public EntityManager getEm() {
+
+        return getEntityManager() ;
     }
 
 }

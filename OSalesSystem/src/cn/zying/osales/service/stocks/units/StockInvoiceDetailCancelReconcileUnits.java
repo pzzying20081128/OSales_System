@@ -12,7 +12,7 @@ import cn.zying.osales.pojos.StockInvoiceBillDetail ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
-import cn.zying.osales.service.stocks.invoice.IStockPaymentbillDetailService ;
+import cn.zying.osales.service.stocks.invoice.IStockPaymentbillCreateService ;
 
 /**
  * 取消对帐
@@ -23,8 +23,8 @@ import cn.zying.osales.service.stocks.invoice.IStockPaymentbillDetailService ;
 public class StockInvoiceDetailCancelReconcileUnits extends ABCommonsService {
 
     @Autowired
-    @Qualifier(IStockPaymentbillDetailService.name)
-    private IStockPaymentbillDetailService iStockPaymentbillDetailService ;
+    @Qualifier(IStockPaymentbillCreateService.name)
+    private IStockPaymentbillCreateService iStockPaymentbillDetailService ;
 
     /**
      * 取消对帐

@@ -8,9 +8,9 @@ import cn.zying.osales.service.SystemOptServiceException ;
  * @author you
  *
  */
-public interface IStockPaymentbillDetailService {
+public interface IStockPaymentbillCreateService {
     
-    public String name = "IStockPaymentbillDetailService" ;
+    public String name = "IStockPaymentbillCreateService" ;
     
     public <T> void createDetail(BillType billType, T bill) throws SystemOptServiceException ;
 
