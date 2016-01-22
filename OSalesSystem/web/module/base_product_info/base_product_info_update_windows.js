@@ -112,7 +112,7 @@ function base_product_info_update_windows(moduleId, moduleName, params) {
 	var maxStockPriceMoneyShow = new Ext.form.TextField({
 		id : 'productinfo.maxStockPriceMoneyShow',
 		name : 'productinfo.maxStockPriceMoneyShow',
-		fieldLabel : ' 采购价',
+		fieldLabel : '最大采购价',
 		// xtype : 'textfield',
 		style : NoAllowBlankStyle,
 		blankText : '不能为空！',

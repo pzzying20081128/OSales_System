@@ -55,7 +55,7 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
     @Autowired
     @Qualifier("StockInvoiceDetailCancelReconcileUnits")
     private StockInvoiceDetailCancelReconcileUnits iStockInvoiceDetailCancelReconcileUnits ;
-    
+
     @Autowired
     @Qualifier("StockInvoiceCheckAllReconcileUnits")
     private StockInvoiceCheckAllReconcileUnits iStockInvoiceCheckAllReconcileUnits ;
@@ -115,8 +115,8 @@ public class StockInvoiceServiceImple extends ABCommonsService implements IStock
 
     @Override
     public void checkAllReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
-        iStockInvoiceCheckAllReconcileUnits.checkAllReconcile(stockinvoice);
-        
+        iStockInvoiceCheckAllReconcileUnits.checkAllReconcile(stockinvoice) ;
+
     }
 
 }

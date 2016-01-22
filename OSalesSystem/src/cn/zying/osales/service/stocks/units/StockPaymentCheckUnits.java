@@ -13,8 +13,8 @@ import cn.zying.osales.service.SystemOptServiceException ;
 public class StockPaymentCheckUnits extends ABCommonsService {
 
     public void check(StockPayment stockpayment_) throws SystemOptServiceException {
-        StockPayment  stockpayment = baseService.load(stockpayment_.getId(), StockPayment.class) ;
-        stockpayment.setCheckManId(stockpayment_.getCheckManId());
+        StockPayment stockpayment = baseService.load(stockpayment_.getId(), StockPayment.class) ;
+        stockpayment.setCheckManId(stockpayment_.getCheckManId()) ;
         switch (stockpayment.getStatus()) {
         case 有效:
             checking(stockpayment) ;
@@ -33,7 +33,7 @@ public class StockPaymentCheckUnits extends ABCommonsService {
         stockpayment.setCheckMan(sysStaffUser) ;
         stockpayment.setCheckedDate(DateToolsUilts.getnowDate()) ;
         stockpayment.setStatus(Status.已审核) ;
-        
+
         baseService.update(stockpayment) ;
 
     }

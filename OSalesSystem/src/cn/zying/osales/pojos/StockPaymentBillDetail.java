@@ -84,18 +84,19 @@ public class StockPaymentBillDetail extends DetailCommBean {
 
     @Transient
     private String noKillSumMoneyHide ;
-    
+
     @Transient
-    private Integer stockPaymentId;
+    private Integer stockPaymentId ;
+
     @Transient
-    private StockPayment stockPayment;
+    private StockPayment stockPayment ;
+
     @Transient
-    private StockPaymentDetail stockPaymentDetail;
-    
+    private StockPaymentDetail stockPaymentDetail ;
+
     @Transient
-    private Integer stockPaymentDetailId;
-    
-    
+    private Integer stockPaymentDetailId ;
+
     //单据对帐金额
     @Transient
     private Long stockPaymentDetailKillSum ;
@@ -107,14 +108,6 @@ public class StockPaymentBillDetail extends DetailCommBean {
     @Transient
     @FieldDesc(name = "抵消金额", isShow = false)
     private String stockPaymentDetailKillSumMoneyHide ;
-    
-    
-    
-    
-    
-    
-    
-    
 
     public BillType getBillType() {
         return billType ;

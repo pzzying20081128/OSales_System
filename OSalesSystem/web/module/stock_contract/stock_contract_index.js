@@ -45,8 +45,7 @@ function create_stock_contract_window(moduleId, moduleName) {
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					stock_contract_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : test_search_params
+						grid : mainGridModule
 					});
 				}
 			}, {
@@ -82,7 +81,7 @@ function create_stock_contract_window(moduleId, moduleName) {
 				stockSelect(data, checkButton, detailGrid);
 				detailGrid.load({
 					params : {
-				// 'searchBean.combinedProductId' : rowDataId
+						'searchBean.stockContractId' : rowDataId
 					}
 				});
 
@@ -170,13 +169,17 @@ function create_stock_contract_window(moduleId, moduleName) {
 			msg : "是否要删除该条信息",
 			yes : function(YN) {
 				ERPAjaxRequest({
-					url : "./simple_ProductBrand_remove.do",
+					url : "./simple_StockContract_remove.do",
 					params : {
-						"productBrand.id" : selectId
+						"stockcontract.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {
-						mainGrid.reload();
+						mainGrid.reload({
+							success : function() {
+								detailGrid.removeAll();
+							}
+						});
 					}
 				});
 			}

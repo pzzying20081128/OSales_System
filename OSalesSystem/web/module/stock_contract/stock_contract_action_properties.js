@@ -12,11 +12,11 @@ var stock_contract_grid_column = {
 		name : 'stockManId',
 		mapping : 'stockManId'
 	}, {
-		name : 'companyGuest.name',
-		mapping : 'companyGuest'
+		name : 'companyInfo.name',
+		mapping : 'companyInfo'
 	}, {
-		name : 'companyGuestId',
-		mapping : 'companyGuestId'
+		name : 'companyInfoId',
+		mapping : 'companyInfoId'
 	}, {
 		name : 'contractStatus',
 		mapping : 'contractStatus'
@@ -65,7 +65,7 @@ var stock_contract_grid_column = {
 	}, {
 		header : '公司名称',
 		width : 200,
-		dataIndex : 'companyGuest.name',
+		dataIndex : 'companyInfo.name',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 

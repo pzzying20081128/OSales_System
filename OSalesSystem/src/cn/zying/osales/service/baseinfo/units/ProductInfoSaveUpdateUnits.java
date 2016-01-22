@@ -3,6 +3,7 @@ package cn.zying.osales.service.baseinfo.units ;
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.ToolsUnits ;
+import cn.zy.apps.tools.units.moneys.BuildMoneyFactory ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.ProductBrand ;
@@ -42,6 +43,7 @@ public class ProductInfoSaveUpdateUnits extends ABCommonsService {
     }
 
     private void setProperties(ProductInfo optProductInfo) {
+        
         StoreInfo storeInfo = baseService.load(optProductInfo.getStoreInfoId(), StoreInfo.class) ;
 
         optProductInfo.setStoreInfo(storeInfo) ;
@@ -61,40 +63,24 @@ public class ProductInfoSaveUpdateUnits extends ABCommonsService {
         ProviderInfo providerInfo = baseService.load(optProductInfo.getProviderInfoId(), ProviderInfo.class) ;
 
         optProductInfo.setProviderInfo(providerInfo) ;
+        
+//        long maxNoTaxStockPrice= optProductInfo.getMaxStockPrice() *(100 - optProductInfo.getStockTaxRate() )
+//        BuildMoneyUnits.
+        Long   maxNoTaxStockPrice =  BuildMoneyFactory.getBuildMoney().jsNoTaxPrice(optProductInfo.getMaxStockPrice(), optProductInfo.getStockTaxRate());  
+        
+        optProductInfo.setMaxNoTaxStockPrice(maxNoTaxStockPrice);
+        
     }
 
     public ProductInfo update(ProductInfo optProductInfo) throws SystemOptServiceException {
         setProperties(optProductInfo) ;
 
         ProductInfo oldProductInfo = baseService.get(optProductInfo.getId(), ProductInfo.class) ;
-        optProductInfo.getBarCode() ;
-        optProductInfo.getBaseUnit() ;
-        optProductInfo.getBoxCount() ;
-        optProductInfo.getBoxUnit() ;
-        optProductInfo.getGrossProfitRate() ;
-        optProductInfo.getIsBox() ;
-        optProductInfo.getMaxStockPrice() ;
-        optProductInfo.getModel() ;
-        optProductInfo.getName() ;
-        optProductInfo.getProductBrand() ;
-        optProductInfo.getProductInfoType() ;
-        optProductInfo.getProviderInfo() ;
-        optProductInfo.getSalesBoxNoTaxPrice() ;
-        optProductInfo.getSalesBoxTaxPrice() ;
-        optProductInfo.getSalesNoTaxPrice() ;
-        optProductInfo.getSalesTaxPrice() ;
-        optProductInfo.getSalesTaxRate() ;
-        optProductInfo.getShelfLife() ;
-        optProductInfo.getShortName() ;
-        optProductInfo.getStockTaxRate() ;
-        optProductInfo.getStoreInfo() ;
-        optProductInfo.getStorePosition() ;
-        optProductInfo.getText() ;
-
+        
         try {
             ToolsUnits.copyBeanProperties(oldProductInfo, optProductInfo, "barCode",
 
-            "baseUnit", "boxCount", "boxUnit", "grossProfitRate", "isBox", "maxStockPrice", "model",
+            "baseUnit", "boxCount", "boxUnit", "grossProfitRate", "isBox", "maxStockPrice", "model","maxNoTaxStockPrice",
 
             "name", "productBrand", "productInfoType", "providerInfo", "salesBoxNoTaxPrice", "salesBoxTaxPrice",
 

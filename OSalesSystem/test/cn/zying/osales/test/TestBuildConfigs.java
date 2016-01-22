@@ -18,6 +18,7 @@ import cn.zying.osales.pojos.StockSummaryBill ;
 import cn.zying.osales.pojos.StoreProductInfoDetail ;
 import cn.zying.osales.pojos.StoreProductInfoStock ;
 import cn.zying.osales.pojos.SysPrintTemplate ;
+import cn.zying.osales.pojos.SystemConfigs ;
 
 
 
@@ -34,9 +35,9 @@ public class TestBuildConfigs {
         
 //        String outPath, String jsSrcPath
         
-        String moduleNmae="stock_in_out_detail_report";
+        String moduleNmae="base_system_config";
         
-        Class<?> clazz = StockSummaryBill.class;
+        Class<?> clazz = SystemConfigs.class;
         
         String jsSrcPath  =  "/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/src/cn/zy/apps/tools/dev/javascript/template";
         String out ="./release/build/"+moduleNmae;

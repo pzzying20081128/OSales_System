@@ -6,42 +6,169 @@ function stock_contract_search_windows(moduleId, moduleName, params) {
 		height : 400,
 		// autoHeight : false,
 		labelWidth : 60,
-		items : [
-
-		{ // 第一排
+		items : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{
-				columnWidth : .18,
+				columnWidth : .70,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
-				hideLabels : true,
-				items : [{
-					// 复选框
-					id : 'staffSearchBean.selectName',
-					xtype : "checkbox",
-					boxLabel : "员工姓名"
-				}]
-			}, {
-				columnWidth : .82,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				hideLabels : true,
 				defaults : {
-					width : 360
+					width : 500
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.providerInfoIds',
+					name : 'searchBean.providerInfoIds',
+					fieldLabel : ' 供应商',
+					url : "./ProviderInfo_combo.do?searchBean.status=有效",
+					allowBlank : true,
+					forceSelection : false
+				})]
+			}, // 1-1 end
+			{
+				columnWidth : .28,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 160
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.stockManIds',
+					name : 'searchBean.stockManIds',
+					fieldLabel : ' 采购员',
+					url : "./SysStaff_combo.do?searchBean.status=全部",
+					allowBlank : true,
+					forceSelection : false,
+					width : 160
+				})]
+			}// 1-2end
+			]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : .70,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 500
+				},
+				items : [createERPBoxSelect({
+					id : 'searchBean.companyInfoIds',
+					name : 'searchBean.companyInfoIds',
+					fieldLabel : ' 公司名称',
+					url : "./CompanyInfo_combo.do?searchBean.status=有效",
+					allowBlank : true,
+					forceSelection : false
+				})
+
+				]
+			}, // 1-1 end
+			{
+				columnWidth : .28,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 160
+				},
+				items : [createERPlocalBoxSelect({
+					id : 'searchBean.contractStatuses',
+					name : 'searchBean.contractStatuses',
+					fieldLabel : ' 合同类型',
+					localdata : [['未启用合同', "未启用合同"], ['执行合同', '执行合同'], ['历史合同', '历史合同'], ['待定', '待定']],
+
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					defaultValue : "未启用合同",
+					allowBlank : true
+				})]
+			}// 1-2end
+			]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : .70,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 492
 				},
 				items : [{
-					// 查询框
-					id : 'staffSearchBean.name',
+					id : 'searchBean.text',
+					name : 'searchBean.text',
+					fieldLabel : ' 备注',
+					xtype : 'textfield',
+					// style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
 					listeners : {
-						"change" : function(field) {
+						'specialkey' : function(field, e) {
 						}
 					}
 				}]
 			}]
-		}// end
+		}, // 1-1 end
+		{
+
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{// 1-1
+				columnWidth : 0.33,
+				layout : 'form',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 180
+				},
+				items : [{
+					id : 'searchBean.startTime',
+					name : 'searchBean.startTime',
+					fieldLabel : ' 签订日期',
+					xtype : 'datefield',
+					format : 'Y-m-d',
+					// style : NoAllowBlankStyle,
+					// blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			},
+
+			{// 1-1
+				columnWidth : 0.33,
+				layout : 'form',
+				baseCls : 'x-plain',
+				format : 'Y-m-d',
+				labelWidth : 20,
+				defaults : {
+					width : 245
+				},
+				items : [{
+					id : 'searchBean.endTime',
+					name : 'searchBean.endTime',
+					fieldLabel : '     到',
+					xtype : 'datefield',
+					format : 'Y-m-d',
+					// style : NoAllowBlankStyle,
+					// blankText : '不能为空！',
+					allowBlank : true,
+
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}]
+
+		}
+
 		],
 		buttons : [{
 			text : '提交',
@@ -89,7 +216,7 @@ function stock_contract_search_windows(moduleId, moduleName, params) {
 	var window = new Ext.ERPDefaultsWindow({
 		title : "查询",
 		closable : true,
-		width : 500,
+		width : 900,
 		// height : 400,
 		// autoHeight : false,
 

@@ -20,11 +20,10 @@ import cn.zying.osales.service.SystemOptServiceException ;
  */
 @Component("StockInvoiceDetailAutoReconcileUnits")
 public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
-    
+
     @Autowired
     @Qualifier("StockInvoiceDetailCancelReconcileUnits")
-    private StockInvoiceDetailCancelReconcileUnits  stockInvoiceDetailCancelReconcileUnits;
-
+    private StockInvoiceDetailCancelReconcileUnits stockInvoiceDetailCancelReconcileUnits ;
 
     /**
      * 手工对单据帐
@@ -34,13 +33,13 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
      * @throws SystemOptServiceException
      */
     public StockInvoiceBillDetail handleReconcile(StockInvoice stockInvoice, StockInvoiceBillDetail stockInvoiceBillDetail) throws SystemOptServiceException {
-        StockBillIsReconciliation stockBillIsReconciliationRsr  =  stockInvoice.getReconciliation();
+        StockBillIsReconciliation stockBillIsReconciliationRsr = stockInvoice.getReconciliation() ;
         if (stockInvoice.getReconciliationSum().longValue() == 0) {
             throw new SystemOptServiceException("该发票的对帐金额为零") ;
         }
         long reconciliationSum = stockInvoice.getReconciliationSum() ;
         reconciliationSum = handleReconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
-        update(stockInvoice,stockBillIsReconciliationRsr) ;
+        update(stockInvoice, stockBillIsReconciliationRsr) ;
         return stockInvoiceBillDetail ;
     }
 
@@ -52,13 +51,13 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
      * @throws SystemOptServiceException
      */
     public StockInvoiceBillDetail autoReconcile(StockInvoice stockInvoice, StockInvoiceBillDetail stockInvoiceBillDetail) throws SystemOptServiceException {
-        StockBillIsReconciliation stockBillIsReconciliationRsr  =  stockInvoice.getReconciliation();
+        StockBillIsReconciliation stockBillIsReconciliationRsr = stockInvoice.getReconciliation() ;
         if (stockInvoice.getReconciliationSum().longValue() == 0) {
             throw new SystemOptServiceException("该发票的对帐金额为零") ;
         }
         long reconciliationSum = stockInvoice.getReconciliationSum() ;
         reconciliationSum = autoReconcile(stockInvoice, reconciliationSum, stockInvoiceBillDetail) ;
-        update(stockInvoice,stockBillIsReconciliationRsr) ;
+        update(stockInvoice, stockBillIsReconciliationRsr) ;
         return stockInvoiceBillDetail ;
     }
 
@@ -68,11 +67,11 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
      * @throws SystemOptServiceException
      */
     public void autoReconciles(StockInvoice stockInvoice) throws SystemOptServiceException {
-        stockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockInvoice);
+        stockInvoiceDetailCancelReconcileUnits.cancelReconciles(stockInvoice) ;
         //查询统一供应商
         long reconciliationSum = stockInvoice.getReconciliationSum() ;
         //原始
-        StockBillIsReconciliation stockBillIsReconciliationRsr  =  stockInvoice.getReconciliation();
+        StockBillIsReconciliation stockBillIsReconciliationRsr = stockInvoice.getReconciliation() ;
 
         List<StockInvoiceBillDetail> stockInvoiceBillDetailes = search(stockInvoice) ;
 
@@ -82,14 +81,13 @@ public class StockInvoiceDetailAutoReconcileUnits extends ABCommonsService {
 
             if (reconciliationSum == 0) break ;
         }
-        update(stockInvoice, stockBillIsReconciliationRsr ) ;
+        update(stockInvoice, stockBillIsReconciliationRsr) ;
 
     }
 
-    private void update(StockInvoice stockInvoice,StockBillIsReconciliation stockBillIsReconciliationRsr ) {
+    private void update(StockInvoice stockInvoice, StockBillIsReconciliation stockBillIsReconciliationRsr) {
         baseService.update(stockInvoice) ;
-       
-            
+
     }
 
     private long handleReconcile(StockInvoice stockInvoice, long reconciliationSum, StockInvoiceBillDetail stockInvoiceBillDetail) {

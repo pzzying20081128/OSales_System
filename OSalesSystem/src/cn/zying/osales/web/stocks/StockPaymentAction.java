@@ -12,7 +12,6 @@ import cn.zying.osales.units.search.bean.StockPaymentSearchBean ;
 import cn.zying.osales.web.OSalesSystemABAction ;
 import cn.zying.osales.web.aop.IAopStockPaymentService ;
 
-
 @Component("StockPaymentAction")
 @org.springframework.context.annotation.Scope(OSalesSystemABAction.Scope)
 public class StockPaymentAction extends OSalesSystemABAction<StockPayment> {
@@ -29,9 +28,6 @@ public class StockPaymentAction extends OSalesSystemABAction<StockPayment> {
     private StockPayment stockpayment ;
 
     private StockPaymentSearchBean searchBean ;
-    
-    
-  
 
     public String save() throws Exception {
         try {
@@ -57,7 +53,6 @@ public class StockPaymentAction extends OSalesSystemABAction<StockPayment> {
         return SUCCESS ;
     }
 
-   
     public String get() throws Exception {
         try {
 

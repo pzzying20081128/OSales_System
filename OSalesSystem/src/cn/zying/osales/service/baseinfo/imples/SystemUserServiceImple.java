@@ -76,7 +76,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws Exception {
+    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws SystemOptServiceException {
 
         Map<String, Object> values = new HashMap<String, Object>() ;
         values.put("systemUserInfoId", loginUserId) ;
@@ -90,7 +90,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws Exception {
+    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws SystemOptServiceException {
         Map<String, Object> values = new HashMap<String, Object>() ;
         values.put("systemUserInfoId", loginUserId) ;
         values.put("moduleId", moduleId) ;
@@ -123,7 +123,7 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     }
 
     @Override
-    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws Exception {
+    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws SystemOptServiceException {
 
         String sql = "select  DISTINCT  systemUserPower   " +
 
@@ -140,6 +140,12 @@ public class SystemUserServiceImple extends ABCommonsService implements ISystemU
     @Override
     public List<SysStaffUser> searchList(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         return iSystemUserSearchUnits.list(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public SysStaffUser searchByName(String name) throws SystemOptServiceException {
+
+        return iSystemUserSearchUnits.searchByName(name) ;
     }
 
 }

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.units.AutoWriteObject ;
 import cn.zy.apps.tools.units.PrpertiesSetValueService ;
-import cn.zy.apps.tools.units.SimpleAutoWritePrpertiesObjectService ;
+import cn.zy.apps.tools.units.SimpleIdAutoWritePrpertiesObjectService ;
 import cn.zy.apps.tools.units.ToolsUnitsException ;
 
 @Component("PrpertiesAutoWriteObjectService")
-public class PrpertiesAutoWriteObjectService extends SimpleAutoWritePrpertiesObjectService {
+public class PrpertiesAutoWriteObjectService extends SimpleIdAutoWritePrpertiesObjectService {
 
     @Autowired
     @Qualifier("SalesPrpertiesSetValueService")
@@ -47,17 +47,6 @@ public class PrpertiesAutoWriteObjectService extends SimpleAutoWritePrpertiesObj
     protected PrpertiesSetValueService autoPrpertiesSetValueService() {
 
         return salesPrpertiesSetValueService ;
-    }
-
-    protected boolean isEqualsParents(Object child, Object parents) {
-
-        Object id = readFieldValue(idfield, child) ;
-        if (id == null) return true ;
-
-        Object parentsId = readFieldValue(idfield, parents) ;
-        if (parentsId == null) return true ;
-
-        return id.equals(parentsId) ;
     }
 
     public PropertiesAutoWriteObject getDemoAutoWriteObject() {

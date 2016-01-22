@@ -30,13 +30,13 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
         baseService.update(stockPayment) ;
 
     }
-    
+
     @Autowired
     @Qualifier("StockPaymentCancelReconcileUnits")
     private StockPaymentCancelReconcileUnits iStockPaymentCancelReconcileUnits ; ;
 
     public StockPaymentBillDetail handleReconcile(Integer stockPaymentId, StockPaymentBillDetail stockPaymentBillDetail_) {
-       
+
         StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
 
         StockPaymentBillDetail stockPaymentBillDetail = baseService.get(StockPaymentBillDetail.class, stockPaymentBillDetail_.getId()) ;
@@ -47,9 +47,9 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
 
         reconciliationSum = reconcile(stockPayment, reconciliationSum, stockPaymentBillDetail, kill) ;
         update(stockPayment) ;
-        
+
         stockPaymentBillDetail.setStockPayment(stockPayment) ;
-        
+
         return stockPaymentBillDetail ;
 
     }
@@ -100,13 +100,11 @@ public class StockPaymentHandleReconcileUnits extends ABCommonsService {
     }
 
     public StockPayment autoAllReconcile(Integer stockPaymentId) throws SystemOptServiceException {
-        
-    
-        iStockPaymentCancelReconcileUnits.cancelAllReconcile(stockPaymentId);
-        
-       
+
+        iStockPaymentCancelReconcileUnits.cancelAllReconcile(stockPaymentId) ;
+
         StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
-        
+
         long reconciliationSum = stockPayment.getReconciliationSum() ;
 
         List<StockPaymentBillDetail> stockPaymentBillDetails = search(stockPayment) ;

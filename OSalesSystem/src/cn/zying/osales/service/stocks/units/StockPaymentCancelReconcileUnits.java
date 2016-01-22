@@ -70,7 +70,7 @@ public class StockPaymentCancelReconcileUnits extends ABCommonsService {
      * @param stockInvoice
      * @throws SystemOptServiceException
      */
-    public StockPayment cancelAllReconcile(Integer  stockPaymentId) throws SystemOptServiceException {
+    public StockPayment cancelAllReconcile(Integer stockPaymentId) throws SystemOptServiceException {
         StockPayment stockPayment = baseService.get(stockPaymentId, StockPayment.class) ;
         List<StockPaymentDetail> stockPaymentDetails = stockPayment.getStockPaymentDetails() ;
         for (StockPaymentDetail stockPaymentDetail : stockPaymentDetails) {

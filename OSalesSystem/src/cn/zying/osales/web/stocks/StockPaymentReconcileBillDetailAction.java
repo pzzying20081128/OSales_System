@@ -27,12 +27,6 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
     @Autowired
     @Qualifier(IAopStockPaymentService.name)
     private IAopStockPaymentService service ;
-    
-
-    
-    
-
-
 
     private StockPayment stockpayment ;
 
@@ -57,10 +51,10 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
 
         return SUCCESS ;
     }
-    
+
     public String autoReconcile() throws Exception {
         try {
-            this.result = service.autoReconcile(stockpaymentbilldetail.getStockPaymentId(), stockpaymentbilldetail.getId());
+            this.result = service.autoReconcile(stockpaymentbilldetail.getStockPaymentId(), stockpaymentbilldetail.getId()) ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
             this.success = false ;
@@ -68,12 +62,12 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
         }
         return SUCCESS ;
     }
-    
+
     public String cancelReconcile() throws Exception {
         try {
-            StockPaymentBillDetail stockPaymentBillDetail   = service.cancelReconcile(stockpaymentbilldetail.getStockPaymentId(),stockpaymentbilldetail) ;
-            StockPaymentBillDetail stockPaymentBillDetail_ = service.getStockPaymentBillDetail(stockPaymentBillDetail.getId());
-            stockPaymentBillDetail_.setStockPayment(stockPaymentBillDetail.getStockPayment());
+            StockPaymentBillDetail stockPaymentBillDetail = service.cancelReconcile(stockpaymentbilldetail.getStockPaymentId(), stockpaymentbilldetail) ;
+            StockPaymentBillDetail stockPaymentBillDetail_ = service.getStockPaymentBillDetail(stockPaymentBillDetail.getId()) ;
+            stockPaymentBillDetail_.setStockPayment(stockPaymentBillDetail.getStockPayment()) ;
             this.result = stockPaymentBillDetail_ ;
             writeObjectService.intToPrpertiesUnits(result) ;
         } catch (Exception e) {
@@ -82,7 +76,7 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
         }
         return SUCCESS ;
     }
-    
+
     /**
      * 手工对帐
      * @return
@@ -99,8 +93,6 @@ public class StockPaymentReconcileBillDetailAction extends OSalesSystemABAction<
         }
         return SUCCESS ;
     }
-
-    
 
     public StockPaymentBillDetail getStockpaymentbilldetail() {
         return stockpaymentbilldetail ;

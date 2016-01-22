@@ -65,7 +65,7 @@ public class StockInvoiceDetailCancelReconcileUnits extends ABCommonsService {
     }
 
     private void update(StockInvoice stockInvoice) {
-//        if (!stockInvoice.getReconciliation().equals(StockBillIsReconciliation.全部对帐)) iStockPaymentbillDetailService.removeDetail(BillType.采购付款, stockInvoice) ;
+        //        if (!stockInvoice.getReconciliation().equals(StockBillIsReconciliation.全部对帐)) iStockPaymentbillDetailService.removeDetail(BillType.采购付款, stockInvoice) ;
         baseService.update(stockInvoice) ;
     }
 

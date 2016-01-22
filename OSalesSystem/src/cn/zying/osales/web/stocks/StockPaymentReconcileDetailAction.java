@@ -29,8 +29,6 @@ public class StockPaymentReconcileDetailAction extends OSalesSystemABAction<Stoc
     private StockPaymentDetail stockpaymentdetail ;
 
     private StockPaymentDetailSearchBean searchBean ;
-    
-    
 
     public String list() throws Exception {
         try {
@@ -60,7 +58,5 @@ public class StockPaymentReconcileDetailAction extends OSalesSystemABAction<Stoc
     public void setSearchBean(StockPaymentDetailSearchBean searchBean) {
         this.searchBean = searchBean ;
     }
-
-    
 
 }

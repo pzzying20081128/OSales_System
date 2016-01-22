@@ -29,10 +29,10 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
     public <T> void createInvoiceDetail(BillType billType, T bill) throws SystemOptServiceException {
         switch (billType) {
         case 采购进货单:
-            createStockStoreReceive(billType , (StockStoreReceive) bill) ;
+            createStockStoreReceive(billType, (StockStoreReceive) bill) ;
             break ;
         case 采购调整单:
-            createStockAdjustBill(billType , (StockAdjustBill) bill) ;
+            createStockAdjustBill(billType, (StockAdjustBill) bill) ;
             break ;
 
         default:
@@ -40,7 +40,7 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
         }
     }
 
-    private void createStockStoreReceive(BillType  billType   ,  StockStoreReceive stockStoreReceive) throws SystemOptServiceException {
+    private void createStockStoreReceive(BillType billType, StockStoreReceive stockStoreReceive) throws SystemOptServiceException {
 
         StockInvoiceBillDetail optStockInvoiceDetail = new StockInvoiceBillDetail() ;
 
@@ -60,7 +60,7 @@ public class StockInvoiceDetailCreateService implements IStockInvoiceDetailCreat
         stockInvoiceBillDetailSaveUpdateUnits.saveUpdate(OptType.save, optStockInvoiceDetail) ;
     }
 
-    private void createStockAdjustBill(BillType  billType  , StockAdjustBill stockAdjustBill) throws SystemOptServiceException {
+    private void createStockAdjustBill(BillType billType, StockAdjustBill stockAdjustBill) throws SystemOptServiceException {
 
         StockInvoiceBillDetail optStockInvoiceDetail = new StockInvoiceBillDetail() ;
 

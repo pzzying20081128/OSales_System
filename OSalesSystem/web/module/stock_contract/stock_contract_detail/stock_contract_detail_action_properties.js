@@ -3,6 +3,12 @@ var stock_contract_detail_grid_column = {
 		name : 'productInfo.name',
 		mapping : 'productInfo'
 	}, {
+		name : "productInfo.barCode",
+		mapping : 'productInfo'
+	}, {
+		name : "productInfo.baseUnitBoxUnit",
+		mapping : 'productInfo'
+	}, {
 		name : 'productInfoId',
 		mapping : 'productInfoId'
 	}, {
@@ -54,6 +60,38 @@ var stock_contract_detail_grid_column = {
 
 		}
 	}, {
+		header : '条形码',
+		width : 200,
+		dataIndex : 'productInfo.barCode',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else if (value.barCode == null || typeof ( value.barCode ) == 'undefined')
+				return null
+			else
+				return value.barCode;
+
+		}
+	}, {
+		header : '条形码',
+		width : 200,
+		dataIndex : 'productInfo.baseUnitBoxUnit',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else if (value.baseUnitBoxUnit == null || typeof ( value.baseUnitBoxUnit ) == 'undefined')
+				return null
+			else
+				return value.baseUnitBoxUnit;
+
+		}
+	},
+
+	{
 		header : '含税单价',
 		width : 200,
 		dataIndex : 'taxPriceMoneyShow',
@@ -93,7 +131,7 @@ var stock_contract_detail_grid_column = {
 
 		}
 	}, {
-		header : '',
+		header : '已箱下单',
 		width : 200,
 		dataIndex : 'isBox',
 		sortable : true,
@@ -102,7 +140,7 @@ var stock_contract_detail_grid_column = {
 			if (value == null || typeof ( value ) == 'undefined')
 				return null
 			else
-				return value;
+				return value ==1 ? "是":"否";
 
 		}
 	},

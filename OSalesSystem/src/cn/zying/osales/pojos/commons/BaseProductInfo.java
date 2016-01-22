@@ -97,6 +97,19 @@ public class BaseProductInfo extends CommBean {
     @Transient
     @FieldDesc(name = "最大采购价", isShow = false)
     private String maxStockPriceMoneyHide ;
+    
+    // 最大采购价
+    @Column(name = "max_no_tax_stock_price")
+    @FieldDesc(name = "最大采购价", isShow = false)
+    private Long maxNoTaxStockPrice ;
+
+    @Transient
+    @FieldDesc(name = "最大采购价", isShow = true)
+    private String maxNoTaxStockPriceMoneyShow ;
+
+    @Transient
+    @FieldDesc(name = "最大采购价", isShow = false)
+    private String maxNoTaxStockPriceMoneyHide ;
 
     //查询的含税采购价 
     @Transient
@@ -702,6 +715,30 @@ public class BaseProductInfo extends CommBean {
 
     public void setProductBrandIds(List<Integer> productBrandIds) {
         this.productBrandIds = productBrandIds ;
+    }
+
+    public Long getMaxNoTaxStockPrice() {
+        return maxNoTaxStockPrice ;
+    }
+
+    public void setMaxNoTaxStockPrice(Long maxNoTaxStockPrice) {
+        this.maxNoTaxStockPrice = maxNoTaxStockPrice ;
+    }
+
+    public String getMaxNoTaxStockPriceMoneyShow() {
+        return maxNoTaxStockPriceMoneyShow ;
+    }
+
+    public void setMaxNoTaxStockPriceMoneyShow(String maxNoTaxStockPriceMoneyShow) {
+        this.maxNoTaxStockPriceMoneyShow = maxNoTaxStockPriceMoneyShow ;
+    }
+
+    public String getMaxNoTaxStockPriceMoneyHide() {
+        return maxNoTaxStockPriceMoneyHide ;
+    }
+
+    public void setMaxNoTaxStockPriceMoneyHide(String maxNoTaxStockPriceMoneyHide) {
+        this.maxNoTaxStockPriceMoneyHide = maxNoTaxStockPriceMoneyHide ;
     }
 
 }

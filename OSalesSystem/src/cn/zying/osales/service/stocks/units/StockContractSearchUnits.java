@@ -76,6 +76,28 @@ public class StockContractSearchUnits extends ABCommonsService {
             value.put("status", searchBean.getStatus()) ;
         }
 
+        if (!ToolsUnits.listIsNULL(searchBean.getCompanyInfoIds())) {
+            sqlWhere = sqlWhere + "  and   stockContract.companyInfoId  in( :companyInfoIds) " ;
+            value.put("companyInfoIds", searchBean.getCompanyInfoIds()) ;
+        }
+        if (!ToolsUnits.listIsNULL(searchBean.getContractStatuses())) {
+            sqlWhere = sqlWhere + "  and   stockContract.contractStatus  in( :contractStatuses) " ;
+            value.put("contractStatuses", searchBean.getContractStatuses()) ;
+        }
+        if (!ToolsUnits.listIsNULL(searchBean.getProviderInfoIds())) {
+            sqlWhere = sqlWhere + "  and   stockContract.providerInfoId  in( :providerInfoIds) " ;
+            value.put("providerInfoIds", searchBean.getProviderInfoIds()) ;
+        }
+        
+        if (searchBean.getStartTime() !=null) {
+            sqlWhere = sqlWhere + "  and   stockContract.signedDate  >= :getStartTime " ;
+            value.put("getStartTime", searchBean.getSignedDate() ) ;
+        }
+        if (searchBean.getEndTime() !=null) {
+            sqlWhere = sqlWhere + "  and   stockContract.signedDate  <= :getEndTime " ;
+            value.put("getEndTime", searchBean.getSignedDate() ) ;
+        }
+
         return sqlWhere ;
     }
 }

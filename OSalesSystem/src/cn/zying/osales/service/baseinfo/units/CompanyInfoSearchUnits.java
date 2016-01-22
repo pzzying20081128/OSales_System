@@ -9,6 +9,7 @@ import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.units.ToolsUnits ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.CompanyInfo ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
@@ -72,7 +73,7 @@ public class CompanyInfoSearchUnits extends ABCommonsService {
             value.put("statuses", searchBean.getStatuses()) ;
         }
 
-        if (searchBean.getStatus() != null) {
+        if (searchBean.getStatus() != null && ! searchBean.getStatus().equals(Status.全部) ) {
             sqlWhere = sqlWhere + " and  companyInfo.status = (:status) " ;
             value.put("status", searchBean.getStatus()) ;
         }

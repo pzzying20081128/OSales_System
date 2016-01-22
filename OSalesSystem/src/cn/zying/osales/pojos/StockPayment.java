@@ -68,10 +68,9 @@ public class StockPayment extends CommBean {
     @Column(name = "is_prepayment")
     @FieldDesc(name = "是否预付")
     private Integer isPrePayment ;
-    
+
     @Transient
     private List<Integer> isPrePayments ;
-
 
     // 付款日期
     @Column(name = "payment_date")
@@ -176,14 +175,14 @@ public class StockPayment extends CommBean {
     @Column(name = "record_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "录入人", isShow = false)
     private Integer recordManId ;
-    
+
     // /对账状态
     @Column(name = "reconciliation")
     @Enumerated(EnumType.STRING)
     private StockBillIsReconciliation reconciliation ;
-    
+
     @Transient
-    private List<StockBillIsReconciliation> reconciliationes;
+    private List<StockBillIsReconciliation> reconciliationes ;
 
     public String getNum() {
         return num ;

@@ -9,7 +9,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 		name : 'stockorder.stockType',
 		fieldLabel : ' 订单类型',
 		storeData : [['采购订单', "采购订单"], ['直营采购订单', '直营采购订单']],
-		defaultValue : null,
+		defaultValue : stock_order_default_order_type,
 		allowBlank : false
 		// disabled:true
 	});
@@ -64,17 +64,7 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [
-
-				createLocalCombo({
-					id : 'stockorder.stockProductType',
-					name : 'stockorder.stockProductType',
-					fieldLabel : ' 采购类型',
-					storeData : [['普通产品', "普通产品"], ['组合产品', '组合产品']],
-					defaultValue : null,
-					allowBlank : false
-
-				})
+				items : [stockType
 
 				]
 			}, {
@@ -85,7 +75,15 @@ function stock_order_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 180
 				},
-				items : [stockType]
+				items : [createLocalCombo({
+					id : 'stockorder.stockProductType',
+					name : 'stockorder.stockProductType',
+					fieldLabel : ' 采购类型',
+					storeData : [['普通产品', "普通产品"], ['组合产品', '组合产品']],
+					defaultValue : null,
+					allowBlank : false
+
+				})]
 			}]
 		},
 		// ////////////////////////////////////////////////////////

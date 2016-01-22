@@ -54,19 +54,19 @@ public class AopSystemUserService implements IAopSystemUserService {
     }
 
     @Override
-    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws Exception {
+    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws SystemOptServiceException {
 
         return systemUserService.listUserModulePowerBySysUserId(loginUserId) ;
     }
 
     @Override
-    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws Exception {
+    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws SystemOptServiceException {
 
         return systemUserService.listUserModulePowerByUserId(loginUserId) ;
     }
 
     @Override
-    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws Exception {
+    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws SystemOptServiceException {
 
         return systemUserService.searchUserPower(moduleId, loginUserId) ;
     }
@@ -75,6 +75,12 @@ public class AopSystemUserService implements IAopSystemUserService {
     public List<SysStaffUser> searchList(OptType optType, SystemUserSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
 
         return systemUserService.searchList(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
+    @Override
+    public SysStaffUser searchByName(String name) throws SystemOptServiceException {
+
+        return systemUserService.searchByName(name) ;
     }
 
 }

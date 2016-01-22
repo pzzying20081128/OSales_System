@@ -73,8 +73,8 @@ public class AopStockInvoiceService implements IAopStockInvoiceService {
 
     @Override
     public void checkAllReconcile(StockInvoice stockinvoice) throws SystemOptServiceException {
-        iStockInvoiceService.checkAllReconcile(stockinvoice);
-        
+        iStockInvoiceService.checkAllReconcile(stockinvoice) ;
+
     }
 
 }

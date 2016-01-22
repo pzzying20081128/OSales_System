@@ -55,9 +55,6 @@ public class StockPaymentReconcileAction extends OSalesSystemABAction<StockPayme
         }
         return SUCCESS ;
     }
-    
-
-    
 
     public String cancelAllReconcile() throws Exception {
         try {

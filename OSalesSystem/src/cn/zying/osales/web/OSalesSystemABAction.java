@@ -1,26 +1,25 @@
 package cn.zying.osales.web ;
 
+import org.apache.log4j.Logger ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 
+import cn.zy.apps.tools.logger.Loggerfactory ;
 import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zy.apps.tools.web.GeneralAction ;
 import cn.zy.apps.tools.web.SelectPage ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
-import cn.zying.osales.service.IABService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
 
 public abstract class OSalesSystemABAction<V> extends GeneralAction implements IOSalesSystemABAction {
 
     private static final long serialVersionUID = -2062527978326655709L ;
 
+    protected static Logger logger = Loggerfactory.instance(OSalesSystemABAction.class) ;
+
     @Autowired
     @Qualifier("PrpertiesAutoWriteObjectService")
     protected PrpertiesAutoWriteObjectService writeObjectService ;
-
-    @Autowired
-    @Qualifier(IABService.name)
-    protected IABService baseService ;
 
     private SelectPage<V> selectPage ;
 
@@ -30,7 +29,7 @@ public abstract class OSalesSystemABAction<V> extends GeneralAction implements I
 
     protected Integer uuid ;
 
-    protected V result ; ;
+    protected V result ;
 
     public Integer getOSalsesLoginUserId() {
         Integer userId = Integer.parseInt(getLoginUserId()) ;

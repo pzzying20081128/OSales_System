@@ -118,6 +118,4 @@ public class StockAdjustBillAction extends OSalesSystemABAction<StockAdjustBill>
         this.searchBean = searchBean ;
     }
 
-
-
 }

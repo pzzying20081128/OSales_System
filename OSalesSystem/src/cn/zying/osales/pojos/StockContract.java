@@ -15,6 +15,7 @@ import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Temporal ;
 import javax.persistence.TemporalType ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
 import cn.zying.osales.OSalesConfigProperties.ContractStatus ;
@@ -48,6 +49,9 @@ public class StockContract extends CommBean {
     @Column(name = "provider_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "供应商", isShow = false)
     private Integer providerInfoId ;
+    
+    @Transient
+    private  List<Integer>  providerInfoIds;
 
     /**
      * // 采购合同明细list
@@ -64,18 +68,28 @@ public class StockContract extends CommBean {
     @Column(name = "stock_man_id", insertable = false, updatable = false)
     @FieldDesc(name = "采购员", isShow = false)
     private Integer stockManId ;
+    
+    @Transient
+    private List<Integer>  stockManIds;
+    
 
     /**
      * // 公司名称
      **/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_info_id")
-    @FieldDesc(name = "公司名称", mapping = "companyGuest.name")
+    @FieldDesc(name = "公司名称", mapping = "companyInfo.name")
     private CompanyInfo companyInfo ;
 
     @Column(name = "company_info_id", insertable = false, updatable = false)
     @FieldDesc(name = "公司名称", isShow = false)
     private Integer companyInfoId ;
+    
+    
+    
+    @Transient
+    private List<Integer>  companyInfoIds;
+    
 
     /**
      * // 合同类型
@@ -84,6 +98,9 @@ public class StockContract extends CommBean {
     @FieldDesc(name = "合同类型", desc = { "未启用合同:未启用合同", "执行合同:执行合同", "历史合同:历史合同", "待定:待定" })
     @Enumerated(EnumType.STRING)
     private ContractStatus contractStatus ;
+    
+    @Transient
+    private List<ContractStatus> contractStatuses;
 
     @Column(name = "text")
     @FieldDesc(name = "备注")
@@ -183,6 +200,38 @@ public class StockContract extends CommBean {
 
     public void setCompanyInfoId(Integer companyInfoId) {
         this.companyInfoId = companyInfoId ;
+    }
+
+    public List<Integer> getProviderInfoIds() {
+        return providerInfoIds ;
+    }
+
+    public void setProviderInfoIds(List<Integer> providerInfoIds) {
+        this.providerInfoIds = providerInfoIds ;
+    }
+
+    public List<Integer> getStockManIds() {
+        return stockManIds ;
+    }
+
+    public void setStockManIds(List<Integer> stockManIds) {
+        this.stockManIds = stockManIds ;
+    }
+
+    public List<Integer> getCompanyInfoIds() {
+        return companyInfoIds ;
+    }
+
+    public void setCompanyInfoIds(List<Integer> companyInfoIds) {
+        this.companyInfoIds = companyInfoIds ;
+    }
+
+    public List<ContractStatus> getContractStatuses() {
+        return contractStatuses ;
+    }
+
+    public void setContractStatuses(List<ContractStatus> contractStatuses) {
+        this.contractStatuses = contractStatuses ;
     }
 
 }

@@ -43,16 +43,16 @@
 	
 	function  stockSelect(data,checkButton ,detailGrid){
 		var status = data.status;
-		checkButton.enable();
+	        if(checkButton!=null  && typeof(checkButton) !="undefined")	    checkButton.enable();
 		if (status == '已审核') {
-			checkButton.setText("取消审核");
+			  if(checkButton!=null  && typeof(checkButton) !="undefined")	 checkButton.setText("取消审核");
 			if(detailGrid!=null)detailGrid.openAllButton(false);
 		} else if (status == '有效') {
-			checkButton.setText("审核");
+			  if(checkButton!=null  && typeof(checkButton) !="undefined")	  checkButton.setText("审核");
 			if(detailGrid!=null)detailGrid.openAllButton(true);
 		} else {
-			checkButton.disable();
-			checkButton.setText("已删除");
+			  if(checkButton!=null  && typeof(checkButton) !="undefined")	  checkButton.disable();
+			  if(checkButton!=null  && typeof(checkButton) !="undefined")	  checkButton.setText("已删除");
 			if(detailGrid!=null)detailGrid.openAllButton(false);
 		}
 	}
@@ -111,8 +111,8 @@
 
 <style type="text/css">
 .upload-icon { //
-	width: 100px background:    url('./ext3/fileupload/css/image_add.png')
-		no-repeat 0 0 !important;
+	#width: 100px background:    url('./ext3/fileupload/css/image_add.png')
+	#	no-repeat 0 0 !important;
 }
 
 .x-grid-row-page-total {
@@ -337,11 +337,6 @@
 </style>
 
 
-
-<script type="text/javascript" src="./ext3/privates/LodopFuncs.js"></script>
-<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
-	<embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop32.exe"></embed>
-</object>
 
 <script type="text/javascript" src="./ext3/privates/private.0000-00-00.js"></script>
 <script type="text/javascript" src="./module/module.js"></script>

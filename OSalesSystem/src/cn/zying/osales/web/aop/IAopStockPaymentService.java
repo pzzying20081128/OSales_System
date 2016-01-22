@@ -6,11 +6,4 @@ public interface IAopStockPaymentService extends InfaceStockPaymentService {
 
     public String name = "IAopStockPaymentService" ;
 
-
-
-
-
-    
-
-   
 }

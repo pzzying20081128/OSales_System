@@ -101,7 +101,7 @@ public class AopStockPaymentService implements IAopStockPaymentService {
 
     @Override
     public StockPaymentBillDetail cancelReconcile(Integer stockpaymentId, StockPaymentBillDetail stockPaymentBillDetail) throws SystemOptServiceException {
-      
+
         return iStockPaymentService.cancelReconcile(stockpaymentId, stockPaymentBillDetail) ;
     }
 

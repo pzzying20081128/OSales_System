@@ -56,15 +56,15 @@ public class StockPaymentBillDetailSearchUnits extends ABCommonsService {
 
         stockPaymentBillDetailes_.addAll(stockInvoiceBillDetails) ;
 
-//        Collections.sort(stockPaymentBillDetailes_, new Comparator<StockPaymentBillDetail>() {
-//
-//            @Override
-//            public int compare(StockPaymentBillDetail o1, StockPaymentBillDetail o2) {
-//
-//                return o1.getBillDate().compareTo(o2.getBillDate()) ;
-//            }
-//
-//        }) ;
+        //        Collections.sort(stockPaymentBillDetailes_, new Comparator<StockPaymentBillDetail>() {
+        //
+        //            @Override
+        //            public int compare(StockPaymentBillDetail o1, StockPaymentBillDetail o2) {
+        //
+        //                return o1.getBillDate().compareTo(o2.getBillDate()) ;
+        //            }
+        //
+        //        }) ;
 
         SelectPage<StockPaymentBillDetail> result = new SelectPage<StockPaymentBillDetail>() ;
         result.setCount((long) stockPaymentBillDetailes_.size()) ;

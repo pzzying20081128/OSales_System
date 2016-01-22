@@ -7,6 +7,7 @@ import cn.zying.osales.pojos.ProduceComBinedProduct ;
 import cn.zying.osales.pojos.ProduceComBinedProductDetail ;
 import cn.zying.osales.pojos.StockAdjustBill ;
 import cn.zying.osales.pojos.StockContract ;
+import cn.zying.osales.pojos.StockContractDetail ;
 import cn.zying.osales.pojos.StockInvoice ;
 import cn.zying.osales.pojos.StockInvoiceDetail ;
 import cn.zying.osales.pojos.StockPayment ;
@@ -17,6 +18,7 @@ import cn.zying.osales.pojos.StockReturnStoreOutDetail ;
 import cn.zying.osales.pojos.StockSummaryBill ;
 import cn.zying.osales.pojos.StoreProductInfoStock ;
 import cn.zying.osales.pojos.SysPrintTemplate ;
+import cn.zying.osales.pojos.SystemConfigs ;
 
 public class TestBuildServiceFile {
 
@@ -27,9 +29,9 @@ public class TestBuildServiceFile {
     public static void main(String[] args) throws Exception {
         
         
-        String module= "stocks";
+        String module= "stock";
         
-        Class<?> clazz = StockSummaryBill.class;
+        Class<?> clazz = StockContractDetail.class;
         
         String className=clazz.getSimpleName();
 

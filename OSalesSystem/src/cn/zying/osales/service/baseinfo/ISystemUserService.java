@@ -36,10 +36,12 @@ public interface ISystemUserService {
 
     public SysStaffUser searchByAccessName(String accessName) throws SystemOptServiceException ;
 
-    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws Exception ;
+    public List<String> listUserModulePowerBySysUserId(Integer loginUserId) throws SystemOptServiceException ;
 
-    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws Exception ;
+    public List<SystemUserPower> listUserModulePowerByUserId(Integer loginUserId) throws SystemOptServiceException ;
 
-    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws Exception ;
+    public List<UserPower<UserOptPower>> searchUserPower(String moduleId, Integer loginUserId) throws SystemOptServiceException ;
+
+    public SysStaffUser searchByName(String name) throws SystemOptServiceException ;
 
 }

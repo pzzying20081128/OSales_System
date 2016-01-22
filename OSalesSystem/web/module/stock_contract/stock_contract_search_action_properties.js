@@ -10,7 +10,6 @@ var stock_contract_search_params = {
 	params : function() {
 		var params = {
 			optType : "search"
-			,
 
 		}
 		return params;

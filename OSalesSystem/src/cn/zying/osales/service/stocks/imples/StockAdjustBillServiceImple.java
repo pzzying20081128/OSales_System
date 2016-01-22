@@ -36,12 +36,10 @@ public class StockAdjustBillServiceImple extends ABCommonsService implements ISt
     @Autowired
     @Qualifier("StockAdjustBillRemoveUnits")
     private StockAdjustBillRemoveUnits iStockAdjustBillRemoveUnits ;
-    
+
     @Autowired
     @Qualifier("StockAdjustBillCheckUnits")
     private StockAdjustBillCheckUnits iStockAdjustBillCheckUnits ;
-    
-    
 
     @Override
     public StockAdjustBill saveUpdate(OptType optType, StockAdjustBill optStockAdjustBill) throws SystemOptServiceException {
@@ -87,8 +85,8 @@ public class StockAdjustBillServiceImple extends ABCommonsService implements ISt
 
     @Override
     public void check(StockAdjustBill stockadjustbill) throws SystemOptServiceException {
-        iStockAdjustBillCheckUnits.check(stockadjustbill);
-        
+        iStockAdjustBillCheckUnits.check(stockadjustbill) ;
+
     }
 
 }

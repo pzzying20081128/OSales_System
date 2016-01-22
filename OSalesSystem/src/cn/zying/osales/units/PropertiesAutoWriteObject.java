@@ -11,7 +11,7 @@ import cn.zying.osales.pojos.SysStaffUser ;
 
 public class PropertiesAutoWriteObject extends AutoWriteObject {
 
-    protected IPropertiesCacheFactory cacheFactory = new PropertiesCacheFactory() ;
+    protected IPropertiesCacheFactory cacheFactory = PropertiesCacheFactory.instance() ;
 
     public void cacheObject(String key, Object object) {
 

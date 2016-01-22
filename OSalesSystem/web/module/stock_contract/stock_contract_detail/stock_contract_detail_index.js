@@ -1,23 +1,12 @@
-function create_stock_contract_detail_window(moduleId, moduleName) {
+function create_stock_contract_detail_window(moduleId, moduleName,params) {
 
-	var checkButton = new Ext.Toolbar.Button({
-		// id : moduleId + '_search',
-		xtype : "tbbutton",
-		text : "审核",
-		key : "check",
-		// keyBinding : createSearchKey(),
-		handler : function() {
-			base_combined_product_check_windows(moduleId, moduleName, {
-				grid : mainGridModule
-			});
-		}
-
-	});
+	var main_Grid  =  params.mainGrid;
+	
 
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		// list grid
-		url : "ssssssssss",
+		url : "./list_StockContractDetail_list.do",
 		// grid_column.record
 		record : stock_contract_detail_grid_column.record,
 		// grid_column.column
@@ -32,9 +21,8 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					stock_contract_detail_create_windows(moduleId, moduleName, {
-						grid : mainGridModule
-						,
-
+						grid : mainGridModule,
+						mainGrid:main_Grid
 					});
 				}
 			}, {
@@ -46,7 +34,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 				handler : function(bt) {
 					stock_contract_detail_update_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						searchParams : test_search_params
+							mainGrid:main_Grid
 					});
 				}
 			}, {
@@ -79,13 +67,7 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				stockSelect(data, checkButton, detailGrid);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
-
+				stockSelect(data, null, null);
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
 			status : function(data) {
@@ -106,12 +88,12 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 		var selection_rows = mainGrid.getSelectionModel().getSelections();
 
 		if (selection_rows == null) {
-			showErrorMsg('提示信息', '请选择要删除的数据记录！！');
+			showErrorMsg('提示信息', '请选择要删除的数据记录');
 			return false;
 		}
 
 		if (selection_rows.length != 1) {
-			showErrorMsg('提示信息', '只能选择一行数据记录！！');
+			showErrorMsg('提示信息', '只能选择一行数据记录');
 			return false;
 		}
 		var selectId = selection_rows[0].id;
@@ -119,9 +101,9 @@ function create_stock_contract_detail_window(moduleId, moduleName) {
 			msg : "是否要删除该条信息",
 			yes : function(YN) {
 				ERPAjaxRequest({
-					url : "./simple_ProductBrand_remove.do",
+					url : "./simple_StockContractDetail_remove.do",
 					params : {
-						"productBrand.id" : selectId
+						"stockcontractdetail.id" : selectId
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {

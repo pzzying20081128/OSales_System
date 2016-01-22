@@ -10,8 +10,10 @@ import org.springframework.web.context.WebApplicationContext ;
 import org.springframework.web.context.support.WebApplicationContextUtils ;
 
 import cn.zy.apps.tools.logger.Loggerfactory ;
+import cn.zy.apps.tools.units.CommSearchBean ;
 import cn.zying.osales.OSalesConfigProperties.OptType ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
+import cn.zying.osales.SystemConfigsProperties ;
 import cn.zying.osales.pojos.CompanyInfo ;
 import cn.zying.osales.pojos.ProductBrand ;
 import cn.zying.osales.pojos.ProductCategory ;
@@ -20,12 +22,15 @@ import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StoreInfo ;
 import cn.zying.osales.pojos.StorePosition ;
 import cn.zying.osales.pojos.SysStaffUser ;
+import cn.zying.osales.pojos.SystemConfigs ;
 import cn.zying.osales.service.IProviderInfoService ;
 import cn.zying.osales.service.baseinfo.ICompanyInfoService ;
 import cn.zying.osales.service.baseinfo.IProductBrandService ;
 import cn.zying.osales.service.baseinfo.IProductInfoService ;
+import cn.zying.osales.service.baseinfo.ISystemConfigsService ;
 import cn.zying.osales.service.baseinfo.ISystemUserService ;
 import cn.zying.osales.units.PrpertiesAutoWriteObjectService ;
+import cn.zying.osales.units.SystemConfigsFactory ;
 import cn.zying.osales.units.search.bean.CompanyInfoSearchBean ;
 import cn.zying.osales.units.search.bean.ProductBrandSearchBean ;
 import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
@@ -33,6 +38,7 @@ import cn.zying.osales.units.search.bean.ProductInfoSearchBean ;
 import cn.zying.osales.units.search.bean.ProviderInfoSearchBean ;
 import cn.zying.osales.units.search.bean.StoreInfoSearchBean ;
 import cn.zying.osales.units.search.bean.StorePositionSearchBean ;
+import cn.zying.osales.units.search.bean.SystemConfigsSearchBean ;
 import cn.zying.osales.units.search.bean.SystemUserSearchBean ;
 import cn.zying.osales.web.aop.IAopProductCategoryService ;
 import cn.zying.osales.web.aop.IAopStoreInfoService ;
@@ -41,10 +47,6 @@ import cn.zying.osales.web.aop.IAopStorePositionService ;
 public class SystemConfigInitListener extends ContextLoaderListener implements ServletContextListener {
 
     private org.apache.log4j.Logger logger = Loggerfactory.instance(SystemConfigInitListener.class) ;
-
-    //	private IERPSystemConfigs iERPSystemConfigs = DefaultERPSystemConfigs.instance();
-
-    //	 protected static ERPSetPrpertiesUnits erpSetPrpertiesUnits = ERPSetPrpertiesUnits.instance(false) ;
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
@@ -62,12 +64,9 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
     }
 
     private void load(WebApplicationContext springContext, PrpertiesAutoWriteObjectService prpertiesAutoWriteObjectService) {
-        //		ISystemConfigService systemConfigService = (ISystemConfigService) springContext.getBean(ISystemConfigService.name);
-        //
-        //		iERPSystemConfigs.loadSystemConfig(systemConfigService.searchAll(null).getResult());
-        //
-        //		loadFeeSubject(springContext);
-        //
+
+        loadSysconfigs(springContext) ;
+
         loadStaffInfo(springContext, prpertiesAutoWriteObjectService) ;
 
         loadProductCategory(springContext, prpertiesAutoWriteObjectService) ;
@@ -93,6 +92,28 @@ public class SystemConfigInitListener extends ContextLoaderListener implements S
         loadProviderInfo(springContext, prpertiesAutoWriteObjectService) ;
 
         loadCompanyInfo(springContext, prpertiesAutoWriteObjectService) ;
+
+    }
+
+    private void loadSysconfigs(WebApplicationContext springContext) {
+
+        Loggerfactory.info(logger, "start load sysconfig...") ;
+
+        ISystemConfigsService service = (ISystemConfigsService) springContext.getBean(ISystemConfigsService.name) ;
+
+        SystemConfigsSearchBean searchBean = new SystemConfigsSearchBean() ;
+
+        CommSearchBean commSearchBean = new CommSearchBean() ;
+
+        List<SystemConfigs> systemConfigs = service.searchList(OptType.list, searchBean, commSearchBean) ;
+
+        SystemConfigsFactory.instance(systemConfigs) ;
+
+        String path = springContext.getServletContext().getRealPath("/") + "systemconfigs.js" ;
+
+        Loggerfactory.info(logger, "start load sysconfig file : " + path) ;
+
+        SystemConfigsFactory.getSystemConfigsFactory().wirteDefaultValue(path, SystemConfigsProperties.defaultConfigs) ;
 
     }
 

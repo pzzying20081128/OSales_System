@@ -19,7 +19,7 @@ import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zying.osales.OSalesConfigProperties.Status ;
 
 @MappedSuperclass
-public abstract class CommBean implements java.io.Serializable {
+public abstract class CommBean extends ImportBean implements java.io.Serializable {
 
     private static final long serialVersionUID = 15993127981203978L ;
 
@@ -32,15 +32,15 @@ public abstract class CommBean implements java.io.Serializable {
     @Enumerated(EnumType.STRING)
     @FieldDesc(name = "状态", isShow = true)
     private Status status ;
-    
+
     @Column(name = "create_time", length = 5)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date  createTime = DateToolsUilts.getnowDate();
+    private Date createTime = DateToolsUilts.getnowDate() ;
 
     @Transient
     //查询
     private List<Status> statuses ;
-    
+
     @Transient
     private Date startTime ;
 

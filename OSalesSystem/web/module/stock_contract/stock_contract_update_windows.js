@@ -15,103 +15,221 @@ function stock_contract_update_windows(moduleId, moduleName, params) {
 	}
 	var selectId = selection_rows[0].id;
 
+	var providerInfoId = createERPcombo({
+		id : 'stockcontract.providerInfoId',
+		name : 'stockcontract.providerInfoId',
+		fieldLabel : ' 供应商',
+		url : "./ProviderInfo_combo.do?searchBean.status=有效",
+		allowBlank : false,
+		forceSelection : false
+	});
+
+	providerInfoId.load({
+		params : {
+			"searchBean.id" : selection_rows[0].data.providerInfoId
+		}
+	});
+
+	var companyInfoId = createERPcombo({
+		id : 'stockcontract.companyInfoId',
+		name : 'stockcontract.companyInfoId',
+		fieldLabel : ' 公司名称',
+		url : "./CompanyInfo_combo.do?searchBean.status=有效",
+		allowBlank : false,
+		forceSelection : false
+	})
+
+	companyInfoId.load({
+		params : {
+			"searchBean.id" : selection_rows[0].data.companyInfoId
+		}
+	});
+	
+	var stockManId = createERPcombo({
+					id : 'stockcontract.stockManId',
+					name : 'stockcontract.stockManId',
+					fieldLabel : ' 采购员',
+					url : "./SysStaff_combo.do?searchBean.status=全部",
+					allowBlank : true,
+					forceSelection : false,
+					width : 160
+				}) ;
+			
+	stockManId.load({
+	       		params : {
+			"searchBean.id" : selection_rows[0].data.stockManId
+		}     
+	});
+
 	var stock_contract_params = {
 		title : "编辑" + moduleName,
 		action : "update",
 		grid : grid,
 		// 结果路径
-		pojo : "sss",
+		pojo : "result",
 		// url
-		url : './saveUpdateMaterialManage.action',
+		url : './simple_StockContract_saveUpdate.do',
 		params : {
-			optType : "update"
+			optType : "update",
+			"stockcontract.id" : selectId
 		},
 		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
 			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'dept.name',
-			mapping : 'name'
-		}]),
+			name : 'stockcontract.providerInfo',
+			mapping : 'providerInfo'
+		}, {
+			name : 'stockcontract.providerInfoId',
+			mapping : 'providerInfoId'
+		}, {
+			name : 'stockcontract.stockMan',
+			mapping : 'stockMan'
+		}, {
+			name : 'stockcontract.stockManId',
+			mapping : 'stockManId'
+		},{
+			name : 'stockcontract.companyInfoId',
+			mapping : 'companyInfoId'
+		}, {
+			name : 'stockcontract.companyInfo',
+			mapping : 'companyInfo'
+		}, {
+			name : 'stockcontract.contractStatus',
+			mapping : 'contractStatus'
+		}, {
+			name : 'stockcontract.text',
+			mapping : 'text'
+		}, {
+			name : 'stockcontract.signedDate',
+			mapping : 'signedDate'
+		}, {
+			name : 'stockcontract.status',
+			mapping : 'status'
+		}
+
+		]),
 		// 字段
 		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{// 1-1
-				columnWidth : .34,
+			items : [{
+				columnWidth : .70,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 200
+					width : 500
+				},
+				items : [providerInfoId]
+			}, // 1-1 end
+			{
+				columnWidth : .28,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 160
+				},
+				items : [stockManId ]
+			}// 1-2end
+			]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : .70,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 500
+				},
+				items : [companyInfoId]
+			}, // 1-1 end
+			{
+				columnWidth : .28,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 160
+				},
+				items : [createLocalCombo({
+					id : 'stockcontract.contractStatus',
+					name : 'stockcontract.contractStatus',
+					fieldLabel : ' 合同类型',
+//					storeData : [['未启用合同', "未启用合同"], ['执行合同', '执行合同'], ['历史合同', '历史合同'], ['待定', '待定']],
+					storeData : [['未启用合同', "未启用合同"] , ['历史合同', '历史合同'], ['待定', '待定']],
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					defaultValue : "未启用合同",
+					allowBlank : false
+				})]
+			}// 1-2end
+			]
+		}, {// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : .70,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 500
 				},
 				items : [{
-					id : 'goods.name',
-					name : 'goods.name',
-					fieldLabel : ' 物料名字',
+					id : 'stockcontract.text',
+					name : 'stockcontract.text',
+					fieldLabel : ' 备注',
 					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					// style : NoAllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
 					}
 				}]
 			}, // 1-1 end
-			{// 1-2
-				columnWidth : .33,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				defaults : {
-					width : 200
-				},
-				items : [createERPcombo({
-					id : 'goods.classification',
-					name : 'goods.classification',
-					label : "物料类别",
-					url : "./searchMatrialClassification.action",
-					allowBlank : false,
-					forceSelection : false
-					// width : 150
-				})]
-			}// 1-2end
-			, {// 1-3
-				columnWidth : .33,
+			{
+				columnWidth : .28,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 200
+					width : 160
 				},
 				items : [{
 
-					id : 'goods.serialNumber',
-					name : 'goods.serialNumber',
-					fieldLabel : ' 物料编号',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					id : 'stockcontract.signedDate',
+					name : 'stockcontract.signedDate',
+					fieldLabel : ' 签订日期',
+					xtype : 'datefield',
+					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
+					format : 'Y-m-d',
 					allowBlank : false,
+					value : new Date(),
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
 					}
-
 				}]
-			}// 1-3 end
+			}// 1-2end
 			]
+		}
 
-		}]
+		]
 
 	}
 
 	var stock_contract_create_window = new stock_contract_save_update_form_panel_windows(stock_contract_params);
-
+	
 	stock_contract_create_window.load({
-		url : './getStaff.action?uuid=' + goodsId,
+		url : './simple_StockContract_get.do?uuid=' + selectId,
 		success : function(result) {
 			json = result.result;
 		}

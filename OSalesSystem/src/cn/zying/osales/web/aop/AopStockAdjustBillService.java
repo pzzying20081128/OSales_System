@@ -52,8 +52,8 @@ public class AopStockAdjustBillService implements IAopStockAdjustBillService {
 
     @Override
     public void check(StockAdjustBill stockadjustbill) throws SystemOptServiceException {
-        iStockAdjustBillService.check(stockadjustbill);
-        
+        iStockAdjustBillService.check(stockadjustbill) ;
+
     }
 
 }

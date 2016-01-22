@@ -8,6 +8,7 @@ import cn.zying.osales.OSalesConfigProperties.Status ;
 import cn.zying.osales.pojos.CompanyInfo ;
 import cn.zying.osales.pojos.ProviderInfo ;
 import cn.zying.osales.pojos.StockContract ;
+import cn.zying.osales.pojos.SysStaffUser ;
 import cn.zying.osales.service.ABCommonsService ;
 import cn.zying.osales.service.SystemOptServiceException ;
 
@@ -40,7 +41,7 @@ public class StockContractSaveUpdateUnits extends ABCommonsService {
 
         StockContract stockContract = baseService.get(optStockContract.getId(), StockContract.class) ;
 
-        ToolsUnits.copyBeanProperties(optStockContract, stockContract, "providerInfo", "providerInfoId", "stockMan", "stockManId", "companyInfo", "companyInfoId", "contractStatus", "text", "signedDate") ;
+        ToolsUnits.copyBeanProperties(stockContract,optStockContract, "providerInfo", "providerInfoId", "stockMan", "stockManId", "companyInfo", "companyInfoId", "contractStatus", "text", "signedDate") ;
         baseService.update(stockContract) ;
         return stockContract ;
     }
@@ -50,6 +51,11 @@ public class StockContractSaveUpdateUnits extends ABCommonsService {
         optStockContract.setCompanyInfo(companyInfo) ;
         ProviderInfo providerInfo = baseService.load(optStockContract.getProviderInfoId(), ProviderInfo.class) ;
         optStockContract.setProviderInfo(providerInfo) ;
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (optStockContract.getStockManId() != null) {
+            SysStaffUser stockMan = baseService.load(optStockContract.getStockManId(), SysStaffUser.class) ;
+            optStockContract.setStockMan(stockMan) ;
+        }
 
     }
 

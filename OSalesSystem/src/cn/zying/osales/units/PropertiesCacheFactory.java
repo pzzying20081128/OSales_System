@@ -13,6 +13,16 @@ public class PropertiesCacheFactory implements IPropertiesCacheFactory {
 
     private Map<String, Object> aloneObjectCache = new HashMap<String, Object>() ;
 
+    private static IPropertiesCacheFactory propertiesCacheFactory = new PropertiesCacheFactory() ;
+
+    private PropertiesCacheFactory() {
+
+    }
+
+    public static IPropertiesCacheFactory instance() {
+        return propertiesCacheFactory ;
+    }
+
     //一码多品
     private Map<String, Map<Integer, ProductInfo>> productInfoCache = new HashMap<String, Map<Integer, ProductInfo>>() ;
 

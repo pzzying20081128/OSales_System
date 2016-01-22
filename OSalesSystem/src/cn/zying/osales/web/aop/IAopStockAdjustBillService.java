@@ -1,19 +1,9 @@
- package  cn.zying.osales.web.aop;
+package cn.zying.osales.web.aop ;
 
- 
- 
- import cn.zying.osales.infaces.InfaceStockAdjustBillService ;
+import cn.zying.osales.infaces.InfaceStockAdjustBillService ;
 
-public interface IAopStockAdjustBillService  extends InfaceStockAdjustBillService   {
-    
-            public String name="IAopStockAdjustBillService";
+public interface IAopStockAdjustBillService extends InfaceStockAdjustBillService {
 
-            
-            
-                
-         
-            
-       
-            
+    public String name = "IAopStockAdjustBillService" ;
 
 }
